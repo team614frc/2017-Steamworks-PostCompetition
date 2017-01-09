@@ -1,0 +1,74 @@
+
+
+------------------------------------------
+SIGNALS SYSTEM:
+	> RoboRIO image FRC_2017_v8
+	> 1 OpenMesh Wireless Bridge (P/N: OM5P-AN or OM5P-AC) that has been configured with the encryption key for our team number at each event
+	>The roboRIO ethernet port must be connected to the Wireless Bridge labeled "18-24 vPOE"
+	>All signals from the Operator Console must be transmitted to the Robot via the ARENA Ethernet network.
+	
+------------------------------------------
+OVERVIEW:
+	-Build steam pressure by scoring it into the boiler. Low goal = less steam pressure than High goal.
+	-Deliver gears to pilots on the airship who install them. When the geartrain is complete, turn the crank to start Rotor.
+	-Robots must latch onto the airship before the end of the match by ascending their ropes.
+
+MATCH SETUP:
+	FUEL:
+		> 10 for each Team in their robot
+		> 20 in each Loading Lane (in a bin between the Loading Station and Starting Line)
+		> 100 in each Hopper (i.e. 50 in each Hopper container)
+	GEARS:
+		> 1 for each Team to preload in their Robot;; Robot can only carry one at a time
+		> 18 in each Loading Lane
+		> 1 in each Airship
+	ROBOT:
+		> Teams may elect to start the match with 1 Gear and/or 10 Fuel. Any Game Pieces not preloaded is placed in the Return Bin in their Loading Lane.
+		
+AUTONOMOUS:
+	> 5 match points - Cross the baseline
+	> 1 match point & 1 kPa - 1 fuel in high goal
+	> 1 match point & 1 kPa - 3 fuel in low goal
+	> 60 match points - Rotor turning
+	
+	> Robots attempt to deliver preloaded Game Pieces (and pilots rush to install delivered gears), retrieve additional Game Pieces, and cross their Base Line.
+	
+	>A yellow stack light next to Rotors 1 and 2 lights up if its Rotor is engaged during Auto.
+	
+TELEOP:
+	> 1 mp, 1 kPa - 3 fuel in high goal
+	> 1 mp, 1 kPa - 9 fuel in low goal
+	> 40 mp - Rotor turning
+	> 50 mp - Ready for Takeoff
+	
+	> Robots attempt to retrieve and deliver Game Pieces, defend against their opponents, and climb their Ropes in the last 30 seconds of the match.
+	
+RANKING POINTS:
+	> 1 - 40 kPa is reached
+	> 1 - Start all rotors
+	
+AIRSHIP:
+							Rotor 1 (Center)	Rotor 2		Rotor 3		Rotor 4
+	> Pre-placed gears:		0					0			1			2
+	> Pilot-placed gears:	1					2			4			6
+	> 1 gear is staged on the airship at the start of the match at the base of the Steam Tank.
+	> Rotors only start if the gears are installed in Rotor order 1, 2, 3, 4
+		- to start Rotor 1, the Pilot places the Gear in the slot at the top of the Steam Tank.
+	
+	> Lifts transfer gears from the Robots to Pilots.
+		- 1 lift is mounted next to each of the 3 sides of the deck that face the Player Stations. The cable on the lift is pulled by the pilot to raise the carraige to a port where the gear can be accessed.
+		
+	
+		
+STEAM:
+	>Fractions of kPa acquired during Autonomous will carry over into Teleop.
+		
+ROBOT:
+	> must fit within 36x40x24 tall or 30x32x36 tall
+	> less than 120 lbs except bumpers and battery
+	
+		
+		
+		
+		
+		
