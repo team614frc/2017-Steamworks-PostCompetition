@@ -1,0 +1,11 @@
+1. Make sure you've got WPIlib properly installed in Eclipse
+	> for 2017, go to http://wpilib.screenstepslive.com/s/4485/m/13503/l/599679-installing-eclipse-c-java
+	> start at "Installing the development plugins - Option 1: Online Install" and go from there
+2. Instll the NavX and SF2 libraries
+	> follow instructions from:
+			http://www.pdocs.kauailabs.com/navx-mxp/software/roborio-libraries/java/
+					- remember, <HomeDirectory> is a fancy way of saying C:/Users/whateveryourusernameis/
+			http://pdocs.kauailabs.com/sf2/software/roborio-libraries/java/
+					- where is says to name the variable "navx-mxp", instead name it "sf2-frc", like it shows in the image. I think it's a typo.
+3. Install motor controller libraries
+		
