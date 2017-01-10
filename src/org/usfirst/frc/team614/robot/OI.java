@@ -1,5 +1,13 @@
 package org.usfirst.frc.team614.robot;
 
+import org.team708.robot.util.Gamepad;
+import org.usfirst.frc.team614.robot.commands.navx.DisplayNavxData;
+import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
+
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -32,5 +40,18 @@ public class OI {
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
+	
+	// X-Box controller(s)
+	public static final Gamepad driverGamepad = new Gamepad(0);
+
+	// NavX
+	private static final Button displayNavxData = new JoystickButton(driverGamepad, Gamepad.button_Start);
+	private static final Button zeroNavxYaw = new JoystickButton(driverGamepad, Gamepad.button_Back);
+	
+	// Binding of Commands
+	public OI() {
+		displayNavxData.whenPressed(new DisplayNavxData());
+		zeroNavxYaw.whenPressed(new ZeroNavxYaw());
+	}
 }
 

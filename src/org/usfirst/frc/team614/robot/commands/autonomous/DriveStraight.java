@@ -4,7 +4,6 @@ package org.usfirst.frc.team614.robot.commands.autonomous;
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Makes the drivetrain move at .5 speed for 1 second
