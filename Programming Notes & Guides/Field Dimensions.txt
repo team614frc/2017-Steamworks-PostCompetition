@@ -1,0 +1,29 @@
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|=============================|
+|Autonomous Mode: Measurements|
+|=============================|
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-Alliance wall to Alliance's front wall of Airship | 114.3 inches across / 9 feet 6.3 inches |
+
+-Alliance wall to closest hopper | 78.5 inches across / 6 feet 6.5 inches |
+
+-Alliance wall to Alliance's secondary walls to the air ship | Between 114.3 inches to 134.3 inches (roughly) / 9 feet 6.3 inches to 11 feet 2.3 inches (roughly) |
+
+-Alliance wall to middle of closest hopper actuator | 120 inches / 10 feet |
+
+-Alliance wall to middle of second closest hopper actuator | 207 inches / 17 feet 3 inches | 
+
+-Width of the Alliance's wall on the Airship | 40.03 inches / 3 feet 4.03 inches |
+
+-Height of boiler | 97 inches / 8 feet 1 inch |
+
+-Edge to edge of Boiler |
+
+-Alliance Wall to far edge of Boiler | Between 0 inches (Alliance Wall) to 26 inches (roughly) / Between 0 inches (Alliance Wall) to 2 feet 2 inches (roughly) |
+
+-Middle of closest hopper to far edge of Boiler (From the Alliance Wall) | 94 inches / 7 feet 10 inches |
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*These measurements are not set in stone and are subject to change (not definite)*
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
