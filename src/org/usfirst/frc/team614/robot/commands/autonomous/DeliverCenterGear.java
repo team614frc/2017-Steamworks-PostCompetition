@@ -1,25 +1,19 @@
-package org.usfirst.frc.team614.robot.commands.navx;
-
-import org.usfirst.frc.team614.robot.Robot;
+package org.usfirst.frc.team614.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * sets the current yaw to be zero (and prints out new values)
+ *
  */
-public class ZeroNavxYaw extends Command {
+public class DeliverCenterGear extends Command {
 
-    public ZeroNavxYaw() {
+    public DeliverCenterGear() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(Robot.navX.isConnected()) {
-    		Robot.navX.zeroYaw();
-    		Robot.printNavxData();
-    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -28,7 +22,7 @@ public class ZeroNavxYaw extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

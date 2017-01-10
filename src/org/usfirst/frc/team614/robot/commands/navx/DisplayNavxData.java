@@ -17,7 +17,7 @@ public class DisplayNavxData extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	if(Robot.navX.isConnected()) {
-//    		Robot.printNavxData();
+    		Robot.printNavxData();
     	}
     }
 
