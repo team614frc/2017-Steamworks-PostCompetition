@@ -1,0 +1,31 @@
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|====================================|
+|Autonomous Mode: Boiler Measurements|
+|====================================|
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+[Field Elements]
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-The far edge of the Tape parallel from the front face of the Boiler | 52 inches | 4 feet 4 inches | 
+
+-Alliance Wall to far edge of Boiler | Between 0 inches (Alliance Wall) to 26 inches (roughly) / Between 0 inches (Alliance Wall) to 2 feet 2 inches (roughly) |
+
+-When shooting from closest Alliance hopper actuator (aiming east when Alliance wall is on right / aiming west when Alliance wall is on left) | Between 100.8 inches(roughly) to 119 inches(roughly) |
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+[Boiler Elements]
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-Boiler edge to edge | 42 inches / 3 feet 6 inches |
+
+-Height of closest (smallest) Reflective Tape (Vision Tape) on Boiler | 80 inches | 6 feet 8 inches |
+
+-Height of farthest (biggest) Reflective Tape (Vision Tape) on Boiler | 88 inches | 7 feet 4 inches |
+
+-Length of High goal to the edge [-----------------]        
+                             ->  [        |        ]
+                                 [        |        ]
+                             ->  [        O        ]
+                                 [-------O0O-------]
+                                 [        O        ]
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*These measurements are not set in stone and are subject to change (not definite)*
+*All measurements are between vertical bars*
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
