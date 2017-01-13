@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Drivetrain extends Subsystem implements PIDOutput {
     
 	public RobotDrive drivetrain;
-	public static Encoder encoder;
 	
 	PIDController turnController;
     private double rotateToAngleRate;
@@ -45,7 +44,6 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		usingPID = false;
 		
 		drivetrain = new RobotDrive(leftMotor, rightMotor);
-    	encoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
 		
 		turnController = new PIDController(kP, kI,kD, kF, Robot.navX, this);
         turnController.setInputRange(-180.0f,  180.0f);
@@ -66,7 +64,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
         setDefaultCommand(new TankDrive());
     }
     public void arcadeDrive(double moveValue, double rotateValue) {
-    	drivetrain.arcadeDrive(moveValue, rotateValue);
+    	drivetrain.arcadeDrive(moveValue, -rotateValue);
     }
     public void stop() {
     	drivetrain.arcadeDrive(0, 0);
@@ -84,9 +82,6 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	}
 	public double getRotateRate() {
 		return rotateToAngleRate;
-	}
-	public void resetEncoder() {
-		encoder.reset();
 	}
 	public PIDController getController() {
 		return turnController;
