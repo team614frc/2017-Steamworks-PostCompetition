@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team614.robot.commands.autonomous;
 
+import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -27,7 +28,7 @@ public class DriveStraight extends Command {
     	Robot.drivetrain.getController().enable();
     	Robot.drivetrain.setUsingPID(true);
     	
-    	Robot.drivetrain.resetEncoder();
+    	Robot.resetEncoder();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -35,8 +36,13 @@ public class DriveStraight extends Command {
     	Robot.drivetrain.arcadeDrive(speed, Robot.drivetrain.getRotateRate());
     }
 
-    // Make this return true when this Command no longer needs to run execute()
+    // Returns true once the distance travelled by the encoder is greater than distance.
+    // Unit conversions are done in Constants.
+    // The size of the wheel MUST be changed in Constants if changed!
     protected boolean isFinished() {
+    	if(Robot.encoder.getDistance() >= distance/Constants.DISTANCE_PER_PULSE) {
+    		return true;
+    	}
         return false;
     }
 
