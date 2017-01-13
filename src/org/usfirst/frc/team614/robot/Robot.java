@@ -6,6 +6,7 @@ import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Timer;
@@ -26,6 +27,7 @@ public class Robot extends IterativeRobot {
 
 	public static AHRS navX;
 	public static Drivetrain drivetrain;
+	public static Encoder encoder;
 	public static OI oi;
 	
     Command autonomousCommand;
@@ -37,7 +39,8 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	drivetrain = new Drivetrain();
-		oi = new OI();
+    	encoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+    	oi = new OI();
         try {
             /* Begins communication with NavX.                                     */
             /* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     */
