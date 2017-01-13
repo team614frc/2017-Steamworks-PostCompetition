@@ -1,0 +1,4 @@
+1. Image the RoboRIO (google)
+2. Update the FIRMWARE for the RoboRIO (google)
+3. Try to deploy code and get an error message related to the JRE
+	> follow the instructions in the URL given in the console
