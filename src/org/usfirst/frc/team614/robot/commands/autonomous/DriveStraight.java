@@ -9,10 +9,13 @@ import edu.wpi.first.wpilibj.command.Command;
  * Makes the drivetrain move at .5 speed for 1 second
  */
 public class DriveStraight extends Command {
+	private double distance, speed;
 
-    public DriveStraight() {
+    public DriveStraight(double distance, double speed) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrain);
+        this.distance = distance;
+        this.distance = speed;
     }
 
     // Called just before this Command runs the first time
@@ -20,13 +23,16 @@ public class DriveStraight extends Command {
     	Robot.navX.reset();
     	Robot.navX.zeroYaw();
     	Robot.printNavxData();
+    	
     	Robot.drivetrain.getController().enable();
     	Robot.drivetrain.setUsingPID(true);
+    	
+    	Robot.drivetrain.resetEncoder();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.arcadeDrive(.5, Robot.drivetrain.getRotateRate());
+    	Robot.drivetrain.arcadeDrive(speed, Robot.drivetrain.getRotateRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
