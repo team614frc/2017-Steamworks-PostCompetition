@@ -57,9 +57,11 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		
         chooser = new SendableChooser();
-        chooser.addDefault("Drive Straight Full", new DriveStraight(.5, 1.0));
-        chooser.addObject("Drive Straight Half", new DriveStraight(.5, .5));
+//        chooser.addDefault("Drive Straight Full", new DriveStraight(.5, 1.0));
+//        chooser.addObject("Drive Straight Half", new DriveStraight(.5, .5));
         SmartDashboard.putData("Drive Straight", chooser);
+        SmartDashboard.putNumber("Speed", .5);
+        SmartDashboard.putNumber("Rotation Rate", .5);
     }
 	
 	/**
@@ -89,7 +91,7 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
     	Robot.navX.reset();
         autonomousCommand = (Command) chooser.getSelected();
-        
+        /*
 		String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
 			case "Drive Straight Full": {
@@ -103,7 +105,7 @@ public class Robot extends IterativeRobot {
 			default: {
 				
 			}
-		}
+		}*/
     	
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
