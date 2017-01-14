@@ -52,7 +52,7 @@ public class Robot extends IterativeRobot {
         }
     	drivetrain = new Drivetrain();
     	encoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
-    	shooter = new Shooter(1.0);
+    	shooter = new Shooter(1.0, 1.0);
     	NetworkTable.initialize();
     	cameraTable = NetworkTable.getTable("camera");
     	
