@@ -6,28 +6,34 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * Uses two flywheels and a piston to shoot a ball.ylo
+ * Uses a feeder motor and a fire motor to shoot the balls.
  */
 public class Shooter extends Subsystem
 {
 	// The port the is not final.
-	VictorSP motor = new VictorSP(RobotMap.shooterLeftMotor);
+	VictorSP feederMotor = new VictorSP(RobotMap.shooterFeederMotor);
+	VictorSP fireMotor = new VictorSP(RobotMap.shooterFireMotor);
 
-	public Shooter()
+	private double feederSpeed, fireSpeed;
+	
+	public Shooter(double feederSpeed, double fireSpeed)
 	{
-		
+		this.feederSpeed = feederSpeed;
+		this.fireSpeed = fireSpeed;
 	}
 
 	// spins the flywheels out to shoot a wiffle ball
 	public void rev()
 	{
-		motor.set(1.0);
+		feederMotor.set(feederSpeed);
+		fireMotor.set(fireSpeed);
 	}
 
 	// stops the flywheels
 	public void stop()
 	{
-		motor.set(0.0);
+		feederMotor.set(0.0);
+		fireMotor.set(0.0);
 	}
 
 	public void initDefaultCommand()
