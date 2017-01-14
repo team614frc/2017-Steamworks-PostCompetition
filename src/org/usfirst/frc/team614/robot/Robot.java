@@ -64,6 +64,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Drive Straight", chooser);
         SmartDashboard.putNumber("Speed", .5);
         SmartDashboard.putNumber("Rotation Rate", .5);
+        SmartDashboard.putNumber("Vision Offset", -1);
     }
 	
 	/**
