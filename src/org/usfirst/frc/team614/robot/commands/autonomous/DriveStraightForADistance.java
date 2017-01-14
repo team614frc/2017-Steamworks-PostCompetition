@@ -10,21 +10,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Makes the drivetrain move at .5 speed for 1 second
  */
-public class DriveStraight extends Command {
-	private double distance, speed, time;
+public class DriveStraightForADistance extends Command {
+	private double distance, speed;
 
 //    public DriveStraight(double distance, double speed) {
-        public DriveStraight(double time) {
+        public DriveStraightForADistance(double time) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrain);
-<<<<<<< HEAD
         this.distance = distance;
         this.speed = speed;
-=======
-//        this.distance = distance;
-//        this.distance = speed;
-        this.time = time;
->>>>>>> origin/master
     }
 
     // Called just before this Command runs the first time
@@ -37,12 +31,11 @@ public class DriveStraight extends Command {
     	Robot.drivetrain.setUsingPID(true);
     	
     	Robot.resetEncoder();
-    	this.setTimeout(time);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.arcadeDrive(SmartDashboard.getNumber("Rotation Rate", 0), Robot.drivetrain.getRotateRate());
+    	Robot.drivetrain.arcadeDrive(SmartDashboard.getNumber("Speed", 0), Robot.drivetrain.getRotateRate());
     }
 
     // Returns true once the distance travelled by the encoder is greater than distance.
@@ -52,7 +45,7 @@ public class DriveStraight extends Command {
 //    	if(Robot.encoder.getDistance() >= distance/Constants.DISTANCE_PER_PULSE) {
 //    		return true;
 //    	}
-        return isTimedOut();
+        return false;
     }
 
     // Called once after isFinished returns true
