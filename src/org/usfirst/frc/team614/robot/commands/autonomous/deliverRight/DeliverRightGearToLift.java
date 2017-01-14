@@ -1,6 +1,6 @@
 package org.usfirst.frc.team614.robot.commands.autonomous.deliverRight;
 
-import org.usfirst.frc.team614.robot.commands.autonomous.DriveIntoLift;
+import org.usfirst.frc.team614.robot.commands.autonomous.DriveUntilStopped;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -29,7 +29,7 @@ public class DeliverRightGearToLift extends CommandGroup {
     	
     	//addSequential(new DeliverRightGear()); // to be replaced with DriveStraight(specific distance);
     	addSequential(new TurnLeftForGearLift());
-    	addSequential(new DriveIntoLift());
+    	addSequential(new DriveUntilStopped(0.5));
     	
     }
 }

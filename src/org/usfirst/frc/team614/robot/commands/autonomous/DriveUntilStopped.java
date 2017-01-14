@@ -1,22 +1,22 @@
-
 package org.usfirst.frc.team614.robot.commands.autonomous;
 
-import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Makes the drivetrain move at .5 speed for 1 second
+ *Makes the the robot drive forward until the robot is not moving
  */
-public class DriveStraight extends Command {
-	private double distance, speed;
 
-    public DriveStraight(double distance, double speed) {
+//Might be necessary to include specific tolerances (because "a" rarely exactly equals 0)
+//However isMoving seems to include thresholds of its own, not sure if they can be modified
+public class DriveUntilStopped extends Command {
+	private double speed;
+    public DriveUntilStopped(double speed) {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.drivetrain);
-        this.distance = distance;
-        this.speed = speed;
+        // eg. requires(chassis);
+    	requires(Robot.drivetrain);
+    	this.speed = speed;
     }
 
     // Called just before this Command runs the first time
@@ -27,8 +27,6 @@ public class DriveStraight extends Command {
     	
     	Robot.drivetrain.getController().enable();
     	Robot.drivetrain.setUsingPID(true);
-    	
-    	Robot.resetEncoder();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -36,14 +34,14 @@ public class DriveStraight extends Command {
     	Robot.drivetrain.arcadeDrive(speed, Robot.drivetrain.getRotateRate());
     }
 
-    // Returns true once the distance travelled by the encoder is greater than distance.
-    // Unit conversions are done in Constants.
-    // The size of the wheel MUST be changed in Constants if changed!
+    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.encoder.getDistance() >= distance/Constants.DISTANCE_PER_PULSE) {
+    	if (!Robot.navX.isMoving())
+    	{
     		return true;
     	}
-        return false;
+    	else
+    		return false;
     }
 
     // Called once after isFinished returns true
