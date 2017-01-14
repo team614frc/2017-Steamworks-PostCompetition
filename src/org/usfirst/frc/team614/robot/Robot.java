@@ -1,7 +1,7 @@
 
 package org.usfirst.frc.team614.robot;
 
-import org.usfirst.frc.team614.robot.commands.autonomous.DriveStraight;
+import org.usfirst.frc.team614.robot.commands.autonomous.DriveStraightForADistance;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 
 import com.kauailabs.navx.frc.AHRS;
