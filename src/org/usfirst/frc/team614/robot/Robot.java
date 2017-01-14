@@ -1,10 +1,6 @@
 
 package org.usfirst.frc.team614.robot;
 
-<<<<<<< HEAD
-=======
-import org.usfirst.frc.team614.robot.commands.autonomous.DriveStraightForADistance;
->>>>>>> origin/Boiler-Shooting-Branch
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.Shooter;
 
