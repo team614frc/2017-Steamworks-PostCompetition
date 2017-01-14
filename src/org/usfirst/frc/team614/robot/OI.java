@@ -1,7 +1,6 @@
 package org.usfirst.frc.team614.robot;
 
 import org.team708.robot.util.Gamepad;
-import org.usfirst.frc.team614.robot.commands.DriveRotateDrive;
 import org.usfirst.frc.team614.robot.commands.navx.DisplayNavxData;
 import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
 
@@ -53,7 +52,6 @@ public class OI {
 	public OI() {
 		displayNavxData.whenPressed(new DisplayNavxData());
 		zeroNavxYaw.whenPressed(new ZeroNavxYaw());
-		drd.whenPressed(new DriveRotateDrive());
 	}
 }
 

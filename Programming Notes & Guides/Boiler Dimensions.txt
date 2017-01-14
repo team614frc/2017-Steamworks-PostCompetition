@@ -10,6 +10,12 @@
 -Alliance Wall to far edge of Boiler | Between 0 inches (Alliance Wall) to 26 inches (roughly) / Between 0 inches (Alliance Wall) to 2 feet 2 inches (roughly) |
 
 -When shooting from closest Alliance hopper actuator (aiming east when Alliance wall is on right / aiming west when Alliance wall is on left) | Between 100.8 inches(roughly) to 119 inches(roughly) |
+
+-When shooting from southeast wall (Aiming southeast when Alliance is on right) | Between 142.5 inches and 163.5 inches (very rough since going on measurements from the above statements) | Between 11 feet 10.5 inches and 13 feet 7.5 inches (very rough since going on measurements from above statements) |
+
+-|Conic is subject to change | Equation of arc to shoot from when a net is covering the boiler at an angle (Preferrably from the closest hopper actuator, ex: Net-{ Goal-[] Net-} ) | ({1}/{30.5})(x+4)(x+3.2)(x-11) (units are in feet) | Conic is subject to change | Local mininum is where the robot is |
+
+-|Conic is subject to change | Equation of arc to shoot when net isn't covering boiler (Preferrably from the key or other places that have the boiler not covered by obstacles, ex: Goal-[] Net-} ) |
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 [Boiler Elements]
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -19,13 +25,17 @@
 
 -Height of farthest (biggest) Reflective Tape (Vision Tape) on Boiler | 88 inches | 7 feet 4 inches |
 
--Length of High goal to the edge [-----------------]        
-                             ->  [        |        ]
-                                 [        |        ]
-                             ->  [        O        ]
-                                 [-------O0O-------]
-                                 [        O        ]
+-Length of High goal to the edge |    [-----------------]  |      
+                                  ->  [        |        ]
+                                      [        |        ]
+                                  ->  [        O        ]
+                                      [-----((O0O))-----]
+                                      [        O        ]
+                                      [        |        ]
+                                      [        |        ] 
+                                 |    [_________________]  |
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 *These measurements are not set in stone and are subject to change (not definite)*
-*All measurements are between vertical bars*
+                  *All measurements are between vertical bars*
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
