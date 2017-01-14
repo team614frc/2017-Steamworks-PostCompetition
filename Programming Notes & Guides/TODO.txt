@@ -1,8 +1,5 @@
 BUILD SEASON:
--Locate and install:
-	>motor controller libraries
-	>navx libraries
-	>sf2 libraries
+-Winch motor, command
 
 	
 CREATE AUTONOMOUS FOR:

@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class ShootIntoBoiler extends CommandGroup {
     
     public ShootIntoBoiler() {
-    	// begins spinning flywheels
+    	// begins revving shooter flywheels & feeder wheels
     	addSequential(new SpinShooterMotors(10));
     }
 }
