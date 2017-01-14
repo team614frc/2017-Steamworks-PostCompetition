@@ -3,28 +3,35 @@ package org.usfirst.frc.team614.robot.commands.autonomous.deliverRight;
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * based on vision, rotates to the left for the right gear lift
  */
 public class TurnLeftForGearLift extends Command {
-
+	
+	double offset;
+	
     public TurnLeftForGearLift() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivetrain);
+    	offset = -1;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	// begin reading vision processing;
     	// get to the point such that there is a gettable value that is the reflected tape's offset from the camera
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	// refresh vision data?
-    	Robot.drivetrain.arcadeDrive(0, .5);
+    	offset = Robot.cameraTable.getNumber("offset", -1.0);
+    	SmartDashboard.putNumber("Vision Offset", offset);
+    	
+//    	Robot.drivetrain.arcadeDrive(0, .5);
 //    	Robot.drivetrain.arcadeDrive(0, -.5);  // negate if it rotates backwards
     }
 
