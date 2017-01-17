@@ -2,7 +2,7 @@
 package org.usfirst.frc.team614.robot;
 
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team614.robot.subsystems.Pneumatics;
+import org.usfirst.frc.team614.robot.subsystems.Shooter;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -29,10 +29,9 @@ public class Robot extends IterativeRobot {
 
 	public static AHRS navX;
 	public static Drivetrain drivetrain;
-	public static Pneumatics pneumatics;
-	
 	public static Encoder encoder;
 	public static NetworkTable cameraTable;
+	public static Shooter shooter;
 	public static OI oi;
 	
     Command autonomousCommand;
@@ -52,9 +51,8 @@ public class Robot extends IterativeRobot {
             DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
         }
     	drivetrain = new Drivetrain();
-    	pneumatics = new Pneumatics();
-    	
     	encoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+    	shooter = new Shooter(1.0, 1.0);
     	NetworkTable.initialize();
     	cameraTable = NetworkTable.getTable("camera");
     	

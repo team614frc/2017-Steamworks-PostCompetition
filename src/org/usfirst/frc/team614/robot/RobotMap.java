@@ -27,11 +27,8 @@ public class RobotMap {
 	// Change these when you shuffle PWM cables around
 	public static int drivetrainLeftMotor = 0;
 	public static int drivetrainRightMotor = 1;
-	public static int shooterLeftMotor = 2;
-	public static int shooterRightMotor = 3;
-	public static int shooterAngleMotor = 4;
 	
-	// pneumatics
-	public static DoubleSolenoid.Value pistonOut = DoubleSolenoid.Value.kForward;
-	public static DoubleSolenoid.Value pistonIn = DoubleSolenoid.Value.kReverse;
+	public static int shooterFeederMotor = 2;
+	public static int shooterFireMotor = 3;
+	
 }

@@ -1,11 +1,8 @@
 BUILD SEASON:
-	- Create systems for:
-		> pneumatics + 1 motor
-		> 
+-Winch motor, command
 
 	
 CREATE AUTONOMOUS FOR:
 	1. Deliver Gear to Left Lift
 	2. Deliver Gear to Right Lift
-	2. Deliver Gear to Center Lift
-	3. Travel to Hopper, Dump Hopper, Shoot 20 High Goals
+	3. Dump Hopper, Shoot 20 High Goals

@@ -38,8 +38,7 @@ public class DriveStraightForDistance extends Command
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute()
 	{
-		Robot.drivetrain.arcadeDrive(
-				/* SmartDashboard.getNumber("Rotation Rate", 0) */ speed, Robot.drivetrain.getRotateRate());
+		Robot.drivetrain.arcadeDrive(speed, Robot.drivetrain.getRotateRate());
 	}
 
 	// Returns true once the distance travelled by the encoder is greater than
