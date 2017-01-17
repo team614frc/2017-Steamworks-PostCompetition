@@ -2,10 +2,12 @@
 package org.usfirst.frc.team614.robot;
 
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team614.robot.subsystems.Pneumatics;
 
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Timer;
@@ -27,6 +29,9 @@ public class Robot extends IterativeRobot {
 
 	public static AHRS navX;
 	public static Drivetrain drivetrain;
+	public static Pneumatics pneumatics;
+	
+	public static Encoder encoder;
 	public static NetworkTable cameraTable;
 	public static OI oi;
 	
@@ -38,11 +43,6 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	drivetrain = new Drivetrain();
-    	NetworkTable.initialize();
-    	cameraTable = NetworkTable.getTable("camera");
-    	
-		oi = new OI();
         try {
             /* Begins communication with NavX.                                     */
             /* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     */
@@ -51,11 +51,22 @@ public class Robot extends IterativeRobot {
         } catch (RuntimeException ex ) {
             DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
         }
+    	drivetrain = new Drivetrain();
+    	pneumatics = new Pneumatics();
+    	
+    	encoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+    	NetworkTable.initialize();
+    	cameraTable = NetworkTable.getTable("camera");
+    	
+		oi = new OI();
 		
         chooser = new SendableChooser();
-//        chooser.addDefault("Default Auto", new ExampleCommand());
-//        chooser.addObject("My Auto", new MyAutoCommand());
-        SmartDashboard.putData("Auto mode", chooser);
+//        chooser.addDefault("Drive Straight Full", new DriveStraight(.5, 1.0));
+//        chooser.addObject("Drive Straight Half", new DriveStraight(.5, .5));
+        SmartDashboard.putData("Drive Straight", chooser);
+        SmartDashboard.putNumber("Speed", .5);
+        SmartDashboard.putNumber("Rotation Rate", .5);
+        SmartDashboard.putNumber("Vision Offset", -1);
     }
 	
 	/**
@@ -85,17 +96,21 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
     	Robot.navX.reset();
         autonomousCommand = (Command) chooser.getSelected();
-        
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+        /*
+		String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
-			break;
-		case "Default Auto":
-		default:
-			autonomousCommand = new ExampleCommand();
-			break;
-		} */
+			case "Drive Straight Full": {
+				autonomousCommand = new DriveStraight(.5, 1.0);
+				break;
+			}
+			case "Drive Straight Half": {
+				autonomousCommand = new DriveStraight(.5, 1.0);
+				break;
+			}
+			default: {
+				
+			}
+		}*/
     	
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
@@ -129,6 +144,9 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {
         LiveWindow.run();
     }
+	public static void resetEncoder() {
+		encoder.reset();
+	}
     public static void printNavxData() {
     	
 	double start_time = Timer.getFPGATimestamp();

@@ -47,7 +47,7 @@ public class OI {
 	// NavX
 	private static final Button displayNavxData = new JoystickButton(driverGamepad, Gamepad.button_Start);
 	private static final Button zeroNavxYaw = new JoystickButton(driverGamepad, Gamepad.button_Back);
-	
+	private static final Button drd = new JoystickButton(driverGamepad, Gamepad.button_A);
 	// Binding of Commands
 	public OI() {
 		displayNavxData.whenPressed(new DisplayNavxData());

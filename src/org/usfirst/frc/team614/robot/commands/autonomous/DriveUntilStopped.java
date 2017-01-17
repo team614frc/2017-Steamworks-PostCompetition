@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team614.robot.commands.autonomous;
 
 import org.usfirst.frc.team614.robot.Robot;
@@ -6,13 +5,18 @@ import org.usfirst.frc.team614.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Makes the drivetrain move at .5 speed for 1 second
+ *Makes the the robot drive forward until the robot is not moving
  */
-public class DriveStraight extends Command {
 
-    public DriveStraight() {
+//Might be necessary to include specific tolerances (because "a" rarely exactly equals 0)
+//However isMoving seems to include thresholds of its own, not sure if they can be modified
+public class DriveUntilStopped extends Command {
+	private double speed;
+    public DriveUntilStopped(double speed) {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.drivetrain);
+        // eg. requires(chassis);
+    	requires(Robot.drivetrain);
+    	this.speed = speed;
     }
 
     // Called just before this Command runs the first time
@@ -20,18 +24,24 @@ public class DriveStraight extends Command {
     	Robot.navX.reset();
     	Robot.navX.zeroYaw();
     	Robot.printNavxData();
+    	
     	Robot.drivetrain.getController().enable();
     	Robot.drivetrain.setUsingPID(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.arcadeDrive(.5, Robot.drivetrain.getRotateRate());
+    	Robot.drivetrain.arcadeDrive(speed, Robot.drivetrain.getRotateRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	if (!Robot.navX.isMoving())
+    	{
+    		return true;
+    	}
+    	else
+    		return false;
     }
 
     // Called once after isFinished returns true

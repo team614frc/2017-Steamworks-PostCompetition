@@ -4,6 +4,7 @@ import org.usfirst.frc.team614.robot.Robot;
 import org.usfirst.frc.team614.robot.RobotMap;
 import org.usfirst.frc.team614.robot.commands.drivetrain.TankDrive;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -16,7 +17,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Drivetrain extends Subsystem implements PIDOutput {
     
-	RobotDrive drivetrain;
+	public RobotDrive drivetrain;
+	
 	PIDController turnController;
     private double rotateToAngleRate;
     private boolean usingPID;
@@ -62,7 +64,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
         setDefaultCommand(new TankDrive());
     }
     public void arcadeDrive(double moveValue, double rotateValue) {
-    	drivetrain.arcadeDrive(moveValue, rotateValue);
+    	drivetrain.arcadeDrive(moveValue, -rotateValue);
     }
     public void stop() {
     	drivetrain.arcadeDrive(0, 0);
