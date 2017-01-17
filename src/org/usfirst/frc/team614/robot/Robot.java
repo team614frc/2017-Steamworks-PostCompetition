@@ -2,6 +2,7 @@
 package org.usfirst.frc.team614.robot;
 
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team614.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team614.robot.subsystems.Shooter;
 
 import com.kauailabs.navx.frc.AHRS;
@@ -29,6 +30,7 @@ public class Robot extends IterativeRobot {
 
 	public static AHRS navX;
 	public static Drivetrain drivetrain;
+	public static Pneumatics pneumatics;
 	public static Encoder encoder;
 	public static NetworkTable cameraTable;
 	public static Shooter shooter;
@@ -51,10 +53,15 @@ public class Robot extends IterativeRobot {
             DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
         }
     	drivetrain = new Drivetrain();
+    	pneumatics = new Pneumatics();
     	encoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
-    	shooter = new Shooter(1.0, 1.0);
+    	shooter = new Shooter();
+
+    	NetworkTable.setServerMode();
+    	NetworkTable.setTeam(614);
     	NetworkTable.initialize();
-    	cameraTable = NetworkTable.getTable("camera");
+    	cameraTable = NetworkTable.getTable("test");
+        SmartDashboard.putNumber("Speed", .5);
     	
 		oi = new OI();
 		
@@ -62,9 +69,8 @@ public class Robot extends IterativeRobot {
 //        chooser.addDefault("Drive Straight Full", new DriveStraight(.5, 1.0));
 //        chooser.addObject("Drive Straight Half", new DriveStraight(.5, .5));
         SmartDashboard.putData("Drive Straight", chooser);
-        SmartDashboard.putNumber("Speed", .5);
         SmartDashboard.putNumber("Rotation Rate", .5);
-        SmartDashboard.putNumber("Vision Offset", -1);
+        SmartDashboard.putNumber("Vision Offset", -.5);
     }
 	
 	/**

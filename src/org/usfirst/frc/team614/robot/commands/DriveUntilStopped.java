@@ -1,11 +1,11 @@
-package org.usfirst.frc.team614.robot.commands.autonomous;
+package org.usfirst.frc.team614.robot.commands;
 
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *Makes the the robot drive forward until the robot is not moving
+ *Makes the the robot drive forward until the robot is not moving (nearly 0 velocity)
  */
 
 //Might be necessary to include specific tolerances (because "a" rarely exactly equals 0)

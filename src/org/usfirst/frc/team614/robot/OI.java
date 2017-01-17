@@ -1,6 +1,8 @@
 package org.usfirst.frc.team614.robot;
 
 import org.team708.robot.util.Gamepad;
+import org.usfirst.frc.team614.robot.commands.PrintNetworkTables;
+import org.usfirst.frc.team614.robot.commands.autonomous.shooter.RevShooterAtSmartDashboardSpeed;
 import org.usfirst.frc.team614.robot.commands.navx.DisplayNavxData;
 import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
 
@@ -47,11 +49,14 @@ public class OI {
 	// NavX
 	private static final Button displayNavxData = new JoystickButton(driverGamepad, Gamepad.button_Start);
 	private static final Button zeroNavxYaw = new JoystickButton(driverGamepad, Gamepad.button_Back);
-	private static final Button drd = new JoystickButton(driverGamepad, Gamepad.button_A);
+	private static final Button printNetworkTables = new JoystickButton(driverGamepad, Gamepad.button_A);
+	private static final Button revShooterAtSmartDashboardSpeed = new JoystickButton(driverGamepad, Gamepad.button_B);
 	// Binding of Commands
 	public OI() {
 		displayNavxData.whenPressed(new DisplayNavxData());
 		zeroNavxYaw.whenPressed(new ZeroNavxYaw());
+		printNetworkTables.whenPressed(new PrintNetworkTables());
+		revShooterAtSmartDashboardSpeed.whileHeld(new RevShooterAtSmartDashboardSpeed());
 	}
 }
 

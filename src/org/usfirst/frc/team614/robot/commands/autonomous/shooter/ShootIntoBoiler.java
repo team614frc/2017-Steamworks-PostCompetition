@@ -1,6 +1,4 @@
-package org.usfirst.frc.team614.robot.commands.autonomous.shootBall;
-
-import org.usfirst.frc.team614.robot.commands.autonomous.SpinShooterMotors;
+package org.usfirst.frc.team614.robot.commands.autonomous.shooter;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
