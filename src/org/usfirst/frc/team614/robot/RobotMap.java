@@ -31,7 +31,11 @@ public class RobotMap {
 	public static int shooterFireMotor = 2;
 	public static int shooterFeederMotor = 3;
 
+	// CAN Talon IDs
+//	public static int shooterFireID = 0;
+	
 	// pneumatics
 	public static DoubleSolenoid.Value pistonOut = DoubleSolenoid.Value.kForward;
 	public static DoubleSolenoid.Value pistonIn = DoubleSolenoid.Value.kReverse;
+
 }

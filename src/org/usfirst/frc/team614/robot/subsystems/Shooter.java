@@ -2,7 +2,8 @@ package org.usfirst.frc.team614.robot.subsystems;
 
 import org.usfirst.frc.team614.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.TalonSRX;
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -12,8 +13,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Shooter extends Subsystem
 {
 	// The port the is not final.
-	VictorSP feederMotor = new VictorSP(RobotMap.shooterFeederMotor);
-	TalonSRX fireMotor = new TalonSRX(RobotMap.shooterFireMotor);
+//	VictorSP feederMotor = new VictorSP(RobotMap.shooterFeederMotor);
+	VictorSP fireMotor = new VictorSP(RobotMap.shooterFireMotor);
+//	CANTalon fireMotor = new CANTalon(RobotMap.shooterFireID);
 
 //	private double feederSpeed, fireSpeed;
 	
