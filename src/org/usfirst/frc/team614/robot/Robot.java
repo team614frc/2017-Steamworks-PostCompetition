@@ -4,6 +4,7 @@ package org.usfirst.frc.team614.robot;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team614.robot.subsystems.Shooter;
+import org.usfirst.frc.team614.robot.subsystems.Winch;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -35,6 +36,7 @@ public class Robot extends IterativeRobot {
 	public static NetworkTable cameraTable;
 	public static Shooter shooter;
 	public static OI oi;
+	public static Winch winch;
 	
     Command autonomousCommand;
     SendableChooser chooser;
@@ -56,6 +58,7 @@ public class Robot extends IterativeRobot {
     	pneumatics = new Pneumatics();
     	encoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
     	shooter = new Shooter();
+    	winch = new Winch();
 
     	NetworkTable.setServerMode();
     	NetworkTable.setTeam(614);

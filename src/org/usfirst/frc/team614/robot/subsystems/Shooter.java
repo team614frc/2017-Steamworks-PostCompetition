@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Shooter extends Subsystem
 {
+	
 	// The port the is not final.
 //	VictorSP feederMotor = new VictorSP(RobotMap.shooterFeederMotor);
 	VictorSP fireMotor = new VictorSP(RobotMap.shooterFireMotor);
