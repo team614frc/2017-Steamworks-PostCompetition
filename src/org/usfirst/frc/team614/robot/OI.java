@@ -1,6 +1,7 @@
 package org.usfirst.frc.team614.robot;
 
 import org.team708.robot.util.Gamepad;
+import org.usfirst.frc.team614.robot.commands.PIDSetter;
 import org.usfirst.frc.team614.robot.commands.PrintNetworkTables;
 import org.usfirst.frc.team614.robot.commands.autonomous.shooter.RevShooterAtSmartDashboardSpeed;
 import org.usfirst.frc.team614.robot.commands.navx.DisplayNavxData;
@@ -52,15 +53,24 @@ public class OI {
 	private static final Button zeroNavxYaw = new JoystickButton(driverGamepad, Gamepad.button_Back);
 	private static final Button printNetworkTables = new JoystickButton(driverGamepad, Gamepad.button_A);
 	private static final Button revShooterAtSmartDashboardSpeed = new JoystickButton(driverGamepad, Gamepad.button_B);
+<<<<<<< HEAD
+=======
+	private static final Button pidSetter = new JoystickButton(driverGamepad, Gamepad.button_X);
+>>>>>>> origin/master
 	private static final Button spinWinchMotors = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
 
 	// Binding of Commands
 	public OI() {
+<<<<<<< HEAD
 		spinWinchMotors.whileHeld(new SpinWinchMotors());
+=======
+		spinWinchMotors.whileHeld(new SpinWinchMotors(0.0, 1.0));
+>>>>>>> origin/master
 		displayNavxData.whenPressed(new DisplayNavxData());
 		zeroNavxYaw.whenPressed(new ZeroNavxYaw());
 		printNetworkTables.whenPressed(new PrintNetworkTables());
 		revShooterAtSmartDashboardSpeed.whileHeld(new RevShooterAtSmartDashboardSpeed());
+		pidSetter.whileHeld(new PIDSetter());
 	}
 }
 

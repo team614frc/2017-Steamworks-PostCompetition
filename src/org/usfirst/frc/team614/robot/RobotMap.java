@@ -34,7 +34,7 @@ public class RobotMap {
 	public static int winchMotor = 4; //may change 
 
 	// CAN Talon IDs
-//	public static int shooterFireID = 0;
+	public static int shooterFireID = 1;
 	
 	// pneumatics
 	public static DoubleSolenoid.Value pistonOut = DoubleSolenoid.Value.kForward;

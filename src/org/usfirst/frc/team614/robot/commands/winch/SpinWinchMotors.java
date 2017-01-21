@@ -1,6 +1,10 @@
 package org.usfirst.frc.team614.robot.commands.winch;
 
+<<<<<<< HEAD
 //import org.usfirst.frc.team614.robot.Constants;
+=======
+import org.usfirst.frc.team614.robot.Constants;
+>>>>>>> origin/master
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -36,7 +40,11 @@ public class SpinWinchMotors extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+<<<<<<< HEAD
     	if(Robot.navX.isMoving() == true) {
+=======
+    	if(Robot.navX.getRawGyroZ()<= this.height) {
+>>>>>>> origin/master
     	   return true;  		
     	}
         return false;
@@ -45,7 +53,10 @@ public class SpinWinchMotors extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.winch.stopMotor();
+<<<<<<< HEAD
     
+=======
+>>>>>>> origin/master
     }
 
     // Called when another command which requires one or more of the same
