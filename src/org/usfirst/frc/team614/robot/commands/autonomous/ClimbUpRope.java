@@ -5,7 +5,7 @@ import org.usfirst.frc.team614.robot.commands.winch.SpinWinchMotors;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * this will climb up rope.
  */
 public class ClimbUpRope extends CommandGroup {
 

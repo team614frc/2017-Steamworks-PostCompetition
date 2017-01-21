@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class LeftGearPrepareGroup extends CommandGroup {
+public class LeftGearPrepareForTeleop extends CommandGroup {
 
-    public LeftGearPrepareGroup() {
+    public LeftGearPrepareForTeleop() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
