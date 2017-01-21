@@ -1,6 +1,11 @@
 BUILD SEASON:
 -Winch motor, command
+	>climb THEN when the Robot Stops Moving
 -create CAN Talon SRX motor controllers for SHOOTER and WINCH. SHOOTER will use Talon's PID functionality to do cool stuff.
+		 change Shooter's FeedbackDevice.AnalogEncoder to be whatever encoder type we use
+		 tune CANTalon PID parameters
+		 
+-AFTER ANY AUTONOMOUS: try to move the robot so that it ends at the farmost hopper.
 	
 CREATE AUTONOMOUS FOR:
 	1. Deliver Gear to Left Lift
