@@ -30,6 +30,8 @@ public class RobotMap {
 
 	public static int shooterFireMotor = 2;
 	public static int shooterFeederMotor = 3;
+	
+	public static int winchMotor = 4; //may change 
 
 	// CAN Talon IDs
 	public static int shooterFireID = 1;
