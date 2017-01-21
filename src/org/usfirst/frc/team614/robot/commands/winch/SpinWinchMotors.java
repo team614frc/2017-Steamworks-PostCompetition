@@ -1,7 +1,5 @@
 package org.usfirst.frc.team614.robot.commands.winch;
 
-//import org.usfirst.frc.team614.robot.Constants;
-import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -37,11 +35,20 @@ public class SpinWinchMotors extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	// this does the opposite of what it is supposed to do i think.
     	if(Robot.navX.isMoving() == true)
-	    	if(Robot.navX.getRawGyroZ()<= this.height) {
+	    	if(Robot.navX.getRawGyroZ() <= this.height) {
 	    	   return true;  		
 	    	}
         return false;
+        
+        /*if (!Robot.navX.isMoving() || Robot.encoder.getRate() <= 0 || Robot.navX.getRawGyroZ() >= this.height)
+        {
+        	return true;
+        }
+        
+        return false;*/
+        	
     }
 
     // Called once after isFinished returns true
