@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -59,12 +60,14 @@ public class Robot extends IterativeRobot {
     	encoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
     	shooter = new Shooter();
     	winch = new Winch();
+    	
+    	encoder.setDistancePerPulse(Constants.DISTANCE_PER_PULSE);
 
     	NetworkTable.setServerMode();
     	NetworkTable.setTeam(614);
     	NetworkTable.initialize();
     	cameraTable = NetworkTable.getTable("test");
-        SmartDashboard.putNumber("Speed", .5);
+        SmartDashboard.putNumber("Speed", 1.0);
     	
 		oi = new OI();
 		
@@ -78,6 +81,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("P", 0);
         SmartDashboard.putNumber("I", 0);
         SmartDashboard.putNumber("D", 0);
+
     }
 	
 	/**

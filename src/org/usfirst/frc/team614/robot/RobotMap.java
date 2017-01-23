@@ -28,10 +28,11 @@ public class RobotMap {
 	public static int drivetrainLeftMotor = 0;
 	public static int drivetrainRightMotor = 1;
 
-	public static int shooterFireMotor = 2;
-	public static int shooterFeederMotor = 3;
+//	public static int shooterFireMotor = 2;
+	public static int shooterFireMotor = 6;
+//	public static int shooterFeederMotor = 3;
 	
-	public static int winchMotor = 4; //may change 
+	public static int winchMotor = 7; //may change 
 
 	// CAN Talon IDs
 	public static int shooterFireID = 1;

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team614.robot;
 
 import org.team708.robot.util.Gamepad;
+import org.usfirst.frc.team614.robot.commands.DriveAtSmartDashboardSpeed;
 import org.usfirst.frc.team614.robot.commands.PIDSetter;
 import org.usfirst.frc.team614.robot.commands.PrintNetworkTables;
 import org.usfirst.frc.team614.robot.commands.autonomous.shooter.RevShooterAtSmartDashboardSpeed;
@@ -53,6 +54,7 @@ public class OI {
 	private static final Button zeroNavxYaw = new JoystickButton(driverGamepad, Gamepad.button_Back);
 	private static final Button printNetworkTables = new JoystickButton(driverGamepad, Gamepad.button_A);
 	private static final Button revShooterAtSmartDashboardSpeed = new JoystickButton(driverGamepad, Gamepad.button_B);
+	private static final Button driveAtSmartDashboardSpeed = new JoystickButton(driverGamepad, Gamepad.button_Y);
 	private static final Button pidSetter = new JoystickButton(driverGamepad, Gamepad.button_X);
 	private static final Button spinWinchMotors = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
 
@@ -63,6 +65,7 @@ public class OI {
 		zeroNavxYaw.whenPressed(new ZeroNavxYaw());
 		printNetworkTables.whenPressed(new PrintNetworkTables());
 		revShooterAtSmartDashboardSpeed.whileHeld(new RevShooterAtSmartDashboardSpeed());
+		driveAtSmartDashboardSpeed.whenPressed(new DriveAtSmartDashboardSpeed());
 		pidSetter.whileHeld(new PIDSetter());
 	}
 }

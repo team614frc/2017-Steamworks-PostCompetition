@@ -4,6 +4,7 @@ import org.usfirst.frc.team614.robot.RobotMap;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
+import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -37,14 +38,17 @@ public class Shooter extends Subsystem
 //        fireMotor.configPeakOutputVoltage(+12.0f, 0.0f);
 //        /* set closed loop gains in slot0 */
 //        fireMotor.setProfile(0);
-//        
+//        fireMotor.changeControlMode(TalonControlMode.Speed);
 //        // PID TUNING PARAMETERS for FIRE MOTOR
 //        // see 12.4.2 of CAN Talon SRX Software Reference Manual
 //        fireMotor.setF(0);
 //        fireMotor.setP(0);
 //        fireMotor.setI(0);
 //        fireMotor.setD(0);
-
+//
+//        fireMotor.enable();
+//        
+//        fireMotor.setSetpoint(.7);
 	}
 
 	// spins the flywheels out to shoot a wiffle ball

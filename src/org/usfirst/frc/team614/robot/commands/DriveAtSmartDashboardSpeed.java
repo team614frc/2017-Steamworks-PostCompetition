@@ -2,6 +2,7 @@ package org.usfirst.frc.team614.robot.commands;
 
 import org.usfirst.frc.team614.robot.Robot;
 
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -22,6 +23,7 @@ public class DriveAtSmartDashboardSpeed extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	SmartDashboard.putNumber("Encoder Distance", Robot.encoder.get());
     	Robot.drivetrain.arcadeDrive(SmartDashboard.getNumber("Speed", 0), 0);
     }
 
