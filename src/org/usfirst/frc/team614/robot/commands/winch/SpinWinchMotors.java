@@ -29,19 +29,18 @@ public class SpinWinchMotors extends Command {
     	}
     }
 
-    // Called repeatedly when this Command is scheduled to run
+    // Called repeatedly(Every 20ms) to spin the Winch 
     protected void execute() {
         Robot.winch.spinMotor(SmartDashboard.getNumber("Winch Motor Speed", 0.0));
         //Robot.winch.spinMotor(speed, Robot.winch.getRotateRate());
     	}
 
-    // Make this return true when this Command no longer needs to run execute()
+    // Make this return true when navX senses the robot not moving (or when it has reached a certain height)
     protected boolean isFinished() {
-    	if(Robot.navX.isMoving() == true)
-	    	if(Robot.navX.getRawGyroZ()<= this.height) {
-	    	   return true;  		
-	    	}
-        return false;
+    	if(!Robot.navX.isMoving())
+	     return true;  		
+    	else         
+    	 return false; 
     }
 
     // Called once after isFinished returns true
