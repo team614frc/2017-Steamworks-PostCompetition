@@ -1,16 +1,15 @@
 package org.usfirst.frc.team614.robot.commands.autonomous;
 
-import org.usfirst.frc.team614.robot.commands.DriveUntilStopped;
-import org.usfirst.frc.team614.robot.commands.autonomous.deliverRight.TurnLeftForGearLift;
+import org.usfirst.frc.team614.robot.commands.winch.SpinWinchMotors;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- * drives forward, turns to the left, and delivers gear to the right lift.
+ * this will climb up rope.
  */
-public class DeliverRightGearToLift extends CommandGroup {
+public class ClimbUpRope extends CommandGroup {
 
-    public DeliverRightGearToLift() {
+    public ClimbUpRope() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -28,9 +27,6 @@ public class DeliverRightGearToLift extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	//addSequential(new DeliverRightGear()); // to be replaced with DriveStraight(specific distance);
-    	addSequential(new TurnLeftForGearLift());
-    	addSequential(new DriveUntilStopped(0.5));
-    	
+    	this.addSequential(new SpinWinchMotors(10 /* speed */, 58 /* height in inches*/));
     }
 }

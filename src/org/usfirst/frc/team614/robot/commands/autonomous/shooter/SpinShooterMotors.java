@@ -1,21 +1,22 @@
-package org.usfirst.frc.team614.robot.commands.drivetrain;
+package org.usfirst.frc.team614.robot.commands.autonomous.shooter;
 
-import org.team708.robot.util.Gamepad;
-import org.usfirst.frc.team614.robot.OI;
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Used for firing the shooter until the time runs out.
  */
-public class TankDrive extends Command {
-
-    public TankDrive() {
+public class SpinShooterMotors extends Command {
+	private double time;
+	
+    public SpinShooterMotors(double time) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+		requires(Robot.shooter);
+		this.time = time;
+    	this.setTimeout(this.time);
     }
 
     // Called just before this Command runs the first time
@@ -24,20 +25,22 @@ public class TankDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.arcadeDrive(OI.driverGamepad.getAxis(Gamepad.leftStick_Y), OI.driverGamepad.getAxis(Gamepad.rightStick_X));
+    	Robot.shooter.rev(SmartDashboard.getNumber("Shooter Speed", 0.0));
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.shooter.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.shooter.stop();
     }
 }

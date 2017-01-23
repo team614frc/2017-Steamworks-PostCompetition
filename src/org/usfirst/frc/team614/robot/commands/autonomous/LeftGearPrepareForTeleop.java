@@ -1,16 +1,17 @@
 package org.usfirst.frc.team614.robot.commands.autonomous;
 
-import org.usfirst.frc.team614.robot.commands.DriveUntilStopped;
-import org.usfirst.frc.team614.robot.commands.autonomous.deliverRight.TurnLeftForGearLift;
+import org.usfirst.frc.team614.robot.Robot;
+import org.usfirst.frc.team614.robot.commands.DriveStraightForADistance;
+import org.usfirst.frc.team614.robot.commands.RotateToAngle;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- * drives forward, turns to the left, and delivers gear to the right lift.
+ *
  */
-public class DeliverRightGearToLift extends CommandGroup {
+public class LeftGearPrepareForTeleop extends CommandGroup {
 
-    public DeliverRightGearToLift() {
+    public LeftGearPrepareForTeleop() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -28,9 +29,11 @@ public class DeliverRightGearToLift extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	//addSequential(new DeliverRightGear()); // to be replaced with DriveStraight(specific distance);
-    	addSequential(new TurnLeftForGearLift());
-    	addSequential(new DriveUntilStopped(0.5));
+    	this.addSequential(new DriveStraightForADistance(-10, 10)); //temporary values
+    	//this.addSequential (Robot.drivetrain.arcadeDrive(0, 1)); //rotate right to when navx yaw =0
+    	this.addSequential(new RotateToAngle(true, 0, 1));//speed and angle not final, turns LEFT
+    	
+    	this.addSequential (new DriveStraightForADistance(10, 10)); //temporary values
     	
     }
 }

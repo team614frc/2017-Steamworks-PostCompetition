@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-|====================================|
+[====================================]
 |Autonomous Mode: Boiler Measurements|
-|====================================|
+[====================================]
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 [Field Elements]
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -13,9 +13,9 @@
 
 -When shooting from southeast wall (Aiming southeast when Alliance is on right) | Between 142.5 inches and 163.5 inches (very rough since going on measurements from the above statements) | Between 11 feet 10.5 inches and 13 feet 7.5 inches (very rough since going on measurements from above statements) |
 
--|Conic is subject to change | Equation of arc to shoot from when a net is covering the boiler at an angle (Preferrably from the closest hopper actuator, ex: Net-{ Goal-[] Net-} ) | ({1}/{30.5})(x+4)(x+3.2)(x-11) (units are in feet) | Conic is subject to change | Local mininum is where the robot is |
+-|Conic is subject to change | Equation of arc to shoot from when a net is covering the boiler at an angle (Preferrably from the closest hopper actuator, ex: Net-{ Goal-[] Net-} ) | ({-1}/{30.5})(x+4)(x+3.2)(x-11) (units are in feet) | Conic is subject to change | Local mininum is where the robot is |
 
--|Conic is subject to change | Equation of arc to shoot when net isn't covering boiler (Preferrably from the key or other places that have the boiler not covered by obstacles, ex: Goal-[] Net-} ) |
+-|Conic is subject to change | Equation of arc to shoot when net isn't covering boiler (Preferrably from the key or other places that have the boiler not covered by obstacles, ex: Goal-[] Net-} ) | ({-1}/{90})(x+4)(x+3.2)(x-14) (units are in feet) | Conic is subject to change | Local mininum is where the robot is |
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 [Boiler Elements]
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------

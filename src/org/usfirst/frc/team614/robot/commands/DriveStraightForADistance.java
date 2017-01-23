@@ -1,5 +1,5 @@
 
-package org.usfirst.frc.team614.robot.commands.autonomous;
+package org.usfirst.frc.team614.robot.commands;
 
 import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.Robot;
@@ -9,11 +9,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * Makes the drivetrain move at .5 speed for 1 second
  */
-public class DriveStraightForDistance extends Command
+public class DriveStraightForADistance extends Command
 {
 	private double distance, speed /* ,time */;
 
-	public DriveStraightForDistance(double distance, double speed)
+	public DriveStraightForADistance(double distance, double speed)
 	{
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.drivetrain);
@@ -38,8 +38,7 @@ public class DriveStraightForDistance extends Command
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute()
 	{
-		Robot.drivetrain.arcadeDrive(
-				/* SmartDashboard.getNumber("Rotation Rate", 0) */ speed, Robot.drivetrain.getRotateRate());
+		Robot.drivetrain.arcadeDrive(speed, Robot.drivetrain.getRotateRate());
 	}
 
 	// Returns true once the distance travelled by the encoder is greater than

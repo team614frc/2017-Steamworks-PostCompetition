@@ -37,13 +37,24 @@ public class Drivetrain extends Subsystem implements PIDOutput {
     static final double kToleranceDegrees = 2.0f;
 	
 	// VictorSP motor controllers
-	VictorSP leftMotor = new VictorSP(RobotMap.drivetrainLeftMotor);
-	VictorSP rightMotor = new VictorSP(RobotMap.drivetrainRightMotor);
+//	VictorSP leftMotor = new VictorSP(RobotMap.drivetrainLeftMotor);
+//	VictorSP rightMotor = new VictorSP(RobotMap.drivetrainRightMotor);
+
+	VictorSP leftMotorA = new VictorSP(0);
+	VictorSP rightMotorA = new VictorSP(1);
+	VictorSP leftMotorB = new VictorSP(2);
+	VictorSP rightMotorB = new VictorSP(3);
 	
 	public Drivetrain() {
+		
+//		leftMotorA.set(1);
+//		leftMotorB.set(1);
+//		rightMotorA.set(1);
+//		rightMotorB.set(1);
+//		
 		usingPID = false;
 		
-		drivetrain = new RobotDrive(leftMotor, rightMotor);
+		drivetrain = new RobotDrive(leftMotorA, leftMotorB, rightMotorA, rightMotorB);
 		
 		turnController = new PIDController(kP, kI,kD, kF, Robot.navX, this);
         turnController.setInputRange(-180.0f,  180.0f);
@@ -57,6 +68,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
         LiveWindow.addActuator("DriveSystem", "RotateController", turnController);
         
         turnController.setSetpoint(0.0f);
+        
 	}
 	
     // Set the default command that constantly runs here.

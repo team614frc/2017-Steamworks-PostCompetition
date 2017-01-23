@@ -1,7 +1,5 @@
-package org.usfirst.frc.team614.robot.commands.drivetrain;
+package org.usfirst.frc.team614.robot.commands;
 
-import org.team708.robot.util.Gamepad;
-import org.usfirst.frc.team614.robot.OI;
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -10,26 +8,28 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class TankDrive extends Command {
+public class PIDSetter extends Command {
 
-    public TankDrive() {
+    public PIDSetter() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivetrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+//    	Robot.shooter.getFireMotor().setF(SmartDashboard.getNumber("F", 0));
+//    	Robot.shooter.getFireMotor().setP(SmartDashboard.getNumber("P", 0));
+//    	Robot.shooter.getFireMotor().setI(SmartDashboard.getNumber("I", 0));
+//    	Robot.shooter.getFireMotor().setD(SmartDashboard.getNumber("D", 0));
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.arcadeDrive(OI.driverGamepad.getAxis(Gamepad.leftStick_Y), OI.driverGamepad.getAxis(Gamepad.rightStick_X));
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

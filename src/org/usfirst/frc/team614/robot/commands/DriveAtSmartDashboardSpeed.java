@@ -1,18 +1,17 @@
-package org.usfirst.frc.team614.robot.commands.drivetrain;
+package org.usfirst.frc.team614.robot.commands;
 
-import org.team708.robot.util.Gamepad;
-import org.usfirst.frc.team614.robot.OI;
 import org.usfirst.frc.team614.robot.Robot;
 
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class TankDrive extends Command {
+public class DriveAtSmartDashboardSpeed extends Command {
 
-    public TankDrive() {
+    public DriveAtSmartDashboardSpeed() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivetrain);
@@ -24,7 +23,8 @@ public class TankDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.arcadeDrive(OI.driverGamepad.getAxis(Gamepad.leftStick_Y), OI.driverGamepad.getAxis(Gamepad.rightStick_X));
+    	SmartDashboard.putNumber("Encoder Distance", Robot.encoder.get());
+    	Robot.drivetrain.arcadeDrive(SmartDashboard.getNumber("Speed", 0), 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
