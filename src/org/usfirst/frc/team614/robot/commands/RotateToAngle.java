@@ -34,14 +34,28 @@ public class RotateToAngle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.arcadeDrive(0,1);
+    	
+    	if (direction) //go left?
+    	{
+    		Robot.drivetrain.arcadeDrive(0,1);	
+    	}
+    	else  //go right?
+    	{
+    		Robot.drivetrain.arcadeDrive(0,-1); // can the second argument even be negative?
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	/*use navX.getYaw() to calculate when the robot is at the intended angle (returns true)
+    	 * the current angle +  the intended angle = the angle relative to the navX that the robot turns to.
+    	 * [-179f, 179f]
+    	 *use modulus maybe? 
+    	 * 
+    	 * 
+    	 */
     	
-    	
-    	if (Robot.navX.getYaw() % 360 <= angle + 2 && Robot.navX.getYaw() % 360 >= angle - 2) //unfinished
+    	if (Robot.navX.getYaw() % 180 <= angle + 2 && Robot.navX.getYaw() % 180 >= angle - 2) //unfinished
     	{
     		return true;
     	}
