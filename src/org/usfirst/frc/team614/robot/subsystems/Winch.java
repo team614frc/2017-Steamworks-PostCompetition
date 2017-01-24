@@ -1,14 +1,15 @@
 package org.usfirst.frc.team614.robot.subsystems;
 
 import org.usfirst.frc.team614.robot.RobotMap;
+import org.usfirst.frc.team614.robot.commands.winch.WinchDrive;
 
-import com.ctre.CANTalon;
-
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
 public class Winch extends Subsystem {
-	CANTalon test = new CANTalon(RobotMap.winchMotor);
+//	CANTalon test = new CANTalon(RobotMap.winchMotor);
+	VictorSP test = new VictorSP(RobotMap.winchMotor);
 	
 	public Winch() {
 		//nothing here just yet
@@ -24,7 +25,7 @@ public class Winch extends Subsystem {
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new WinchDrive());
     }
 }
 

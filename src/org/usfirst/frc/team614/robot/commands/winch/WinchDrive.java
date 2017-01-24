@@ -1,5 +1,7 @@
-package org.usfirst.frc.team614.robot.commands.autonomous.shooter;
+package org.usfirst.frc.team614.robot.commands.winch;
 
+import org.team708.robot.util.Gamepad;
+import org.usfirst.frc.team614.robot.OI;
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -8,21 +10,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class RevShooterAtSmartDashboardSpeed extends Command {
+public class WinchDrive extends Command {
 
-    public RevShooterAtSmartDashboardSpeed() {
+    public WinchDrive() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.shooter);
+    	requires(Robot.winch);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooter.rev(SmartDashboard.getNumber("Speed", 0));
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+//    	Robot.winch.spinMotor(OI.driverGamepad.getAxis(Gamepad.leftStick_X));
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -32,12 +34,10 @@ public class RevShooterAtSmartDashboardSpeed extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.shooter.stop();
     }
 }
