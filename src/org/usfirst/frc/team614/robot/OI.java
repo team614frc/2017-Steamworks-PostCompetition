@@ -4,7 +4,6 @@ import org.team708.robot.util.Gamepad;
 import org.usfirst.frc.team614.robot.commands.DriveAtSmartDashboardSpeed;
 import org.usfirst.frc.team614.robot.commands.PIDSetter;
 import org.usfirst.frc.team614.robot.commands.PrintNetworkTables;
-import org.usfirst.frc.team614.robot.commands.autonomous.shooter.RevShooterAtSmartDashboardSpeed;
 import org.usfirst.frc.team614.robot.commands.navx.DisplayNavxData;
 import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
 import org.usfirst.frc.team614.robot.commands.winch.SpinWinchMotors;
@@ -64,7 +63,7 @@ public class OI {
 		displayNavxData.whenPressed(new DisplayNavxData());
 		zeroNavxYaw.whenPressed(new ZeroNavxYaw());
 		printNetworkTables.whenPressed(new PrintNetworkTables());
-		revShooterAtSmartDashboardSpeed.whileHeld(new RevShooterAtSmartDashboardSpeed());
+//		revShooterAtSmartDashboardSpeed.whileHeld(new RevShooterAtSmartDashboardSpeed());
 		driveAtSmartDashboardSpeed.whenPressed(new DriveAtSmartDashboardSpeed());
 		pidSetter.whileHeld(new PIDSetter());
 	}

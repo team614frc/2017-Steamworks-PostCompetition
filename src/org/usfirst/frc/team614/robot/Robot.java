@@ -1,10 +1,8 @@
 
 package org.usfirst.frc.team614.robot;
 
-import org.usfirst.frc.team614.robot.commands.autonomous.shooter.ShooterDrive;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.Pneumatics;
-import org.usfirst.frc.team614.robot.subsystems.Shooter;
 import org.usfirst.frc.team614.robot.subsystems.Winch;
 
 import com.kauailabs.navx.frc.AHRS;
@@ -14,7 +12,6 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -36,7 +33,7 @@ public class Robot extends IterativeRobot {
 	public static Pneumatics pneumatics;
 	public static Encoder encoder;
 	public static NetworkTable cameraTable;
-	public static Shooter shooter;
+//	public static Shooter shooter;
 	public static OI oi;
 	public static Winch winch;
 	
@@ -59,7 +56,7 @@ public class Robot extends IterativeRobot {
     	drivetrain = new Drivetrain();
     	pneumatics = new Pneumatics();
     	encoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
-    	shooter = new Shooter();
+//    	shooter = new Shooter();
     	winch = new Winch();
     	
     	encoder.setDistancePerPulse(Constants.DISTANCE_PER_PULSE);

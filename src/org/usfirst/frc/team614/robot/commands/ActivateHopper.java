@@ -1,7 +1,6 @@
 package org.usfirst.frc.team614.robot.commands;
 
 import org.usfirst.frc.team614.robot.commands.autonomous.activateHopper.RotateToBoiler;
-import org.usfirst.frc.team614.robot.commands.autonomous.shooter.ShootIntoRedBoiler;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -16,7 +15,7 @@ public class ActivateHopper extends CommandGroup {
     	//begins to drive straight for a TBD distance and speed
     	addSequential(new DriveStraightForADistance(0.0, 0.0));
     	//begins to shoot fuel cells into the high goal of the boiler
-    	addSequential(new ShootIntoRedBoiler());
+//    	addSequential(new ShootIntoRedBoiler());
     	
     	
     	
