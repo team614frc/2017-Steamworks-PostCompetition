@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team614.robot;
 
+import org.usfirst.frc.team614.robot.commands.ResetEncoder;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team614.robot.subsystems.Shooter;
@@ -66,19 +67,21 @@ public class Robot extends IterativeRobot {
     	NetworkTable.setTeam(614);
     	NetworkTable.initialize();
     	cameraTable = NetworkTable.getTable("test");
-        SmartDashboard.putNumber("Speed", 500);
     	
 		oi = new OI();
 		
         chooser = new SendableChooser();
         SmartDashboard.putData("Drive Straight", chooser);
+        SmartDashboard.putData("Reset Encoder", new ResetEncoder());
         SmartDashboard.putNumber("Rotation Rate", .5);
         SmartDashboard.putNumber("Vision Offset", -.5);
-        SmartDashboard.putNumber("RPM", 3833.0/60);
-        SmartDashboard.putNumber("F", 0);
-        SmartDashboard.putNumber("P", 0.015);
-        SmartDashboard.putNumber("I", .001);
+        SmartDashboard.putNumber("RPM", 1500);
+        SmartDashboard.putNumber("F", 0.1097);
+        SmartDashboard.putNumber("P", 0.22);
+        SmartDashboard.putNumber("I", 0);
         SmartDashboard.putNumber("D", 0);
+        SmartDashboard.putNumber("Shooter PID Error", 0);
+        SmartDashboard.putNumber("Shooter Encoder Distance", 0);
 
     }
 	
