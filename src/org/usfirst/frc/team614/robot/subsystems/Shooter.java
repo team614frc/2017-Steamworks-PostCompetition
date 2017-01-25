@@ -1,5 +1,6 @@
 package org.usfirst.frc.team614.robot.subsystems;
 
+import org.usfirst.frc.team614.robot.Robot;
 import org.usfirst.frc.team614.robot.RobotMap;
 import org.usfirst.frc.team614.robot.commands.autonomous.shooter.ShooterDrive;
 
@@ -7,12 +8,16 @@ import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Uses a feeder motor and a fire motor to shoot the balls.
  */
-public class Shooter extends Subsystem
+public class Shooter extends PIDSubsystem
 {
 	
 	// The port the is not final.
@@ -24,13 +29,20 @@ public class Shooter extends Subsystem
 	
 	public Shooter()
 	{
-		
+		super("Shooter", 0.015, 0.001, 0.0);
 		// .7 motor speed ~= 3833 RPM
 		
 		// sets PID parameters for firing motor
 		fireMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder); // change to w/e encoder type we use
-		fireMotor.reverseSensor(false);
+		
+		fireMotor.changeControlMode(TalonControlMode.Speed);
+		fireMotor.set(0.0);
+		
+		
+		fireMotor.reverseSensor(true);
 		fireMotor.configEncoderCodesPerRev(128);
+		//fireMotor.setPosition(0);
+		
 		/* if using QuadEncoder:
 		fireMotor.configEncoderCodesPerRev(XXX);
 		 * if using AnalogEncoder or AnalogPot:
@@ -40,26 +52,30 @@ public class Shooter extends Subsystem
         fireMotor.configNominalOutputVoltage(+0.0f, -0.0f);
         fireMotor.configPeakOutputVoltage(+12.0f, 0.0f);
         /* set closed loop gains in slot0 */
-//        fireMotor.setProfile(0);
-//        fireMotor.changeControlMode(TalonControlMode.Speed);
-//        fireMotor.set(63.8833333);
-//        // PID TUNING PARAMETERS for FIRE MOTOR
-//        // see 12.4.2 of CAN Talon SRX Software Reference Manual
-//        fireMotor.setF(.109);
-//        fireMotor.setP(5.0);
-//        fireMotor.setI(.06);
-//        fireMotor.setD(.6);
-//
-//        fireMotor.enable();
+        fireMotor.setProfile(1);
+        
+        // PID TUNING PARAMETERS for FIRE MOTOR
+        // see 12.4.2 of CAN Talon SRX Software Reference Manual
+        fireMotor.setF(.1097);
+        fireMotor.setP(.22);
+        fireMotor.setI(0);
+        fireMotor.setD(0);
+        
+//		setInputRange(0, 800000);
+//        setAbsoluteTolerance(1000);
 
-        
-        
+        enable();
+        /* Add the PID Controller to the Test-mode dashboard, allowing manual  */
+        /* tuning of the Turn Controller's P, I and D coefficients.            */
+        /* Typically, only the P value needs to be modified.                   */
+        LiveWindow.addActuator("ShooterSystem", "ShooterSpeed", getPIDController());
 	}
 
 	// spins the flywheels out to shoot a wiffle ball
 	public void rev(double speed)
 	{
 //		feederMotor.set(feederSpeed);
+		fireMotor.changeControlMode(TalonControlMode.Speed);
 		fireMotor.set(speed);
 	}
 
@@ -77,4 +93,51 @@ public class Shooter extends Subsystem
 		// Set the default command for a subsystem here.
 		 setDefaultCommand(new ShooterDrive());
 	}
+
+	protected double returnPIDInput() {
+		return fireMotor.getSpeed();
+	}
+
+	protected void usePIDOutput(double output) {
+		SmartDashboard.putNumber("OUTPUT", output);
+		fireMotor.set(-output);
+	}
+	
+//
+//    // Put methods for controlling this subsystem
+//    // here. Call these from Commands.
+//	
+//	public static CANTalon shooterMotor;
+//	
+//	public Shooter() {
+//		shooterMotor = new CANTalon(RobotMap.shooterFireID);
+//		shooterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+//		
+//		shooterMotor.changeControlMode(TalonControlMode.Speed);
+//		shooterMotor.set(0.0);
+//		
+//		shooterMotor.reverseSensor(true);
+//		shooterMotor.configEncoderCodesPerRev(128);
+//		
+//		shooterMotor.configNominalOutputVoltage(+0.0,  -0.0);
+//		shooterMotor.configPeakOutputVoltage(+12.0, 0.0);
+//		
+//		shooterMotor.setProfile(1);
+//		shooterMotor.setF(0.1097);
+//		shooterMotor.setP(0.22);
+//		shooterMotor.setI(0);
+//		shooterMotor.setD(0);
+//	}
+//	
+//	public void rev(double speed) {
+//		shooterMotor.set(speed);
+//	}
+//
+//	public CANTalon getShooterMotor() {
+//		return shooterMotor;
+//	}
+//    public void initDefaultCommand() {
+//        // Set the default command for a subsystem here.
+//        setDefaultCommand(new ShooterDrive());
+//    }
 }

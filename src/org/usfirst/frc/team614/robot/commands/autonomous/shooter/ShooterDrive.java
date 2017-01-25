@@ -4,6 +4,8 @@ import org.team708.robot.util.Gamepad;
 import org.usfirst.frc.team614.robot.OI;
 import org.usfirst.frc.team614.robot.Robot;
 
+import com.ctre.CANTalon.TalonControlMode;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -20,12 +22,23 @@ public class ShooterDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.putNumber("ERROR", Robot.shooter.getFireMotor().getClosedLoopError());
-    	Robot.shooter.getFireMotor().set(OI.driverGamepad.getAxis(Gamepad.rightStick_Y));
+    	SmartDashboard.putNumber("ERROR", Robot.shooter.getPIDController().getError());
+//    	Robot.shooter.setSetpoint(OI.driverGamepad.getAxis(Gamepad.rightStick_Y));
+    	Robot.shooter.rev(OI.driverGamepad.getAxis(Gamepad.rightStick_Y) * SmartDashboard.getNumber("Speed", 0));
+//    	Robot.shooter.setSetpoint(SmartDashboard.getNumber("Speed", 0));
+    	Robot.shooter.getPIDController().setPID(
+    			SmartDashboard.getNumber("P",  0),
+    			SmartDashboard.getNumber("I",  0),
+    			SmartDashboard.getNumber("D",  0));
+    	
+//    	Robot.shooter.rev(OI.driverGamepad.getAxis(Gamepad.rightStick_Y) * 1500);
+//    	Robot.shooter.rev(1500);
+    	
 //    	Robot.shooter.getFireMotor().set(SmartDashboard.getNumber("Speed", 0));
 //        Robot.shooter.getFireMotor().setForwardSoftLimit(SmartDashboard.getNumber("RPS", 3833/60.0));
 //    	Robot.shooter.getFireMotor().set(SmartDashboard.getNumber("RPS", 3833/60.0));
@@ -38,10 +51,12 @@ public class ShooterDrive extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.shooter.rev(0.0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.shooter.rev(0.0);
     }
 }

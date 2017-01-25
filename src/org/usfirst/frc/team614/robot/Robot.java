@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team614.robot;
 
+import org.usfirst.frc.team614.robot.commands.autonomous.shooter.ShooterDrive;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team614.robot.subsystems.Shooter;
@@ -67,21 +68,22 @@ public class Robot extends IterativeRobot {
     	NetworkTable.setTeam(614);
     	NetworkTable.initialize();
     	cameraTable = NetworkTable.getTable("test");
-        SmartDashboard.putNumber("Speed", 1.0);
+        SmartDashboard.putNumber("Speed", 500);
     	
 		oi = new OI();
 		
         chooser = new SendableChooser();
 //        chooser.addDefault("Drive Straight Full", new DriveStraight(.5, 1.0));
 //        chooser.addObject("Drive Straight Half", new DriveStraight(.5, .5));
+//        SmartDashboard.putData("Run At Full Speed", new ShooterDrive());
         SmartDashboard.putData("Drive Straight", chooser);
         SmartDashboard.putNumber("Rotation Rate", .5);
         SmartDashboard.putNumber("Vision Offset", -.5);
         SmartDashboard.putNumber("RPM", 3833.0/60);
 //        SmartDashboard.putNumber("F", 0);
-//        SmartDashboard.putNumber("P", 0);
-//        SmartDashboard.putNumber("I", 0);
-//        SmartDashboard.putNumber("D", 0);
+        SmartDashboard.putNumber("P", 0.015);
+        SmartDashboard.putNumber("I", .001);
+        SmartDashboard.putNumber("D", 0);
 
     }
 	
@@ -94,6 +96,8 @@ public class Robot extends IterativeRobot {
     	// resets NavX and disables the PID controller.
     	Robot.navX.reset();
     	drivetrain.setUsingPID(false);
+//    	Robot.shooter.getPIDController().disable();
+//    	Robot.shooter.getPIDController().reset();
     }
 	
 	public void disabledPeriodic() {
@@ -110,6 +114,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
+//    	shooter.enable();
     	Robot.navX.reset();
         autonomousCommand = (Command) chooser.getSelected();
         /*
@@ -140,6 +145,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
+//    	shooter.enable();
 		// This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
