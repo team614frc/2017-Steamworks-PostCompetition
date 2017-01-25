@@ -3,6 +3,7 @@ package org.usfirst.frc.team614.robot;
 
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.Pneumatics;
+import org.usfirst.frc.team614.robot.subsystems.Shooter;
 import org.usfirst.frc.team614.robot.subsystems.Winch;
 
 import com.kauailabs.navx.frc.AHRS;
@@ -33,7 +34,7 @@ public class Robot extends IterativeRobot {
 	public static Pneumatics pneumatics;
 	public static Encoder encoder;
 	public static NetworkTable cameraTable;
-//	public static Shooter shooter;
+	public static Shooter shooter;
 	public static OI oi;
 	public static Winch winch;
 	
@@ -56,7 +57,7 @@ public class Robot extends IterativeRobot {
     	drivetrain = new Drivetrain();
     	pneumatics = new Pneumatics();
     	encoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
-//    	shooter = new Shooter();
+    	shooter = new Shooter();
     	winch = new Winch();
     	
     	encoder.setDistancePerPulse(Constants.DISTANCE_PER_PULSE);
@@ -70,14 +71,11 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		
         chooser = new SendableChooser();
-//        chooser.addDefault("Drive Straight Full", new DriveStraight(.5, 1.0));
-//        chooser.addObject("Drive Straight Half", new DriveStraight(.5, .5));
-//        SmartDashboard.putData("Run At Full Speed", new ShooterDrive());
         SmartDashboard.putData("Drive Straight", chooser);
         SmartDashboard.putNumber("Rotation Rate", .5);
         SmartDashboard.putNumber("Vision Offset", -.5);
         SmartDashboard.putNumber("RPM", 3833.0/60);
-//        SmartDashboard.putNumber("F", 0);
+        SmartDashboard.putNumber("F", 0);
         SmartDashboard.putNumber("P", 0.015);
         SmartDashboard.putNumber("I", .001);
         SmartDashboard.putNumber("D", 0);
