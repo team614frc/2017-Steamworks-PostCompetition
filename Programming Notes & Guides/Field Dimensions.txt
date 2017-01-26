@@ -18,12 +18,13 @@
 
 -Height of boiler | 97 inches / 8 feet 1 inch |
 
--Edge to edge of Boiler |
-
 -Alliance Wall to far edge of Boiler | Between 0 inches (Alliance Wall) to 26 inches (roughly) / Between 0 inches (Alliance Wall) to 2 feet 2 inches (roughly) |
 
 -Middle of closest hopper to far edge of Boiler (From the Alliance Wall) | 94 inches / 7 feet 10 inches |
 
+-Secondary walls of the air ship to the boiler | 175.78 inches / 14 feet 7.78 inches |
+ [14.6 feet]
+ 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 *These measurements are not set in stone and are subject to change (not definite)*
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
