@@ -24,7 +24,10 @@
 
 -Secondary walls of the air ship to the boiler | 175.78 inches / 14 feet 7.78 inches |
  [14.6 feet]
- 
+
+-Size of Hopper| 83 inches/ 6ft 10.992 inches |3ft 5.4996in |
+
+- Alliance wall to Middle of third Closest Hopper|27ft 2.4inches |326.3inches|
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 *These measurements are not set in stone and are subject to change (not definite)*
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
