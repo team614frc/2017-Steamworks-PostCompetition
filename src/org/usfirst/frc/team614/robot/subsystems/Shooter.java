@@ -6,12 +6,13 @@ import org.usfirst.frc.team614.robot.commands.autonomous.shooter.ShooterDrive;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class Shooter extends Subsystem {
+public class Shooter extends PIDSubsystem {
 	boolean usingPID = true;
 	
 	public Encoder shooterEncoder = new Encoder(RobotMap.shooterEncoderA, RobotMap.shooterEncoderB, false, Encoder.EncodingType.k4X);
@@ -19,7 +20,7 @@ public class Shooter extends Subsystem {
 	VictorSP shooterVictor = new VictorSP(RobotMap.shooterFireMotor);
 	
 	public Shooter() {
-//		super("Shooter", Constants.shooterP, Constants.shooterI, Constants.shooterD, Constants.shooterF);
+		super("Shooter", Constants.shooterP, Constants.shooterI, Constants.shooterD, Constants.shooterF);
 //		
 		shooterEncoder.setDistancePerPulse(Constants.SHOOTER_DISTANCE_PER_PULSE);
 		shooterEncoder.reset();
@@ -44,16 +45,16 @@ public class Shooter extends Subsystem {
 	}
 
 	protected void usePIDOutput(double output) {
-//		if(usingPID) {
-////			shooterVictor.pidWrite(output);
-//			SmartDashboard.putNumber("Shooter PID Output", output);
+		if(usingPID) {
 //			shooterVictor.pidWrite(output);
-////			shooterVictor.set(output / maxRevolutionsPerSecond); // does not work
-////			shooterVictor.set
-//			// set speed to [ current rate ] / [ maximum possible rate ]
-//		} else {
-//			
-//		}
+			SmartDashboard.putNumber("Shooter PID Output [XXX]", output);
+//			shooterVictor.pidWrite(output);
+//			shooterVictor.set(output / maxRevolutionsPerSecond); // does not work
+//			shooterVictor.set
+			// set speed to [ current rate ] / [ maximum possible rate ]
+		} else {
+			
+		}
 	}
 }
 

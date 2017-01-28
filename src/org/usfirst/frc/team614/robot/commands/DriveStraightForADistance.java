@@ -28,11 +28,12 @@ public class DriveStraightForADistance extends Command
 		Robot.navX.reset();
 		Robot.navX.zeroYaw();
 
-		Robot.drivetrain.getController().enable();
 		Robot.drivetrain.setUsingPID(true);
 
 		Robot.drivetrain.leftEncoder.reset();
 		Robot.drivetrain.rightEncoder.reset();
+
+        Robot.drivetrain.getController().setSetpoint(0.0f);
 	}
 
 	// Called repeatedly when this Command is scheduled to run

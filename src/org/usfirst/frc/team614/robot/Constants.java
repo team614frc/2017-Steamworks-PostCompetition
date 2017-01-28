@@ -5,6 +5,10 @@ package org.usfirst.frc.team614.robot;
 public class Constants {
 	
 	// Drivetrain
+	public static final double drivetrainP = 0.30;
+	public static final double drivetrainI = 0;
+	public static final double drivetrainD = 0;
+	public static final double drivetrainF = 0;
 	public static final double DRIVETRAIN_WHEEL_DIAMETER = 4;
 	public static final double DRIVETRAIN_ENCODER_PULSES_PER_REV = 256.0; // must be changed?
 	public static final double DRIVETRAIN_DISTANCE_PER_PULSE = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) / Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV;

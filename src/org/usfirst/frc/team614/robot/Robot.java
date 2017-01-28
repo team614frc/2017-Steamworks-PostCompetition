@@ -1,7 +1,8 @@
 
 package org.usfirst.frc.team614.robot;
 
-import org.usfirst.frc.team614.robot.commands.ResetEncoder;
+import org.usfirst.frc.team614.robot.commands.ResetDrivetrainEncoder;
+import org.usfirst.frc.team614.robot.commands.autonomous.shooter.ResetShooterEncoder;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team614.robot.subsystems.Shooter;
@@ -72,14 +73,20 @@ public class Robot extends IterativeRobot {
         chooser = new SendableChooser();
 //        chooser.addDefault("Drive Straight Full", new DriveStraight(.5, 1.0));
 //        chooser.addObject("Drive Straight Half", new DriveStraight(.5, .5));
+        
 //        SmartDashboard.putData("Run At Full Speed", new ShooterDrive());
         SmartDashboard.putData("Drive Straight", chooser);
-        SmartDashboard.putData("Reset Encoder", new ResetEncoder());
 //        SmartDashboard.putNumber("Rotation Rate", .5);
 //        SmartDashboard.putNumber("Vision Offset", -.5);
-
+        SmartDashboard.putNumber("Drivetrain P", Constants.drivetrainP);
+        SmartDashboard.putNumber("Drivetrain I", Constants.drivetrainI);
+        SmartDashboard.putNumber("Drivetrain D", Constants.drivetrainD);
+        SmartDashboard.putNumber("Drivetrain F", Constants.drivetrainF);
         SmartDashboard.putNumber("Drivetrain left Encoder Distance [???]", 0);
         SmartDashboard.putNumber("Drivetrain right Encoder Distance [???]", 0);
+        SmartDashboard.putNumber("Drivetrain angle target [Degrees (-180, +180)]", 0);
+        SmartDashboard.putData("Drivetrain Reset Encoder", new ResetDrivetrainEncoder());
+
         
         SmartDashboard.putNumber("Shooter P", Constants.shooterP);
         SmartDashboard.putNumber("Shooter I", Constants.shooterI);
@@ -93,6 +100,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Shooter Encoder Count [Revs*4096]", 0);
         SmartDashboard.putNumber("Shooter Encoder Rate [Revs/Sec]", 0);
 		SmartDashboard.putNumber("Shooter Encoder MAX Rate [Revs/Sec]", 0);
+        SmartDashboard.putData("Shooter Reset Encoder", new ResetShooterEncoder());
 
 		SmartDashboard.putNumber("Winch PD ID", RobotMap.PDPWinchMotor);
 		SmartDashboard.putNumber("Winch Current Draw [Amps]", -.1);

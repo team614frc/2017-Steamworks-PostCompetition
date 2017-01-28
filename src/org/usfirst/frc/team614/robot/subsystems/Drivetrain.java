@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -32,10 +33,6 @@ public class Drivetrain extends Subsystem implements PIDOutput {
     /* controllers by displaying a form where you can enter new P, I,  */
     /* and D constants and test the mechanism.                         */
     
-    static final double kP = 0.30;
-    static final double kI = 0.00;
-    static final double kD = 0.00;
-    static final double kF = 0.00;
 
     static final double kToleranceDegrees = 2.0f;
 	
@@ -58,7 +55,13 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		leftEncoder.setDistancePerPulse(Constants.DRIVETRAIN_DISTANCE_PER_PULSE);
 		rightEncoder.setDistancePerPulse(Constants.DRIVETRAIN_DISTANCE_PER_PULSE);
 		
-		turnController = new PIDController(kP, kI,kD, kF, Robot.navX, this);
+		turnController = new PIDController(
+				Constants.drivetrainP,
+				Constants.drivetrainI,
+				Constants.drivetrainD,
+				Constants.drivetrainF,
+				Robot.navX, this
+		);
         turnController.setInputRange(-180.0f,  180.0f);
         turnController.setOutputRange(-1.0, 1.0);
         turnController.setAbsoluteTolerance(kToleranceDegrees);
@@ -68,8 +71,6 @@ public class Drivetrain extends Subsystem implements PIDOutput {
         /* tuning of the Turn Controller's P, I and D coefficients.            */
         /* Typically, only the P value needs to be modified.                   */
         LiveWindow.addActuator("DriveSystem", "RotateController", turnController);
-        
-        turnController.setSetpoint(0.0f);
         
 	}
 	

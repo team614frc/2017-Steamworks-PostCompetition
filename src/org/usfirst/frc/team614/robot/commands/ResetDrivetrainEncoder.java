@@ -7,17 +7,17 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ResetEncoder extends Command {
+public class ResetDrivetrainEncoder extends Command {
 
-    public ResetEncoder() {
+    public ResetDrivetrainEncoder() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-
-        Robot.shooter.shooterEncoder.reset();
+        Robot.drivetrain.leftEncoder.reset();
+        Robot.drivetrain.rightEncoder.reset();
     }
 
     // Called repeatedly when this Command is scheduled to run
