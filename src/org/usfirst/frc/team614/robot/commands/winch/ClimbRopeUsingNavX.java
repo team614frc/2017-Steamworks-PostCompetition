@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
-public class SpinWinchMotors extends Command {
+public class ClimbRopeUsingNavX extends Command {
 
 	private double height;
 	private double speed;
 	
-    public SpinWinchMotors(double height, double speed) {
+    public ClimbRopeUsingNavX(double height, double speed) {
     	requires(Robot.winch); 
     	
     	this.height = height;    	
@@ -25,13 +25,12 @@ public class SpinWinchMotors extends Command {
     	if(Robot.navX.isConnected()) {
     		Robot.navX.reset();
     		Robot.navX.zeroYaw();
-    		Robot.printNavxData();
     	}
     }
 
     // Called repeatedly(Every 20ms) to spin the Winch 
     protected void execute() {
-        Robot.winch.spinMotor(SmartDashboard.getNumber("Winch Motor Speed", 0.0));
+        Robot.winch.spinWinch(SmartDashboard.getNumber("Winch Motor Speed", 0.0));
         //Robot.winch.spinMotor(speed, Robot.winch.getRotateRate());
     	}
 
@@ -45,13 +44,13 @@ public class SpinWinchMotors extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.winch.stopMotor();
+    	Robot.winch.stop();
     
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.winch.stopMotor();
+    	Robot.winch.stop();
     }
 }

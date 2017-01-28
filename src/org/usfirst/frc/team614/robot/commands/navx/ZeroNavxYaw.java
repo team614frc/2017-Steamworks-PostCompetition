@@ -18,7 +18,6 @@ public class ZeroNavxYaw extends Command {
     protected void initialize() {
     	if(Robot.navX.isConnected()) {
     		Robot.navX.zeroYaw();
-    		Robot.printNavxData();
     	}
     }
 

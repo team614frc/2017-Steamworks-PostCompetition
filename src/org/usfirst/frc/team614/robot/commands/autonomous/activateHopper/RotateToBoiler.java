@@ -23,7 +23,6 @@ public class RotateToBoiler extends Command {
     	if(Robot.navX.isConnected()) {
     		Robot.navX.reset();
     		Robot.navX.zeroYaw();
-    		Robot.printNavxData();
     		
     		Robot.drivetrain.getController().enable();
     		Robot.drivetrain.setUsingPID(true);

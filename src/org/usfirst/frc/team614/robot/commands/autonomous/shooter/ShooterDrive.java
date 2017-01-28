@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class ShooterDrive extends Command {
 
-	private double targetSpeed = 0;
 	
     public ShooterDrive() {
         // Use requires() here to declare subsystem dependencies
@@ -27,24 +26,41 @@ public class ShooterDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	/* print encoder value */
-    	SmartDashboard.putNumber("Shooter Encoder Distance", Robot.shooter.getShooterMotor().getEncPosition());
 
-    	/* print PID Error*/
-    	SmartDashboard.putNumber("Shooter PID Error", Robot.shooter.getShooterMotor().getError());
+    	/* print encoder value */
+//    	SmartDashboard.putNumber("Shooter Encoder Distance", Robot.shooter.shooterEncoder.getDistance());
+//    	SmartDashboard.putNumber("Shooter Encoder Count", Robot.shooter.shooterEncoder.getRaw());
+//    	/* print encoder rate */
+//    	SmartDashboard.putNumber("Shooter Encoder Rate", Robot.shooter.shooterEncoder.getRate());
+//		if(SmartDashboard.getNumber(
+//				"Shooter Encoder MAX Rate", 0) < Robot.shooter.shooterEncoder.getRate())
+//				SmartDashboard.putNumber("Shooter Encoder MAX Rate", Robot.shooter.shooterEncoder.getRate());
+//
+//    	/* print PID Error*/
+//    	SmartDashboard.putNumber("Shooter PID Error", Robot.shooter.getPIDController().getError());
     	
-    	/* USE PID Speed mode */
-    	targetSpeed = OI.driverGamepad.getAxis(Gamepad.rightStick_Y) * SmartDashboard.getNumber("RPM", 0.0); /* 1500 RPM in either direction */
-    	Robot.shooter.getShooterMotor().changeControlMode(TalonControlMode.Speed);
-    	Robot.shooter.getShooterMotor().set(targetSpeed); /* 1500 RPM in either direction */
+    	/* USE SmartDasboard control for PID*/
+//    	Robot.shooter.setSetpoint(
+//    			SmartDashboard.getNumber("Shooter PID Target RPM", 1500)// / 60.0 // RPM / 60 = RPS
+//		); /* 1500 RPM in either direction */
     	
+    	/* USE SmartDasboard control for VOLTAGE SPEED*/
+//    	Robot.shooter.getVictor().set(
+//    			SmartDashboard.getNumber("Shooter non-PID Target %", 0.7) // / 5600
+//		); /* 1500 RPM in either direction */
+//    	Robot.shooter.setUsingPID(false);
+
     	/* USE Right Stick Y control */
-//    	Robot.shooter.getShooterMotor().changeControlMode(TalonControlMode.PercentVbus);
-//    	Robot.shooter.getShooterMotor().set(OI.driverGamepad.getAxis(Gamepad.rightStick_Y)); /* 1500 RPM in either direction */
+//    	Robot.shooter.setSetpoint(OI.driverGamepad.getAxis(Gamepad.rightStick_Y)); /* 1500 RPM in either direction */
     	
-    	/* USE VictorSP motor movement */
-//    	Robot.shooter.getVictor().set(SmartDashboard.getNumber("Speed", 0.0));
+    	/* SET PID control */
+//    	Robot.shooter.getPIDController().setPID(
+//    			SmartDashboard.getNumber("Shooter P", 0),
+//    			SmartDashboard.getNumber("Shooter I", 0),
+//    			SmartDashboard.getNumber("Shooter D", 0),
+//    			/*SmartDashboard.getNumber("Shooter Target % Speed", 0) * 1023 /*/
+//    			(SmartDashboard.getNumber("Shooter F", 0))
+//		);
     }
 
     // Make this return true when this Command no longer needs to run execute()

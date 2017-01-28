@@ -17,7 +17,7 @@ public class ResetEncoder extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
 
-        Robot.shooter.getShooterMotor().setEncPosition(0);
+        Robot.shooter.shooterEncoder.reset();
     }
 
     // Called repeatedly when this Command is scheduled to run

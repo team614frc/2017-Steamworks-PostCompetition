@@ -18,28 +18,31 @@ public class RobotMap {
     // number and the module. For example you with a rangefinder:
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
-	
+
+	// Change these when you shuffle PWM cables around
 	// DIO
-	public static int encoderA = 0;
-	public static int encoderB = 1;
+	public static final int drivetrainLeftEncoderA = 0;
+	public static final int drivetrainLeftEncoderB = 1;
+	public static final int drivetrainRightEncoderA = 2;
+	public static final int drivetrainRightEncoderB = 3;
+	public static final int shooterEncoderA = 4;
+	public static final int shooterEncoderB = 5;
+	public static final int winchEncoderA = 6;
+	public static final int winchEncoderB = 7;
 	
 	// Motor Controller Ports (PWM)
-	// Change these when you shuffle PWM cables around
-	public static int drivetrainLeftMotor = 0;
-	public static int drivetrainRightMotor = 1;
+	public static final int drivetrainLeftMotor = 0;
+	public static final int drivetrainRightMotor = 1;
 
-//	public static int shooterFireMotor = 2;
-	public static int shooterFireMotor = 6;
-//	public static int shooterFeederMotor = 3;
+	public static final int shooterFireMotor = 6;
 	
-	
-	public static int winchMotor = 7;
+	public static final int winchMotor = 7;
 
-	// CAN Talon IDs
-	public static int shooterID = 1;
+	// Power Distribution Board
+	public static final int PDPWinchMotor = 14;
 	
-	// pneumatics
-	public static DoubleSolenoid.Value pistonOut = DoubleSolenoid.Value.kForward;
-	public static DoubleSolenoid.Value pistonIn = DoubleSolenoid.Value.kReverse;
+	// Pneumatics
+	public static final DoubleSolenoid.Value pistonOut = DoubleSolenoid.Value.kForward;
+	public static final DoubleSolenoid.Value pistonIn = DoubleSolenoid.Value.kReverse;
 
 }

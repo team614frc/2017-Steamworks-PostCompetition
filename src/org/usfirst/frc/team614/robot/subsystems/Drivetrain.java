@@ -1,5 +1,6 @@
 package org.usfirst.frc.team614.robot.subsystems;
 
+import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.Robot;
 import org.usfirst.frc.team614.robot.RobotMap;
 import org.usfirst.frc.team614.robot.commands.drivetrain.TankDrive;
@@ -18,6 +19,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Drivetrain extends Subsystem implements PIDOutput {
     
 	public RobotDrive drivetrain;
+	public Encoder leftEncoder;
+	public Encoder rightEncoder;
 	
 	PIDController turnController;
     private double rotateToAngleRate;
@@ -47,14 +50,13 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	
 	public Drivetrain() {
 		
-//		leftMotorA.set(1);
-//		leftMotorB.set(1);
-//		rightMotorA.set(1);
-//		rightMotorB.set(1);
-//		
 		usingPID = false;
-		
 		drivetrain = new RobotDrive(leftMotorA, leftMotorB, rightMotorA, rightMotorB);
+		leftEncoder = new Encoder(RobotMap.drivetrainLeftEncoderA, RobotMap.drivetrainLeftEncoderB, false, Encoder.EncodingType.k4X);
+		rightEncoder = new Encoder(RobotMap.drivetrainRightEncoderA, RobotMap.drivetrainRightEncoderB, false, Encoder.EncodingType.k4X);
+
+		leftEncoder.setDistancePerPulse(Constants.DRIVETRAIN_DISTANCE_PER_PULSE);
+		rightEncoder.setDistancePerPulse(Constants.DRIVETRAIN_DISTANCE_PER_PULSE);
 		
 		turnController = new PIDController(kP, kI,kD, kF, Robot.navX, this);
         turnController.setInputRange(-180.0f,  180.0f);

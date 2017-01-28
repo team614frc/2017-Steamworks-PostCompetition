@@ -5,7 +5,14 @@ import org.usfirst.frc.team614.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * 	NAVX DEGREE ORIENTATION:
+ * 			 0
+ * 	    -45 \|/ +45
+ * 	  -90  --X--  +90
+ * 	   -135 /|\ +135
+ *		  +/-180
+ *  X is the robot. at +/-180, the left is -179.9999... and the right is +179.9999...
+ * 
  */
 public class RotateToAngle extends Command {
 	private double angle;
@@ -24,8 +31,6 @@ public class RotateToAngle extends Command {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		if (Robot.navX.isConnected()) {
-
-			Robot.printNavxData();
 
 			Robot.drivetrain.getController().enable();
 			Robot.drivetrain.setUsingPID(true);

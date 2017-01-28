@@ -23,7 +23,6 @@ public class DriveUntilStopped extends Command {
     protected void initialize() {
     	Robot.navX.reset();
     	Robot.navX.zeroYaw();
-    	Robot.printNavxData();
     	
     	Robot.drivetrain.getController().enable();
     	Robot.drivetrain.setUsingPID(true);

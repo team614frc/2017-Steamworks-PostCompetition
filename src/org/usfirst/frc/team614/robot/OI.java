@@ -2,11 +2,9 @@ package org.usfirst.frc.team614.robot;
 
 import org.team708.robot.util.Gamepad;
 import org.usfirst.frc.team614.robot.commands.DriveAtSmartDashboardSpeed;
-import org.usfirst.frc.team614.robot.commands.PIDSetter;
 import org.usfirst.frc.team614.robot.commands.PrintNetworkTables;
-import org.usfirst.frc.team614.robot.commands.navx.DisplayNavxData;
 import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
-import org.usfirst.frc.team614.robot.commands.winch.SpinWinchMotors;
+import org.usfirst.frc.team614.robot.commands.winch.CatchAndClimbRope;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -49,23 +47,19 @@ public class OI {
 	public static final Gamepad driverGamepad = new Gamepad(0);
 	
 	// NavX
-	private static final Button displayNavxData = new JoystickButton(driverGamepad, Gamepad.button_Start);
 	private static final Button zeroNavxYaw = new JoystickButton(driverGamepad, Gamepad.button_Back);
 	private static final Button printNetworkTables = new JoystickButton(driverGamepad, Gamepad.button_A);
 	private static final Button revShooterAtSmartDashboardSpeed = new JoystickButton(driverGamepad, Gamepad.button_B);
 	private static final Button driveAtSmartDashboardSpeed = new JoystickButton(driverGamepad, Gamepad.button_Y);
-	private static final Button pidSetter = new JoystickButton(driverGamepad, Gamepad.button_X);
-	private static final Button spinWinchMotors = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
+	private static final Button climbRope = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
 
 	// Binding of Commands
 	public OI() {
-		spinWinchMotors.whileHeld(new SpinWinchMotors(0.0, 1.0));
-		displayNavxData.whenPressed(new DisplayNavxData());
+		climbRope.whenPressed(new CatchAndClimbRope());
 		zeroNavxYaw.whenPressed(new ZeroNavxYaw());
 		printNetworkTables.whenPressed(new PrintNetworkTables());
 //		revShooterAtSmartDashboardSpeed.whileHeld(new RevShooterAtSmartDashboardSpeed());
 		driveAtSmartDashboardSpeed.whenPressed(new DriveAtSmartDashboardSpeed());
-		pidSetter.whileHeld(new PIDSetter());
 	}
 }
 

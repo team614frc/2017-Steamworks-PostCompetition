@@ -27,12 +27,12 @@ public class DriveStraightForADistance extends Command
 	{
 		Robot.navX.reset();
 		Robot.navX.zeroYaw();
-		Robot.printNavxData();
 
 		Robot.drivetrain.getController().enable();
 		Robot.drivetrain.setUsingPID(true);
 
-		Robot.resetEncoder();
+		Robot.drivetrain.leftEncoder.reset();
+		Robot.drivetrain.rightEncoder.reset();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -47,7 +47,8 @@ public class DriveStraightForADistance extends Command
 	// The size of the wheel MUST be changed in Constants if changed!
 	protected boolean isFinished()
 	{
-		if (Robot.encoder.getDistance() >= distance / Constants.DISTANCE_PER_PULSE)
+		// only tests left side... we're driving straight, so who cares.
+		if (Robot.drivetrain.leftEncoder.getDistance() >= distance / Constants.DRIVETRAIN_DISTANCE_PER_PULSE)
 		{
 			return true;
 		}
