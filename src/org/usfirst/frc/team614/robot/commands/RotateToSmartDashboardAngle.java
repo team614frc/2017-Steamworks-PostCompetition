@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class RotateToSmartDashboardAngle extends Command {
 
+
+	
     public RotateToSmartDashboardAngle() {
         // Use requires() here to declare subsystem dependencies
 //         eg. requires(chassis);
@@ -40,16 +42,17 @@ public class RotateToSmartDashboardAngle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		Robot.drivetrain.arcadeDrive(0.0, Robot.drivetrain.getRotateRate());
+		Robot.drivetrain.arcadeDrive(0.0, .7 * Robot.drivetrain.getRotateRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	// Robot isn't at the immediate start of command and may be stopped b/c it never even started
     	if(this.timeSinceInitialized() > .2) {
-	    	// PID stuff is done, robot is at target angle
-	    	if(!Robot.navX.isMoving())
-	    		return true;  	
+	    	// PID stuff is done, robot has been at target angle for a short time
+	    	if(!Robot.navX.isMoving()) {
+	    		return true;
+	    	}
     	}	
 		return false; 
     }

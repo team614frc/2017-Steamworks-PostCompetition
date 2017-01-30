@@ -1,10 +1,10 @@
 
 package org.usfirst.frc.team614.robot.commands;
 
-import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Makes the drivetrain move at .5 speed for 1 second
@@ -25,6 +25,10 @@ public class DriveStraightForADistance extends Command
 	// Called just before this Command runs the first time
 	protected void initialize()
 	{
+		
+		setTimeout(2.0);
+		
+		
 		Robot.navX.reset();
 		Robot.navX.zeroYaw();
 
@@ -33,13 +37,14 @@ public class DriveStraightForADistance extends Command
 		Robot.drivetrain.leftEncoder.reset();
 		Robot.drivetrain.rightEncoder.reset();
 
-        Robot.drivetrain.getController().setSetpoint(0.0f);
+        Robot.drivetrain.getController().setSetpoint(0f);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute()
 	{
-		Robot.drivetrain.arcadeDrive(speed, Robot.drivetrain.getRotateRate());
+//		Robot.drivetrain.arcadeDrive(speed, Robot.drivetrain.getRotateRate());
+		Robot.drivetrain.arcadeDrive(SmartDashboard.getNumber("Drivetrain Speed", 0), Robot.drivetrain.getRotateRate());
 	}
 
 	// Returns true once the distance travelled by the encoder is greater than
@@ -48,13 +53,14 @@ public class DriveStraightForADistance extends Command
 	// The size of the wheel MUST be changed in Constants if changed!
 	protected boolean isFinished()
 	{
+		return isTimedOut();
 		// only tests left side... we're driving straight, so who cares.
-		if (Robot.drivetrain.leftEncoder.getDistance() >= distance / Constants.DRIVETRAIN_DISTANCE_PER_PULSE)
-		{
-			return true;
-		}
-
-		return false;
+//		if (Robot.drivetrain.leftEncoder.getDistance() >= distance / Constants.DRIVETRAIN_DISTANCE_PER_PULSE)
+//		{
+//			return true;
+//		}
+//
+//		return false;
 	}
 
 	// Called once after isFinished returns true

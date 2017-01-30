@@ -94,6 +94,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Drivetrain I", Constants.drivetrainI);
         SmartDashboard.putNumber("Drivetrain D", Constants.drivetrainD);
         SmartDashboard.putNumber("Drivetrain F", Constants.drivetrainF);
+        SmartDashboard.putNumber("Drivetrain Speed", Constants.DRIVETRAIN_AUTONOMOUS_SPEED);
         SmartDashboard.putNumber("Drivetrain left Encoder Distance [???]", 0);
         SmartDashboard.putNumber("Drivetrain right Encoder Distance [???]", 0);
         SmartDashboard.putNumber("Drivetrain Angle Target [Degrees (-180, +180)]", 0);

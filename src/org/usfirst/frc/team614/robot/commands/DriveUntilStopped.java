@@ -21,11 +21,14 @@ public class DriveUntilStopped extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.navX.reset();
-    	Robot.navX.zeroYaw();
+//    	Robot.navX.reset();
+//    	Robot.navX.zeroYaw();
     	
     	Robot.drivetrain.getController().enable();
     	Robot.drivetrain.setUsingPID(true);
+    	
+
+        Robot.drivetrain.getController().setSetpoint(Robot.navX.getYaw());
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -35,7 +38,7 @@ public class DriveUntilStopped extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (!Robot.navX.isMoving())
+    	if (!Robot.navX.isMoving() && this.timeSinceInitialized() > .2)
     	{
     		return true;
     	}

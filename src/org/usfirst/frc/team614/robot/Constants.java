@@ -5,7 +5,7 @@ package org.usfirst.frc.team614.robot;
 public class Constants {
 	
 	// Drivetrain
-	public static final double drivetrainP = 0.035;
+	public static final double drivetrainP = 0.05;
 	public static final double drivetrainI = 0;
 	public static final double drivetrainD = 0.12;
 	public static final double drivetrainF = 0;
