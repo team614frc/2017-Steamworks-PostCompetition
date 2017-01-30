@@ -5,6 +5,10 @@ import org.usfirst.frc.team614.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
+ * 
+ * [DEPRECATED]
+ * 
+ * 
  * 	NAVX DEGREE ORIENTATION:
  * 			 0
  * 	    -45 \|/ +45

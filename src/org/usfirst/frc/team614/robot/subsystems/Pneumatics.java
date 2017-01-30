@@ -1,7 +1,7 @@
 package org.usfirst.frc.team614.robot.subsystems;
 
 import org.usfirst.frc.team614.robot.RobotMap;
-import org.usfirst.frc.team614.robot.commands.pneumatics.ControlCompressor;
+import org.usfirst.frc.team614.robot.commands.pneumatics.AutomaticCompressorControl;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -23,7 +23,7 @@ public class Pneumatics extends Subsystem {
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new ControlCompressor());
+        setDefaultCommand(new AutomaticCompressorControl());
     }
 }
 

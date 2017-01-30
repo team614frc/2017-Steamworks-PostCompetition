@@ -1,4 +1,4 @@
-package org.usfirst.frc.team614.robot.commands.autonomous.shooter;
+package org.usfirst.frc.team614.robot.commands.shooter;
 
 import org.team708.robot.util.Gamepad;
 import org.usfirst.frc.team614.robot.OI;

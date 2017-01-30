@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ControlCompressor extends Command {
+public class AutomaticCompressorControl extends Command {
 
-    public ControlCompressor() {
+    public AutomaticCompressorControl() {
         // Use requires() here to declare subsystem dependencies
          requires(Robot.pneumatics);
     }

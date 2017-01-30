@@ -2,7 +2,7 @@ package org.usfirst.frc.team614.robot.subsystems;
 
 import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.RobotMap;
-import org.usfirst.frc.team614.robot.commands.autonomous.shooter.ShooterDrive;
+import org.usfirst.frc.team614.robot.commands.shooter.ShooterDrive;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team614.robot.commands.autonomous;
 
+import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.commands.DriveUntilStopped;
 import org.usfirst.frc.team614.robot.commands.autonomous.deliverRight.TurnLeftForGearLift;
 
@@ -28,9 +29,9 @@ public class DeliverRightGearToLift extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	//addSequential(new DeliverRightGear()); // to be replaced with DriveStraight(specific distance);
+//    	addSequential(new DriveStraightForADistance(XXX, Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
     	addSequential(new TurnLeftForGearLift());
-    	addSequential(new DriveUntilStopped(0.5));
+    	addSequential(new DriveUntilStopped(Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
     	
     }
 }

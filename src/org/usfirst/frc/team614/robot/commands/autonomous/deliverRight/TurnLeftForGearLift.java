@@ -7,39 +7,65 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * based on vision, rotates to the left for the right gear lift
+ * 
+ * TODO: negate rotation speed if wrong direction
  */
 public class TurnLeftForGearLift extends Command {
 	
-	double offset;
+	double angle;
+	boolean targetFound;
 	
     public TurnLeftForGearLift() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivetrain);
-    	offset = -1;
+    	angle = -999;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	// begin reading vision processing;
-    	// get to the point such that there is a gettable value that is the reflected tape's offset from the camera
-    	
+    	// get to the point such that there is a gettable value that is the reflected tape's angle from the camera
+
+		Robot.navX.reset();
+		Robot.navX.zeroYaw();
+
+		Robot.drivetrain.setUsingPID(true);
+
+
+//        Robot.drivetrain.getController().setSetpoint(
+//        		SmartDashboard.getNumber("Drivetrain Angle Target [Degrees (-180, +180)]", 0)
+//		);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	offset = Robot.cameraTable.getNumber("offset", -1.0);
-    	SmartDashboard.putNumber("Vision Offset", offset);
+
+    	angle = Robot.cameraTable.getNumber("angle", 999);
+    	targetFound = Robot.cameraTable.getBoolean("targetFound", false);
     	
-//    	Robot.drivetrain.arcadeDrive(0, .5);
-//    	Robot.drivetrain.arcadeDrive(0, -.5);  // negate if it rotates backwards
+    	SmartDashboard.putNumber("Vision Target angle", angle);
+    	SmartDashboard.putBoolean("Vision Target found", targetFound);
+    	
+    	if(targetFound == false) {
+    		Robot.drivetrain.arcadeDrive(0, -.5);
+
+    	} else {
+	    	Robot.drivetrain.getController().setSetpoint(angle);
+	    	Robot.drivetrain.arcadeDrive(0, Robot.drivetrain.getRotateRate());
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
-     // return (if offset is really small; the robot's momentum would carry it a little, bring it exactly onto
-        			// the lift, perhaps.)
+    	// PID stuff is done, robot is at target angle
+    	// Robot isn't at the immediate start of command and may be stopped b/c it never even started
+    	if(this.timeSinceInitialized() > .2) {
+	    	// PID stuff is done, robot is at target angle
+	    	if(!Robot.navX.isMoving())
+	    		return true;  	
+    	}	
+		return false;
     }
 
     // Called once after isFinished returns true
@@ -50,6 +76,6 @@ public class TurnLeftForGearLift extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	//stop moving
+    	Robot.drivetrain.stop();
     }
 }

@@ -2,7 +2,11 @@
 package org.usfirst.frc.team614.robot;
 
 import org.usfirst.frc.team614.robot.commands.ResetDrivetrainEncoder;
-import org.usfirst.frc.team614.robot.commands.autonomous.shooter.ResetShooterEncoder;
+import org.usfirst.frc.team614.robot.commands.RotateToSmartDashboardAngle;
+import org.usfirst.frc.team614.robot.commands.UpdatePIDs;
+import org.usfirst.frc.team614.robot.commands.autonomous.DeliverRightGearToLift;
+import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
+import org.usfirst.frc.team614.robot.commands.shooter.ResetShooterEncoder;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team614.robot.subsystems.Shooter;
@@ -66,7 +70,7 @@ public class Robot extends IterativeRobot {
     	NetworkTable.setServerMode();
     	NetworkTable.setTeam(614);
     	NetworkTable.initialize();
-    	cameraTable = NetworkTable.getTable("test");
+    	cameraTable = NetworkTable.getTable("camera");
     	
 		oi = new OI();
 		
@@ -75,17 +79,27 @@ public class Robot extends IterativeRobot {
 //        chooser.addObject("Drive Straight Half", new DriveStraight(.5, .5));
         
 //        SmartDashboard.putData("Run At Full Speed", new ShooterDrive());
-        SmartDashboard.putData("Drive Straight", chooser);
-//        SmartDashboard.putNumber("Rotation Rate", .5);
-//        SmartDashboard.putNumber("Vision Offset", -.5);
+//        SmartDashboard.putData("Drive Straight", chooser);
+        
+        
+        SmartDashboard.putData("Update PID Values", new UpdatePIDs());
+        SmartDashboard.putData("Rotate To Angle", new RotateToSmartDashboardAngle());
+        SmartDashboard.putData("Zero Yaw", new ZeroNavxYaw());
+        
+        SmartDashboard.putNumber("Rotation Rate", .5);
+        SmartDashboard.putNumber("Vision Target Angle", 999);
+        SmartDashboard.putBoolean("Vision Target Found", false);
+        
         SmartDashboard.putNumber("Drivetrain P", Constants.drivetrainP);
         SmartDashboard.putNumber("Drivetrain I", Constants.drivetrainI);
         SmartDashboard.putNumber("Drivetrain D", Constants.drivetrainD);
         SmartDashboard.putNumber("Drivetrain F", Constants.drivetrainF);
         SmartDashboard.putNumber("Drivetrain left Encoder Distance [???]", 0);
         SmartDashboard.putNumber("Drivetrain right Encoder Distance [???]", 0);
-        SmartDashboard.putNumber("Drivetrain angle target [Degrees (-180, +180)]", 0);
+        SmartDashboard.putNumber("Drivetrain Angle Target [Degrees (-180, +180)]", 0);
+        
         SmartDashboard.putData("Drivetrain Reset Encoder", new ResetDrivetrainEncoder());
+        SmartDashboard.putData("Deliver Right Gear", new DeliverRightGearToLift());
 
         
         SmartDashboard.putNumber("Shooter P", Constants.shooterP);
@@ -100,8 +114,10 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Shooter Encoder Count [Revs*4096]", 0);
         SmartDashboard.putNumber("Shooter Encoder Rate [Revs/Sec]", 0);
 		SmartDashboard.putNumber("Shooter Encoder MAX Rate [Revs/Sec]", 0);
+		
         SmartDashboard.putData("Shooter Reset Encoder", new ResetShooterEncoder());
 
+        
 		SmartDashboard.putNumber("Winch PD ID", RobotMap.PDPWinchMotor);
 		SmartDashboard.putNumber("Winch Current Draw [Amps]", -.1);
 		SmartDashboard.putNumber("MAX Winch Current Draw [Amps]", -.1);
@@ -187,6 +203,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Drivetrain left Encoder Distance [???]", drivetrain.leftEncoder.getDistance());
         SmartDashboard.putNumber("Drivetrain right Encoder Distance [???]", drivetrain.rightEncoder.getDistance());
         
+        SmartDashboard.putNumber("Navx YAW", navX.getYaw());
         
     	// current draw & update max current draw
         if(SmartDashboard.getNumber("MAX Winch Current Draw [Amps]", 0) < Robot.pdp.getCurrent(RobotMap.PDPWinchMotor)) {
@@ -198,6 +215,15 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putNumber("Shooter PID Output [XXX]", XXX);
 //        SmartDashboard.putNumber("Shooter PID Error", XXX);
         
+        // vision
+    	SmartDashboard.putNumber(
+    			"Vision Target Angle",
+    			Robot.cameraTable.getNumber("angle", 0)
+		);
+    	SmartDashboard.putBoolean(
+    			"Vision Target Found",
+    			Robot.cameraTable.getBoolean("targetFound", false)
+		);
     }
     
     /**
@@ -217,38 +243,38 @@ public class Robot extends IterativeRobot {
 	    if ( update_count > 0 ) {
 	    	double avg_updates_per_sec = delta_time / update_count;
 	    	if ( avg_updates_per_sec > 0.0 ) {
-	    		SmartDashboard.putNumber("IMU_EffUpdateRateHz", 1.0 / avg_updates_per_sec);
+//	    		SmartDashboard.putNumber("EffUpdateRateHz", 1.0 / avg_updates_per_sec);
 	    	}
 	    }
 	    
 	    /* Display 6-axis Processed Angle Data                                      */
 	//        SmartDashboard.putData("     ");
-	    SmartDashboard.putBoolean(  "IMU_Connected",        navX.isConnected());
-	    SmartDashboard.putBoolean(  "IMU_IsCalibrating",    navX.isCalibrating());
-	    SmartDashboard.putNumber(   "IMU_Yaw",              navX.getYaw());
-	    SmartDashboard.putNumber(   "IMU_Pitch",            navX.getPitch());
-	    SmartDashboard.putNumber(   "IMU_Roll",             navX.getRoll());
+	    SmartDashboard.putBoolean(  "NavX Connected",        navX.isConnected());
+	    SmartDashboard.putBoolean(  "NavX IsCalibrating",    navX.isCalibrating());
+	    SmartDashboard.putNumber(   "Yaw",              navX.getYaw());
+	    SmartDashboard.putNumber(   "Pitch",            navX.getPitch());
+	    SmartDashboard.putNumber(   "Roll",             navX.getRoll());
 	    
 	    /* Display tilt-corrected, Magnetometer-based heading (requires             */
 	    /* magnetometer calibration to be useful)                                   */
 	    
-	    SmartDashboard.putNumber(   "IMU_CompassHeading",   navX.getCompassHeading());
+//	    SmartDashboard.putNumber(   "NavX CompassHeading",   navX.getCompassHeading());
 	    
 	    /* Display 9-axis Heading (requires magnetometer calibration to be useful)  */
-	    SmartDashboard.putNumber(   "IMU_FusedHeading",     navX.getFusedHeading());
+//	    SmartDashboard.putNumber(   "NavX FusedHeading",     navX.getFusedHeading());
 	
 	    /* These functions are compatible w/the WPI Gyro Class, providing a simple  */
 	    /* path for upgrading from the Kit-of-Parts gyro to the navx MXP            */
 	    
-	    SmartDashboard.putNumber(   "IMU_TotalYaw",         navX.getAngle());
-	    SmartDashboard.putNumber(   "IMU_YawRateDPS",       navX.getRate());
+//	    SmartDashboard.putNumber(   "NavX TotalYaw",         navX.getAngle());
+//	    SmartDashboard.putNumber(   "NavX YawRateDPS",       navX.getRate());
 	
 	    /* Display Processed Acceleration Data (Linear Acceleration, Motion Detect) */
 	    
-	    SmartDashboard.putNumber(   "IMU_Accel_X",          navX.getWorldLinearAccelX());
-	    SmartDashboard.putNumber(   "IMU_Accel_Y",          navX.getWorldLinearAccelY());
-	    SmartDashboard.putBoolean(  "IMU_IsMoving",         navX.isMoving());
-	    SmartDashboard.putBoolean(  "IMU_IsRotating",       navX.isRotating());
+	    SmartDashboard.putNumber(   "Accel_X",          navX.getWorldLinearAccelX());
+	    SmartDashboard.putNumber(   "Accel_Y",          navX.getWorldLinearAccelY());
+	    SmartDashboard.putBoolean(  "IsMoving",         navX.isMoving());
+	    SmartDashboard.putBoolean(  "IsRotating",       navX.isRotating());
 	
 	    /* Display estimates of velocity/displacement.  Note that these values are  */
 	    /* not expected to be accurate enough for estimating robot position on a    */
@@ -256,10 +282,10 @@ public class Robot extends IterativeRobot {
 	    /* of these errors due to single (velocity) integration and especially      */
 	    /* double (displacement) integration.                                       */
 	    
-	    SmartDashboard.putNumber(   "Velocity_X",           navX.getVelocityX());
-	    SmartDashboard.putNumber(   "Velocity_Y",           navX.getVelocityY());
-	    SmartDashboard.putNumber(   "Displacement_X",       navX.getDisplacementX());
-	    SmartDashboard.putNumber(   "Displacement_Y",       navX.getDisplacementY());
+//	    SmartDashboard.putNumber(   "Velocity_X",           navX.getVelocityX());
+//	    SmartDashboard.putNumber(   "Velocity_Y",           navX.getVelocityY());
+//	    SmartDashboard.putNumber(   "Displacement_X",       navX.getDisplacementX());
+//	    SmartDashboard.putNumber(   "Displacement_Y",       navX.getDisplacementY());
 	    
 	    /* Display Raw Gyro/Accelerometer/Magnetometer Values                       */
 	    /* NOTE:  These values are not normally necessary, but are made available   */
@@ -279,9 +305,9 @@ public class Robot extends IterativeRobot {
 	    
 	    /* Omnimount Yaw Axis Information                                           */
 	    /* For more info, see http://navx-mxp.kauailabs.com/installation/omnimount  */
-	    AHRS.BoardYawAxis yaw_axis = navX.getBoardYawAxis();
-	    SmartDashboard.putString(   "YawAxisDirection",     yaw_axis.up ? "Up" : "Down" );
-	    SmartDashboard.putNumber(   "YawAxis",              yaw_axis.board_axis.getValue() );
+//	    AHRS.BoardYawAxis yaw_axis = navX.getBoardYawAxis();
+//	    SmartDashboard.putString(   "YawAxisDirection",     yaw_axis.up ? "Up" : "Down" );
+//	    SmartDashboard.putNumber(   "YawAxis",              yaw_axis.board_axis.getValue() );
 	    
 	    /* Sensor Board Information                                                 */
 //	    SmartDashboard.putString(   "FirmwareVersion",      navX.getFirmwareVersion());
