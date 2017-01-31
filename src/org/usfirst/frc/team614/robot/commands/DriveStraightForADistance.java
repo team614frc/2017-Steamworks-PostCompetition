@@ -1,10 +1,10 @@
 
 package org.usfirst.frc.team614.robot.commands;
 
+import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Makes the drivetrain move at .5 speed for 1 second
@@ -26,8 +26,9 @@ public class DriveStraightForADistance extends Command
 	protected void initialize()
 	{
 		
+		//
 		setTimeout(2.0);
-		
+		//
 		
 		Robot.navX.reset();
 		Robot.navX.zeroYaw();
@@ -43,8 +44,7 @@ public class DriveStraightForADistance extends Command
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute()
 	{
-//		Robot.drivetrain.arcadeDrive(speed, Robot.drivetrain.getRotateRate());
-		Robot.drivetrain.arcadeDrive(SmartDashboard.getNumber("Drivetrain Speed", 0), Robot.drivetrain.getRotateRate());
+		Robot.drivetrain.arcadeDrive(speed, Robot.drivetrain.getRotateRate());
 	}
 
 	// Returns true once the distance travelled by the encoder is greater than
@@ -54,7 +54,7 @@ public class DriveStraightForADistance extends Command
 	protected boolean isFinished()
 	{
 		return isTimedOut();
-		// only tests left side... we're driving straight, so who cares.
+//		 only tests left side... we're driving straight, so who cares.
 //		if (Robot.drivetrain.leftEncoder.getDistance() >= distance / Constants.DRIVETRAIN_DISTANCE_PER_PULSE)
 //		{
 //			return true;

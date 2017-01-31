@@ -1,7 +1,7 @@
 package org.usfirst.frc.team614.robot;
 
 import org.team708.robot.util.Gamepad;
-import org.usfirst.frc.team614.robot.commands.DriveAtSmartDashboardSpeed;
+import org.usfirst.frc.team614.robot.commands.DriveStraightAtSmartDashboardSpeed;
 import org.usfirst.frc.team614.robot.commands.PrintNetworkTables;
 import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
 import org.usfirst.frc.team614.robot.commands.winch.CatchAndClimbRope;
@@ -59,7 +59,7 @@ public class OI {
 		zeroNavxYaw.whenPressed(new ZeroNavxYaw());
 		printNetworkTables.whenPressed(new PrintNetworkTables());
 //		revShooterAtSmartDashboardSpeed.whileHeld(new RevShooterAtSmartDashboardSpeed());
-		driveAtSmartDashboardSpeed.whenPressed(new DriveAtSmartDashboardSpeed());
+		driveAtSmartDashboardSpeed.whenPressed(new DriveStraightAtSmartDashboardSpeed());
 	}
 }
 

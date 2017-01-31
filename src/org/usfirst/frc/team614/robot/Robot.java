@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team614.robot;
 
+import org.usfirst.frc.team614.robot.commands.DriveStraightAtSmartDashboardSpeed;
 import org.usfirst.frc.team614.robot.commands.ResetDrivetrainEncoder;
 import org.usfirst.frc.team614.robot.commands.RotateToSmartDashboardAngle;
 import org.usfirst.frc.team614.robot.commands.UpdatePIDs;
@@ -98,8 +99,9 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Drivetrain left Encoder Distance [???]", 0);
         SmartDashboard.putNumber("Drivetrain right Encoder Distance [???]", 0);
         SmartDashboard.putNumber("Drivetrain Angle Target [Degrees (-180, +180)]", 0);
-        
+
         SmartDashboard.putData("Drivetrain Reset Encoder", new ResetDrivetrainEncoder());
+        SmartDashboard.putData("Drivetrain Drive", new DriveStraightAtSmartDashboardSpeed());
         SmartDashboard.putData("Deliver Right Gear", new DeliverRightGearToLift());
 
         
