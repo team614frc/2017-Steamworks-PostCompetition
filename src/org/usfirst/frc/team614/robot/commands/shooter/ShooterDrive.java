@@ -34,7 +34,7 @@ public class ShooterDrive extends Command {
     		if(Robot.shooter.shooterEncoder.getRate() <= Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance()) {
     			Robot.shooter.set(1);
     		} else if (Robot.shooter.shooterEncoder.getRate() >= Robot.shooter.getGoalRPS() + Robot.shooter.getTolerance()){
-    			Robot.shooter.set(.1);
+    			Robot.shooter.set(.3);
     		}
     	}
     	
