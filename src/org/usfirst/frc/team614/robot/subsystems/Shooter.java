@@ -6,29 +6,39 @@ import org.usfirst.frc.team614.robot.commands.shooter.ShooterDrive;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
-public class Shooter extends PIDSubsystem {
-	boolean usingPID = true;
+public class Shooter extends Subsystem {
+
+	private boolean isEnabled = false;
+	private double goalRPS = 0;
+	private double tolerance = 0.0;
 	
 	public Encoder shooterEncoder = new Encoder(RobotMap.shooterEncoderA, RobotMap.shooterEncoderB, false, Encoder.EncodingType.k4X);
 	
 	VictorSP shooterVictor = new VictorSP(RobotMap.shooterFireMotor);
 	
 	public Shooter() {
-		super("Shooter", Constants.shooterP, Constants.shooterI, Constants.shooterD, Constants.shooterF);
-//		
+		
+		shooterVictor.setSafetyEnabled(false);
+		
 		shooterEncoder.setDistancePerPulse(Constants.SHOOTER_DISTANCE_PER_PULSE);
 		shooterEncoder.reset();
-//		enable();
+		
+		isEnabled = true;
+		
 	}
-	
+	public double getTolerance() { 
+		return tolerance;
+	}
 	public VictorSP getVictor() {
 		return shooterVictor;
+	}
+	public void set(double speed) {
+		shooterVictor.set(speed);
 	}
 	
     public void initDefaultCommand() {
@@ -36,25 +46,25 @@ public class Shooter extends PIDSubsystem {
         setDefaultCommand(new ShooterDrive());
     }
     
-    public void setUsingPID(boolean set) {
-    	usingPID = set;
+    public boolean isEnabled() {
+    	return isEnabled;
+    }
+    
+    public double getGoalRPS() {
+    	return goalRPS;
+    }
+    
+    public void setGoalRPS(double RPS) {
+    	goalRPS = RPS;
+    }
+    
+    public void setEnabled(boolean set) {
+    	isEnabled = set;
     }
 
-	protected double returnPIDInput() {
-		return shooterEncoder.getRate(); // Revs per Second
-	}
-
-	protected void usePIDOutput(double output) {
-		if(usingPID) {
-//			shooterVictor.pidWrite(output);
-			SmartDashboard.putNumber("Shooter PID Output [XXX]", output);
-//			shooterVictor.pidWrite(output);
-//			shooterVictor.set(output / maxRevolutionsPerSecond); // does not work
-//			shooterVictor.set
-			// set speed to [ current rate ] / [ maximum possible rate ]
-		} else {
-			
-		}
-	}
+    public double isOnTarget()
+    {
+        return Math.abs(goalRPS - shooterEncoder.getRate());
+    }
 }
 

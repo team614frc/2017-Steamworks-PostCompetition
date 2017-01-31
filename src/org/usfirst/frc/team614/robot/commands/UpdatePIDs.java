@@ -28,12 +28,12 @@ public class UpdatePIDs extends Command {
 				SmartDashboard.getNumber("Drivetrain F", 0)
 		);
     	
-    	Robot.shooter.getPIDController().setPID(
-				SmartDashboard.getNumber("Shooter P", 0),
-				SmartDashboard.getNumber("Shooter I", 0),
-				SmartDashboard.getNumber("Shooter D", 0),
-				SmartDashboard.getNumber("Shooter F", 0)
-		);
+//    	Robot.shooter.getPIDController().setPID(
+//				SmartDashboard.getNumber("Shooter P", 0),
+//				SmartDashboard.getNumber("Shooter I", 0),
+//				SmartDashboard.getNumber("Shooter D", 0),
+//				SmartDashboard.getNumber("Shooter F", 0)
+//		);
     }
 
     // Make this return true when this Command no longer needs to run execute()
