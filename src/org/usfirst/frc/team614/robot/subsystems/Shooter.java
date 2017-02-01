@@ -19,26 +19,25 @@ public class Shooter extends Subsystem {
 	
 	public Encoder shooterEncoder = new Encoder(RobotMap.shooterEncoderA, RobotMap.shooterEncoderB, false, Encoder.EncodingType.k4X);
 	
-	VictorSP shooterVictor = new VictorSP(RobotMap.shooterFireMotor);
+	VictorSP shooterMotor = new VictorSP(RobotMap.shooterFireMotor);
 	
 	public Shooter() {
 		
-		shooterVictor.setSafetyEnabled(false);
+		shooterMotor.setSafetyEnabled(false);
 		
 		shooterEncoder.setDistancePerPulse(Constants.SHOOTER_DISTANCE_PER_PULSE);
 		shooterEncoder.reset();
 		
-		isEnabled = true;
 		
 	}
 	public double getTolerance() { 
 		return tolerance;
 	}
-	public VictorSP getVictor() {
-		return shooterVictor;
+	public VictorSP getMotor() {
+		return shooterMotor;
 	}
 	public void set(double speed) {
-		shooterVictor.set(speed);
+		shooterMotor.set(speed);
 	}
 	
     public void initDefaultCommand() {
@@ -60,9 +59,12 @@ public class Shooter extends Subsystem {
     
     public void setEnabled(boolean set) {
     	isEnabled = set;
+    	if(!set) {
+    		shooterMotor.set(0);
+    	}
     }
 
-    public double isOnTarget()
+    public double getError()
     {
         return Math.abs(goalRPS - shooterEncoder.getRate());
     }

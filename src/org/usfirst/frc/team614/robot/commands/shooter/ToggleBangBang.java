@@ -1,39 +1,29 @@
-package org.usfirst.frc.team614.robot.commands;
+package org.usfirst.frc.team614.robot.commands.shooter;
 
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class UpdatePIDs extends Command {
+public class ToggleBangBang extends Command {
 
-    public UpdatePIDs() {
+    public ToggleBangBang() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	if(Robot.shooter.isEnabled())
+			Robot.shooter.setEnabled(false);
+    	else
+    		Robot.shooter.setEnabled(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//    	Robot.drivetrain.getController().setPID(
-//				SmartDashboard.getNumber("Drivetrain P", 0),
-//				SmartDashboard.getNumber("Drivetrain I", 0),
-//				SmartDashboard.getNumber("Drivetrain D", 0),
-//				SmartDashboard.getNumber("Drivetrain F", 0)
-//		);
-    	
-//    	Robot.shooter.getPIDController().setPID(
-//				SmartDashboard.getNumber("Shooter P", 0),
-//				SmartDashboard.getNumber("Shooter I", 0),
-//				SmartDashboard.getNumber("Shooter D", 0),
-//				SmartDashboard.getNumber("Shooter F", 0)
-//		);
     }
 
     // Make this return true when this Command no longer needs to run execute()

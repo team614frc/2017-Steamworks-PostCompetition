@@ -27,10 +27,12 @@ public class ShooterDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	Robot.shooter.setGoalRPS(SmartDashboard.getNumber("Shooter non-PID Target [%]", 0));
-		SmartDashboard.putNumber("Shooter Bang Bang Error", Robot.shooter.isOnTarget());   
     	
     	if(Robot.shooter.isEnabled()) {
+
+        	Robot.shooter.setGoalRPS(SmartDashboard.getNumber("Shooter Target [Revs/Sec]", 0));
+    		SmartDashboard.putNumber("Shooter Bang Bang Error", Robot.shooter.getError());   
+    		
     		if(Robot.shooter.shooterEncoder.getRate() <= Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance()) {
     			Robot.shooter.set(1);
     		} else if (Robot.shooter.shooterEncoder.getRate() >= Robot.shooter.getGoalRPS() + Robot.shooter.getTolerance()){
