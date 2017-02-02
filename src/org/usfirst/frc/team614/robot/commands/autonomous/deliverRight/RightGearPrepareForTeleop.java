@@ -1,4 +1,4 @@
-package org.usfirst.frc.team614.robot.commands.autonomous;
+package org.usfirst.frc.team614.robot.commands.autonomous.deliverRight;
 
 import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.Robot;
@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class LeftGearPrepareForTeleop extends CommandGroup {
+public class RightGearPrepareForTeleop extends CommandGroup {
 
-    public LeftGearPrepareForTeleop() {
+    public RightGearPrepareForTeleop() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -29,12 +29,14 @@ public class LeftGearPrepareForTeleop extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-
+    	
     	this.addSequential(new DriveStraightForADistance(-999, Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); //temporary values
-    	this.addSequential(new RotateToAngle(999)); // turns LEFT
+    	this.addSequential(new RotateToAngle(999)); // turns RIGHT
     	this.addSequential (new DriveStraightForADistance(999, Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); //temporary values
-    	// Robot is now in middle of the field, on the "bottom" if looking at it from the bird's eye.
+    	// Robot is now in middle of the field, on the "top" if looking at it from the bird's eye.
     	addSequential(new RotateToAngle(-999));
     	addSequential(new DriveStraightForADistance(999, Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
+    	
+    	
     }
 }

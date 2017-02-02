@@ -30,11 +30,14 @@ public class DeliverRightGearToLift extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
 
-    	addSequential(new DriveStraightForADistance(999, Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
+    	addSequential(new DriveStraightForADistance(999, Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); // temp until distance is known
 //    	addSequential(new DriveStraight(Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
+    	addSequential(new RotateToSmartDashboardAngle()); // temp until vision mechanics are done
 //    	addSequential(new TurnLeftForGearLift());
-    	addSequential(new RotateToSmartDashboardAngle());
     	addSequential(new DriveUntilStopped(Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
+    	// wait until button on gear holder is no longer pressed;
+    	// wait about a second for gear to be lifted out of holder;
+//    	addSequential(new RightGearPrepareForTeleop());
     	
     }
 }

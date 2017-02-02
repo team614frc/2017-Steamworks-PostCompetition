@@ -30,8 +30,8 @@ public class DriveStraightForADistance extends Command
 		setTimeout(2.0);
 		//
 		
-		Robot.navX.reset();
-		Robot.navX.zeroYaw();
+//		Robot.navX.reset();
+//		Robot.navX.zeroYaw();
 
 		Robot.drivetrain.setUsingPID(true);
 

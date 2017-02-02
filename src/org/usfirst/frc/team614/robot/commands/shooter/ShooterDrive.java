@@ -33,10 +33,11 @@ public class ShooterDrive extends Command {
         	Robot.shooter.setGoalRPS(SmartDashboard.getNumber("Shooter Target Speed (Revs per Sec)", 0));
     		
     		if(Robot.shooter.shooterEncoder.getRate() <= Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance()) {
-    			Robot.shooter.set(1);
+    			Robot.shooter.set(SmartDashboard.getNumber("Bang Max", 0));
     		} else if (Robot.shooter.shooterEncoder.getRate() >= Robot.shooter.getGoalRPS() + Robot.shooter.getTolerance()){
-    			Robot.shooter.set(.3);
+    			Robot.shooter.set(SmartDashboard.getNumber("Bang Min", 0));
     		}
+//    		Robot.shooter.set(SmartDashboard.getNumber("Shooter Target Speed [%]", 0));
     	}
     	
     }

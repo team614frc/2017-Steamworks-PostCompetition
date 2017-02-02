@@ -118,9 +118,13 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Shooter Encoder MAX Rate (Revs per Sec)", 0);
 		SmartDashboard.putNumber("Shooter Bang Bang Error", 0);
         SmartDashboard.putNumber("Shooter Target Speed (Revs per Sec)", 0);
+        SmartDashboard.putNumber("Shooter Tolerance", 0);
 
         SmartDashboard.putData("Shooter Reset Encoder", new ResetShooterEncoder());
         SmartDashboard.putData("Shooter Toggle Bang Bang", new ToggleBangBang());
+//        SmartDashboard.putNumber("Bang Max", 1.0);
+//        SmartDashboard.putNumber("Bang Min", .3);
+//        SmartDashboard.putNumber("Shooter Target Speed [%]", 0);
         
 
         																																																																																																																			//		SmartDashboard.putNumber("Winch PD ID", RobotMap.PDPWinchMotor);
@@ -216,7 +220,7 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putNumber("Winch Current Draw (Amps)", Robot.pdp.getCurrent(RobotMap.PDPWinchMotor));
         
         // shooter
-
+        shooter.setTolerance(SmartDashboard.getNumber("Shooter Tolerance", 0));
         SmartDashboard.putNumber("Shooter Encoder Distance (Revs)", shooter.shooterEncoder.getDistance());
 //        SmartDashboard.putNumber("Shooter Encoder Count (Revs*4096)", shooter.shooterEncoder.getRaw());
         SmartDashboard.putNumber("Shooter Encoder Rate (Revs per Sec)", shooter.shooterEncoder.getRate());

@@ -30,6 +30,9 @@ public class Shooter extends Subsystem {
 		
 		
 	}
+	public void setTolerance(Double t) {
+		tolerance = t;
+	}
 	public double getTolerance() { 
 		return tolerance;
 	}
