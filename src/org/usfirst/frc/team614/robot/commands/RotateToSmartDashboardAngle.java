@@ -36,7 +36,7 @@ public class RotateToSmartDashboardAngle extends Command {
 		Robot.drivetrain.rightEncoder.reset();
 
         Robot.drivetrain.getController().setSetpoint(
-        		SmartDashboard.getNumber("Drivetrain Rotation Target [Degrees (-180, +180)]", 0)
+        		SmartDashboard.getNumber("Drivetrain Rotation Target (Degrees (-180, +180))", 0)
 		);
     }
 
