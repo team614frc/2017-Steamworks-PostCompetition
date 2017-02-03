@@ -4,11 +4,11 @@ package org.usfirst.frc.team614.robot;
 import org.usfirst.frc.team614.robot.commands.DriveStraightAtSmartDashboardSpeed;
 import org.usfirst.frc.team614.robot.commands.ResetDrivetrainEncoder;
 import org.usfirst.frc.team614.robot.commands.RotateToSmartDashboardAngle;
-import org.usfirst.frc.team614.robot.commands.UpdatePIDs;
 import org.usfirst.frc.team614.robot.commands.autonomous.DeliverRightGearToLift;
 import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
 import org.usfirst.frc.team614.robot.commands.shooter.ResetShooterEncoder;
 import org.usfirst.frc.team614.robot.commands.shooter.ToggleBangBang;
+import org.usfirst.frc.team614.robot.commands.winch.CatchAndClimbRope;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team614.robot.subsystems.Shooter;
@@ -128,8 +128,10 @@ public class Robot extends IterativeRobot {
         
 
         																																																																																																																			//		SmartDashboard.putNumber("Winch PD ID", RobotMap.PDPWinchMotor);
-//		SmartDashboard.putNumber("Winch Current Draw (Amps)", 0);
-//		SmartDashboard.putNumber("MAX Winch Current Draw (Amps)", 0);
+		SmartDashboard.putNumber("Winch Current Draw (Amps)", 0);
+		SmartDashboard.putNumber("MAX Winch Current Draw (Amps)", 0);
+        
+        SmartDashboard.putData("Try to Catch & Climb Rope", new CatchAndClimbRope());
 
 		printNavXData();
     }
@@ -214,10 +216,12 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Drivetrain right Encoder Distance (???)", drivetrain.rightEncoder.getDistance());
         
     	// current draw & update max current draw
-//        if(SmartDashboard.getNumber("MAX Winch Current Draw (Amps)", 0) < Robot.pdp.getCurrent(RobotMap.PDPWinchMotor)) {
-//        	SmartDashboard.putNumber("MAX Winch Current Draw (Amps)", Robot.pdp.getCurrent(RobotMap.PDPWinchMotor));
-//        }
-//        SmartDashboard.putNumber("Winch Current Draw (Amps)", Robot.pdp.getCurrent(RobotMap.PDPWinchMotor));
+        if(SmartDashboard.getNumber("MAX Winch Current Draw (Amps)", 0) < Robot.pdp.getCurrent(RobotMap.PDPWinchMotor)) {
+        	SmartDashboard.putNumber("MAX Winch Current Draw (Amps)", Robot.pdp.getCurrent(RobotMap.PDPWinchMotor));
+        }
+        SmartDashboard.putNumber("Winch Current Draw (Amps)", Robot.pdp.getCurrent(RobotMap.PDPWinchMotor));
+        SmartDashboard.putNumber("Winch Encoder Distance [Revs]", Robot.winch.getEncoderRevolutions());
+        
         
         // shooter
         shooter.setTolerance(SmartDashboard.getNumber("Shooter Tolerance", 0));

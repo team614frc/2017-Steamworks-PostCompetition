@@ -15,7 +15,7 @@ public class Winch extends Subsystem {
 	
 	public Winch() {
 		
-		winchEncoder.setDistancePerPulse(Constants.WINCH_DISTANCE_PER_PULSE);
+		winchEncoder.setDistancePerPulse(Constants.WINCH_ENCODER_DISTANCE_PER_PULSE);
 		winchEncoder.reset();
 	
 	}

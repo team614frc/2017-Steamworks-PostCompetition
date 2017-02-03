@@ -1,4 +1,4 @@
-package org.usfirst.frc.team614.robot.commands.autonomous;
+package org.usfirst.frc.team614.robot.commands.autonomous.deliverLeft;
 
 import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.Robot;

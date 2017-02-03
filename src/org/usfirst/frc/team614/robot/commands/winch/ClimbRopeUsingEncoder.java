@@ -20,13 +20,13 @@ public class ClimbRopeUsingEncoder extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.winch.spinWinch(Constants.WINCH_SPEED);
+    	SmartDashboard.putBoolean("Winch is climbing", true);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
     	/* Print encoder distance to smart dashboard */
-        SmartDashboard.putNumber("Winch Encoder Distance [Revs]", Robot.winch.getEncoderRevolutions());
         
         
         
@@ -43,11 +43,13 @@ public class ClimbRopeUsingEncoder extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.winch.stop();
+    	SmartDashboard.putBoolean("Winch is climbing", false);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
     	Robot.winch.stop();
+    	SmartDashboard.putBoolean("Winch is climbing", false);
     }
 }

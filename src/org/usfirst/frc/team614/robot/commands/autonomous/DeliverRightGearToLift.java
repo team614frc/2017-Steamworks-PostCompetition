@@ -3,7 +3,7 @@ package org.usfirst.frc.team614.robot.commands.autonomous;
 import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.commands.DriveStraightForADistance;
 import org.usfirst.frc.team614.robot.commands.DriveUntilStopped;
-import org.usfirst.frc.team614.robot.commands.RotateToSmartDashboardAngle;
+import org.usfirst.frc.team614.robot.commands.RotateToAngle;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -32,7 +32,7 @@ public class DeliverRightGearToLift extends CommandGroup {
 
     	addSequential(new DriveStraightForADistance(999, Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); // temp until distance is known
 //    	addSequential(new DriveStraight(Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
-    	addSequential(new RotateToSmartDashboardAngle()); // temp until vision mechanics are done
+    	addSequential(new RotateToAngle(-45)); // temp until vision mechanics are done
 //    	addSequential(new TurnLeftForGearLift());
     	addSequential(new DriveUntilStopped(Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
     	// wait until button on gear holder is no longer pressed;
