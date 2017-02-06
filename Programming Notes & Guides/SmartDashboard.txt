@@ -1,1 +1,0 @@
--Do NOT use forward slashes in strings. Those could get interepreted as Regular Expressions. If you don't know what those are, good.
