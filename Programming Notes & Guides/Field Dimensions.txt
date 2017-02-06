@@ -25,6 +25,26 @@
 -Secondary walls of the air ship to the boiler | 175.78 inches / 14 feet 7.78 inches |
  [14.6 feet]
  
+ -Alliance wall to Far Boiler | 196 inches / 16 feet 4 inches |
+ [16.3 feet]
+ 
+ -Length of field | 654.1 inches / 53 feet 9.1 inches |
+ 
+ -Half of field | 322.55 inches / 26 feet 10.55 inches |
+ 
+|-----------------------------------------------------------------| 
+|        =Measurements to put in RightGearPrepareForTeleop=       | 
+|            *All measurements are based on the diagram*          |
+|-----------------------------------------------------------------|
+ 
+ -Driving from the secondary right Air Ship wall to a Short Distance | 88.5 inches / 7 feet 4.5 inches |
+ 
+ -Angle to turn the robot when driven to that Short Distance | 62.4 degrees |
+ 
+ -From the Short Distance to the Middle of the Field | 258.48 inches / 21 feet 6.48 inches |
+ 
+ -From the Middle of the Field to the far most Hopper | 225.840 inches / 18 feet 9.84 inches |
+ 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 *These measurements are not set in stone and are subject to change (not definite)*
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
