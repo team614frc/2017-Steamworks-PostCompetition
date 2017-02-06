@@ -148,6 +148,9 @@ public class Robot extends IterativeRobot {
     	Robot.navX.reset();
     	Robot.winch.reset();
     	drivetrain.setUsingPID(false);
+    	shooter.reset();
+    	shooter.setEnabled(false);
+    	drivetrain.reset();
 //    	Robot.shooter.getPIDController().disable();
 //    	Robot.shooter.getPIDController().reset();
     }

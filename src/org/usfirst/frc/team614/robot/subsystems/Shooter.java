@@ -17,7 +17,7 @@ public class Shooter extends Subsystem {
 	private double goalRPS = 0;
 	private double tolerance = 0.0;
 	
-	public Encoder shooterEncoder = new Encoder(RobotMap.shooterEncoderA, RobotMap.shooterEncoderB, false, Encoder.EncodingType.k4X);
+	private Encoder shooterEncoder = new Encoder(RobotMap.shooterEncoderA, RobotMap.shooterEncoderB, false, Encoder.EncodingType.k4X);
 	
 	VictorSP shooterMotor = new VictorSP(RobotMap.shooterFireMotor);
 	
@@ -29,6 +29,15 @@ public class Shooter extends Subsystem {
 		shooterEncoder.reset();
 		
 		
+	}
+	public double getDistance() {
+		return shooterEncoder.getDistance();
+	}
+	public double getRate() {
+		return shooterEncoder.getRate();
+	}
+	public void reset() {
+		shooterEncoder.reset();
 	}
 	public void setTolerance(Double t) {
 		tolerance = t;

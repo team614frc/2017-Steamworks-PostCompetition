@@ -84,6 +84,10 @@ public class Drivetrain extends Subsystem implements PIDOutput {
     public void stop() {
     	drivetrain.arcadeDrive(0, 0);
     }
+    public void reset() {
+    	leftEncoder.reset();
+    	rightEncoder.reset();
+    }
 	public void setUsingPID(boolean set) {
 		usingPID = set;
 		if(set == true) {
