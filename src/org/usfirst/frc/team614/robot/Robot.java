@@ -5,11 +5,13 @@ import org.usfirst.frc.team614.robot.commands.DriveStraightAtSmartDashboardSpeed
 import org.usfirst.frc.team614.robot.commands.ResetDrivetrainEncoder;
 import org.usfirst.frc.team614.robot.commands.RotateToSmartDashboardAngle;
 import org.usfirst.frc.team614.robot.commands.autonomous.DeliverRightGearToLift;
+import org.usfirst.frc.team614.robot.commands.elevator.RevElevator;
 import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
 import org.usfirst.frc.team614.robot.commands.shooter.ResetShooterEncoder;
 import org.usfirst.frc.team614.robot.commands.shooter.ToggleBangBang;
 import org.usfirst.frc.team614.robot.commands.winch.CatchAndClimbRope;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team614.robot.subsystems.Elevator;
 import org.usfirst.frc.team614.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team614.robot.subsystems.Shooter;
 import org.usfirst.frc.team614.robot.subsystems.Winch;
@@ -42,6 +44,7 @@ public class Robot extends IterativeRobot {
 	public static Pneumatics pneumatics;
 	public static Shooter shooter;
 	public static Winch winch;
+	public static Elevator elevator;
 
 	public static PowerDistributionPanel pdp;
 	public static NetworkTable cameraTable;
@@ -67,6 +70,7 @@ public class Robot extends IterativeRobot {
     	pneumatics = new Pneumatics();
     	shooter = new Shooter();
     	winch = new Winch();
+    	elevator = new Elevator();
     	
     	pdp = new PowerDistributionPanel();
     	NetworkTable.setServerMode();
@@ -127,14 +131,16 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putNumber("Bang Max", 1.0);
 //        SmartDashboard.putNumber("Bang Min", .3);
 //        SmartDashboard.putNumber("Shooter Target Speed [%]", 0);
-        
-
         																																																																																																																			//		SmartDashboard.putNumber("Winch PD ID", RobotMap.PDPWinchMotor);
 		SmartDashboard.putNumber("Winch Current Draw (Amps)", 0);
 		SmartDashboard.putNumber("MAX Winch Current Draw (Amps)", 0);
         
         SmartDashboard.putData("Try to Catch & Climb Rope", new CatchAndClimbRope());
 
+        
+        SmartDashboard.putData("Rev Elevator", new RevElevator());
+        
+        
 		printNavXData();
     }
 	
@@ -225,7 +231,7 @@ public class Robot extends IterativeRobot {
         	SmartDashboard.putNumber("MAX Winch Current Draw (Amps)", Robot.pdp.getCurrent(RobotMap.PDPWinchMotor));
         }
         SmartDashboard.putNumber("Winch Current Draw (Amps)", Robot.pdp.getCurrent(RobotMap.PDPWinchMotor));
-        SmartDashboard.putNumber("Winch Encoder Distance [Revs]", Robot.winch.getEncoderRevolutions());
+        SmartDashboard.putNumber("Winch Encoder Distance (Revs)", Robot.winch.getEncoderRevolutions());
         
         
         // shooter

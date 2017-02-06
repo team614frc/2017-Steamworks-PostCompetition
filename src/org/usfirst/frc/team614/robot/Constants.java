@@ -25,4 +25,7 @@ public class Constants {
 	public static final double WINCH_CURRENT_DRAW_AT_CATCHING_ROPE = 10.0; // must be adjusted as new weights are added
 	public static final double WINCH_ENCODER_COUNTS_PER_REV = 1024; // must be changed
 	public static final double WINCH_ENCODER_DISTANCE_PER_PULSE = 1 / WINCH_ENCODER_COUNTS_PER_REV;
+	
+	// Elevator
+	public static final double ELEVATOR_SPEED = 1.0;
 }
