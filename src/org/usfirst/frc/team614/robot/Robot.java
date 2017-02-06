@@ -117,6 +117,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Shooter Encoder Rate (Revs per Sec)", 0);
 		SmartDashboard.putNumber("Shooter Encoder MAX Rate (Revs per Sec)", 0);
 		SmartDashboard.putNumber("Shooter Bang Bang Error", 0);
+		SmartDashboard.putNumber("Shooter Bang Max", 1.0);
+		SmartDashboard.putNumber("Shooter Bang Min", .5);
         SmartDashboard.putNumber("Shooter Target Speed (Revs per Sec)", 0);
         SmartDashboard.putNumber("Shooter Tolerance", 0);
 
@@ -225,11 +227,11 @@ public class Robot extends IterativeRobot {
         
         // shooter
         shooter.setTolerance(SmartDashboard.getNumber("Shooter Tolerance", 0));
-        SmartDashboard.putNumber("Shooter Encoder Distance (Revs)", shooter.shooterEncoder.getDistance());
+        SmartDashboard.putNumber("Shooter Encoder Distance (Revs)", shooter.getDistance());
 //        SmartDashboard.putNumber("Shooter Encoder Count (Revs*4096)", shooter.shooterEncoder.getRaw());
-        SmartDashboard.putNumber("Shooter Encoder Rate (Revs per Sec)", shooter.shooterEncoder.getRate());
-		if(SmartDashboard.getNumber("Shooter Encoder MAX Rate (Revs per Sec)", 0) < shooter.shooterEncoder.getRate()) {
-	        SmartDashboard.putNumber("Shooter Encoder MAX Rate (Revs per Sec)", shooter.shooterEncoder.getRate());
+        SmartDashboard.putNumber("Shooter Encoder Rate (Revs per Sec)", shooter.getRate());
+		if(SmartDashboard.getNumber("Shooter Encoder MAX Rate (Revs per Sec)", 0) < shooter.getRate()) {
+	        SmartDashboard.putNumber("Shooter Encoder MAX Rate (Revs per Sec)", shooter.getRate());
 		}
 		SmartDashboard.putNumber("Shooter Bang Bang Error", shooter.getError());        
         // vision
