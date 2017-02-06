@@ -12,6 +12,7 @@ import org.usfirst.frc.team614.robot.commands.shooter.ToggleBangBang;
 import org.usfirst.frc.team614.robot.commands.winch.CatchAndClimbRope;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.Elevator;
+import org.usfirst.frc.team614.robot.subsystems.Hopper;
 import org.usfirst.frc.team614.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team614.robot.subsystems.Shooter;
 import org.usfirst.frc.team614.robot.subsystems.Winch;
@@ -45,6 +46,7 @@ public class Robot extends IterativeRobot {
 	public static Shooter shooter;
 	public static Winch winch;
 	public static Elevator elevator;
+	public static Hopper hopper;
 
 	public static PowerDistributionPanel pdp;
 	public static NetworkTable cameraTable;
@@ -71,6 +73,7 @@ public class Robot extends IterativeRobot {
     	shooter = new Shooter();
     	winch = new Winch();
     	elevator = new Elevator();
+    	hopper = new Hopper();
     	
     	pdp = new PowerDistributionPanel();
     	NetworkTable.setServerMode();
