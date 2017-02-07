@@ -142,6 +142,7 @@ public class Robot extends IterativeRobot {
 
         
         SmartDashboard.putData("Rev Elevator", new RevElevator());
+        SmartDashboard.putNumber("Elevator Speed", .5);
         
         
 		printNavXData();

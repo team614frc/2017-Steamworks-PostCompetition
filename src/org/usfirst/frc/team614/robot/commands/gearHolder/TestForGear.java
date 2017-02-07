@@ -25,7 +25,8 @@ public class TestForGear extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.gearSwitch.get();
+//        return Robot.gearSwitch.get();
+    	return true;
         //return !Robot.gearSwitch.get();
     }
 
