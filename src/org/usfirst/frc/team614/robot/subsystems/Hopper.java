@@ -18,6 +18,12 @@ public class Hopper extends Subsystem {
 	public Hopper() {
 		
 	}
+	public void set(double speed) {
+		hopperMotor.set(speed);
+	}
+	public void stop() {
+		hopperMotor.set(0);
+	}
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

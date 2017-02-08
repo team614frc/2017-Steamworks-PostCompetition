@@ -46,7 +46,7 @@ public class RobotMap {
 	public static final int hopperMotor = 8;
 
 	// Power Distribution Board
-	public static final int PDPWinchMotor = 14;
+	public static final int PDPWinchMotor = 0; // we think it's zero
 	
 	// Pneumatics
 	public static final DoubleSolenoid.Value pistonOut = DoubleSolenoid.Value.kForward;

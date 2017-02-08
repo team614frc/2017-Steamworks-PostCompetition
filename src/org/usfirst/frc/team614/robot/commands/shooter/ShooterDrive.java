@@ -31,15 +31,28 @@ public class ShooterDrive extends Command {
     	if(Robot.shooter.isEnabled()) {
 
         	Robot.shooter.setGoalRPS(SmartDashboard.getNumber("Shooter Target Speed (Revs per Sec)", 0));
-    		
-    		if(Robot.shooter.getRate() <= Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance()) {
-    			Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Max", 1.0));
-    		} else if (Robot.shooter.getRate() >= Robot.shooter.getGoalRPS() + Robot.shooter.getTolerance()){
-    			Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Min", 0.5));
-    		}
-//    		Robot.shooter.set(SmartDashboard.getNumber("Shooter Target Speed [%]", 0));
+        	
+        	if(Robot.shooter.getShootingFromAirship()) {
+		    	
+//	        	Robot.shooter.setGoalRPS(60.0);
+				
+				if(Robot.shooter.getRate() <= Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance()) {
+					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Max", .8));
+				} else if (Robot.shooter.getRate() >= Robot.shooter.getGoalRPS() + Robot.shooter.getTolerance()){
+					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Min", .6));
+				}
+
+        	} else { // robot is shooting right next to boiler
+
+//	        	Robot.shooter.setGoalRPS(XXX);
+//				
+//				if(Robot.shooter.getRate() <= Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance()) {
+//					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Max", XXX));
+//				} else if (Robot.shooter.getRate() >= Robot.shooter.getGoalRPS() + Robot.shooter.getTolerance()){
+//					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Min", XXX));
+//				}
+        	}
     	}
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

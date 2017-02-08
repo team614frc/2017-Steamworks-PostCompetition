@@ -1,10 +1,12 @@
 
 package org.usfirst.frc.team614.robot;
 
-import org.usfirst.frc.team614.robot.commands.DriveStraightAtSmartDashboardSpeed;
-import org.usfirst.frc.team614.robot.commands.ResetDrivetrainEncoder;
-import org.usfirst.frc.team614.robot.commands.RotateToSmartDashboardAngle;
-import org.usfirst.frc.team614.robot.commands.autonomous.DeliverRightGearToLift;
+import org.usfirst.frc.team614.robot.commands.autonomous.DeliverRightRedGearToLift;
+import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraight;
+import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightAtSmartDashboardSpeed;
+import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightForADistance;
+import org.usfirst.frc.team614.robot.commands.drivetrain.ResetDrivetrainEncoder;
+import org.usfirst.frc.team614.robot.commands.drivetrain.RotateToSmartDashboardAngle;
 import org.usfirst.frc.team614.robot.commands.elevator.RevElevator;
 import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
 import org.usfirst.frc.team614.robot.commands.shooter.ResetShooterEncoder;
@@ -13,7 +15,6 @@ import org.usfirst.frc.team614.robot.commands.winch.CatchAndClimbRope;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.Elevator;
 import org.usfirst.frc.team614.robot.subsystems.Hopper;
-import org.usfirst.frc.team614.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team614.robot.subsystems.Shooter;
 import org.usfirst.frc.team614.robot.subsystems.Winch;
 
@@ -42,14 +43,14 @@ public class Robot extends IterativeRobot {
 
 	public static AHRS navX;
 	public static Drivetrain drivetrain;
-	public static Pneumatics pneumatics;
 	public static Shooter shooter;
 	public static Winch winch;
 	public static Elevator elevator;
 	public static Hopper hopper;
 
 	public static PowerDistributionPanel pdp;
-	public static NetworkTable cameraTable;
+	public static NetworkTable gearCamera;
+	public static NetworkTable shooterCamera;
 	public static OI oi;
 	
     Command autonomousCommand;
@@ -69,7 +70,6 @@ public class Robot extends IterativeRobot {
             DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
         }
     	drivetrain = new Drivetrain();
-    	pneumatics = new Pneumatics();
     	shooter = new Shooter();
     	winch = new Winch();
     	elevator = new Elevator();
@@ -79,13 +79,16 @@ public class Robot extends IterativeRobot {
     	NetworkTable.setServerMode();
     	NetworkTable.setTeam(614);
     	NetworkTable.initialize();
-    	cameraTable = NetworkTable.getTable("camera");
+    	gearCamera = NetworkTable.getTable("gearCamera");
+    	shooterCamera = NetworkTable.getTable("shooterCamera");
     	
 		oi = new OI();
 		
         chooser = new SendableChooser();
-//        chooser.addDefault("Drive Straight Full", new DriveStraight(.5, 1.0));
-//        chooser.addObject("Drive Straight Half", new DriveStraight(.5, .5));
+        chooser.addDefault("Drive Straight Forever", new DriveStraight(.5));
+        chooser.addObject("Drive Straight For a Little Bit", new DriveStraightForADistance(100, .5));
+        chooser.addObject("Deliver Red Left Gear", new DeliverRightRedGearToLift());
+        SmartDashboard.putData("Autonomous", chooser);
         
 //        SmartDashboard.putData("Run At Full Speed", new ShooterDrive());
 //        SmartDashboard.putData("Drive Straight", chooser);
@@ -93,7 +96,7 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putData("Update PID Values", new UpdatePIDs());
         SmartDashboard.putData("Zero Yaw", new ZeroNavxYaw());
 
-        SmartDashboard.putNumber("Vision Target Angle", 999);
+        SmartDashboard.putNumber("Vision Target Angle", 0);
         SmartDashboard.putBoolean("Vision Target Found", false);
         
 //        SmartDashboard.putNumber("Drivetrain P", Constants.drivetrainP);
@@ -108,7 +111,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Drivetrain Reset Encoder", new ResetDrivetrainEncoder());
         SmartDashboard.putData("Drivetrain Drive", new DriveStraightAtSmartDashboardSpeed());
         SmartDashboard.putData("Rotate To Angle", new RotateToSmartDashboardAngle());
-        SmartDashboard.putData("Deliver Right Gear", new DeliverRightGearToLift());
+        SmartDashboard.putData("Deliver Right Gear", new DeliverRightRedGearToLift());
 
 
 //        SmartDashboard.putNumber("Shooter P", Constants.shooterP);
@@ -137,6 +140,8 @@ public class Robot extends IterativeRobot {
         																																																																																																																			//		SmartDashboard.putNumber("Winch PD ID", RobotMap.PDPWinchMotor);
 		SmartDashboard.putNumber("Winch Current Draw (Amps)", 0);
 		SmartDashboard.putNumber("MAX Winch Current Draw (Amps)", 0);
+        SmartDashboard.putNumber("Winch Encoder Distance (Revs)", 0);
+        SmartDashboard.putNumber("Winch Encoder Rate (Revs per Sec)", 0);
         
         SmartDashboard.putData("Try to Catch & Climb Rope", new CatchAndClimbRope());
 
@@ -159,7 +164,7 @@ public class Robot extends IterativeRobot {
     	Robot.winch.reset();
     	drivetrain.setUsingPID(false);
     	shooter.reset();
-    	shooter.setEnabled(false);
+    	shooter.setEnabled(false, false);
     	drivetrain.reset();
 //    	Robot.shooter.getPIDController().disable();
 //    	Robot.shooter.getPIDController().reset();
@@ -182,21 +187,25 @@ public class Robot extends IterativeRobot {
 //    	shooter.enable();
     	Robot.navX.reset();
         autonomousCommand = (Command) chooser.getSelected();
-        /*
+        
 		String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
-			case "Drive Straight Full": {
-				autonomousCommand = new DriveStraight(.5, 1.0);
+			case "Drive Straight Forever": {
+				autonomousCommand = new DriveStraight(.5);
 				break;
 			}
-			case "Drive Straight Half": {
-				autonomousCommand = new DriveStraight(.5, 1.0);
+			case "Drive Straight For a Little Bit": {
+				autonomousCommand = new DriveStraightForADistance(100, .5);
+				break;
+			}
+			case "Deliver Red Left Gear": {
+				autonomousCommand = new DeliverRightRedGearToLift();
 				break;
 			}
 			default: {
 				
 			}
-		}*/
+		}
     	
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
@@ -229,13 +238,17 @@ public class Robot extends IterativeRobot {
         // encoder distances
         SmartDashboard.putNumber("Drivetrain left Encoder Distance (???)", drivetrain.leftEncoder.getDistance());
         SmartDashboard.putNumber("Drivetrain right Encoder Distance (???)", drivetrain.rightEncoder.getDistance());
+
+        SmartDashboard.putNumber("Drivetrain left Encoder Count (???)", drivetrain.leftEncoder.getRaw());
+        SmartDashboard.putNumber("Drivetrain right Encoder Count (???)", drivetrain.rightEncoder.getRaw());
         
-    	// current draw & update max current draw
+    	// winch
         if(SmartDashboard.getNumber("MAX Winch Current Draw (Amps)", 0) < Robot.pdp.getCurrent(RobotMap.PDPWinchMotor)) {
         	SmartDashboard.putNumber("MAX Winch Current Draw (Amps)", Robot.pdp.getCurrent(RobotMap.PDPWinchMotor));
         }
         SmartDashboard.putNumber("Winch Current Draw (Amps)", Robot.pdp.getCurrent(RobotMap.PDPWinchMotor));
         SmartDashboard.putNumber("Winch Encoder Distance (Revs)", Robot.winch.getEncoderRevolutions());
+        SmartDashboard.putNumber("Winch Encoder Rate (Revs per Sec)", Robot.winch.getRate());
         
         
         // shooter
@@ -246,15 +259,24 @@ public class Robot extends IterativeRobot {
 		if(SmartDashboard.getNumber("Shooter Encoder MAX Rate (Revs per Sec)", 0) < shooter.getRate()) {
 	        SmartDashboard.putNumber("Shooter Encoder MAX Rate (Revs per Sec)", shooter.getRate());
 		}
-		SmartDashboard.putNumber("Shooter Bang Bang Error", shooter.getError());        
+		SmartDashboard.putNumber("Shooter Bang Bang Error", shooter.getError()); 
+		
         // vision
     	SmartDashboard.putNumber(
-    			"Vision Target Angle",
-    			Robot.cameraTable.getNumber("angle", 0)
+    			"Gear Camera Angle",
+    			Robot.gearCamera.getNumber("angle", 0)
 		);
     	SmartDashboard.putBoolean(
-    			"Vision Target Found",
-    			Robot.cameraTable.getBoolean("targetFound", false)
+    			"Gear Camera Found",
+    			Robot.gearCamera.getBoolean("targetFound", false)
+		);
+    	SmartDashboard.putNumber(
+    			"Shooter Camera Angle",
+    			Robot.shooterCamera.getNumber("angle", 0)
+		);
+    	SmartDashboard.putBoolean(
+    			"Shooter Camera Found",
+    			Robot.shooterCamera.getBoolean("targetFound", false)
 		);
     }
     
