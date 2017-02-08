@@ -25,15 +25,20 @@ public class DriveStraightForADistance extends Command
 	// Called just before this Command runs the first time
 	protected void initialize()
 	{
-		Robot.navX.reset();
-		Robot.navX.zeroYaw();
+		
+		//
+		setTimeout(2.0);
+		//
+		
+//		Robot.navX.reset();
+//		Robot.navX.zeroYaw();
 
 		Robot.drivetrain.setUsingPID(true);
 
 		Robot.drivetrain.leftEncoder.reset();
 		Robot.drivetrain.rightEncoder.reset();
 
-        Robot.drivetrain.getController().setSetpoint(0.0f);
+        Robot.drivetrain.getController().setSetpoint(0f);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -48,13 +53,14 @@ public class DriveStraightForADistance extends Command
 	// The size of the wheel MUST be changed in Constants if changed!
 	protected boolean isFinished()
 	{
-		// only tests left side... we're driving straight, so who cares.
-		if (Robot.drivetrain.leftEncoder.getDistance() >= distance / Constants.DRIVETRAIN_DISTANCE_PER_PULSE)
-		{
-			return true;
-		}
-
-		return false;
+		return isTimedOut();
+//		 only tests left side... we're driving straight, so who cares.
+//		if (Robot.drivetrain.leftEncoder.getDistance() >= distance / Constants.DRIVETRAIN_DISTANCE_PER_PULSE)
+//		{
+//			return true;
+//		}
+//
+//		return false;
 	}
 
 	// Called once after isFinished returns true

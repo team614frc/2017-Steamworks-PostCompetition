@@ -9,23 +9,26 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 
 public class Winch extends Subsystem {
-	
-	VictorSP winchMotor = new VictorSP(RobotMap.winchMotor);
+
+	VictorSP winchMotorA = new VictorSP(RobotMap.winchMotorA);
+	VictorSP winchMotorB = new VictorSP(RobotMap.winchMotorB);
 	public Encoder winchEncoder = new Encoder(RobotMap.winchEncoderA, RobotMap.winchEncoderB, false, Encoder.EncodingType.k4X);
 	
 	public Winch() {
 		
-		winchEncoder.setDistancePerPulse(Constants.WINCH_DISTANCE_PER_PULSE);
+		winchEncoder.setDistancePerPulse(Constants.WINCH_ENCODER_DISTANCE_PER_PULSE);
 		winchEncoder.reset();
 	
 	}
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public void spinWinch(double speed) {
-		winchMotor.set(speed);
+		winchMotorA.set(speed);
+		winchMotorB.set(speed);
 	}
 	public void stop() {
-		winchMotor.set(0.0);
+		winchMotorA.set(0.0);
+		winchMotorB.set(0.0);
 	}
 	public void reset() {
 		winchEncoder.reset();

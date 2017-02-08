@@ -1,4 +1,4 @@
-package org.usfirst.frc.team614.robot.commands.autonomous.shooter;
+package org.usfirst.frc.team614.robot.commands.shooter;
 
 import org.usfirst.frc.team614.robot.Robot;
 
@@ -7,17 +7,19 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ResetShooterEncoder extends Command {
+public class ToggleBangBang extends Command {
 
-    public ResetShooterEncoder() {
+    public ToggleBangBang() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-
-        Robot.shooter.shooterEncoder.reset();
+    	if(Robot.shooter.isEnabled())
+			Robot.shooter.setEnabled(false);
+    	else
+    		Robot.shooter.setEnabled(true);
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -2,6 +2,8 @@ BUILD SEASON:
 
 -update DISTANCE_PER_PULSE and PULSES_PER_REV in constants to reflect the actual encoder values
 
+-tune Bang Bang
+
 -Winch motor, command
 	>climb THEN when the Robot Stops Moving
 -create CAN Talon SRX motor controllers for SHOOTER and WINCH. SHOOTER will use Talon's PID functionality to do cool stuff.

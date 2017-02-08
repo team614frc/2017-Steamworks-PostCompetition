@@ -21,6 +21,7 @@ public class TryToCatchRope extends Command {
     protected void initialize() {
     	Robot.winch.reset();
     	Robot.winch.spinWinch(Constants.WINCH_SPEED);
+    	SmartDashboard.putBoolean("Winch is climbing", false);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -29,9 +30,11 @@ public class TryToCatchRope extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	// motor is under strain, it caught the rope
-    	if(Robot.pdp.getCurrent(RobotMap.PDPWinchMotor) > Constants.WINCH_CURRENT_DRAW_AT_CATCHING_ROPE) {
-    		return true;
+    	if(this.timeSinceInitialized() > .5) {
+	    	// motor is under strain, it caught the rope
+	    	if(Robot.pdp.getCurrent(RobotMap.PDPWinchMotor) > Constants.WINCH_CURRENT_DRAW_AT_CATCHING_ROPE) {
+	    		return true;
+	    	}
     	}
         return false;
     }
@@ -44,6 +47,7 @@ public class TryToCatchRope extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.winch.stop();
     	Robot.winch.reset(); // sets encoder to 0
     }
 }

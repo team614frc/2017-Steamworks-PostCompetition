@@ -21,19 +21,19 @@ public class UpdatePIDs extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.getController().setPID(
-				SmartDashboard.getNumber("Drivetrain P", 0),
-				SmartDashboard.getNumber("Drivetrain I", 0),
-				SmartDashboard.getNumber("Drivetrain D", 0),
-				SmartDashboard.getNumber("Drivetrain F", 0)
-		);
+//    	Robot.drivetrain.getController().setPID(
+//				SmartDashboard.getNumber("Drivetrain P", 0),
+//				SmartDashboard.getNumber("Drivetrain I", 0),
+//				SmartDashboard.getNumber("Drivetrain D", 0),
+//				SmartDashboard.getNumber("Drivetrain F", 0)
+//		);
     	
-    	Robot.shooter.getPIDController().setPID(
-				SmartDashboard.getNumber("Shooter P", 0),
-				SmartDashboard.getNumber("Shooter I", 0),
-				SmartDashboard.getNumber("Shooter D", 0),
-				SmartDashboard.getNumber("Shooter F", 0)
-		);
+//    	Robot.shooter.getPIDController().setPID(
+//				SmartDashboard.getNumber("Shooter P", 0),
+//				SmartDashboard.getNumber("Shooter I", 0),
+//				SmartDashboard.getNumber("Shooter D", 0),
+//				SmartDashboard.getNumber("Shooter F", 0)
+//		);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -1,5 +1,6 @@
-package org.usfirst.frc.team614.robot.commands.autonomous;
+package org.usfirst.frc.team614.robot.commands.autonomous.deliverLeft;
 
+import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.Robot;
 import org.usfirst.frc.team614.robot.commands.DriveStraightForADistance;
 import org.usfirst.frc.team614.robot.commands.RotateToAngle;
@@ -28,12 +29,12 @@ public class LeftGearPrepareForTeleop extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	
-    	this.addSequential(new DriveStraightForADistance(-10, 10)); //temporary values
-    	//this.addSequential (Robot.drivetrain.arcadeDrive(0, 1)); //rotate right to when navx yaw =0
-    	this.addSequential(new RotateToAngle(true, 0, 1));//speed and angle not final, turns LEFT
-    	
-    	this.addSequential (new DriveStraightForADistance(10, 10)); //temporary values
-    	
+
+    	this.addSequential(new DriveStraightForADistance(-999, Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); //temporary values
+    	this.addSequential(new RotateToAngle(999)); // turns LEFT
+    	this.addSequential (new DriveStraightForADistance(999, Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); //temporary values
+    	// Robot is now in middle of the field, on the "bottom" if looking at it from the bird's eye.
+    	addSequential(new RotateToAngle(-999));
+    	addSequential(new DriveStraightForADistance(999, Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
     }
 }

@@ -40,10 +40,10 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 //	VictorSP leftMotor = new VictorSP(RobotMap.drivetrainLeftMotor);
 //	VictorSP rightMotor = new VictorSP(RobotMap.drivetrainRightMotor);
 
-	VictorSP leftMotorA = new VictorSP(0);
-	VictorSP rightMotorA = new VictorSP(1);
-	VictorSP leftMotorB = new VictorSP(2);
-	VictorSP rightMotorB = new VictorSP(3);
+	VictorSP leftMotorA = new VictorSP(RobotMap.drivetrainLeftMotorA);
+	VictorSP leftMotorB = new VictorSP(RobotMap.drivetrainLeftMotorB);
+	VictorSP rightMotorA = new VictorSP(RobotMap.drivetrainRightMotorA);
+	VictorSP rightMotorB = new VictorSP(RobotMap.drivetrainRightMotorB);
 	
 	public Drivetrain() {
 		
@@ -83,6 +83,10 @@ public class Drivetrain extends Subsystem implements PIDOutput {
     }
     public void stop() {
     	drivetrain.arcadeDrive(0, 0);
+    }
+    public void reset() {
+    	leftEncoder.reset();
+    	rightEncoder.reset();
     }
 	public void setUsingPID(boolean set) {
 		usingPID = set;
