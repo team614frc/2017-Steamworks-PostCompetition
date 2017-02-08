@@ -27,7 +27,7 @@
 
 -Size of Hopper| 83 inches/ 6ft 10.992 inches |3ft 5.4996in |
 
-- Alliance wall to Middle of third Closest Hopper|27ft 2.4inches |326.3inches|
+- Alliance wall to Middle of third Closest Hopper|27ft 2inches |326inches|
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 *These measurements are not set in stone and are subject to change (not definite)*
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
