@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Shooter extends Subsystem {
 
 	private boolean isEnabled = false;
+	private boolean shootingFromAirship = true; // true if robot is shooting from airship; false if robot is right up to the boiler
 	private double goalRPS = 0;
 	private double tolerance = 0.0;
 	
@@ -27,8 +28,17 @@ public class Shooter extends Subsystem {
 		
 		shooterEncoder.setDistancePerPulse(Constants.SHOOTER_DISTANCE_PER_PULSE);
 		shooterEncoder.reset();
-		
-		
+	}
+	
+	
+	public void reset() {
+		shooterEncoder.reset();
+	}
+    public boolean isEnabled() {
+    	return isEnabled;
+    }
+	public boolean getShootingFromAirship() {
+		return shootingFromAirship;
 	}
 	public double getDistance() {
 		return shooterEncoder.getDistance();
@@ -36,49 +46,45 @@ public class Shooter extends Subsystem {
 	public double getRate() {
 		return shooterEncoder.getRate();
 	}
-	public void reset() {
-		shooterEncoder.reset();
-	}
 	public void setTolerance(Double t) {
 		tolerance = t;
 	}
 	public double getTolerance() { 
 		return tolerance;
 	}
+    public double getGoalRPS() {
+    	return goalRPS;
+    }
+    public double getError()
+    {
+        return Math.abs(goalRPS - shooterEncoder.getRate());
+    }
 	public VictorSP getMotor() {
 		return shooterMotor;
 	}
+	
 	public void set(double speed) {
 		shooterMotor.set(speed);
 	}
 	
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        setDefaultCommand(new ShooterDrive());
-    }
     
-    public boolean isEnabled() {
-    	return isEnabled;
-    }
     
-    public double getGoalRPS() {
-    	return goalRPS;
-    }
     
     public void setGoalRPS(double RPS) {
     	goalRPS = RPS;
     }
     
-    public void setEnabled(boolean set) {
+    public void setEnabled(boolean set, boolean shootingFromAirship) {
     	isEnabled = set;
+    	this.shootingFromAirship = shootingFromAirship;
     	if(!set) {
     		shooterMotor.set(0);
     	}
     }
 
-    public double getError()
-    {
-        return Math.abs(goalRPS - shooterEncoder.getRate());
+    public void initDefaultCommand() {
+        // Set the default command for a subsystem here.
+        setDefaultCommand(new ShooterDrive());
     }
 }
 

@@ -29,6 +29,7 @@ public class RobotMap {
 	public static final int shooterEncoderB = 5;
 	public static final int winchEncoderA = 6;
 	public static final int winchEncoderB = 7;
+	public static final int gearButton = 8;
 	
 	// Motor Controller Ports (PWM)
 	public static final int drivetrainLeftMotorA = 0;
@@ -46,7 +47,7 @@ public class RobotMap {
 	public static final int hopperMotor = 8;
 
 	// Power Distribution Board
-	public static final int PDPWinchMotor = 14;
+	public static final int PDPWinchMotor = 0; // we think it's zero
 	
 	// Pneumatics
 	public static final DoubleSolenoid.Value pistonOut = DoubleSolenoid.Value.kForward;

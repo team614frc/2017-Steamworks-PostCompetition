@@ -30,7 +30,7 @@ public class ClimbRopeUsingNavX extends Command {
 
     // Called repeatedly(Every 20ms) to spin the Winch 
     protected void execute() {
-        Robot.winch.spinWinch(SmartDashboard.getNumber("Winch Motor Speed", 0.0));
+        Robot.winch.set(SmartDashboard.getNumber("Winch Motor Speed", 0.0));
         //Robot.winch.spinMotor(speed, Robot.winch.getRotateRate());
     	}
 

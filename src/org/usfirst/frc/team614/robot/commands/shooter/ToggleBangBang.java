@@ -17,9 +17,9 @@ public class ToggleBangBang extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	if(Robot.shooter.isEnabled())
-			Robot.shooter.setEnabled(false);
+			Robot.shooter.setEnabled(false, false);
     	else
-    		Robot.shooter.setEnabled(true);
+    		Robot.shooter.setEnabled(true, false);
     }
 
     // Called repeatedly when this Command is scheduled to run

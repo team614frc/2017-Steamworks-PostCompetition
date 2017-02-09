@@ -12,7 +12,7 @@ public class Winch extends Subsystem {
 
 	VictorSP winchMotorA = new VictorSP(RobotMap.winchMotorA);
 	VictorSP winchMotorB = new VictorSP(RobotMap.winchMotorB);
-	public Encoder winchEncoder = new Encoder(RobotMap.winchEncoderA, RobotMap.winchEncoderB, false, Encoder.EncodingType.k4X);
+	private Encoder winchEncoder = new Encoder(RobotMap.winchEncoderA, RobotMap.winchEncoderB, true, Encoder.EncodingType.k4X);
 	
 	public Winch() {
 		
@@ -22,7 +22,7 @@ public class Winch extends Subsystem {
 	}
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	public void spinWinch(double speed) {
+	public void set(double speed) {
 		winchMotorA.set(speed);
 		winchMotorB.set(speed);
 	}
@@ -35,6 +35,9 @@ public class Winch extends Subsystem {
 	}
 	public double getEncoderRevolutions() {
 		return winchEncoder.getDistance();
+	}
+	public double getRate() {
+		return winchEncoder.getRate();
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

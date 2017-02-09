@@ -1,10 +1,9 @@
 package org.usfirst.frc.team614.robot;
 
 import org.team708.robot.util.Gamepad;
-import org.usfirst.frc.team614.robot.commands.DriveStraightAtSmartDashboardSpeed;
-import org.usfirst.frc.team614.robot.commands.PrintNetworkTables;
-import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
-import org.usfirst.frc.team614.robot.commands.winch.CatchAndClimbRope;
+import org.usfirst.frc.team614.robot.commands.elevator.RevElevator;
+import org.usfirst.frc.team614.robot.commands.shooter.Shoot;
+import org.usfirst.frc.team614.robot.commands.winch.TryToCatchRope;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -46,20 +45,21 @@ public class OI {
 	// X-Box controller(s)
 	public static final Gamepad driverGamepad = new Gamepad(0);
 	
-	// NavX
-	private static final Button zeroNavxYaw = new JoystickButton(driverGamepad, Gamepad.button_Back);
-	private static final Button printNetworkTables = new JoystickButton(driverGamepad, Gamepad.button_A);
-	private static final Button revShooterAtSmartDashboardSpeed = new JoystickButton(driverGamepad, Gamepad.button_B);
-	private static final Button driveAtSmartDashboardSpeed = new JoystickButton(driverGamepad, Gamepad.button_Y);
-	private static final Button climbRope = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
+//	private static final Button zeroNavxYaw = new JoystickButton(driverGamepad, Gamepad.button_Back);
+//	private static final Button driveAtSmartDashboardSpeed = new JoystickButton(driverGamepad, Gamepad.button_Y);
+	private static final Button tryToClimbRope = new JoystickButton(driverGamepad, Gamepad.button_Start);
+	private static final Button revElevator = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
+	private static final Button revShooterFromAirship = new JoystickButton(driverGamepad, Gamepad.button_A);
+	private static final Button revShooterFromBoiler = new JoystickButton(driverGamepad, Gamepad.button_B);
 
 	// Binding of Commands
 	public OI() {
-		climbRope.whenPressed(new CatchAndClimbRope());
-		zeroNavxYaw.whenPressed(new ZeroNavxYaw());
-		printNetworkTables.whenPressed(new PrintNetworkTables());
-//		revShooterAtSmartDashboardSpeed.whileHeld(new RevShooterAtSmartDashboardSpeed());
-		driveAtSmartDashboardSpeed.whenPressed(new DriveStraightAtSmartDashboardSpeed());
+		tryToClimbRope.whenPressed(new TryToCatchRope());
+		revElevator.whileHeld(new RevElevator());
+		revShooterFromAirship.whileHeld(new Shoot(true));
+		revShooterFromBoiler.whileHeld(new Shoot(false));
+//		zeroNavxYaw.whenPressed(new ZeroNavxYaw());
+//		driveAtSmartDashboardSpeed.whenPressed(new DriveStraightAtSmartDashboardSpeed());
 	}
 }
 
