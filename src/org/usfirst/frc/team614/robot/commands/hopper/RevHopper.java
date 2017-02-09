@@ -1,36 +1,32 @@
-package org.usfirst.frc.team614.robot.commands.drivetrain;
+package org.usfirst.frc.team614.robot.commands.hopper;
 
-import org.team708.robot.util.Gamepad;
-import org.usfirst.frc.team614.robot.OI;
+import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class TankDrive extends Command {
+public class RevHopper extends Command {
 
-    public TankDrive() {
+    public RevHopper() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+    	requires(Robot.hopper);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.hopper.set(Constants.HOPPER_SPEED);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//    	Robot.winch.set(OI.driverGamepad.getAxis(Gamepad.leftStick_Y));
-    	Robot.drivetrain.arcadeDrive(OI.driverGamepad.getAxis(Gamepad.leftStick_Y), OI.driverGamepad.getAxis(Gamepad.rightStick_X));
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

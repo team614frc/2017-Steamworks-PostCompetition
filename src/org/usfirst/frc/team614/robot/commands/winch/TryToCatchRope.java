@@ -20,7 +20,7 @@ public class TryToCatchRope extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.winch.reset();
-    	Robot.winch.spinWinch(Constants.WINCH_SPEED);
+    	Robot.winch.set(Constants.WINCH_SPEED);
     	SmartDashboard.putBoolean("Winch is climbing", false);
     }
 

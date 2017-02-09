@@ -16,7 +16,6 @@ public class Hopper extends Subsystem {
 	private VictorSP hopperMotor = new VictorSP(RobotMap.hopperMotor);
 
 	public Hopper() {
-		
 	}
 	public void set(double speed) {
 		hopperMotor.set(speed);

@@ -30,9 +30,9 @@ public class RightRedGearPrepareForTeleop extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	this.addSequential(new DriveStraightForADistance(-999, Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); //temporary values
-    	this.addSequential(new RotateToAngle(999)); // turns RIGHT
-    	this.addSequential (new DriveStraightForADistance(999, Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); //temporary values
+    	addSequential(new DriveStraightForADistance(-999, Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); //temporary values
+    	addSequential(new RotateToAngle(999)); // turns RIGHT
+    	addSequential (new DriveStraightForADistance(999, Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); //temporary values
     	// Robot is now in middle of the field, on the "top" if looking at it from the bird's eye.
     	addSequential(new RotateToAngle(-999));
     	addSequential(new DriveStraightForADistance(999, Constants.DRIVETRAIN_AUTONOMOUS_SPEED));

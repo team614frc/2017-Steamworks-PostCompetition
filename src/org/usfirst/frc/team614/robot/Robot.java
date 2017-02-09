@@ -12,6 +12,7 @@ import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
 import org.usfirst.frc.team614.robot.commands.shooter.ResetShooterEncoder;
 import org.usfirst.frc.team614.robot.commands.shooter.ToggleBangBang;
 import org.usfirst.frc.team614.robot.commands.winch.CatchAndClimbRope;
+import org.usfirst.frc.team614.robot.commands.winch.ReleaseRope;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.Elevator;
 import org.usfirst.frc.team614.robot.subsystems.Hopper;
@@ -20,6 +21,7 @@ import org.usfirst.frc.team614.robot.subsystems.Winch;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -48,6 +50,8 @@ public class Robot extends IterativeRobot {
 	public static Elevator elevator;
 	public static Hopper hopper;
 
+	public static DigitalInput gearButton;
+	
 	public static PowerDistributionPanel pdp;
 	public static NetworkTable gearCamera;
 	public static NetworkTable shooterCamera;
@@ -75,14 +79,17 @@ public class Robot extends IterativeRobot {
     	elevator = new Elevator();
     	hopper = new Hopper();
     	
+    	gearButton = new DigitalInput(RobotMap.gearButton);
+    	
     	pdp = new PowerDistributionPanel();
+		oi = new OI();
+		
     	NetworkTable.setServerMode();
     	NetworkTable.setTeam(614);
     	NetworkTable.initialize();
     	gearCamera = NetworkTable.getTable("gearCamera");
     	shooterCamera = NetworkTable.getTable("shooterCamera");
     	
-		oi = new OI();
 		
         chooser = new SendableChooser();
         chooser.addDefault("Drive Straight Forever", new DriveStraight(.5));
@@ -96,9 +103,12 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putData("Update PID Values", new UpdatePIDs());
         SmartDashboard.putData("Zero Yaw", new ZeroNavxYaw());
 
-        SmartDashboard.putNumber("Vision Target Angle", 0);
-        SmartDashboard.putBoolean("Vision Target Found", false);
-        
+
+    	SmartDashboard.putNumber("Gear Camera Angle", 0);
+    	SmartDashboard.putBoolean("Gear Camera Found", false);
+    	SmartDashboard.putNumber("Shooter Camera Angle", 0);
+    	SmartDashboard.putBoolean("Shooter Camera Found", false);
+    	
 //        SmartDashboard.putNumber("Drivetrain P", Constants.drivetrainP);
 //        SmartDashboard.putNumber("Drivetrain I", Constants.drivetrainI);
 //        SmartDashboard.putNumber("Drivetrain D", Constants.drivetrainD);
@@ -142,8 +152,9 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("MAX Winch Current Draw (Amps)", 0);
         SmartDashboard.putNumber("Winch Encoder Distance (Revs)", 0);
         SmartDashboard.putNumber("Winch Encoder Rate (Revs per Sec)", 0);
-        
+
         SmartDashboard.putData("Try to Catch & Climb Rope", new CatchAndClimbRope());
+        SmartDashboard.putData("Lower Rope", new ReleaseRope());
 
         
         SmartDashboard.putData("Rev Elevator", new RevElevator());

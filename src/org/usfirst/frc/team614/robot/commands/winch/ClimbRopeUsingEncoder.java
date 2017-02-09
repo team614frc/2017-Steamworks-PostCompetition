@@ -19,7 +19,9 @@ public class ClimbRopeUsingEncoder extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.winch.spinWinch(Constants.WINCH_SPEED);
+    	Robot.winch.reset();
+    	
+    	Robot.winch.set(Constants.WINCH_SPEED);
     	SmartDashboard.putBoolean("Winch is climbing", true);
     }
 

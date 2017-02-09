@@ -1,7 +1,7 @@
 package org.usfirst.frc.team614.robot.commands.shooter;
 
-import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.Robot;
+import org.usfirst.frc.team614.robot.commands.hopper.RevHopper;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -27,12 +27,16 @@ public class Shoot extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	Robot.shooter.setEnabled(true, shootingFromAirship);
-//    	 wait until shooter is up to speed...
+    	if(shootingFromAirship) {
+    		addSequential(new RevShooterFromAirship());
+    	} else {
+    		addSequential(new RevShooterFromBoiler());
+    	}
+    	//    	 wait until shooter is up to speed...
     	addSequential(new WaitUntilShooterIsAtTargetSpeed());
 //    	feed balls into shooter...
-    	Robot.hopper.set(Constants.HOPPER_SPEED);
-//    	 manually wait until all balls are shot
+    	addSequential(new RevHopper());
+    	//    	 manually wait until all balls are shot
     }
     protected void end() {
     	Robot.hopper.stop();

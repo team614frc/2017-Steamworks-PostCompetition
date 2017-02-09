@@ -19,7 +19,7 @@ public class ClimbRopeUsingAmperage extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.winch.spinWinch(Constants.WINCH_SPEED);
+    	Robot.winch.set(Constants.WINCH_SPEED);
     }
 
     // Called repeatedly when this Command is scheduled to run

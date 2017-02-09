@@ -20,10 +20,10 @@ public class Constants {
 	public static final double SHOOTER_DISTANCE_PER_PULSE = 1 / SHOOTER_ENCODER_COUNTS_PER_REV;
 	
 	// Winch
-	public static final double WINCH_SPEED = .4;
-	public static final double WINCH_ENCODER_REVOLUTIONS_TO_TOP = 100;
-	public static final double WINCH_CURRENT_DRAW_AT_MAX_HEIGHT = 60.0; // must be adjusted as new weights are added
-	public static final double WINCH_CURRENT_DRAW_AT_CATCHING_ROPE = 10.0; // must be adjusted as new weights are added
+	public static final double WINCH_SPEED = 1.0;
+	public static final double WINCH_ENCODER_REVOLUTIONS_TO_TOP = 5.5 / 2;
+	public static final double WINCH_CURRENT_DRAW_AT_MAX_HEIGHT = 20; // must be adjusted as new weights are added
+	public static final double WINCH_CURRENT_DRAW_AT_CATCHING_ROPE = 12.0; // must be adjusted as new weights are added
 	public static final double WINCH_ENCODER_COUNTS_PER_REV = 1024; // must be changed
 	public static final double WINCH_ENCODER_DISTANCE_PER_PULSE = 1 / WINCH_ENCODER_COUNTS_PER_REV;
 	
