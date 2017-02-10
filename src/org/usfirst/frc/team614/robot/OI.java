@@ -4,6 +4,7 @@ import org.team708.robot.util.Gamepad;
 import org.usfirst.frc.team614.robot.commands.elevator.RevElevator;
 import org.usfirst.frc.team614.robot.commands.shooter.Shoot;
 import org.usfirst.frc.team614.robot.commands.winch.CatchAndClimbRope;
+import org.usfirst.frc.team614.robot.commands.winch.ReverseWinch;
 import org.usfirst.frc.team614.robot.commands.winch.StopWinch;
 
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -50,14 +51,17 @@ public class OI {
 //	private static final Button driveAtSmartDashboardSpeed = new JoystickButton(driverGamepad, Gamepad.button_Y);
 	private static final Button tryToClimbRope = new JoystickButton(driverGamepad, Gamepad.button_Start);
 	private static final Button stopClimber = new JoystickButton(driverGamepad, Gamepad.button_Back);
+	private static final Button reverseClimber = new JoystickButton(driverGamepad, Gamepad.button_R_Shoulder);
+	
 	private static final Button revElevator = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
-	private static final Button revShooterFromAirship = new JoystickButton(driverGamepad, Gamepad.button_A);
+	private static final Button revShooterFromAirship = new JoystickButton(driverGamepad, Gamepad.button_X);
 	private static final Button revShooterFromBoiler = new JoystickButton(driverGamepad, Gamepad.button_B);
 
 	// Binding of Commands
 	public OI() {
 		tryToClimbRope.whenPressed(new CatchAndClimbRope());
 		stopClimber.whenPressed(new StopWinch());
+		reverseClimber.whileHeld(new ReverseWinch());
 		revElevator.whileHeld(new RevElevator());
 		revShooterFromAirship.whileHeld(new Shoot(true));
 		revShooterFromBoiler.whileHeld(new Shoot(false));

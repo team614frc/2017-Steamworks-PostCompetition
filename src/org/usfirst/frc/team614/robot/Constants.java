@@ -31,5 +31,5 @@ public class Constants {
 	public static final double ELEVATOR_SPEED = .7;
 	
 	// Hopper
-	public static final double HOPPER_SPEED = .5;
+	public static final double HOPPER_SPEED = .2;
 }

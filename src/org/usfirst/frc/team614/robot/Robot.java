@@ -1,6 +1,8 @@
 
 package org.usfirst.frc.team614.robot;
 
+import org.usfirst.frc.team614.robot.commands.DoNothing;
+import org.usfirst.frc.team614.robot.commands.autonomous.DeliverLeftRedGearToLift;
 import org.usfirst.frc.team614.robot.commands.autonomous.DeliverRightRedGearToLift;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraight;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightAtSmartDashboardSpeed;
@@ -12,7 +14,7 @@ import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
 import org.usfirst.frc.team614.robot.commands.shooter.ResetShooterEncoder;
 import org.usfirst.frc.team614.robot.commands.shooter.ToggleBangBang;
 import org.usfirst.frc.team614.robot.commands.winch.CatchAndClimbRope;
-import org.usfirst.frc.team614.robot.commands.winch.StopWinch;
+import org.usfirst.frc.team614.robot.commands.winch.ReverseWinch;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.Elevator;
 import org.usfirst.frc.team614.robot.subsystems.Hopper;
@@ -94,7 +96,8 @@ public class Robot extends IterativeRobot {
         chooser = new SendableChooser();
         chooser.addDefault("Drive Straight Forever", new DriveStraight(.5));
         chooser.addObject("Drive Straight For a Little Bit", new DriveStraightForADistance(100, .5));
-        chooser.addObject("Deliver Red Left Gear", new DeliverRightRedGearToLift());
+        chooser.addObject("Deliver Red Left Gear", new DeliverLeftRedGearToLift());
+        chooser.addObject("Do Nothing", new DoNothing());
         SmartDashboard.putData("Autonomous", chooser);
         
 //        SmartDashboard.putData("Run At Full Speed", new ShooterDrive());
@@ -102,6 +105,7 @@ public class Robot extends IterativeRobot {
 //        
 //        SmartDashboard.putData("Update PID Values", new UpdatePIDs());
         SmartDashboard.putData("Zero Yaw", new ZeroNavxYaw());
+        SmartDashboard.putData("Deliver Red Left Gear", new DeliverLeftRedGearToLift());
 
 
     	SmartDashboard.putNumber("Gear Camera Angle", 0);
@@ -121,7 +125,6 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Drivetrain Reset Encoder", new ResetDrivetrainEncoder());
         SmartDashboard.putData("Drivetrain Drive", new DriveStraightAtSmartDashboardSpeed());
         SmartDashboard.putData("Rotate To Angle", new RotateToSmartDashboardAngle());
-        SmartDashboard.putData("Deliver Right Gear", new DeliverRightRedGearToLift());
 
 
 //        SmartDashboard.putNumber("Shooter P", Constants.shooterP);
@@ -137,13 +140,12 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Shooter Encoder Rate (Revs per Sec)", 0);
 		SmartDashboard.putNumber("Shooter Encoder MAX Rate (Revs per Sec)", 0);
 		SmartDashboard.putNumber("Shooter Bang Bang Error", 0);
-		SmartDashboard.putNumber("Shooter Bang Max", 1.0);
-		SmartDashboard.putNumber("Shooter Bang Min", .5);
+		SmartDashboard.putNumber("Shooter Bang Max", .8);
+		SmartDashboard.putNumber("Shooter Bang Min", .6);
         SmartDashboard.putNumber("Shooter Target Speed (Revs per Sec)", 0);
         SmartDashboard.putNumber("Shooter Tolerance", 0);
 
         SmartDashboard.putData("Shooter Reset Encoder", new ResetShooterEncoder());
-        SmartDashboard.putData("Shooter Toggle Bang Bang", new ToggleBangBang());
 //        SmartDashboard.putNumber("Bang Max", 1.0);
 //        SmartDashboard.putNumber("Bang Min", .3);
 //        SmartDashboard.putNumber("Shooter Target Speed [%]", 0);
@@ -153,14 +155,6 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Winch Encoder Distance (Revs)", 0);
         SmartDashboard.putNumber("Winch Encoder Rate (Revs per Sec)", 0);
 
-        SmartDashboard.putData("Try to Catch & Climb Rope", new CatchAndClimbRope());
-        SmartDashboard.putData("Lower Rope", new StopWinch());
-
-        
-        SmartDashboard.putData("Rev Elevator", new RevElevator());
-        SmartDashboard.putNumber("Elevator Speed", .5);
-        
-        
 		printNavXData();
     }
 	
@@ -214,7 +208,8 @@ public class Robot extends IterativeRobot {
 				break;
 			}
 			default: {
-				
+				autonomousCommand = new DoNothing();
+				break;
 			}
 		}
     	
@@ -275,19 +270,27 @@ public class Robot extends IterativeRobot {
         // vision
     	SmartDashboard.putNumber(
     			"Gear Camera Angle",
-    			Robot.gearCamera.getNumber("angle", 0)
+    			gearCamera.getNumber("angle", 0)
+		);
+    	SmartDashboard.putNumber(
+    			"Gear Camera Distance",
+    			gearCamera.getNumber("distance", 0)
 		);
     	SmartDashboard.putBoolean(
     			"Gear Camera Found",
-    			Robot.gearCamera.getBoolean("targetFound", false)
+    			gearCamera.getBoolean("targetFound", false)
 		);
     	SmartDashboard.putNumber(
     			"Shooter Camera Angle",
-    			Robot.shooterCamera.getNumber("angle", 0)
+    			shooterCamera.getNumber("angle", 0)
+		);
+    	SmartDashboard.putNumber(
+    			"Shooter Camera Distance",
+    			shooterCamera.getNumber("distance", 0)
 		);
     	SmartDashboard.putBoolean(
     			"Shooter Camera Found",
-    			Robot.shooterCamera.getBoolean("targetFound", false)
+    			shooterCamera.getBoolean("targetFound", false)
 		);
     }
     

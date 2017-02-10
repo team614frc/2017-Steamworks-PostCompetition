@@ -12,16 +12,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class RotateToVisionTarget extends Command {
 	
-	double angle;
-	boolean targetFound;
-	boolean usingGearCamera;
-	boolean rotateRight;
+	double angle = 0;
+	double distance = 0;
+	boolean targetFound = false;
+	boolean usingGearCamera = false;
+	boolean rotateRight = false;
 	
     public RotateToVisionTarget(boolean usingGearCamera, boolean rotateRight) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivetrain);
     	angle = 0;
+    	distance = 0;
     	this.usingGearCamera = usingGearCamera;
     	this.rotateRight = rotateRight;
     }
@@ -35,6 +37,7 @@ public class RotateToVisionTarget extends Command {
 //		Robot.navX.zeroYaw();
 
 		Robot.drivetrain.setUsingPID(true);
+		Robot.drivetrain.getController().setSetpoint(0);
 
 
 //        Robot.drivetrain.getController().setSetpoint(
@@ -48,22 +51,25 @@ public class RotateToVisionTarget extends Command {
     	if(usingGearCamera) { // using front gear camera
 	    	angle = Robot.gearCamera.getNumber("angle", 0);
 	    	targetFound = Robot.gearCamera.getBoolean("targetFound", false);
+	    	distance = Robot.gearCamera.getNumber("distance", 0);
     	} else { // using shooter camera
 	    	angle = Robot.shooterCamera.getNumber("angle", 0);
 	    	targetFound = Robot.shooterCamera.getBoolean("targetFound", false);
+	    	distance = Robot.shooterCamera.getNumber("distance", 0);
     	}
+//    	targetFound = true;
     	
     	if(targetFound == false) { // vision target not yet seen
     		if(rotateRight) { // spin right
-    			Robot.drivetrain.getController().setSetpoint(180.0);
+    			Robot.drivetrain.getController().setSetpoint(179.9);
     		} else { // spin left
-    			Robot.drivetrain.getController().setSetpoint(-180.0);
+    			Robot.drivetrain.getController().setSetpoint(-179.9);
     		}
     	} else { // vision target seen
 	    	Robot.drivetrain.getController().setSetpoint(angle);
     	}
-    	
-    	Robot.drivetrain.arcadeDrive(0, Robot.drivetrain.getRotateRate());
+//    	
+    	Robot.drivetrain.arcadeDrive(0, .7 * Robot.drivetrain.getRotateRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -80,12 +86,14 @@ public class RotateToVisionTarget extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.drivetrain.setUsingPID(false);
     	// DriveUntilVisionTargetIsClose
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.drivetrain.setUsingPID(false);
     	Robot.drivetrain.stop();
     }
 }
