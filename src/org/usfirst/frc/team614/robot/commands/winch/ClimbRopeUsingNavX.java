@@ -26,16 +26,20 @@ public class ClimbRopeUsingNavX extends Command {
     		Robot.navX.reset();
     		Robot.navX.zeroYaw();
     	}
+        Robot.winch.set(SmartDashboard.getNumber("Winch Motor Speed", 0.0));
     }
 
     // Called repeatedly(Every 20ms) to spin the Winch 
     protected void execute() {
-        Robot.winch.set(SmartDashboard.getNumber("Winch Motor Speed", 0.0));
-        //Robot.winch.spinMotor(speed, Robot.winch.getRotateRate());
-    	}
+	}
 
     // Make this return true when navX senses the robot not moving (or when it has reached a certain height)
     protected boolean isFinished() {
+    	
+    	if(Robot.winch.shouldBeStopped()) {
+    		return true;
+    	}
+    	
     	if(!Robot.navX.isMoving())
 	     return true;  		
     	else         

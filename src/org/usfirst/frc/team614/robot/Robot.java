@@ -12,7 +12,7 @@ import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
 import org.usfirst.frc.team614.robot.commands.shooter.ResetShooterEncoder;
 import org.usfirst.frc.team614.robot.commands.shooter.ToggleBangBang;
 import org.usfirst.frc.team614.robot.commands.winch.CatchAndClimbRope;
-import org.usfirst.frc.team614.robot.commands.winch.ReleaseRope;
+import org.usfirst.frc.team614.robot.commands.winch.StopWinch;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.Elevator;
 import org.usfirst.frc.team614.robot.subsystems.Hopper;
@@ -154,7 +154,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Winch Encoder Rate (Revs per Sec)", 0);
 
         SmartDashboard.putData("Try to Catch & Climb Rope", new CatchAndClimbRope());
-        SmartDashboard.putData("Lower Rope", new ReleaseRope());
+        SmartDashboard.putData("Lower Rope", new StopWinch());
 
         
         SmartDashboard.putData("Rev Elevator", new RevElevator());

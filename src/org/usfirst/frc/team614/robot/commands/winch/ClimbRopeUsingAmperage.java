@@ -25,11 +25,11 @@ public class ClimbRopeUsingAmperage extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	/* Print current draw to smart dashboard & update max current draw */
-        if(SmartDashboard.getNumber("MAX Winch Current Draw", 0) < Robot.pdp.getCurrent(RobotMap.PDPWinchMotor)) {
-        	SmartDashboard.putNumber("MAX Winch Current Draw", Robot.pdp.getCurrent(RobotMap.PDPWinchMotor));
-        }
-        SmartDashboard.putNumber("Winch Current Draw", Robot.pdp.getCurrent(RobotMap.PDPWinchMotor));
+//    	/* Print current draw to smart dashboard & update max current draw */
+//        if(SmartDashboard.getNumber("MAX Winch Current Draw", 0) < Robot.pdp.getCurrent(RobotMap.PDPWinchMotor)) {
+//        	SmartDashboard.putNumber("MAX Winch Current Draw", Robot.pdp.getCurrent(RobotMap.PDPWinchMotor));
+//        }
+//        SmartDashboard.putNumber("Winch Current Draw", Robot.pdp.getCurrent(RobotMap.PDPWinchMotor));
         
         
         
@@ -37,6 +37,11 @@ public class ClimbRopeUsingAmperage extends Command {
 
     // Make this return true when the winch is at the top (motor stalls -> higher current draw)
     protected boolean isFinished() {
+    	
+    	if(Robot.winch.shouldBeStopped()) {
+    		return true;
+    	}
+    	
     	if(SmartDashboard.getNumber("Winch Current Draw", 0) > Constants.WINCH_CURRENT_DRAW_AT_MAX_HEIGHT) {
     		return true;
     	}
