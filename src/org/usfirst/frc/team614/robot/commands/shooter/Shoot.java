@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class Shoot extends CommandGroup {
 
-    public Shoot(boolean shootingFromAirship, boolean shouldRotateIfNoVision, boolean rotationDirection) {
+    public Shoot(boolean shootingFromAirship, boolean shouldRotateAtAll, boolean shouldRotateIfNoVision, boolean rotationDirection) {
 
     	// rev shooter
     	if(shootingFromAirship) {
@@ -25,7 +25,7 @@ public class Shoot extends CommandGroup {
     	// if in teleop, don't rotate if no vision targeting is recieved; default left/right rotation is ignored.
     	// if camera is broken, don't rotate at all
     	
-    	addSequential(new RotateToVisionTarget(false, shouldRotateIfNoVision, rotationDirection)); // on blue side => rotate right and vice versa
+//    	addSequential(new RotateToVisionTarget(false, shouldRotateAtAll, shouldRotateIfNoVision, rotationDirection)); // on blue side => rotate right and vice versa
     	
     	// wait until shooter is up to speed...
     	addSequential(new WaitUntilShooterIsAtTargetSpeed());

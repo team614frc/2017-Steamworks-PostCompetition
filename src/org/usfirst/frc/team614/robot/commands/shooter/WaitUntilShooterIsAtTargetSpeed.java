@@ -10,13 +10,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class WaitUntilShooterIsAtTargetSpeed extends Command {
 	
-	double timeSinceHitTarget = 0.0;
 	boolean isOnTarget = false;
 	
     public WaitUntilShooterIsAtTargetSpeed() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	setTimeout(4);
+    	setTimeout(2);
     }
 
     // Called just before this Command runs the first time

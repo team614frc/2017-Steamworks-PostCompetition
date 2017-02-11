@@ -56,17 +56,22 @@ public class OI {
 	private static final Button revElevator = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
 	private static final Button revShooterFromBoiler = new JoystickButton(driverGamepad, Gamepad.shoulderAxisLeft);
 	private static final Button revShooterFromAirship = new JoystickButton(driverGamepad, Gamepad.shoulderAxisRight);
+	private static final Button testShooter = new JoystickButton(driverGamepad, Gamepad.button_X);
 
 	private static final Button deliverGear = new JoystickButton(driverGamepad, Gamepad.button_A);
 
 	// Binding of Commands
 	public OI() {
+		
+
+		testShooter.whileHeld(new Shoot(true, false, false, false));
+		
 		tryToClimbRope.whenPressed(new CatchAndClimbRope());
 		stopClimber.whenPressed(new StopWinch());
 		reverseClimber.whileHeld(new ReverseWinch());
 		revElevator.whileHeld(new RevElevator());
-		revShooterFromAirship.whileHeld(new Shoot(true, false, false));
-		revShooterFromBoiler.whileHeld(new Shoot(false, false, false));
+		revShooterFromAirship.whileHeld(new Shoot(true, true, false, false));
+		revShooterFromBoiler.whileHeld(new Shoot(false, true, false, false));
 //		zeroNavxYaw.whenPressed(new ZeroNavxYaw());
 //		driveAtSmartDashboardSpeed.whenPressed(new DriveStraightAtSmartDashboardSpeed());
 	}

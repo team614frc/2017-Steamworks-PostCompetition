@@ -32,7 +32,7 @@ public class DeliverRightRedGearToLift extends CommandGroup {
 
     	addSequential(new DriveStraightForADistance(999, Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); // temp until distance is known
 //    	addSequential(new DriveStraight(Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
-    	addSequential(new RotateToVisionTarget(true, true, false));
+    	addSequential(new RotateToVisionTarget(true, true, true, false));
     	addSequential(new DriveUntilStopped(Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
     	// wait until button on gear holder is no longer pressed;
     	// wait about a second for gear to be lifted out of holder;

@@ -32,7 +32,7 @@ public class DeliverLeftRedGearToLift extends CommandGroup {
 //    	addSequential(new DoNothing());
     	addSequential(new DriveStraightForADistance(1, Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); // temp until distance is known
 //    	addSequential(new DriveStraight(Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
-    	addSequential(new RotateToVisionTarget(true, true, true));
+    	addSequential(new RotateToVisionTarget(true, true, true, true));
 //    	addSequential(new RotateToAngle(-45));
 //    	addSequential(new DriveUntilStopped(Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
     	

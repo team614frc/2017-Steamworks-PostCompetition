@@ -14,6 +14,7 @@ public class RotateToVisionTarget extends Command {
 	
 
 	boolean usingFrontCamera = false;
+	boolean shouldRotateAtAll = true;
 	boolean shouldRotateIfNoVision = false;
 	boolean rotationDirection = false; // left for false, right for true
 	
@@ -21,11 +22,12 @@ public class RotateToVisionTarget extends Command {
 	double distance = 0;
 	boolean targetFound = false;
 	
-    public RotateToVisionTarget(boolean usingFrontCamera, boolean shouldRotateIfNoVision, boolean rotationDirection) { // third argument is ignored if the second argument is false.
+    public RotateToVisionTarget(boolean usingFrontCamera, boolean shouldRotateAtAll, boolean shouldRotateIfNoVision, boolean rotationDirection) { // third argument is ignored if the second argument is false.
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivetrain);
     	
+    	this.shouldRotateAtAll = shouldRotateAtAll;
     	this.rotationDirection = rotationDirection;
     	this.shouldRotateIfNoVision = shouldRotateIfNoVision;
     	this.usingFrontCamera = usingFrontCamera;
@@ -48,7 +50,7 @@ public class RotateToVisionTarget extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-
+if(shouldRotateAtAll) {
     	if(usingFrontCamera) { // using front gear camera
 	    	angle = Robot.gearCamera.getNumber("angle", 0);
 	    	targetFound = Robot.gearCamera.getBoolean("targetFound", false);
@@ -73,9 +75,13 @@ public class RotateToVisionTarget extends Command {
 //    	
     	Robot.drivetrain.arcadeDrive(0, .7 * Robot.drivetrain.getRotateRate());
     }
+    }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	if(!shouldRotateAtAll) {
+    		return true;
+    	}
     	// PID stuff is done, robot is at target angle
     	// Robot isn't at the immediate start of command and may be stopped b/c it never even started
     	if(this.timeSinceInitialized() > .2) {
