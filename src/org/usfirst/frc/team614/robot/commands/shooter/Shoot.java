@@ -1,5 +1,6 @@
 package org.usfirst.frc.team614.robot.commands.shooter;
 
+import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.Robot;
 import org.usfirst.frc.team614.robot.commands.hopper.RevHopper;
 
@@ -28,22 +29,22 @@ public class Shoot extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	if(shootingFromAirship) {
-    		addSequential(new RevShooterFromAirship());
+    		addParallel(new RevShooterFromAirship());
     	} else {
-    		addSequential(new RevShooterFromBoiler());
+    		addParallel(new RevShooterFromBoiler());
     	}
     	//    	 wait until shooter is up to speed...
-//    	addSequential(new WaitUntilShooterIsAtTargetSpeed());
+    	addSequential(new WaitUntilShooterIsAtTargetSpeed());
 //    	feed balls into shooter...
     	addSequential(new RevHopper());
     	//    	 manually wait until all balls are shot
     }
     protected void end() {
-//    	Robot.hopper.stop();
+    	Robot.hopper.stop();
     	Robot.shooter.setEnabled(false, false);
     }
     protected void interrupted() {
-//    	Robot.hopper.stop();
+    	Robot.hopper.stop();
     	Robot.shooter.setEnabled(false, false);
     }
 }

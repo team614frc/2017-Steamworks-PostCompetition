@@ -142,7 +142,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Shooter Bang Bang Error", 0);
 		SmartDashboard.putNumber("Shooter Bang Max", .8);
 		SmartDashboard.putNumber("Shooter Bang Min", .6);
-        SmartDashboard.putNumber("Shooter Target Speed (Revs per Sec)", 0);
+        SmartDashboard.putNumber("Shooter Target Speed (Revs per Sec)", 40.0);
         SmartDashboard.putNumber("Shooter Tolerance", 0);
 
         SmartDashboard.putData("Shooter Reset Encoder", new ResetShooterEncoder());
