@@ -1,10 +1,5 @@
 BUILD SEASON:
 
-
-- fix left encoder :(
-
-
-
 AUTONOMOUS:
 -Deliver Gear:
 	.Line up to Lift Tape

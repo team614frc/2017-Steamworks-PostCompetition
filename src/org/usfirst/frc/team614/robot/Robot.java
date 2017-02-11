@@ -2,7 +2,8 @@
 package org.usfirst.frc.team614.robot;
 
 import org.usfirst.frc.team614.robot.commands.DoNothing;
-import org.usfirst.frc.team614.robot.commands.autonomous.DeliverLeftRedGearToLift;
+import org.usfirst.frc.team614.robot.commands.RumbleController;
+import org.usfirst.frc.team614.robot.commands.autonomous.LeftRedGear;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraight;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightAtSmartDashboardSpeed;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightForADistance;
@@ -46,7 +47,8 @@ public class Robot extends IterativeRobot {
 	public static Winch winch;
 	public static Elevator elevator;
 	public static Hopper hopper;
-
+	
+	public static boolean gearButtonIsPressed;
 	public static DigitalInput gearButton;
 	
 	public static PowerDistributionPanel pdp;
@@ -77,6 +79,7 @@ public class Robot extends IterativeRobot {
     	hopper = new Hopper();
     	
     	gearButton = new DigitalInput(RobotMap.gearButton);
+    	gearButtonIsPressed = true;
     	
     	pdp = new PowerDistributionPanel();
 		oi = new OI();
@@ -91,7 +94,7 @@ public class Robot extends IterativeRobot {
         chooser = new SendableChooser();
         chooser.addDefault("Drive Straight Forever", new DriveStraight(.5));
         chooser.addObject("Drive Straight For a Little Bit", new DriveStraightForADistance(1, .5));
-        chooser.addObject("Deliver Red Left Gear", new DeliverLeftRedGearToLift());
+        chooser.addObject("Deliver Red Left Gear", new LeftRedGear());
         chooser.addObject("Do Nothing", new DoNothing());
         SmartDashboard.putData("Autonomous", chooser);
         
@@ -100,8 +103,9 @@ public class Robot extends IterativeRobot {
 //        
 //        SmartDashboard.putData("Update PID Values", new UpdatePIDs());
         SmartDashboard.putData("Zero Yaw", new ZeroNavxYaw());
-        SmartDashboard.putData("Deliver Red Left Gear", new DeliverLeftRedGearToLift());
-
+        SmartDashboard.putData("Deliver Red Left Gear", new LeftRedGear());
+        SmartDashboard.putData("Rumble Left", new RumbleController(false));
+        SmartDashboard.putData("Rumble Right", new RumbleController(true));
 
     	SmartDashboard.putNumber("Gear Camera Angle", 0);
     	SmartDashboard.putBoolean("Gear Camera Found", false);
@@ -151,6 +155,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Winch Encoder Rate (Revs per Sec)", 0);
 
 		printNavXData();
+		
     }
 	
 	/**
@@ -199,7 +204,7 @@ public class Robot extends IterativeRobot {
 				break;
 			}
 			case "Deliver Red Left Gear": {
-				autonomousCommand = new DeliverLeftRedGearToLift();
+				autonomousCommand = new LeftRedGear();
 				break;
 			}
 			default: {
@@ -235,6 +240,21 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
 
         printNavXData();
+
+        // whenever the gear button is toggled, rumble the controller.
+        if(!gearButtonIsPressed) { // last iteration, button was open
+        	if(gearButton.get()) { // now, button is closed
+        		Command rumble = new RumbleController(true);
+        		rumble.start();
+        		gearButtonIsPressed = true;
+        	}
+        } else {
+        	if(!gearButton.get()) { // open
+        		Command rumble = new RumbleController(false);
+        		rumble.start();
+        		gearButtonIsPressed = false;
+        	}
+        }
         
         // encoder distances
         SmartDashboard.putNumber("Drivetrain left Encoder Distance (???)", drivetrain.leftEncoder.getDistance());

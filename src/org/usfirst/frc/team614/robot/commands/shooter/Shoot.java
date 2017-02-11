@@ -13,7 +13,7 @@ public class Shoot extends CommandGroup {
 
     public Shoot(boolean shootingFromAirship, boolean shouldRotateAtAll, boolean shouldRotateIfNoVision, boolean rotationDirection) {
 
-    	// rev shooter
+//    	 rev shooter
     	if(shootingFromAirship) {
     		addParallel(new RevShooterFromAirship());
     	} else {
@@ -24,9 +24,9 @@ public class Shoot extends CommandGroup {
     	// if in autonomous, rotate left or right if vision target isn't on screen
     	// if in teleop, don't rotate if no vision targeting is recieved; default left/right rotation is ignored.
     	// if camera is broken, don't rotate at all
-    	
-//    	addSequential(new RotateToVisionTarget(false, shouldRotateAtAll, shouldRotateIfNoVision, rotationDirection)); // on blue side => rotate right and vice versa
-    	
+    	if(shouldRotateAtAll) {
+    		addSequential(new RotateToVisionTarget(false, shouldRotateIfNoVision, rotationDirection)); // on blue side => rotate right and vice versa
+    	}
     	// wait until shooter is up to speed...
     	addSequential(new WaitUntilShooterIsAtTargetSpeed());
 //    	feed balls into shooter...

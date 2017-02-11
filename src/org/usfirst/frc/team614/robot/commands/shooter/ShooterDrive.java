@@ -43,7 +43,7 @@ public class ShooterDrive extends Command {
 				}
 
         	} else { // robot is shooting right next to boiler
-
+        			Robot.shooter.stop();
 //	        	Robot.shooter.setGoalRPS(XXX);
 //				
 //				if(Robot.shooter.getRate() <= Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance()) {

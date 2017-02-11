@@ -66,10 +66,9 @@ public class Shooter extends Subsystem {
 	public void set(double speed) {
 		shooterMotor.set(speed);
 	}
-	
-    
-    
-    
+	public void stop() {
+		set(0);
+	}
     public void setGoalRPS(double RPS) {
     	goalRPS = RPS;
     }
@@ -86,5 +85,7 @@ public class Shooter extends Subsystem {
         // Set the default command for a subsystem here.
         setDefaultCommand(new ShooterDrive());
     }
+
+
 }
 
