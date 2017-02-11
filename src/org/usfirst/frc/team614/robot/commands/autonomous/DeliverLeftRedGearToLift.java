@@ -1,10 +1,9 @@
 package org.usfirst.frc.team614.robot.commands.autonomous;
 
 import org.usfirst.frc.team614.robot.Constants;
-import org.usfirst.frc.team614.robot.commands.RotateToVisionTarget;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightForADistance;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveUntilStopped;
-import org.usfirst.frc.team614.robot.commands.shooter.Shoot;
+import org.usfirst.frc.team614.robot.commands.drivetrain.RotateToAngle;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -30,14 +29,15 @@ public class DeliverLeftRedGearToLift extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-
-    	addSequential(new DriveStraightForADistance(999, Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); // temp until distance is known
+//    	addSequential(new DoNothing());
+    	addSequential(new DriveStraightForADistance(1, Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); // temp until distance is known
 //    	addSequential(new DriveStraight(Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
-    	addSequential(new RotateToVisionTarget(true, true));
+//    	addSequential(new RotateToVisionTarget(true, true));
+    	addSequential(new RotateToAngle(-45));
     	addSequential(new DriveUntilStopped(Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
     	
-    	addParallel(new Shoot(true));
-    	
+//    	addParallel(new Shoot(true));
+
     	// wait until button on gear holder is no longer pressed;
     	// wait about a second for gear to be lifted out of holder;
 //    	addSequential(new LeftRedGearPrepareForTeleop());

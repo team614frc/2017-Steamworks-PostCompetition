@@ -30,6 +30,11 @@ public class TryToCatchRope extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	
+    	if(Robot.winch.shouldBeStopped()) {
+    		return true;
+    	}
+    	
     	if(this.timeSinceInitialized() > .5) {
 	    	// motor is under strain, it caught the rope
 	    	if(Robot.pdp.getCurrent(RobotMap.PDPWinchMotor) > Constants.WINCH_CURRENT_DRAW_AT_CATCHING_ROPE) {

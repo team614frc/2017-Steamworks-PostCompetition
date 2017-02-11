@@ -1,6 +1,5 @@
-package org.usfirst.frc.team614.robot.commands.hopper;
+package org.usfirst.frc.team614.robot.commands.winch;
 
-import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -8,20 +7,21 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RevHopper extends Command {
+public class ReverseWinch extends Command {
 
-    public RevHopper() {
+    public ReverseWinch() {
         // Use requires() here to declare subsystem dependencies
-    	requires(Robot.hopper);
+        // eg. requires(chassis);
+    	requires(Robot.winch);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.winch.set(-.3);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.hopper.set(Constants.HOPPER_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,12 +31,14 @@ public class RevHopper extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-//    	Robot.hopper.stop();
+    	Robot.winch.reset();
+    	Robot.winch.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-//    	Robot.hopper.stop();
+    	Robot.winch.reset();
+    	Robot.winch.stop();
     }
 }

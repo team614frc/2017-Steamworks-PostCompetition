@@ -79,11 +79,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
         setDefaultCommand(new TankDrive());
     }
     public void arcadeDrive(double moveValue, double rotateValue) {
-    	if(usingPID) {
-    		arcadeDrive(moveValue, -.7 * rotateValue); // poor man's proportional value
-    	} else {
     	drivetrain.arcadeDrive(moveValue, -rotateValue);
-    	}
     }
     public void stop() {
     	drivetrain.arcadeDrive(0, 0);

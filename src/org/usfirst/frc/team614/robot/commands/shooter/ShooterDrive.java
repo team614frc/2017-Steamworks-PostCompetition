@@ -29,7 +29,7 @@ public class ShooterDrive extends Command {
     	
     	
     	if(Robot.shooter.isEnabled()) {
-
+    		
         	Robot.shooter.setGoalRPS(SmartDashboard.getNumber("Shooter Target Speed (Revs per Sec)", 0));
         	
         	if(Robot.shooter.getShootingFromAirship()) {

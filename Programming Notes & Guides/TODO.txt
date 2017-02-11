@@ -1,14 +1,56 @@
 BUILD SEASON:
 
+AUTONOMOUS:
+-Deliver Gear:
+	.Line up to Lift Tape
+	.Drive Until Stopped
+	-wait until gear is released from switch + a short time later
+-Airship Shot:
+	.Line up to Boiler Tape
+	.Rev Shooter
+	-wait until shooter is revved up to speed
+	.feed balls from hopper
+	-wait until all balls are shot [sensor or time or manual command]
+	.disable hopper
+	.disable shooter
+-Drive to Far Field
+	.rotate parallel to field
+	.drive
+	.rotate perpindicular to field
+	.drive
+	.end
+	
+	
+TELEOP:
+-Deliver Gear:
+	.Line up to Lift Tape
+	.Drive Until Stopped
+	.end
+	-[wait until gear is released from switch? => JOYSTICK RUMBLE]
+-Airship Shot:
+	.Line up to Boiler Tape
+	.Rev Shooter
+	-wait until shooter is revved up to speed
+	.feed balls from hopper
+	-wait until all balls are shot [sensor or time or manual command]
+	.disable hopper
+	.disable shooter
+	
+-Boiler Shot:
+	.Line up to Boiler Tape
+	.Rev Shooter
+	-wait until shooter is revved up to speed
+	.feed balls from hopper
+	-wait until all balls are shot [sensor or time or manual command]
+	.disable hopper
+	.disable shooter
+
+
+
 -update DISTANCE_PER_PULSE and PULSES_PER_REV in constants to reflect the actual encoder values
 
 -tune Bang Bang
 
--Winch motor, command
-	>climb THEN when the Robot Stops Moving
--create CAN Talon SRX motor controllers for SHOOTER and WINCH. SHOOTER will use Talon's PID functionality to do cool stuff.
-		 change Shooter's FeedbackDevice.AnalogEncoder to be whatever encoder type we use
-		 tune CANTalon PID parameters
 		 
 -AFTER ANY AUTONOMOUS: try to move the robot so that it ends at the farmost hopper.
 	
