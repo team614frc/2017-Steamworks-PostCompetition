@@ -49,7 +49,7 @@ public class DriveStraightForADistance extends Command
 	protected boolean isFinished()
 	{
 //		 only tests left side... we're driving straight, so who cares.
-		if (Robot.drivetrain.leftEncoder.getDistance() >= distance / Constants.DRIVETRAIN_DISTANCE_PER_PULSE)
+		if (Robot.drivetrain.rightEncoder.getDistance() >= distance)
 		{
 			return true;
 		}

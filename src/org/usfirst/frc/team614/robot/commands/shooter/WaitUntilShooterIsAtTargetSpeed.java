@@ -21,7 +21,6 @@ public class WaitUntilShooterIsAtTargetSpeed extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-		SmartDashboard.putBoolean("Target Speeded", false);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -41,7 +40,7 @@ public class WaitUntilShooterIsAtTargetSpeed extends Command {
 	    		setTimeout(.5);
 	    	} // else { // robot was on target last iteration and still is; do nothing.
 	    	//}
-    	}	    		SmartDashboard.putBoolean("Target Speeded", isTimedOut());
+    	}	 
 
         return isTimedOut();
     }

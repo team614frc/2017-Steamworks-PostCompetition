@@ -3,18 +3,13 @@ package org.usfirst.frc.team614.robot;
 
 import org.usfirst.frc.team614.robot.commands.DoNothing;
 import org.usfirst.frc.team614.robot.commands.autonomous.DeliverLeftRedGearToLift;
-import org.usfirst.frc.team614.robot.commands.autonomous.DeliverRightRedGearToLift;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraight;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightAtSmartDashboardSpeed;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightForADistance;
 import org.usfirst.frc.team614.robot.commands.drivetrain.ResetDrivetrainEncoder;
 import org.usfirst.frc.team614.robot.commands.drivetrain.RotateToSmartDashboardAngle;
-import org.usfirst.frc.team614.robot.commands.elevator.RevElevator;
 import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
 import org.usfirst.frc.team614.robot.commands.shooter.ResetShooterEncoder;
-import org.usfirst.frc.team614.robot.commands.shooter.ToggleBangBang;
-import org.usfirst.frc.team614.robot.commands.winch.CatchAndClimbRope;
-import org.usfirst.frc.team614.robot.commands.winch.ReverseWinch;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.Elevator;
 import org.usfirst.frc.team614.robot.subsystems.Hopper;
@@ -95,7 +90,7 @@ public class Robot extends IterativeRobot {
 		
         chooser = new SendableChooser();
         chooser.addDefault("Drive Straight Forever", new DriveStraight(.5));
-        chooser.addObject("Drive Straight For a Little Bit", new DriveStraightForADistance(100, .5));
+        chooser.addObject("Drive Straight For a Little Bit", new DriveStraightForADistance(1, .5));
         chooser.addObject("Deliver Red Left Gear", new DeliverLeftRedGearToLift());
         chooser.addObject("Do Nothing", new DoNothing());
         SmartDashboard.putData("Autonomous", chooser);
@@ -200,11 +195,11 @@ public class Robot extends IterativeRobot {
 				break;
 			}
 			case "Drive Straight For a Little Bit": {
-				autonomousCommand = new DriveStraightForADistance(100, .5);
+				autonomousCommand = new DriveStraightForADistance(1, .5);
 				break;
 			}
 			case "Deliver Red Left Gear": {
-				autonomousCommand = new DeliverRightRedGearToLift();
+				autonomousCommand = new DeliverLeftRedGearToLift();
 				break;
 			}
 			default: {

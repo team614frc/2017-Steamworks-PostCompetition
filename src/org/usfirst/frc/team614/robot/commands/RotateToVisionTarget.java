@@ -12,43 +12,44 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class RotateToVisionTarget extends Command {
 	
+
+	boolean usingFrontCamera = false;
+	boolean shouldRotateIfNoVision = false;
+	boolean rotationDirection = false; // left for false, right for true
+	
 	double angle = 0;
 	double distance = 0;
 	boolean targetFound = false;
-	boolean usingGearCamera = false;
-	boolean rotateRight = false;
 	
-    public RotateToVisionTarget(boolean usingGearCamera, boolean rotateRight) {
+    public RotateToVisionTarget(boolean usingFrontCamera, boolean shouldRotateIfNoVision, boolean rotationDirection) { // third argument is ignored if the second argument is false.
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivetrain);
+    	
+    	this.rotationDirection = rotationDirection;
+    	this.shouldRotateIfNoVision = shouldRotateIfNoVision;
+    	this.usingFrontCamera = usingFrontCamera;
+    	
     	angle = 0;
     	distance = 0;
-    	this.usingGearCamera = usingGearCamera;
-    	this.rotateRight = rotateRight;
+    	this.usingFrontCamera = usingFrontCamera;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	// begin reading vision processing;
-    	// get to the point such that there is a gettable value that is the reflected tape's angle from the camera
 
 //		Robot.navX.reset();
 //		Robot.navX.zeroYaw();
 
 		Robot.drivetrain.setUsingPID(true);
-		Robot.drivetrain.getController().setSetpoint(0);
+		Robot.drivetrain.getController().setSetpoint(Robot.navX.getYaw());
 
-
-//        Robot.drivetrain.getController().setSetpoint(
-//        		SmartDashboard.getNumber("Drivetrain Angle Target [Degrees (-180, +180)]", 0)
-//		);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 
-    	if(usingGearCamera) { // using front gear camera
+    	if(usingFrontCamera) { // using front gear camera
 	    	angle = Robot.gearCamera.getNumber("angle", 0);
 	    	targetFound = Robot.gearCamera.getBoolean("targetFound", false);
 	    	distance = Robot.gearCamera.getNumber("distance", 0);
@@ -59,13 +60,14 @@ public class RotateToVisionTarget extends Command {
     	}
 //    	targetFound = true;
     	
-    	if(targetFound == false) { // vision target not yet seen
-    		if(rotateRight) { // spin right
+    	if(shouldRotateIfNoVision == true && targetFound == false) { // vision target not yet seen and the robot should act on this
+    		if(rotationDirection) { // spin right
     			Robot.drivetrain.getController().setSetpoint(179.9);
     		} else { // spin left
     			Robot.drivetrain.getController().setSetpoint(-179.9);
     		}
-    	} else { // vision target seen
+    	}
+    	else if(targetFound) { // vision target seen
 	    	Robot.drivetrain.getController().setSetpoint(angle);
     	}
 //    	
