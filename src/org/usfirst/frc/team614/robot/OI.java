@@ -1,6 +1,7 @@
 package org.usfirst.frc.team614.robot;
 
 import org.team708.robot.util.Gamepad;
+import org.usfirst.frc.team614.robot.commands.DeliverGear;
 import org.usfirst.frc.team614.robot.commands.elevator.RevElevator;
 import org.usfirst.frc.team614.robot.commands.shooter.Shoot;
 import org.usfirst.frc.team614.robot.commands.winch.CatchAndClimbRope;
@@ -70,6 +71,7 @@ public class OI {
 		stopClimber.whenPressed(new StopWinch());
 		reverseClimber.whileHeld(new ReverseWinch());
 		revElevator.whileHeld(new RevElevator());
+		deliverGear.whenPressed(new DeliverGear(false, false));
 		revShooterFromBoiler.whileHeld(new Shoot(false, true, false, false));
 //		revShooterFromAirship.whileHeld(new Shoot(true, true, false, false)); // uhh, for some reason this one is mutually exclusive with the testShooter 
 		testShooter.whileHeld(new Shoot(true, false, false, false));

@@ -48,33 +48,37 @@ public class RotateToVisionTarget extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(usingFrontCamera) { // using front gear camera
-	    	angle = Robot.gearCamera.getNumber("angle", 0);
-	    	targetFound = Robot.gearCamera.getBoolean("targetFound", false);
-	    	distance = Robot.gearCamera.getNumber("distance", 0);
-    	} else { // using shooter camera
-	    	angle = Robot.shooterCamera.getNumber("angle", 0);
-	    	targetFound = Robot.shooterCamera.getBoolean("targetFound", false);
-	    	distance = Robot.shooterCamera.getNumber("distance", 0);
+    	if(Robot.cameraIsActive) {
+	    	if(usingFrontCamera) { // using front gear camera
+		    	angle = Robot.gearCamera.getNumber("angle", 0);
+		    	targetFound = Robot.gearCamera.getBoolean("targetFound", false);
+		    	distance = Robot.gearCamera.getNumber("distance", 0);
+	    	} else { // using shooter camera
+		    	angle = Robot.shooterCamera.getNumber("angle", 0);
+		    	targetFound = Robot.shooterCamera.getBoolean("targetFound", false);
+		    	distance = Robot.shooterCamera.getNumber("distance", 0);
+	    	}
+	//    	targetFound = true;
+	    	
+	    	if(shouldRotateIfNoVision == true && targetFound == false) { // vision target not yet seen and the robot should act on this
+	    		if(rotationDirection) { // spin right
+	    			Robot.drivetrain.getController().setSetpoint(179.9);
+	    		} else { // spin left
+	    			Robot.drivetrain.getController().setSetpoint(-179.9);
+	    		}
+	    	}
+	    	else if(targetFound) { // vision target seen
+		    	Robot.drivetrain.getController().setSetpoint(angle);
+	    	}
+	//    	
+	    	Robot.drivetrain.arcadeDrive(0, .7 * Robot.drivetrain.getRotateRate());
     	}
-//    	targetFound = true;
-    	
-    	if(shouldRotateIfNoVision == true && targetFound == false) { // vision target not yet seen and the robot should act on this
-    		if(rotationDirection) { // spin right
-    			Robot.drivetrain.getController().setSetpoint(179.9);
-    		} else { // spin left
-    			Robot.drivetrain.getController().setSetpoint(-179.9);
-    		}
-    	}
-    	else if(targetFound) { // vision target seen
-	    	Robot.drivetrain.getController().setSetpoint(angle);
-    	}
-//    	
-    	Robot.drivetrain.arcadeDrive(0, .7 * Robot.drivetrain.getRotateRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	if(!Robot.cameraIsActive)
+    		return true;
     	// PID stuff is done, robot is at target angle
     	// Robot isn't at the immediate start of command and may be stopped b/c it never even started
     	if(this.timeSinceInitialized() > .2) {

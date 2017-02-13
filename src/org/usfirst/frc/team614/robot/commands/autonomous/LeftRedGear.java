@@ -17,10 +17,10 @@ public class LeftRedGear extends CommandGroup {
 
     public LeftRedGear() {
 
-//    	addSequential(new DriveStraightForADistance(1, Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); // temp until distance is known
-//    	addSequential(new DeliverGear(true, true));
-//    	
-//    	// wait until button on gear holder is no longer pressed;
+    	addSequential(new DriveStraightForADistance(24, Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); // temp until distance is known
+    	addSequential(new DeliverGear(true, true));
+    	
+    	// wait until button on gear holder is no longer pressed;
 //    	addSequential(new WaitUntilGearButtonIsUnpressed());
 //    	// turn to boiler and shoot
 //    	addSequential(new Shoot(true, true, true, false));
