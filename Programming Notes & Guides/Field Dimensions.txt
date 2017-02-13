@@ -34,9 +34,11 @@
  -Alliance wall to Far Boiler | 196 inches / 16 feet 4 inches |
  [16.3 feet]
  
- -Length of field | 654.1 inches / 53 feet 9.1 inches |
+ -Length of field | 652 inches / 54ft 4in|
  
- -Half of field | 322.55 inches / 26 feet 10.55 inches |
+ -Half of field | 326 inches/ 27feet 2inches|
+
+-Width of field | 324 inches/ 27 feet|
  
 |-----------------------------------------------------------------| 
 |        =Measurements to put in RightGearPrepareForTeleop=       | 
