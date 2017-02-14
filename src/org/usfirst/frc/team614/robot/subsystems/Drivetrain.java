@@ -84,6 +84,11 @@ public class Drivetrain extends Subsystem implements PIDOutput {
     public void stop() {
     	drivetrain.arcadeDrive(0, 0);
     }
+    public void setDistancePerPulse(double dpp) {
+
+		leftEncoder.setDistancePerPulse(dpp);
+		rightEncoder.setDistancePerPulse(dpp);
+    }
     public void reset() {
     	leftEncoder.reset();
     	rightEncoder.reset();
