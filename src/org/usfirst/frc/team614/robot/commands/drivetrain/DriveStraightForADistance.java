@@ -12,12 +12,13 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveStraightForADistance extends Command
 {
 	private double distance, speed /* ,time */;
+	private boolean done = false;
 
 	public DriveStraightForADistance(double distance, double speed)
 	{
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.drivetrain);
-		this.distance = distance;
+		this.distance = distance; // in units of inches (ideally)
 		this.speed = speed;
 	}
 
@@ -39,7 +40,20 @@ public class DriveStraightForADistance extends Command
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute()
 	{
-		Robot.drivetrain.arcadeDrive(speed, Robot.drivetrain.getRotateRate());
+		
+		if (Robot.drivetrain.rightEncoder.getDistance() > distance) {
+			
+			Robot.drivetrain.arcadeDrive(-speed, 0);
+			if(done == false) {
+				setTimeout(this.timeSinceInitialized() + .3);
+				done = true;
+			}
+		} else {
+
+			Robot.drivetrain.arcadeDrive(speed, Robot.drivetrain.getRotateRate());
+		}
+		
+		
 	}
 
 	// Returns true once the distance travelled by the encoder is greater than
@@ -48,12 +62,15 @@ public class DriveStraightForADistance extends Command
 	// The size of the wheel MUST be changed in Constants if changed!
 	protected boolean isFinished()
 	{
-//		 only tests left side... we're driving straight, so who cares.
-		if (Robot.drivetrain.rightEncoder.getDistance() >= distance)
-		{
-			return true;
-		}
-
+//		 only tests right side... we're driving straight, so who cares.
+//		if (Robot.drivetrain.rightEncoder.getDistance() > distance) {
+//			
+//			Robot.drivetrain.arcadeDrive(-1, 0);
+//			setTimeout(this.timeSinceInitialized() + .1);
+//			return true;
+//		}
+		if(done)
+			return isTimedOut();
 		return false;
 	}
 

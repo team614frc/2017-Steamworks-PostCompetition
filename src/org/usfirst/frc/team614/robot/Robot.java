@@ -4,7 +4,7 @@ package org.usfirst.frc.team614.robot;
 import org.usfirst.frc.team614.robot.commands.DoNothing;
 import org.usfirst.frc.team614.robot.commands.RumbleController;
 import org.usfirst.frc.team614.robot.commands.ToggleVisionRotation;
-import org.usfirst.frc.team614.robot.commands.autonomous.LeftRedGear;
+import org.usfirst.frc.team614.robot.commands.autonomous.deliverLeftRed.LeftRedGear;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraight;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightAtSmartDashboardSpeed;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightForADistance;
@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -48,6 +49,8 @@ public class Robot extends IterativeRobot {
 	public static Winch winch;
 	public static Elevator elevator;
 	public static Hopper hopper;
+	
+	public static Servo shooterServo;
 	
 	public static boolean cameraIsActive;
 	
@@ -80,6 +83,8 @@ public class Robot extends IterativeRobot {
     	winch = new Winch();
     	elevator = new Elevator();
     	hopper = new Hopper();
+    	
+    	shooterServo = new Servo(RobotMap.shooterServo);
     	
     	cameraIsActive= true;
     	
@@ -149,10 +154,12 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Shooter Encoder Rate (Revs per Sec)", 0);
 		SmartDashboard.putNumber("Shooter Encoder MAX Rate (Revs per Sec)", 0);
 		SmartDashboard.putNumber("Shooter Bang Bang Error", 0);
-		SmartDashboard.putNumber("Shooter Bang Max", .8);
-		SmartDashboard.putNumber("Shooter Bang Min", .6);
-        SmartDashboard.putNumber("Shooter Target Speed (Revs per Sec)", 40.0);
+		SmartDashboard.putNumber("Shooter Bang Min", Constants.SHOOTER_BANG_MIN);
+		SmartDashboard.putNumber("Shooter Bang Max", Constants.SHOOTER_BANG_MAX);
+        SmartDashboard.putNumber("Shooter Target Speed (Revs per Sec)", Constants.SHOOTER_RPS);
         SmartDashboard.putNumber("Shooter Tolerance", 0);
+        SmartDashboard.putNumber("Shooter Servo Angle for Airship", 0);
+        SmartDashboard.putNumber("Shooter Servo Angle for Boiler", 0);
 
         SmartDashboard.putData("Shooter Reset Encoder", new ResetShooterEncoder());
         
@@ -270,6 +277,8 @@ public class Robot extends IterativeRobot {
         }
         
         // encoder distances
+        
+        
         SmartDashboard.putNumber("Drivetrain left Encoder Distance (???)", drivetrain.leftEncoder.getDistance());
         SmartDashboard.putNumber("Drivetrain right Encoder Distance (???)", drivetrain.rightEncoder.getDistance());
 
@@ -294,6 +303,7 @@ public class Robot extends IterativeRobot {
 	        SmartDashboard.putNumber("Shooter Encoder MAX Rate (Revs per Sec)", shooter.getRate());
 		}
 		SmartDashboard.putNumber("Shooter Bang Bang Error", shooter.getError()); 
+		
 		
         // vision
 		SmartDashboard.putBoolean("Camera is Active", cameraIsActive);

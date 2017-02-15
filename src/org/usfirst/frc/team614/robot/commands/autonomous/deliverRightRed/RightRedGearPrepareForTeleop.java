@@ -14,10 +14,9 @@ public class RightRedGearPrepareForTeleop extends CommandGroup {
 
     public RightRedGearPrepareForTeleop() {
     	
-    	addSequential(new DriveStraightForADistance(-1, Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); //temporary values
+    	addSequential(new DriveStraightForADistance(1, Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); //temporary values
     	addSequential(new RotateToAngle(45)); // turns RIGHT
-    	addSequential (new DriveStraightForADistance(1, Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); //temporary values
-    	// Robot is now in middle of the field, on the "top" if looking at it from the bird's eye.
+    	addSequential (new DriveStraightForADistance(-1, -Constants.DRIVETRAIN_AUTONOMOUS_SPEED)); //temporary values
     	addSequential(new RotateToAngle(-90));
     	addSequential(new DriveStraightForADistance(1, Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
     	

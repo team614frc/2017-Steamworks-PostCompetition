@@ -45,6 +45,8 @@ public class RobotMap {
 	public static final int elevatorMotor = 7;
 	
 	public static final int hopperMotor = 8;
+	
+	public static final int shooterServo = 9;
 
 	// Power Distribution Board
 	public static final int PDPWinchMotor = 0; // we think it's zero

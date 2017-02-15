@@ -10,13 +10,18 @@ public class Constants {
 	public static final double drivetrainD = 0.12;
 	public static final double drivetrainF = 0;
 	public static final double DRIVETRAIN_WHEEL_DIAMETER = 4;
-	public static final double DRIVETRAIN_AUTONOMOUS_SPEED = .5;
-	public static final double DRIVETRAIN_ENCODER_PULSES_PER_REV = 250.0;
+	public static final double DRIVETRAIN_AUTONOMOUS_SPEED = .75;
+	public static final double DRIVETRAIN_ENCODER_PULSES_PER_REV = 220.0;//250.0;
+	// each "distance" unit is 1 inch.
 	public static final double DRIVETRAIN_DISTANCE_PER_PULSE = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) / Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV;
 //	public static final double DRIVETRAIN_DISTANCE_PER_PULSE = 1 / DRIVETRAIN_ENCODER_PULSES_PER_REV;
 
 	// Shooter
+	
 	public static final double SHOOTER_ENCODER_COUNTS_PER_REV = 1024.0;
+	public static final double SHOOTER_RPS= 28.0;
+	public static final double SHOOTER_BANG_MIN = .1;
+	public static final double SHOOTER_BANG_MAX = 1.0;
 	public static final double SHOOTER_DISTANCE_PER_PULSE = 1 / SHOOTER_ENCODER_COUNTS_PER_REV;
 	
 	// Winch
@@ -31,5 +36,5 @@ public class Constants {
 	public static final double ELEVATOR_SPEED = .7;
 	
 	// Hopper
-	public static final double HOPPER_SPEED = -.7;
+	public static final double HOPPER_SPEED = -.4;
 }
