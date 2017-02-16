@@ -57,8 +57,8 @@ public class OI {
 	private static final Button revElevator = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
 //	private static final Button revShooterFromBoiler = new JoystickButton(driverGamepad, Gamepad.button_Y);
 //	private static final Button revShooterFromAirship = new JoystickButton(driverGamepad, Gamepad.button_X);
-	private static final Button staticRevShooterFromBoiler = new JoystickButton(driverGamepad, Gamepad.button_X);
-	private static final Button staticRevShooterFromAirship = new JoystickButton(driverGamepad, Gamepad.button_Y);
+	private static final Button staticRevShooterFromBoiler = new JoystickButton(driverGamepad, Gamepad.button_Y);
+	private static final Button staticRevShooterFromAirship = new JoystickButton(driverGamepad, Gamepad.button_X);
 
 	private static final Button deliverGear = new JoystickButton(driverGamepad, Gamepad.button_A);
 

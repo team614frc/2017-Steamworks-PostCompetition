@@ -279,7 +279,8 @@ public class Robot extends IterativeRobot {
         	}
         }
         
-        // encoder distances
+        // drivetrain
+        SmartDashboard.putNumber("Drivetrain Encoder PID Error", drivetrain.getDistanceController().getError());
         
         
         SmartDashboard.putNumber("Drivetrain left Encoder Distance (???)", drivetrain.leftEncoder.getDistance());

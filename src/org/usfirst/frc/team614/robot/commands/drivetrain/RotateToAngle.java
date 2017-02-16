@@ -38,8 +38,8 @@ public class RotateToAngle extends Command {
 
 		if(useAbsoluteAngle) {
 	        Robot.drivetrain.getTurnController().setSetpoint(angle % 360);
-		} else {
-//			Robot.drivetrain.getController().setSetpoint((Robot.navX.getYaw() + angle));// % 360);
+		} else { // relative angle
+			Robot.drivetrain.getTurnController().setSetpoint((Robot.navX.getYaw() + angle));// % 360);
 		}
     }
 

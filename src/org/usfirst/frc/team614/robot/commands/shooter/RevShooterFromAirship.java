@@ -19,8 +19,7 @@ public class RevShooterFromAirship extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.shooter.setEnabled(true, true);
-//    	Robot.shooterServo.setAngle(SmartDashboard.getNumber("Shooter Servo Angle for Airship", 0.0));
-//    	Robot.shooterServo.setAngle(0);
+    	Robot.shooterServo.setAngle(0);
     }
 
     // Called repeatedly when this Command is scheduled to run

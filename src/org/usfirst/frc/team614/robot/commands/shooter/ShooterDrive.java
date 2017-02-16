@@ -46,11 +46,11 @@ public class ShooterDrive extends Command {
         			Robot.shooter.stop();
 //	        	Robot.shooter.setGoalRPS(XXX);
 //				
-//				if(Robot.shooter.getRate() <= Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance()) {
-//					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Max", XXX));
-//				} else if (Robot.shooter.getRate() >= Robot.shooter.getGoalRPS() + Robot.shooter.getTolerance()){
-//					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Min", XXX));
-//				}
+    				if(Robot.shooter.getRate() <= Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance()) {
+    					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Max", .8));
+    				} else if (Robot.shooter.getRate() >= Robot.shooter.getGoalRPS() + Robot.shooter.getTolerance()){
+    					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Min", .6));
+    				}
         	}
     	}
     }
