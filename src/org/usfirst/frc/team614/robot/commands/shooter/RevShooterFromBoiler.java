@@ -19,7 +19,7 @@ public class RevShooterFromBoiler extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.shooter.setEnabled(true, false);
-    	Robot.shooterServo.setAngle(SmartDashboard.getNumber("Shooter Servo Angle for Boiler", 0.0));
+//    	Robot.shooterServo.setAngle(SmartDashboard.getNumber("Shooter Servo Angle for Boiler", 0.0));
 //    	Robot.shooterServo.setAngle(0);
     }
 

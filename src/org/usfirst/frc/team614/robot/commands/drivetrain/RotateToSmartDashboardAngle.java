@@ -30,19 +30,19 @@ public class RotateToSmartDashboardAngle extends Command {
 //		Robot.navX.reset();
 //		Robot.navX.zeroYaw();
 
-		Robot.drivetrain.setUsingPID(true);
+		Robot.drivetrain.setUsingTurnPID(true);
 
 		Robot.drivetrain.leftEncoder.reset();
 		Robot.drivetrain.rightEncoder.reset();
 
-        Robot.drivetrain.getController().setSetpoint(
+        Robot.drivetrain.getTurnController().setSetpoint(
         		SmartDashboard.getNumber("Drivetrain Rotation Target (Degrees (-180, +180))", 0)
 		);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		Robot.drivetrain.arcadeDrive(0.0, Robot.drivetrain.getRotateRate());
+		Robot.drivetrain.arcadeDrive(0.0, Robot.drivetrain.getPIDRotateRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -59,14 +59,14 @@ public class RotateToSmartDashboardAngle extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-		Robot.drivetrain.setUsingPID(false);
+		Robot.drivetrain.setUsingTurnPID(false);
 		Robot.drivetrain.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-		Robot.drivetrain.setUsingPID(false);
+		Robot.drivetrain.setUsingTurnPID(false);
 		Robot.drivetrain.stop();
     }
 }

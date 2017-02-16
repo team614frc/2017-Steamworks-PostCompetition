@@ -9,7 +9,7 @@ import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraight;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightAtSmartDashboardSpeed;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightForADistance;
 import org.usfirst.frc.team614.robot.commands.drivetrain.ResetDrivetrainEncoder;
-import org.usfirst.frc.team614.robot.commands.drivetrain.RotateToSmartDashboardAngle;
+import org.usfirst.frc.team614.robot.commands.drivetrain.RotateToAngle;
 import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
 import org.usfirst.frc.team614.robot.commands.shooter.ResetShooterEncoder;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
@@ -106,7 +106,7 @@ public class Robot extends IterativeRobot {
         chooser.addObject("Drive Straight For a Little Bit", new DriveStraightForADistance(1, .5));
         chooser.addObject("Deliver Red Left Gear", new LeftRedGear());
         chooser.addObject("Do Nothing", new DoNothing());
-        SmartDashboard.putData("Autonomous", chooser);
+//        SmartDashboard.putData("Autonomous", chooser);
         
         
 //        SmartDashboard.putData("Run At Full Speed", new ShooterDrive());
@@ -117,11 +117,11 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Click Here if Camera is Dead! (Or again if camera is back up)", new ToggleVisionRotation());
         SmartDashboard.putData("Zero Yaw", new ZeroNavxYaw());
         SmartDashboard.putData("Deliver Red Left Gear", new LeftRedGear());
-        SmartDashboard.putData("Rumble Left", new RumbleController(false));
-        SmartDashboard.putData("Rumble Right", new RumbleController(true));
+//        SmartDashboard.putData("Rumble Left", new RumbleController(false));
+//        SmartDashboard.putData("Rumble Right", new RumbleController(true));
 
-        SmartDashboard.putBoolean("Gear is in Holder", gearButton.get());
         SmartDashboard.putBoolean("Camera is Active", cameraIsActive);
+        SmartDashboard.putBoolean("Gear is in Holder", gearButton.get());
     	SmartDashboard.putNumber("Gear Camera Angle", 0);
     	SmartDashboard.putBoolean("Gear Camera Found", false);
     	SmartDashboard.putNumber("Shooter Camera Angle", 0);
@@ -138,7 +138,9 @@ public class Robot extends IterativeRobot {
 
         SmartDashboard.putData("Drivetrain Reset Encoder", new ResetDrivetrainEncoder());
         SmartDashboard.putData("Drivetrain Drive", new DriveStraightAtSmartDashboardSpeed());
-        SmartDashboard.putData("Rotate To Angle", new RotateToSmartDashboardAngle());
+        SmartDashboard.putData("Drivetrain Drive for 4 Feet", new DriveStraightForADistance(48, .5));
+        SmartDashboard.putData("Rotate To Absolute Angle", new RotateToAngle(90, true));
+        SmartDashboard.putData("Rotate To Relative Angle", new RotateToAngle(90, false));
 
 
 //        SmartDashboard.putNumber("Shooter P", Constants.shooterP);
@@ -186,7 +188,8 @@ public class Robot extends IterativeRobot {
     	// resets NavX and disables the PID controller.
     	Robot.navX.reset();
     	Robot.winch.reset();
-    	drivetrain.setUsingPID(false);
+    	drivetrain.setUsingTurnPID(false);
+    	drivetrain.setUsingDistancePID(false);
     	shooter.reset();
     	shooter.setEnabled(false, false);
     	drivetrain.reset();
@@ -303,6 +306,7 @@ public class Robot extends IterativeRobot {
 	        SmartDashboard.putNumber("Shooter Encoder MAX Rate (Revs per Sec)", shooter.getRate());
 		}
 		SmartDashboard.putNumber("Shooter Bang Bang Error", shooter.getError()); 
+		SmartDashboard.putNumber("Shooter Servo Angle", shooterServo.getAngle());
 		
 		
         // vision
@@ -373,7 +377,7 @@ public class Robot extends IterativeRobot {
 	    /* These functions are compatible w/the WPI Gyro Class, providing a simple  */
 	    /* path for upgrading from the Kit-of-Parts gyro to the navx MXP            */
 	    
-//	    SmartDashboard.putNumber(   "NavX TotalYaw",         navX.getAngle());
+	    SmartDashboard.putNumber(   "NavX Total Angle",         navX.getAngle());
 //	    SmartDashboard.putNumber(   "NavX YawRateDPS",       navX.getRate());
 	
 	    /* Display Processed Acceleration Data (Linear Acceleration, Motion Detect) */

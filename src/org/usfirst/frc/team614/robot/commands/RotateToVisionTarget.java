@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class RotateToVisionTarget extends Command {
 	
 
-	boolean usingFrontCamera = false;
+	boolean usingGearCamera = false;
 	boolean shouldRotateIfNoVision = false;
 	boolean rotationDirection = false; // left for false, right for true
 	
@@ -21,18 +21,18 @@ public class RotateToVisionTarget extends Command {
 	double distance = 0;
 	boolean targetFound = false;
 	
-    public RotateToVisionTarget(boolean usingFrontCamera, boolean shouldRotateIfNoVision, boolean rotationDirection) { // third argument is ignored if the second argument is false.
+    public RotateToVisionTarget(boolean usingGearCamera, boolean shouldRotateIfNoVision, boolean rotationDirection) { // third argument is ignored if the second argument is false.
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivetrain);
     	
     	this.rotationDirection = rotationDirection;
     	this.shouldRotateIfNoVision = shouldRotateIfNoVision;
-    	this.usingFrontCamera = usingFrontCamera;
+    	this.usingGearCamera = usingGearCamera;
     	
     	angle = 0;
     	distance = 0;
-    	this.usingFrontCamera = usingFrontCamera;
+    	this.usingGearCamera = usingGearCamera;
     }
 
     // Called just before this Command runs the first time
@@ -41,15 +41,15 @@ public class RotateToVisionTarget extends Command {
 //		Robot.navX.reset();
 //		Robot.navX.zeroYaw();
 
-		Robot.drivetrain.setUsingPID(true);
-		Robot.drivetrain.getController().setSetpoint(Robot.navX.getYaw());
+		Robot.drivetrain.setUsingTurnPID(true);
+		Robot.drivetrain.getTurnController().setSetpoint(Robot.navX.getAngle());
 
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(Robot.cameraIsActive) {
-	    	if(usingFrontCamera) { // using front gear camera
+	    	if(usingGearCamera) { // using front gear camera
 		    	angle = Robot.gearCamera.getNumber("angle", 0);
 		    	targetFound = Robot.gearCamera.getBoolean("targetFound", false);
 		    	distance = Robot.gearCamera.getNumber("distance", 0);
@@ -62,16 +62,16 @@ public class RotateToVisionTarget extends Command {
 	    	
 	    	if(shouldRotateIfNoVision == true && targetFound == false) { // vision target not yet seen and the robot should act on this
 	    		if(rotationDirection) { // spin right
-	    			Robot.drivetrain.getController().setSetpoint(179.9);
+	    			Robot.drivetrain.getTurnController().setSetpoint(179.9);
 	    		} else { // spin left
-	    			Robot.drivetrain.getController().setSetpoint(-179.9);
+	    			Robot.drivetrain.getTurnController().setSetpoint(-179.9);
 	    		}
 	    	}
 	    	else if(targetFound) { // vision target seen
-		    	Robot.drivetrain.getController().setSetpoint(angle);
+		    	Robot.drivetrain.getTurnController().setSetpoint(angle);
 	    	}
 	//    	
-	    	Robot.drivetrain.arcadeDrive(0, .7 * Robot.drivetrain.getRotateRate());
+	    	Robot.drivetrain.arcadeDrive(0, .7 * Robot.drivetrain.getPIDRotateRate());
     	}
     }
 
@@ -91,14 +91,14 @@ public class RotateToVisionTarget extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrain.setUsingPID(false);
+    	Robot.drivetrain.setUsingTurnPID(false);
     	// DriveUntilVisionTargetIsClose
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.drivetrain.setUsingPID(false);
+    	Robot.drivetrain.setUsingTurnPID(false);
     	Robot.drivetrain.stop();
     }
 }

@@ -23,14 +23,14 @@ public class DriveStraight extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
 
-		Robot.drivetrain.setUsingPID(true);
+		Robot.drivetrain.setUsingTurnPID(true);
 
-        Robot.drivetrain.getController().setSetpoint(Robot.navX.getYaw());
+        Robot.drivetrain.getTurnController().setSetpoint(Robot.navX.getYaw());
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.arcadeDrive(speed, Robot.drivetrain.getRotateRate());
+    	Robot.drivetrain.arcadeDrive(speed, Robot.drivetrain.getPIDRotateRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -40,14 +40,14 @@ public class DriveStraight extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-		Robot.drivetrain.setUsingPID(false);
+		Robot.drivetrain.setUsingTurnPID(false);
 		Robot.drivetrain.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-		Robot.drivetrain.setUsingPID(false);
+		Robot.drivetrain.setUsingTurnPID(false);
 		Robot.drivetrain.stop();
     }
 }

@@ -29,29 +29,32 @@ public class DriveStraightForADistance extends Command
 //		Robot.navX.reset();
 //		Robot.navX.zeroYaw();
 
-		Robot.drivetrain.setUsingPID(true);
+		Robot.drivetrain.setUsingTurnPID(true);
+		Robot.drivetrain.setUsingDistancePID(true);
 
 		Robot.drivetrain.leftEncoder.reset();
 		Robot.drivetrain.rightEncoder.reset();
 
-        Robot.drivetrain.getController().setSetpoint(Robot.navX.getYaw());
+        Robot.drivetrain.getTurnController().setSetpoint(Robot.navX.getYaw());
+        Robot.drivetrain.getDistanceController().setSetpoint(distance);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute()
 	{
 		
-		if (Robot.drivetrain.rightEncoder.getDistance() > distance) {
-			
-			Robot.drivetrain.arcadeDrive(-speed, 0);
-			if(done == false) {
-				setTimeout(this.timeSinceInitialized() + .3);
-				done = true;
-			}
-		} else {
+//		if (Robot.drivetrain.rightEncoder.getDistance() > distance) {
+//			
+//			Robot.drivetrain.arcadeDrive(-speed, 0);
+//			if(done == false) {
+//				setTimeout(this.timeSinceInitialized() + .3);
+//				done = true;
+//			}
+//		if(Robot.navX.isMoving())
+//		} else {
 
-			Robot.drivetrain.arcadeDrive(speed, Robot.drivetrain.getRotateRate());
-		}
+			Robot.drivetrain.arcadeDrive(Robot.drivetrain.getPIDSpeed(), Robot.drivetrain.getPIDRotateRate());
+//		}
 		
 		
 	}
@@ -62,6 +65,15 @@ public class DriveStraightForADistance extends Command
 	// The size of the wheel MUST be changed in Constants if changed!
 	protected boolean isFinished()
 	{
+
+    	// Robot isn't at the immediate start of command and may be stopped b/c it never even started
+    	if(this.timeSinceInitialized() > .2) {
+	    	// PID stuff is done
+	    	if(!Robot.navX.isMoving()) {
+	    		return true;
+	    	}
+    	}	
+		return false; 
 //		 only tests right side... we're driving straight, so who cares.
 //		if (Robot.drivetrain.rightEncoder.getDistance() > distance) {
 //			
@@ -69,15 +81,16 @@ public class DriveStraightForADistance extends Command
 //			setTimeout(this.timeSinceInitialized() + .1);
 //			return true;
 //		}
-		if(done)
-			return isTimedOut();
-		return false;
+//		if(done)
+//			return isTimedOut();
+//		return false;
 	}
 
 	// Called once after isFinished returns true
 	protected void end()
 	{
-		Robot.drivetrain.setUsingPID(false);
+		Robot.drivetrain.setUsingTurnPID(false);
+		Robot.drivetrain.setUsingDistancePID(false);
 		Robot.drivetrain.stop();
 	}
 
@@ -85,7 +98,8 @@ public class DriveStraightForADistance extends Command
 	// subsystems is scheduled to run
 	protected void interrupted()
 	{
-		Robot.drivetrain.setUsingPID(false);
+		Robot.drivetrain.setUsingTurnPID(false);
+		Robot.drivetrain.setUsingDistancePID(false);
 		Robot.drivetrain.stop();
 	}
 }

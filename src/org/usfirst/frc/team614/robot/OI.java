@@ -55,12 +55,11 @@ public class OI {
 	private static final Button reverseClimber = new JoystickButton(driverGamepad, Gamepad.button_R_Shoulder);
 	
 	private static final Button revElevator = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
-	private static final Button revShooterFromBoiler = new JoystickButton(driverGamepad, Gamepad.shoulderAxisLeft);
-	private static final Button revShooterFromAirship = new JoystickButton(driverGamepad, Gamepad.shoulderAxisRight);
-	
-	private static final Button testShooter = new JoystickButton(driverGamepad, Gamepad.button_X);
+//	private static final Button revShooterFromBoiler = new JoystickButton(driverGamepad, Gamepad.button_Y);
+//	private static final Button revShooterFromAirship = new JoystickButton(driverGamepad, Gamepad.button_X);
+	private static final Button staticRevShooterFromBoiler = new JoystickButton(driverGamepad, Gamepad.button_X);
+	private static final Button staticRevShooterFromAirship = new JoystickButton(driverGamepad, Gamepad.button_Y);
 
-	
 	private static final Button deliverGear = new JoystickButton(driverGamepad, Gamepad.button_A);
 
 	// Binding of Commands
@@ -72,9 +71,11 @@ public class OI {
 		reverseClimber.whileHeld(new ReverseWinch());
 		revElevator.whileHeld(new RevElevator());
 		deliverGear.whenPressed(new DeliverGear(false, false));
-		revShooterFromBoiler.whileHeld(new Shoot(false, true, false, false));
-//		revShooterFromAirship.whileHeld(new Shoot(true, true, false, false)); // uhh, for some reason this one is mutually exclusive with the testShooter 
-		testShooter.whileHeld(new Shoot(true, false, false, false));
+//		revShooterFromBoiler.whileHeld(new Shoot(false, true, false, false));
+//		revShooterFromAirship.whileHeld(new Shoot(true, true, false, false));
+		
+		staticRevShooterFromBoiler.whileHeld(new Shoot(false, false, false, false));
+		staticRevShooterFromAirship.whileHeld(new Shoot(true, false, false, false));
 		
 	}
 }
