@@ -23,7 +23,7 @@ public class LeftRedGear extends CommandGroup {
     	// turn to boiler and shoot
     	addSequential(new Shoot(true, true, true, false));
     	// wait until all balls are shot
-    	addSequential(new WaitUntilAllBallsAreShot());
-    	addSequential(new LeftRedGearPrepareForTeleop());
+//    	addSequential(new WaitUntilAllBallsAreShot());
+//    	addSequential(new LeftRedGearPrepareForTeleop());
     }
 }
