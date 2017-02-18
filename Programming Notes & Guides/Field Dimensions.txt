@@ -2,58 +2,193 @@
 |=============================|
 |Autonomous Mode: Measurements|
 |=============================|
+
+*Some measurements are repeated to make them effortless to find*
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+|==========================|
+|Alliance Wall Measurements|
+|==========================|
+
+Airship:
 -Alliance wall to Alliance's front wall of Airship | 114.3 inches across / 9 feet 6.3 inches |
 
--Alliance wall to closest hopper | 78.5 inches across / 6 feet 6.5 inches |
-
--Alliance wall to Alliance's secondary walls to the air ship | Between 114.3 inches to 134.3 inches (roughly) / 9 feet 6.3 inches to 11 feet 2.3 inches (roughly) |
-
--Alliance wall to middle of closest hopper actuator | 120 inches / 10 feet |
-
--Alliance wall to middle of second closest hopper actuator | 207 inches / 17 feet 3 inches | 
+-Alliance wall to Alliance's secondary walls to the air ship | Between 114.3 inches to 148.3 inches (roughly) / 9 feet 6.3 inches to 11 feet 2.3 inches (roughly) |
 
 -Width of the Alliance's wall on the Airship | 40.03 inches / 3 feet 4.03 inches |
 
--Height of boiler | 97 inches / 8 feet 1 inch |
 
+Hoppers:
+-Alliance wall to closest hopper | 78.5 inches across / 6 feet 6.5 inches |
+
+-Alliance wall to middle of closest hopper actuator | 120 inches / 10 feet |
+
+-Alliance wall to middle of second closest hopper actuator | 207 inches / 17 feet 3 inches |
+
+-Alliance wall to Middle of third Closest Hopper | 326inches / 27 feet 2 inches |
+
+
+Boiler:
 -Alliance Wall to far edge of Boiler | Between 0 inches (Alliance Wall) to 26 inches (roughly) / Between 0 inches (Alliance Wall) to 2 feet 2 inches (roughly) |
 
+-Alliance wall to Far Boiler | 196 inches / 16 feet 4 inches |
+ [16.3 feet] 
+
+|===================|
+|Boiler Measurements|
+|===================|
+
+Dimensions:
+-Height of boiler | 97 inches / 8 feet 1 inch |
+
+
+Hoppers:
 -Middle of closest hopper to far edge of Boiler (From the Alliance Wall) | 94 inches / 7 feet 10 inches |
 
--Secondary walls of the air ship to the boiler | 175.78 inches / 14 feet 7.78 inches |
- [14.6 feet]
-<<<<<<< HEAD
 
--Size of Hopper| 83 inches/ 6ft 10.992 inches |3ft 5.4996in |
-
-- Alliance wall to Middle of third Closest Hopper|27ft 2inches |326inches|
-=======
- 
- -Alliance wall to Far Boiler | 196 inches / 16 feet 4 inches |
+Walls:
+-Alliance wall to Far Boiler | 196 inches / 16 feet 4 inches |
  [16.3 feet]
  
- -Length of field | 652 inches / 54ft 4in|
+-Secondary walls of the air ship to the boiler | 168.7485 inches - 175.7485 inches / 14 feet 0.7845 inches - 14 feet 7.78 inches |
+ [14.1 feet - 14.8 feet] 
  
- -Half of field | 326 inches/ 27feet 2inches|
+ -Alliance Wall to far edge of Boiler | Between 0 inches (Alliance Wall) to 26 inches (roughly) / Between 0 inches (Alliance Wall) to 2 feet 2 inches (roughly) |
+ 
+ -Alliance wall to Far Boiler | 196 inches / 16 feet 4 inches |
+ [16.3 feet] 
+ 
+|===================|
+|Hopper Measurements|
+|===================|
 
--Width of field | 324 inches/ 27 feet|
+Dimensions:
+-Size of Hopper | 83 inches/ 6ft 10.992 inches |3ft 5.4996in |
+
+
+Walls:
+-Alliance wall to Middle of third Closest Hopper | 326inches / 27 feet 2 inches |
+
+-Alliance wall to closest hopper | 78.5 inches across / 6 feet 6.5 inches |
+
+-Alliance wall to middle of closest hopper actuator | 120 inches / 10 feet |
+
+-Alliance wall to middle of second closest hopper actuator | 207 inches / 17 feet 3 inches |
+
+-Alliance wall to Middle of third Closest Hopper | 326inches / 27 feet 2 inches |
+
+|====================|
+|Airship Measurements|
+|====================|
+
+Alliance Wall:
+-Alliance wall to Alliance's front wall of Airship | 114.3 inches across / 9 feet 6.3 inches |
+
+-Alliance wall to Alliance's secondary walls to the air ship | Between 114.3 inches to 148.3 inches (roughly) / 9 feet 6.3 inches to 11 feet 2.3 inches (roughly) |
+
+-Width of the Alliance's wall on the Airship | 40.03 inches / 3 feet 4.03 inches |
+
+
+Boiler:
+-Secondary walls of the air ship to the boiler | 168.7485 inches - 175.7485 inches / 14 feet 0.7845 inches - 14 feet 7.78 inches |
+ [14.1 feet - 14.8 feet] 
+
+|==================|
+|Field Measurements|
+|==================|
  
-|-----------------------------------------------------------------| 
-|        =Measurements to put in RightGearPrepareForTeleop=       | 
-|            *All measurements are based on the diagram*          |
-|-----------------------------------------------------------------|
+ Dimensions:
+ -Length of field | 654.1 inches / 53 feet 9.1 inches |
  
+ -Half of field | 322.55 inches / 26 feet 10.55 inches |
+ 
+ 
+ Misc:
+ -26x26 pixel square measurement(for reference) | 19.928351235319 inches / 1 feet 7.928351235319 inches |
+ *2.5 marks on the protractor | 26x26 pixel square |
+ 
+ -13x13 pixel square measurement(for reference) | 23.642857142857 inches / 1 feet 11.642857142857 inches |
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][[] 
+[|-----------------------------------------------------|] 
+[| =Measurements to put in RightGearPrepareForTeleop=  |] 
+[|     *All measurements are based on the diagram*     |]
+[|-----------------------------------------------------|]
+[][[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+Distances:
  -Driving from the secondary right Air Ship wall to a Short Distance | 88.5 inches / 7 feet 4.5 inches |
- 
- -Angle to turn the robot when driven to that Short Distance | 62.4 degrees |
+ *Measurement 1
  
  -From the Short Distance to the Middle of the Field | 258.48 inches / 21 feet 6.48 inches |
+ *Measurement 3
  
  -From the Middle of the Field to the far most Hopper | 225.840 inches / 18 feet 9.84 inches |
+ *Measurement 4 
+
  
->>>>>>> origin/master
+ Angles:
+ -Angle to turn the robot when driven to that Short Distance | 62.4 degrees |
+ *Measurement 2
+ 
+[][][][][][][][][][][][][][][][][][][][][][][][][][][]][] 
+[|-----------------------------------------------------|] 
+[| =Measurements to put in LeftGearPrepareForTeleop=   |] 
+[|     *All measurements are based on the diagram*     |]
+[|-----------------------------------------------------|]
+[][[][][][][][][][][][][][][][][][][][][][][][][][][][][]
+
+Distances:
+-Driving from the secondary left Air Ship wall to short Distance(x) | 66.1621261013 inches / 5 feet 6.1621261013 inches |
+*Step 1
+
+-Driving from (x) to the Middle of the field | 238.34308 inches / 19 feet 10.34308 inches |
+*Step 3
+
+-Driving from Middle of the Field to the far most Hopper | 49.82087 inches / 4 feet 1.82087 inches |
+*Step 5
+
+
+Angles:
+-Angle to turn when to (x) | 55.5 degrees |
+*Step 2
+
+-N/A
+*Step 4
+
+[][][][][][][][][][][][][][][][][][][][][][][][][][][]][] 
+[|-----------------------------------------------------|] 
+[| =Measurements to put in CenterGearPrepareForTeleop= [] 
+[|     *All measurements are based on the diagram*     |]
+[|-----------------------------------------------------|]
+[][[][][][][][][][][][][][][][][][][][][][][][][][][][][]
+
+Distances:
+-Driving from primary front Air Ship wall to short Distance(y) | 39.8567 inches / 3 feet 3.8567 inches  |
+*Step 1
+
+-Driving from (x) to Short Distance(y)  | 99.6417 inches / 8 feet 3.6417 inches  |
+*Step 3
+
+-Driving from (y) to Middle of the Field | 251.0972 / 20 feet 11.0972 inches |
+*Step 5
+
+-Driving from Middle of the Field to Hopper | 43.8423 / 3 feet 7.8423 inches  |
+*Step 7
+
+
+Angles:
+-N/A
+*Step 2
+
+-N/A
+*Step 4
+
+-N/A
+*Step 6
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 *These measurements are not set in stone and are subject to change (not definite)*
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
