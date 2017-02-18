@@ -68,7 +68,10 @@ public class RotateToVisionTarget extends Command {
 	    		}
 	    	}
 	    	else if(targetFound) { // vision target seen
-		    	Robot.drivetrain.getTurnController().setSetpoint(angle);
+	    		if(usingGearCamera)
+	    			Robot.drivetrain.getTurnController().setSetpoint(angle);
+	    		else
+	    			Robot.drivetrain.getTurnController().setSetpoint(angle-10);
 	    	}
 	//    	
 	    	Robot.drivetrain.arcadeDrive(0, .7 * Robot.drivetrain.getPIDRotateRate());

@@ -21,7 +21,11 @@ public class Constants {
 //	public static final double DRIVETRAIN_DISTANCE_PER_PULSE = 1 / DRIVETRAIN_ENCODER_PULSES_PER_REV;
 
 	// Shooter
-	
+
+	public static final double shooterP = 0.3;
+	public static final double shooterI = 0.0;
+	public static final double shooterD = 0.0;
+	public static final double shooterF = 0.0;
 	public static final double SHOOTER_ENCODER_COUNTS_PER_REV = 1024.0;
 	public static final double SHOOTER_RPS= 32;
 	public static final double SHOOTER_BANG_MIN = .5;

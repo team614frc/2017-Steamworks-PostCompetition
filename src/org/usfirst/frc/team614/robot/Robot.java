@@ -2,7 +2,6 @@
 package org.usfirst.frc.team614.robot;
 
 import org.usfirst.frc.team614.robot.commands.DoNothing;
-import org.usfirst.frc.team614.robot.commands.RumbleController;
 import org.usfirst.frc.team614.robot.commands.ToggleVisionRotation;
 import org.usfirst.frc.team614.robot.commands.autonomous.deliverLeftRed.LeftRedGear;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraight;
@@ -10,6 +9,7 @@ import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightAtSmartDas
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightForADistance;
 import org.usfirst.frc.team614.robot.commands.drivetrain.ResetDrivetrainEncoder;
 import org.usfirst.frc.team614.robot.commands.drivetrain.RotateToSmartDashboardAngle;
+import org.usfirst.frc.team614.robot.commands.gearholder.RumbleController;
 import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
 import org.usfirst.frc.team614.robot.commands.shooter.ResetShooterEncoder;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;

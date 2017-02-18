@@ -1,4 +1,4 @@
-package org.usfirst.frc.team614.robot.commands;
+package org.usfirst.frc.team614.robot.commands.gearholder;
 
 import org.usfirst.frc.team614.robot.OI;
 

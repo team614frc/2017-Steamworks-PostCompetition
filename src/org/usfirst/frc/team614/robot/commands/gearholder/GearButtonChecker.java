@@ -1,7 +1,6 @@
 package org.usfirst.frc.team614.robot.commands.gearholder;
 
 import org.usfirst.frc.team614.robot.Robot;
-import org.usfirst.frc.team614.robot.commands.RumbleController;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
@@ -30,22 +29,24 @@ public class GearButtonChecker extends Command {
 
         // whenever the gear button is toggled, rumble the controller.
         SmartDashboard.putBoolean("Gear is in Holder", Robot.gearHolder.getIsPushed());
-        if(timeSinceInitialized() > timeGearButtonWasLastTogggled + 2) {
-	        if(!wasPressedLastIteration) { // last iteration, button was open
-	        	if(Robot.gearHolder.getIsPushed()) { // now, button is closed
-	        		timeGearButtonWasLastTogggled = timeSinceInitialized();
+        if(!wasPressedLastIteration) { // last iteration, button was open
+        	if(Robot.gearHolder.getIsPushed()) { // now, button is closed
+        		timeGearButtonWasLastTogggled = timeSinceInitialized();
+        		if(timeSinceInitialized() > timeGearButtonWasLastTogggled + 2) {
 	        		Command rumble = new RumbleController(true);
 	        		rumble.start();
 	        		wasPressedLastIteration = true;
-	        	}
-	        } else {
-	        	if(!Robot.gearHolder.getIsPushed()) { // open
-	        		timeGearButtonWasLastTogggled = timeSinceInitialized();
+        		}
+        	}
+        } else {
+        	if(!Robot.gearHolder.getIsPushed()) { // this iteration, open
+        		timeGearButtonWasLastTogggled = timeSinceInitialized();
+        		if(timeSinceInitialized() > timeGearButtonWasLastTogggled + 2) {
 	        		Command rumble = new RumbleController(false);
 	        		rumble.start();
 	        		wasPressedLastIteration = false;
-	        	}
-	        }
+        		}
+        	}
         }
     }
 
