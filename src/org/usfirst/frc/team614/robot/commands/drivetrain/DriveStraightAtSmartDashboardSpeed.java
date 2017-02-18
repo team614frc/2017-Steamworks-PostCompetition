@@ -27,7 +27,7 @@ public class DriveStraightAtSmartDashboardSpeed extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.arcadeDrive(SmartDashboard.getNumber("Drivetrain Speed", 0), Robot.drivetrain.getPIDRotateRate());
+    	Robot.drivetrain.arcadeDrive(SmartDashboard.getNumber("Drivetrain Target Speed", 0), Robot.drivetrain.getPIDRotateRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()

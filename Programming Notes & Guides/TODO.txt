@@ -54,13 +54,8 @@ TELEOP:
 
 -update DISTANCE_PER_PULSE and PULSES_PER_REV in constants to reflect the actual encoder values
 
--fix Relate RotateToAngle
-
 -add DriveStraightForADistanceAtAbsoluteAngle
-
--test encoder pid
-
--update radio firmware
+	>done, needs testing
 
 -tune Bang Bang
 

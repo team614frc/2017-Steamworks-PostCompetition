@@ -4,40 +4,39 @@ package org.usfirst.frc.team614.robot.commands.drivetrain;
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Makes the drivetrain drive straight for a distance in inches
+ * Makes the robot drive straight for a distance in inches
+ * the angle is the angle the robot drives straight to, relative to where the robot started.
+ * it is expected that the robot is already close to the target absolute angle, as excess rotation
+ * 		will make the encoders sad.
  */
-public class DriveStraightForADistance extends Command
+public class DriveStraightForADistanceAtAbsoluteAngle extends Command
 {
-	private double distance, speed;
+	private double distance, speed, angle;
 //	private boolean done = false;
 
-	public DriveStraightForADistance(double distance, double speed)
+	public DriveStraightForADistanceAtAbsoluteAngle(double distance, double speed, double angle)
 	{
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.drivetrain);
 		this.distance = distance; // in units of inches (ideally)
 		this.speed = speed;
+		this.angle = angle;
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize()
 	{
 		
-//		Robot.navX.reset();
-//		Robot.navX.zeroYaw();
-
-//		Robot.drivetrain.setUsingTurnPID(true);
+		Robot.drivetrain.setUsingTurnPID(true);
 		Robot.drivetrain.setUsingDistancePID(true);
 
 		Robot.drivetrain.leftEncoder.reset();
 		Robot.drivetrain.rightEncoder.reset();
 
-//        Robot.drivetrain.getTurnController().setSetpoint(Robot.navX.getYaw());
-        Robot.drivetrain.getDistanceController().setSetpoint(SmartDashboard.getNumber("Drivetrain Target Distance", 0));
-//        Robot.drivetrain.getDistanceController().setSetpoint(distance);
+        Robot.drivetrain.getTurnController().setSetpoint(angle);
+        Robot.drivetrain.getDistanceController().setSetpoint(distance);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -54,8 +53,7 @@ public class DriveStraightForADistance extends Command
 //		if(Robot.navX.isMoving())
 //		} else {
 
-		Robot.drivetrain.arcadeDrive(Robot.drivetrain.getPIDSpeed(), 0);
-//		Robot.drivetrain.arcadeDrive(Robot.drivetrain.getPIDSpeed(), Robot.drivetrain.getPIDRotateRate());
+			Robot.drivetrain.arcadeDrive(Robot.drivetrain.getPIDSpeed(), Robot.drivetrain.getPIDRotateRate());
 //		}
 		
 		

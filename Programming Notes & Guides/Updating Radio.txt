@@ -1,1 +1,9 @@
-Consider using "Ethernet" rather than "Local Area Conection *2" in the Radio Configuration Utility.
+-Search for the "Programming your radio for home use" webpage.
+-Follow the instructions; Select "Ethernet" in the pop-up for the FRC Radio Configuration Utility.
+
+-for Configuring, make sure WiFi is Truly Disabled.
+	>go to: Control Panel\Network and Internet\Network Connections
+	>right-click WiFi and click "Disable"
+	>follow Utility's instructions...
+	>right-click WiFi and click "Enable"
+	>congrats I've spent no less than 7 hours of my life over 2 years trying to figure this BS out
