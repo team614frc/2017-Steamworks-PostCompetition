@@ -1,6 +1,7 @@
 package org.usfirst.frc.team614.robot;
 
 import org.team708.robot.util.Gamepad;
+import org.usfirst.frc.team614.robot.commands.DeliverGear;
 import org.usfirst.frc.team614.robot.commands.elevator.RevElevator;
 import org.usfirst.frc.team614.robot.commands.shooter.Shoot;
 import org.usfirst.frc.team614.robot.commands.winch.CatchAndClimbRope;
@@ -54,19 +55,28 @@ public class OI {
 	private static final Button reverseClimber = new JoystickButton(driverGamepad, Gamepad.button_R_Shoulder);
 	
 	private static final Button revElevator = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
-	private static final Button revShooterFromAirship = new JoystickButton(driverGamepad, Gamepad.button_X);
-	private static final Button revShooterFromBoiler = new JoystickButton(driverGamepad, Gamepad.button_B);
+//	private static final Button revShooterFromBoiler = new JoystickButton(driverGamepad, Gamepad.button_Y);
+//	private static final Button revShooterFromAirship = new JoystickButton(driverGamepad, Gamepad.button_X);
+	private static final Button staticRevShooterFromBoiler = new JoystickButton(driverGamepad, Gamepad.button_Y);
+	private static final Button staticRevShooterFromAirship = new JoystickButton(driverGamepad, Gamepad.button_X);
+
+	private static final Button deliverGear = new JoystickButton(driverGamepad, Gamepad.button_A);
 
 	// Binding of Commands
 	public OI() {
+		
+		
 		tryToClimbRope.whenPressed(new CatchAndClimbRope());
 		stopClimber.whenPressed(new StopWinch());
 		reverseClimber.whileHeld(new ReverseWinch());
 		revElevator.whileHeld(new RevElevator());
-		revShooterFromAirship.whileHeld(new Shoot(true));
-		revShooterFromBoiler.whileHeld(new Shoot(false));
-//		zeroNavxYaw.whenPressed(new ZeroNavxYaw());
-//		driveAtSmartDashboardSpeed.whenPressed(new DriveStraightAtSmartDashboardSpeed());
+		deliverGear.whenPressed(new DeliverGear(false, false));
+//		revShooterFromBoiler.whileHeld(new Shoot(false, true, false, false));
+//		revShooterFromAirship.whileHeld(new Shoot(true, true, false, false));
+		
+		staticRevShooterFromBoiler.whileHeld(new Shoot(false, false, false, false));
+		staticRevShooterFromAirship.whileHeld(new Shoot(true, false, false, false));
+		
 	}
 }
 

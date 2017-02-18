@@ -40,9 +40,9 @@ public class ClimbRopeUsingEncoder extends Command {
     		return true;
     	}
     	
-    	if(Robot.winch.getEncoderRevolutions() > Constants.WINCH_ENCODER_REVOLUTIONS_TO_TOP) {
-    		return true;
-    	}
+//    	if(Robot.winch.getEncoderRevolutions() > Constants.WINCH_ENCODER_REVOLUTIONS_TO_TOP) {
+//    		return true;
+//    	}
         return false;
     }
 

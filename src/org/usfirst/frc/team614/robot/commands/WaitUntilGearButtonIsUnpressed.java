@@ -20,7 +20,7 @@ public class WaitUntilGearButtonIsUnpressed extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	SmartDashboard.putBoolean("Gear Is Considered Safely Out", false);
-    	setTimeout(20.0); // if somehow nothing happens for 20 seconds, quit the command
+    	setTimeout(10); // if somehow nothing happens for 20 seconds, quit the command
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -45,9 +45,18 @@ TELEOP:
 	.disable hopper
 	.disable shooter
 
-
+-if shooter is not recieving camera values, don't rotate, just shoot.
+	>done, but needs testing.
+-in teleop: do nothing if robot doesn't detect vision target.
+	>done, but needs testing.
+-in auto: differentiate rotation left/right if robot doesn't detect vision target
+	>done, but needs testing.
 
 -update DISTANCE_PER_PULSE and PULSES_PER_REV in constants to reflect the actual encoder values
+
+-fix Relate RotateToAngle
+
+-test encoder pid
 
 -tune Bang Bang
 
