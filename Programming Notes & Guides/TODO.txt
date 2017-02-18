@@ -56,7 +56,11 @@ TELEOP:
 
 -fix Relate RotateToAngle
 
+-add DriveStraightForADistanceAtAbsoluteAngle
+
 -test encoder pid
+
+-update radio firmware
 
 -tune Bang Bang
 
