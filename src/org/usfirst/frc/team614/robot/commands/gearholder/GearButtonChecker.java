@@ -32,20 +32,20 @@ public class GearButtonChecker extends Command {
         if(!wasPressedLastIteration) { // last iteration, button was open
         	if(Robot.gearHolder.getIsPushed()) { // now, button is closed
         		timeGearButtonWasLastTogggled = timeSinceInitialized();
-        		if(timeSinceInitialized() > timeGearButtonWasLastTogggled + 2) {
+//        		if(timeSinceInitialized() > timeGearButtonWasLastTogggled + 2) {
 	        		Command rumble = new RumbleController(true);
 	        		rumble.start();
 	        		wasPressedLastIteration = true;
-        		}
+//        		}
         	}
         } else {
         	if(!Robot.gearHolder.getIsPushed()) { // this iteration, open
         		timeGearButtonWasLastTogggled = timeSinceInitialized();
-        		if(timeSinceInitialized() > timeGearButtonWasLastTogggled + 2) {
+//        		if(timeSinceInitialized() > timeGearButtonWasLastTogggled + 2) {
 	        		Command rumble = new RumbleController(false);
 	        		rumble.start();
 	        		wasPressedLastIteration = false;
-        		}
+//        		}
         	}
         }
     }

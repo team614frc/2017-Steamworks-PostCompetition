@@ -18,7 +18,7 @@ public class StopWinch extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.winch.stop();
-    	Robot.winch.reset();
+//    	Robot.winch.reset();
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -74,8 +74,8 @@ public class OI {
 //		revShooterFromBoiler.whileHeld(new Shoot(false, true, false, false));
 //		revShooterFromAirship.whileHeld(new Shoot(true, true, false, false));
 		
-		staticRevShooterFromBoiler.whileHeld(new Shoot(false, false, false, false));
-		staticRevShooterFromAirship.whileHeld(new Shoot(true, false, false, false));
+		staticRevShooterFromBoiler.whileHeld(new Shoot(true, false, false, false, false));
+		staticRevShooterFromAirship.whileHeld(new Shoot(true, true, false, false, false));
 		
 	}
 }

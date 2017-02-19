@@ -3,13 +3,17 @@ package org.usfirst.frc.team614.robot;
 
 import org.usfirst.frc.team614.robot.commands.DoNothing;
 import org.usfirst.frc.team614.robot.commands.ToggleVisionRotation;
+import org.usfirst.frc.team614.robot.commands.autonomous.CenterGear;
+import org.usfirst.frc.team614.robot.commands.autonomous.deliverLeftBlue.LeftBlueGear;
 import org.usfirst.frc.team614.robot.commands.autonomous.deliverLeftRed.LeftRedGear;
-import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraight;
+import org.usfirst.frc.team614.robot.commands.autonomous.deliverRightBlue.RightBlueGear;
+import org.usfirst.frc.team614.robot.commands.autonomous.deliverRightRed.RightRedGear;
+import org.usfirst.frc.team614.robot.commands.autonomous.knockHopper.BlueKnockHopperAndShoot;
+import org.usfirst.frc.team614.robot.commands.autonomous.knockHopper.RedKnockHopperAndShoot;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightAtSmartDashboardSpeed;
-import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightForADistance;
+import org.usfirst.frc.team614.robot.commands.drivetrain.DriveForADistance;
 import org.usfirst.frc.team614.robot.commands.drivetrain.ResetDrivetrainEncoder;
 import org.usfirst.frc.team614.robot.commands.drivetrain.RotateToSmartDashboardAngle;
-import org.usfirst.frc.team614.robot.commands.gearholder.RumbleController;
 import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
 import org.usfirst.frc.team614.robot.commands.shooter.ResetShooterEncoder;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
@@ -98,11 +102,23 @@ public class Robot extends IterativeRobot {
     	
 		
         chooser = new SendableChooser();
-        chooser.addObject("Drive Straight For a Little Bit", new DriveStraightForADistance(6, .5));
         chooser.addObject("Deliver Red Left Gear", new LeftRedGear());
-        chooser.addObject("Drive Straight Indefinitely", new DriveStraight(.5));
+        chooser.addObject("Deliver Red Right Gear", new RightRedGear());
+        chooser.addObject("Deliver Blue Left Gear", new LeftBlueGear());
+        chooser.addObject("Deliver Blue Right Gear", new RightBlueGear());
+        chooser.addObject("Deliver Center Gear", new CenterGear());
+        chooser.addObject("Knock Red Hopper", new RedKnockHopperAndShoot());
+        chooser.addObject("Knock Blue Hopper", new BlueKnockHopperAndShoot());
         chooser.addDefault("Do Nothing", new DoNothing());
         SmartDashboard.putData("Autonomous", chooser);
+
+        SmartDashboard.putData("Deliver Red Left Gear", new LeftRedGear());
+        SmartDashboard.putData("Deliver Red Right Gear", new RightRedGear());
+        SmartDashboard.putData("Deliver Blue Left Gear", new LeftBlueGear());
+        SmartDashboard.putData("Deliver Blue Right Gear", new RightBlueGear());
+        SmartDashboard.putData("Deliver Center Gear", new CenterGear());
+        SmartDashboard.putData("Knock Red Hopper", new RedKnockHopperAndShoot());
+        SmartDashboard.putData("Knock Blue Hopper", new BlueKnockHopperAndShoot());
         
         
 //        SmartDashboard.putData("Run At Full Speed", new ShooterDrive());
@@ -127,14 +143,15 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putNumber("Drivetrain D", Constants.drivetrainD);
 //        SmartDashboard.putNumber("Drivetrain F", Constants.drivetrainF);
         SmartDashboard.putNumber("Drivetrain Target Speed", Constants.DRIVETRAIN_AUTONOMOUS_SPEED);
-        SmartDashboard.putNumber("Drivetrain Target Distance", 12);
+        SmartDashboard.putNumber("Drivetrain Target Distance", -90);
         SmartDashboard.putNumber("Drivetrain left Encoder Distance (inches)", 0);
         SmartDashboard.putNumber("Drivetrain right Encoder Distance (inches)", 0);
+        SmartDashboard.putNumber("Drivetrain right Encoder Rate (inches/sec)", 0);
         SmartDashboard.putNumber("Drivetrain Rotation Target (Degrees (-180, +180))", 0);
 
         SmartDashboard.putData("Drivetrain Reset Encoder", new ResetDrivetrainEncoder());
         SmartDashboard.putData("Drivetrain Drive Indefinitely", new DriveStraightAtSmartDashboardSpeed());
-        SmartDashboard.putData("Drivetrain Drive for 4 Feet", new DriveStraightForADistance(48, .5));
+        SmartDashboard.putData("Drivetrain Drive for 4 Feet", new DriveForADistance(48, .7));
         SmartDashboard.putData("Rotate To Absolute SmartDashboard Angle", new RotateToSmartDashboardAngle(true));
         SmartDashboard.putData("Rotate To Relative SmartDashboard Angle", new RotateToSmartDashboardAngle(false));
 
@@ -285,6 +302,18 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+
+    	
+    	cameraIsActive = true;
+    	
+    	// resets NavX and disables the PID controller.
+    	Robot.navX.reset();
+    	Robot.winch.reset();
+    	drivetrain.setUsingTurnPID(false);
+    	drivetrain.setUsingDistancePID(false);
+    	shooter.reset();
+    	shooter.setEnabled(false, false);
+    	drivetrain.reset();
     }
 
     /**
@@ -302,6 +331,7 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putNumber("Drivetrain left Encoder Distance (inches)", drivetrain.leftEncoder.getDistance());
         SmartDashboard.putNumber("Drivetrain right Encoder Distance (inches)", drivetrain.rightEncoder.getDistance());
+        SmartDashboard.putNumber("Drivetrain right Encoder Rate (inches/sec)", drivetrain.rightEncoder.getRate());
         
     	// winch
         if(SmartDashboard.getNumber("MAX Winch Current Draw (Amps)", 0) < Robot.pdp.getCurrent(RobotMap.PDPWinchMotor)) {

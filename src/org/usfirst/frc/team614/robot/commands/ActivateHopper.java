@@ -1,6 +1,6 @@
 package org.usfirst.frc.team614.robot.commands;
 
-import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightForADistance;
+import org.usfirst.frc.team614.robot.commands.drivetrain.DriveForADistance;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -9,11 +9,11 @@ public class ActivateHopper extends CommandGroup {
 
     public ActivateHopper() {
     	//begins to drive straight for a distance of 9.5 at a speed of 0.5    	
-    	addSequential(new DriveStraightForADistance(2.375, 0.5));
+    	addSequential(new DriveForADistance(2.375, 0.5));
     	//begins to rotate the robot at a TBD speed and rotation to the boiler
 //    	addSequential(new RotateToBoiler(0.0, 0.0));
     	//begins to drive straight for a TBD distance and speed
-    	addSequential(new DriveStraightForADistance(0.0, 0.0));
+    	addSequential(new DriveForADistance(0.0, 0.0));
     	//begins to shoot fuel cells into the high goal of the boiler
 //    	addSequential(new ShootIntoRedBoiler());
     	

@@ -15,7 +15,7 @@ public class WaitUntilShooterIsAtTargetSpeed extends Command {
     public WaitUntilShooterIsAtTargetSpeed() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	setTimeout(2);
+    	setTimeout(1);
     }
 
     // Called just before this Command runs the first time
@@ -28,18 +28,18 @@ public class WaitUntilShooterIsAtTargetSpeed extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(!isOnTarget) { // robot was not on target last iteration
-	    	isOnTarget = Robot.shooter.getRate() > Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance();
-	    	if(isOnTarget) { // if robot was not on target but now is on target
-		    	setTimeout(.5);
-	    	}
-    	} else { // robot was on target last iteration
-	    	isOnTarget = Robot.shooter.getRate() > Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance();
-	    	if(!isOnTarget) { // robot is no longer at target, so reset timeout
-	    		setTimeout(.5);
-	    	} // else { // robot was on target last iteration and still is; do nothing.
-	    	//}
-    	}	 
+//    	if(!isOnTarget) { // robot was not on target last iteration
+//	    	isOnTarget = Robot.shooter.getRate() > Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance();
+//	    	if(isOnTarget) { // if robot was not on target but now is on target
+//		    	setTimeout(.5);
+//	    	}
+//    	} else { // robot was on target last iteration
+//	    	isOnTarget = Robot.shooter.getRate() > Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance();
+//	    	if(!isOnTarget) { // robot is no longer at target, so reset timeout
+//	    		setTimeout(.5);
+//	    	} // else { // robot was on target last iteration and still is; do nothing.
+//	    	//}
+//    	}	 
 
         return isTimedOut();
     }

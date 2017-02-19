@@ -30,17 +30,17 @@ public class ShooterDrive extends Command {
     	
     	if(Robot.shooter.isEnabled()) {
     		
-//        	Robot.shooter.setGoalRPS(SmartDashboard.getNumber("Shooter Target Speed (Revs per Sec)", 0));
-        	Robot.shooter.getVelocityController().setSetpoint(SmartDashboard.getNumber("Shooter Target Speed (Revs per Sec)", 0));
+        	Robot.shooter.setGoalRPS(SmartDashboard.getNumber("Shooter Target Speed (Revs per Sec)", 0));
+//        	Robot.shooter.getVelocityController().setSetpoint(SmartDashboard.getNumber("Shooter Target Speed (Revs per Sec)", 0));
         	
 //        	if(Robot.shooter.getShootingFromAirship()) {
 //		    	
 //				
-//				if(Robot.shooter.getRate() <= Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance()) {
-//					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Max", .8));
-//				} else if (Robot.shooter.getRate() >= Robot.shooter.getGoalRPS() + Robot.shooter.getTolerance()){
-//					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Min", .6));
-//				}
+				if(Robot.shooter.getRate() <= Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance()) {
+					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Max", .8));
+				} else if (Robot.shooter.getRate() >= Robot.shooter.getGoalRPS() + Robot.shooter.getTolerance()){
+					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Min", .6));
+				}
 //
 //        	} else { // robot is shooting right next to boiler
 //        			Robot.shooter.stop();

@@ -5,7 +5,7 @@ package org.usfirst.frc.team614.robot;
 public class Constants {
 	
 	// Drivetrain
-	public static final double drivetrainRotationP = 0.05;
+	public static final double drivetrainRotationP = 0.1;
 	public static final double drivetrainRotationI = 0;
 	public static final double drivetrainRotationD = 0.12;
 	public static final double drivetrainRotationF = 0;
@@ -14,7 +14,7 @@ public class Constants {
 	public static final double drivetrainDistanceD = 0.0;
 	public static final double drivetrainDistanceF = 0;
 	public static final double DRIVETRAIN_WHEEL_DIAMETER = 4;
-	public static final double DRIVETRAIN_AUTONOMOUS_SPEED = .75;
+	public static final double DRIVETRAIN_AUTONOMOUS_SPEED = .3;
 	public static final double DRIVETRAIN_ENCODER_PULSES_PER_REV = 220.0;//250.0;
 	// each "distance" unit is 1 inch.
 	public static final double DRIVETRAIN_DISTANCE_PER_PULSE = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) / Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV;
