@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team614.robot.commands.drivetrain;
 
+import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -43,7 +44,7 @@ public class DriveForADistance extends Command
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute()
 	{
-		Robot.drivetrain.arcadeDrive(.7 * Robot.drivetrain.getPIDSpeed(), 0);
+		Robot.drivetrain.arcadeDrive(Constants.DRIVETRAIN_AUTONOMOUS_SPEED * Robot.drivetrain.getPIDSpeed(), 0);
 //		Robot.drivetrain.arcadeDrive(.7 * Robot.drivetrain.getPIDSpeed(), .7 * Robot.drivetrain.getPIDRotateRate());
 //		}
 		
@@ -65,7 +66,7 @@ public class DriveForADistance extends Command
 //	    	}
 
 
-    		if(Robot.drivetrain.rightEncoder.getRate() < 1.0 && Robot.drivetrain.rightEncoder.getRate() > -1.0) {
+    		if(Robot.drivetrain.rightEncoder.getRate() < 10.0 && Robot.drivetrain.rightEncoder.getRate() > -10.0) {
 				return true;
 			}
     	}	

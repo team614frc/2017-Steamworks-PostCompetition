@@ -14,7 +14,7 @@ public class Constants {
 	public static final double drivetrainDistanceD = 0.0;
 	public static final double drivetrainDistanceF = 0;
 	public static final double DRIVETRAIN_WHEEL_DIAMETER = 4;
-	public static final double DRIVETRAIN_AUTONOMOUS_SPEED = .3;
+	public static final double DRIVETRAIN_AUTONOMOUS_SPEED = 1.0; // more of a multiplier tbh
 	public static final double DRIVETRAIN_ENCODER_PULSES_PER_REV = 220.0;//250.0;
 	// each "distance" unit is 1 inch.
 	public static final double DRIVETRAIN_DISTANCE_PER_PULSE = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) / Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV;

@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class RevShooterFromBoiler extends Command {
+public class RevShooterFromHopper extends Command {
 
 	
-    public RevShooterFromBoiler() {
+    public RevShooterFromHopper() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -19,8 +19,8 @@ public class RevShooterFromBoiler extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.shooter.setEnabled(true, false);
-    	Robot.shooterServo.setAngle(70);
-
+    	Robot.shooterServo.setAngle(0.0);
+    	Robot.shooter.setGoalRPS(30.5);
     }
 
     // Called repeatedly when this Command is scheduled to run

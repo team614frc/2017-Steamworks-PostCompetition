@@ -15,15 +15,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class RedKnockHopperAndShoot extends CommandGroup {
 
     public RedKnockHopperAndShoot() {
-    	addSequential(new DriveForADistance(-24, -Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
+    	addSequential(new DriveForADistance(-20, -Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
     	addSequential(new RotateToAngle(-45, true));
-    	addSequential(new DriveForADistance(-105, -Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
+    	addSequential(new DriveForADistance(-80, -Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
     	addSequential(new RotateToAngle(0, true));
-    	addSequential(new DriveForADistance(-50, -Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
+    	addSequential(new DriveForADistance(-56, -Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
     	
     	addParallel(new Shoot(false, false, false, false, false));
     	
-    	addParallel(new RotateToAngle(15, true));
+    	addParallel(new RotateToAngle(13, true));
     	/*
     	addSequential(new DriveStraightForADistance(-118, -Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
     	addSequential(new RotateToAngle(90, true));

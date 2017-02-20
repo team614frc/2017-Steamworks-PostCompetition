@@ -53,7 +53,7 @@ public class RotateToAngle extends Command {
     	// Robot isn't at the immediate start of command and may be stopped b/c it never even started
     	if(this.timeSinceInitialized() > .5) {
 	    	// PID stuff is done, robot has been at target angle for a short time
-    		if(Robot.drivetrain.rightEncoder.getRate() < 1.0 && Robot.drivetrain.rightEncoder.getRate() > -1.0) {
+    		if(Robot.drivetrain.rightEncoder.getRate() < 10.0 && Robot.drivetrain.rightEncoder.getRate() > -10.0) {
 				return true;
 			}
 //			if(Robot.navX.getYaw() - angle > 0) { // positive angle to travel, robot is turning left
