@@ -19,6 +19,7 @@ import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightAtSmartDas
 import org.usfirst.frc.team614.robot.commands.drivetrain.ResetDrivetrainEncoder;
 import org.usfirst.frc.team614.robot.commands.drivetrain.RotateToSmartDashboardAngle;
 import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
+import org.usfirst.frc.team614.robot.commands.shooter.KillShooterEncoderInput;
 import org.usfirst.frc.team614.robot.commands.shooter.ResetShooterEncoder;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.Elevator;
@@ -134,7 +135,8 @@ public class Robot extends IterativeRobot {
 //        
 //        SmartDashboard.putData("Update PID Values", new UpdatePIDs());
 
-        SmartDashboard.putData("Toggle Camera Active", new ToggleVisionRotation());
+//        SmartDashboard.putData("KILL CAMERA", new ToggleVisionRotation());
+//        SmartDashboard.putData("KILL SHOOTER ENCODER", new KillShooterEncoderInput());
         SmartDashboard.putData("Zero Yaw", new ZeroNavxYaw());
 //        SmartDashboard.putData("Rumble Left", new RumbleController(false));
 //        SmartDashboard.putData("Rumble Right", new RumbleController(true));
@@ -240,6 +242,7 @@ public class Robot extends IterativeRobot {
     public void disabledInit(){
     	
     	cameraIsActive = true;
+    	shooter.setUsingEncoder(true);
     	
     	// resets NavX and disables the PID controller.
     	Robot.navX.reset();
@@ -249,8 +252,6 @@ public class Robot extends IterativeRobot {
     	shooter.reset();
     	shooter.setEnabled(false, false);
     	drivetrain.reset();
-//    	Robot.shooter.getPIDController().disable();
-//    	Robot.shooter.getPIDController().reset();
     }
 	
 	public void disabledPeriodic() {
@@ -267,7 +268,20 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
+
+
+    	cameraIsActive = true;
+    	shooter.setUsingEncoder(true);
+    	
+    	// resets NavX and disables the PID controller.
     	Robot.navX.reset();
+    	Robot.winch.reset();
+    	drivetrain.setUsingTurnPID(false);
+    	drivetrain.setUsingDistancePID(false);
+    	shooter.reset();
+    	shooter.setEnabled(false, false);
+    	drivetrain.reset();
+    	
         autonomousCommand = (Command) chooser.getSelected();
         
         // uhh, ignore these
@@ -312,6 +326,7 @@ public class Robot extends IterativeRobot {
 
     	
     	cameraIsActive = true;
+    	shooter.setUsingEncoder(true);
     	
     	// resets NavX and disables the PID controller.
     	Robot.navX.reset();

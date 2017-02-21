@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Shooter extends Subsystem implements PIDOutput {
 
 	private boolean isEnabled = false;
+	private boolean usingEncoder = true;
 	private boolean shootingFromAirship = true; // true if robot is shooting from airship; false if robot is right up to the boiler
 	private double goalRPS = 0;
 	private double tolerance = 0.0;
@@ -52,6 +53,12 @@ public class Shooter extends Subsystem implements PIDOutput {
 	}
     public boolean isEnabled() {
     	return isEnabled;
+    }
+    public boolean getUsingEncoder() {
+    	return usingEncoder;
+    }
+    public void setUsingEncoder(boolean set) {
+    	usingEncoder = true;
     }
 	public boolean getShootingFromAirship() {
 		return shootingFromAirship;
