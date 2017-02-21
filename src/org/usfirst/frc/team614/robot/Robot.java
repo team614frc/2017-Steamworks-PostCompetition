@@ -135,8 +135,8 @@ public class Robot extends IterativeRobot {
 //        
 //        SmartDashboard.putData("Update PID Values", new UpdatePIDs());
 
-//        SmartDashboard.putData("KILL CAMERA", new ToggleVisionRotation());
-//        SmartDashboard.putData("KILL SHOOTER ENCODER", new KillShooterEncoderInput());
+        SmartDashboard.putData("KILL CAMERA", new ToggleVisionRotation());
+        SmartDashboard.putData("KILL SHOOTER ENCODER", new KillShooterEncoderInput());
         SmartDashboard.putData("Zero Yaw", new ZeroNavxYaw());
 //        SmartDashboard.putData("Rumble Left", new RumbleController(false));
 //        SmartDashboard.putData("Rumble Right", new RumbleController(true));
