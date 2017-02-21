@@ -23,9 +23,9 @@ public class Constants {
 	// Shooter
 	
 	public static final double SHOOTER_ENCODER_COUNTS_PER_REV = 1024.0;
-	public static final double SHOOTER_RPS= 35.0;
-	public static final double SHOOTER_BANG_MIN = .3;
-	public static final double SHOOTER_BANG_MAX = .8;
+	public static final double SHOOTER_RPS= 36;
+	public static final double SHOOTER_BANG_MIN = .5;
+	public static final double SHOOTER_BANG_MAX = .7;
 	public static final double SHOOTER_DISTANCE_PER_PULSE = 1 / SHOOTER_ENCODER_COUNTS_PER_REV;
 	
 	// Winch
@@ -40,5 +40,5 @@ public class Constants {
 	public static final double ELEVATOR_SPEED = .7;
 	
 	// Hopper
-	public static final double HOPPER_SPEED = -.4;
+	public static final double HOPPER_SPEED = -1.0;
 }

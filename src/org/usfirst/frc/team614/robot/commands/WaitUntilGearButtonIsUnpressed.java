@@ -25,7 +25,7 @@ public class WaitUntilGearButtonIsUnpressed extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(!Robot.gearButton.get()) { // if button is open (released, gear is no longer on holder)
+    	if(!Robot.gearHolder.getIsPushed()) { // if button is open (released, gear is no longer on holder)
     		if(!gearHasBeenReleased) { // this is the first iteration of the command since the gear left
     			setTimeout(1.0); 
         		gearHasBeenReleased = true;

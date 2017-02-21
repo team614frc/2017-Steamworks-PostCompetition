@@ -1,0 +1,25 @@
+Left Joystick:
+	Y-Direction: Drive robot forward and backward
+Right Joystick:
+	X-Direction: Rotate robot left and right
+Shoulders:
+	LB: Elevator (hold)
+	LT: Boiler Shot (Assuming the robot is already driven up to the gear holder)
+	RB: Reverse Climbing Sequence
+	RT: Airship Shot
+Letter Buttons:
+	A: Line Up & Deliver Gear
+	B: 
+	X:
+	Y:
+
+	Start (right center button): Begin Climbing Sequence
+	Back (left center button): Cancel Climbing Sequence
+	
+	
+	
+	
+	
+	
+	
+purge the weebs™

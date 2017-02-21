@@ -9,18 +9,18 @@ import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraight;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightAtSmartDashboardSpeed;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightForADistance;
 import org.usfirst.frc.team614.robot.commands.drivetrain.ResetDrivetrainEncoder;
-import org.usfirst.frc.team614.robot.commands.drivetrain.RotateToAngle;
+import org.usfirst.frc.team614.robot.commands.drivetrain.RotateToSmartDashboardAngle;
 import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
 import org.usfirst.frc.team614.robot.commands.shooter.ResetShooterEncoder;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.Elevator;
+import org.usfirst.frc.team614.robot.subsystems.GearHolder;
 import org.usfirst.frc.team614.robot.subsystems.Hopper;
 import org.usfirst.frc.team614.robot.subsystems.Shooter;
 import org.usfirst.frc.team614.robot.subsystems.Winch;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -49,13 +49,11 @@ public class Robot extends IterativeRobot {
 	public static Winch winch;
 	public static Elevator elevator;
 	public static Hopper hopper;
+	public static GearHolder gearHolder;
 	
 	public static Servo shooterServo;
 	
 	public static boolean cameraIsActive;
-	
-	public static boolean gearButtonIsPressed;
-	public static DigitalInput gearButton;
 	
 	public static PowerDistributionPanel pdp;
 	public static NetworkTable gearCamera;
@@ -83,13 +81,11 @@ public class Robot extends IterativeRobot {
     	winch = new Winch();
     	elevator = new Elevator();
     	hopper = new Hopper();
+    	gearHolder = new GearHolder();
     	
     	shooterServo = new Servo(RobotMap.shooterServo);
     	
     	cameraIsActive= true;
-    	
-    	gearButton = new DigitalInput(RobotMap.gearButton);
-    	gearButtonIsPressed = true;
     	
     	pdp = new PowerDistributionPanel();
 		oi = new OI();
@@ -102,11 +98,11 @@ public class Robot extends IterativeRobot {
     	
 		
         chooser = new SendableChooser();
-        chooser.addDefault("Drive Straight Forever", new DriveStraight(.5));
-        chooser.addObject("Drive Straight For a Little Bit", new DriveStraightForADistance(1, .5));
+        chooser.addObject("Drive Straight For a Little Bit", new DriveStraightForADistance(6, .5));
         chooser.addObject("Deliver Red Left Gear", new LeftRedGear());
-        chooser.addObject("Do Nothing", new DoNothing());
-//        SmartDashboard.putData("Autonomous", chooser);
+        chooser.addObject("Drive Straight Indefinitely", new DriveStraight(.5));
+        chooser.addDefault("Do Nothing", new DoNothing());
+        SmartDashboard.putData("Autonomous", chooser);
         
         
 //        SmartDashboard.putData("Run At Full Speed", new ShooterDrive());
@@ -114,14 +110,13 @@ public class Robot extends IterativeRobot {
 //        
 //        SmartDashboard.putData("Update PID Values", new UpdatePIDs());
 
-        SmartDashboard.putData("Click Here if Camera is Dead! (Or again if camera is back up)", new ToggleVisionRotation());
+        SmartDashboard.putData("Toggle Camera Active", new ToggleVisionRotation());
         SmartDashboard.putData("Zero Yaw", new ZeroNavxYaw());
-        SmartDashboard.putData("Deliver Red Left Gear", new LeftRedGear());
 //        SmartDashboard.putData("Rumble Left", new RumbleController(false));
 //        SmartDashboard.putData("Rumble Right", new RumbleController(true));
 
         SmartDashboard.putBoolean("Camera is Active", cameraIsActive);
-        SmartDashboard.putBoolean("Gear is in Holder", gearButton.get());
+        SmartDashboard.putBoolean("Gear is in Holder", gearHolder.getIsPushed());
     	SmartDashboard.putNumber("Gear Camera Angle", 0);
     	SmartDashboard.putBoolean("Gear Camera Found", false);
     	SmartDashboard.putNumber("Shooter Camera Angle", 0);
@@ -131,16 +126,17 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putNumber("Drivetrain I", Constants.drivetrainI);
 //        SmartDashboard.putNumber("Drivetrain D", Constants.drivetrainD);
 //        SmartDashboard.putNumber("Drivetrain F", Constants.drivetrainF);
-        SmartDashboard.putNumber("Drivetrain Speed", Constants.DRIVETRAIN_AUTONOMOUS_SPEED);
-        SmartDashboard.putNumber("Drivetrain left Encoder Distance (???)", 0);
-        SmartDashboard.putNumber("Drivetrain right Encoder Distance (???)", 0);
+        SmartDashboard.putNumber("Drivetrain Target Speed", Constants.DRIVETRAIN_AUTONOMOUS_SPEED);
+        SmartDashboard.putNumber("Drivetrain Target Distance", 12);
+        SmartDashboard.putNumber("Drivetrain left Encoder Distance (inches)", 0);
+        SmartDashboard.putNumber("Drivetrain right Encoder Distance (inches)", 0);
         SmartDashboard.putNumber("Drivetrain Rotation Target (Degrees (-180, +180))", 0);
 
         SmartDashboard.putData("Drivetrain Reset Encoder", new ResetDrivetrainEncoder());
-        SmartDashboard.putData("Drivetrain Drive", new DriveStraightAtSmartDashboardSpeed());
+        SmartDashboard.putData("Drivetrain Drive Indefinitely", new DriveStraightAtSmartDashboardSpeed());
         SmartDashboard.putData("Drivetrain Drive for 4 Feet", new DriveStraightForADistance(48, .5));
-        SmartDashboard.putData("Rotate To Absolute Angle", new RotateToAngle(90, true));
-        SmartDashboard.putData("Rotate To Relative Angle", new RotateToAngle(90, false));
+        SmartDashboard.putData("Rotate To Absolute SmartDashboard Angle", new RotateToSmartDashboardAngle(true));
+        SmartDashboard.putData("Rotate To Relative SmartDashboard Angle", new RotateToSmartDashboardAngle(false));
 
 
 //        SmartDashboard.putNumber("Shooter P", Constants.shooterP);
@@ -152,16 +148,13 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putNumber("Shooter PID Output (XXX)", 0);
 //        SmartDashboard.putNumber("Shooter PID Error", 0);
 //        SmartDashboard.putNumber("Shooter Encoder Count (Revs*4096)", 0);
-        SmartDashboard.putNumber("Shooter Encoder Distance (Revs)", 0);
         SmartDashboard.putNumber("Shooter Encoder Rate (Revs per Sec)", 0);
-		SmartDashboard.putNumber("Shooter Encoder MAX Rate (Revs per Sec)", 0);
-		SmartDashboard.putNumber("Shooter Bang Bang Error", 0);
+		SmartDashboard.putNumber("Shooter Bang Error", 0);
 		SmartDashboard.putNumber("Shooter Bang Min", Constants.SHOOTER_BANG_MIN);
 		SmartDashboard.putNumber("Shooter Bang Max", Constants.SHOOTER_BANG_MAX);
         SmartDashboard.putNumber("Shooter Target Speed (Revs per Sec)", Constants.SHOOTER_RPS);
         SmartDashboard.putNumber("Shooter Tolerance", 0);
-        SmartDashboard.putNumber("Shooter Servo Angle for Airship", 0);
-        SmartDashboard.putNumber("Shooter Servo Angle for Boiler", 0);
+		SmartDashboard.putNumber("Shooter Servo Angle", shooterServo.getAngle());
 
         SmartDashboard.putData("Shooter Reset Encoder", new ResetShooterEncoder());
         
@@ -174,6 +167,45 @@ public class Robot extends IterativeRobot {
 
 		printNavXData();
 		
+		
+		// vision from camera:
+
+//		Thread visionThread;
+//		visionThread = new Thread(() -> {
+//			// Get the UsbCamera from CameraServer
+//			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+//			// Set the resolution
+//			camera.setResolution(640, 480);
+//			camera.setExposureManual(5);
+//			// Get a CvSink. This will capture Mats from the camera
+//			CvSink cvSink = CameraServer.getInstance().getVideo();
+//			// Setup a CvSource. This will send images back to the Dashboard
+//			CvSource outputStream = CameraServer.getInstance().putVideo("Rectangle", 640, 480);
+//
+//			// Mats are very memory expensive. Lets reuse this Mat.
+//			Mat mat = new Mat();
+//
+//			// This cannot be 'true'. The program will never exit if it is. This
+//			// lets the robot stop this thread when restarting robot code or
+//			// deploying.
+//			while (!Thread.interrupted()) {
+//				// Tell the CvSink to grab a frame from the camera and put it
+//				// in the source mat.  If there is an error notify the output.
+//				if (cvSink.grabFrame(mat) == 0) {
+//					// Send the output the error.
+//					outputStream.notifyError(cvSink.getError());
+//					// skip the rest of the current iteration
+//					continue;
+//				}
+//				// Put a rectangle on the image
+//				Imgproc.rectangle(mat, new Point(100, 100), new Point(400, 400),
+//						new Scalar(255, 255, 255), 5);
+//				// Give the output stream a new image to display
+//				outputStream.putFrame(mat);
+//			}
+//		});
+//		visionThread.setDaemon(true);
+//		visionThread.start();
     }
 	
 	/**
@@ -211,29 +243,29 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-//    	shooter.enable();
     	Robot.navX.reset();
         autonomousCommand = (Command) chooser.getSelected();
         
-		String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-			case "Drive Straight Forever": {
-				autonomousCommand = new DriveStraight(.5);
-				break;
-			}
-			case "Drive Straight For a Little Bit": {
-				autonomousCommand = new DriveStraightForADistance(1, .5);
-				break;
-			}
-			case "Deliver Red Left Gear": {
-				autonomousCommand = new LeftRedGear();
-				break;
-			}
-			default: {
-				autonomousCommand = new DoNothing();
-				break;
-			}
-		}
+        // uhh, ignore these
+//		String autoSelected = SmartDashboard.getString("Autonomous", "Default");
+//		switch(autoSelected) {
+//			case "Drive Straight Indefinitely": {
+//				autonomousCommand = new DriveStraight(.5);
+//				break;
+//			}
+//			case "Drive Straight For a Little Bit": {
+//				autonomousCommand = new DriveStraightForADistance(1, .5);
+//				break;
+//			}
+//			case "Deliver Red Left Gear": {
+//				autonomousCommand = new LeftRedGear();
+//				break;
+//			}
+//			default: {
+//				autonomousCommand = new DoNothing();
+//				break;
+//			}
+//		}
     	
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
@@ -263,31 +295,13 @@ public class Robot extends IterativeRobot {
 
         printNavXData();
 
-        // whenever the gear button is toggled, rumble the controller.
-        SmartDashboard.putBoolean("Gear is in Holder", gearButton.get());
-        if(!gearButtonIsPressed) { // last iteration, button was open
-        	if(gearButton.get()) { // now, button is closed
-        		Command rumble = new RumbleController(true);
-        		rumble.start();
-        		gearButtonIsPressed = true;
-        	}
-        } else {
-        	if(!gearButton.get()) { // open
-        		Command rumble = new RumbleController(false);
-        		rumble.start();
-        		gearButtonIsPressed = false;
-        	}
-        }
         
         // drivetrain
         SmartDashboard.putNumber("Drivetrain Encoder PID Error", drivetrain.getDistanceController().getError());
         
         
-        SmartDashboard.putNumber("Drivetrain left Encoder Distance (???)", drivetrain.leftEncoder.getDistance());
-        SmartDashboard.putNumber("Drivetrain right Encoder Distance (???)", drivetrain.rightEncoder.getDistance());
-
-        SmartDashboard.putNumber("Drivetrain left Encoder Count (???)", drivetrain.leftEncoder.getRaw());
-        SmartDashboard.putNumber("Drivetrain right Encoder Count (???)", drivetrain.rightEncoder.getRaw());
+        SmartDashboard.putNumber("Drivetrain left Encoder Distance (inches)", drivetrain.leftEncoder.getDistance());
+        SmartDashboard.putNumber("Drivetrain right Encoder Distance (inches)", drivetrain.rightEncoder.getDistance());
         
     	// winch
         if(SmartDashboard.getNumber("MAX Winch Current Draw (Amps)", 0) < Robot.pdp.getCurrent(RobotMap.PDPWinchMotor)) {
@@ -300,14 +314,8 @@ public class Robot extends IterativeRobot {
         
         // shooter
         shooter.setTolerance(SmartDashboard.getNumber("Shooter Tolerance", 0));
-        SmartDashboard.putNumber("Shooter Encoder Distance (Revs)", shooter.getDistance());
-//        SmartDashboard.putNumber("Shooter Encoder Count (Revs*4096)", shooter.shooterEncoder.getRaw());
         SmartDashboard.putNumber("Shooter Encoder Rate (Revs per Sec)", shooter.getRate());
-		if(SmartDashboard.getNumber("Shooter Encoder MAX Rate (Revs per Sec)", 0) < shooter.getRate()) {
-	        SmartDashboard.putNumber("Shooter Encoder MAX Rate (Revs per Sec)", shooter.getRate());
-		}
-		SmartDashboard.putNumber("Shooter Bang Bang Error", shooter.getError()); 
-		SmartDashboard.putNumber("Shooter Servo Angle", shooterServo.getAngle());
+		SmartDashboard.putNumber("Shooter Bang Error", shooter.getError()); 
 		
 		
         // vision
@@ -361,11 +369,11 @@ public class Robot extends IterativeRobot {
 	    
 	    /* Display 6-axis Processed Angle Data                                      */
 	//        SmartDashboard.putData("     ");
-	    SmartDashboard.putBoolean(  "NavX Connected",        navX.isConnected());
-	    SmartDashboard.putBoolean(  "NavX IsCalibrating",    navX.isCalibrating());
+//	    SmartDashboard.putBoolean(  "NavX Connected",        navX.isConnected());
+//	    SmartDashboard.putBoolean(  "NavX IsCalibrating",    navX.isCalibrating());
 	    SmartDashboard.putNumber(   "Yaw",              navX.getYaw());
-	    SmartDashboard.putNumber(   "Pitch",            navX.getPitch());
-	    SmartDashboard.putNumber(   "Roll",             navX.getRoll());
+//	    SmartDashboard.putNumber(   "Pitch",            navX.getPitch());
+//	    SmartDashboard.putNumber(   "Roll",             navX.getRoll());
 	    
 	    /* Display tilt-corrected, Magnetometer-based heading (requires             */
 	    /* magnetometer calibration to be useful)                                   */
@@ -378,15 +386,15 @@ public class Robot extends IterativeRobot {
 	    /* These functions are compatible w/the WPI Gyro Class, providing a simple  */
 	    /* path for upgrading from the Kit-of-Parts gyro to the navx MXP            */
 	    
-	    SmartDashboard.putNumber(   "NavX Total Angle",         navX.getAngle());
+	    SmartDashboard.putNumber(   "Total Angle",         navX.getAngle());
 //	    SmartDashboard.putNumber(   "NavX YawRateDPS",       navX.getRate());
 	
 	    /* Display Processed Acceleration Data (Linear Acceleration, Motion Detect) */
 	    
-	    SmartDashboard.putNumber(   "Accel_X",          navX.getWorldLinearAccelX());
-	    SmartDashboard.putNumber(   "Accel_Y",          navX.getWorldLinearAccelY());
+//	    SmartDashboard.putNumber(   "Accel_X",          navX.getWorldLinearAccelX());
+//	    SmartDashboard.putNumber(   "Accel_Y",          navX.getWorldLinearAccelY());
 	    SmartDashboard.putBoolean(  "IsMoving",         navX.isMoving());
-	    SmartDashboard.putBoolean(  "IsRotating",       navX.isRotating());
+//	    SmartDashboard.putBoolean(  "IsRotating",       navX.isRotating());
 	
 	    /* Display estimates of velocity/displacement.  Note that these values are  */
 	    /* not expected to be accurate enough for estimating robot position on a    */

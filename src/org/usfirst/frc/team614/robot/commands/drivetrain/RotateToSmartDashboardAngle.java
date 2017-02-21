@@ -17,12 +17,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class RotateToSmartDashboardAngle extends Command {
 
-
+	double angle = 0;
+	boolean useAbsoluteAngle = false;
 	
-    public RotateToSmartDashboardAngle() {
+    public RotateToSmartDashboardAngle(boolean useAbsoluteAngle) {
         // Use requires() here to declare subsystem dependencies
 //         eg. requires(chassis);
     	requires(Robot.drivetrain);
+    	this.useAbsoluteAngle = useAbsoluteAngle;
     }
 
     // Called just before this Command runs the first time
@@ -31,18 +33,18 @@ public class RotateToSmartDashboardAngle extends Command {
 //		Robot.navX.zeroYaw();
 
 		Robot.drivetrain.setUsingTurnPID(true);
+		angle = SmartDashboard.getNumber("Drivetrain Rotation Target (Degrees (-180, +180))", 0);
 
-		Robot.drivetrain.leftEncoder.reset();
-		Robot.drivetrain.rightEncoder.reset();
-
-        Robot.drivetrain.getTurnController().setSetpoint(
-        		SmartDashboard.getNumber("Drivetrain Rotation Target (Degrees (-180, +180))", 0)
-		);
+		if(useAbsoluteAngle) {
+	        Robot.drivetrain.getTurnController().setSetpoint(angle % 360);
+		} else { // relative angle
+			Robot.drivetrain.getTurnController().setSetpoint((Robot.navX.getYaw() + angle));// % 360);
+		}
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		Robot.drivetrain.arcadeDrive(0.0, Robot.drivetrain.getPIDRotateRate());
+		Robot.drivetrain.arcadeDrive(0.0, .7*Robot.drivetrain.getPIDRotateRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
