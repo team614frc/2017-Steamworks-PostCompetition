@@ -16,6 +16,7 @@ import org.usfirst.frc.team614.robot.commands.autonomous.knockHopper.BlueKnockHo
 import org.usfirst.frc.team614.robot.commands.autonomous.knockHopper.RedKnockHopperAndShoot;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveForADistance;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightAtSmartDashboardSpeed;
+import org.usfirst.frc.team614.robot.commands.drivetrain.DriveUntilStopped;
 import org.usfirst.frc.team614.robot.commands.drivetrain.ResetDrivetrainEncoder;
 import org.usfirst.frc.team614.robot.commands.drivetrain.RotateToSmartDashboardAngle;
 import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
@@ -161,6 +162,7 @@ public class Robot extends IterativeRobot {
 
         SmartDashboard.putData("Drivetrain Reset Encoder", new ResetDrivetrainEncoder());
         SmartDashboard.putData("Drivetrain Drive Indefinitely", new DriveStraightAtSmartDashboardSpeed());
+        SmartDashboard.putData("Drivetrain Drive Until Stopped", new DriveUntilStopped(.4));
         SmartDashboard.putData("Drivetrain Drive for 4 Feet", new DriveForADistance(48, .7));
         SmartDashboard.putData("Rotate To Absolute SmartDashboard Angle", new RotateToSmartDashboardAngle(true));
         SmartDashboard.putData("Rotate To Relative SmartDashboard Angle", new RotateToSmartDashboardAngle(false));
