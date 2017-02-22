@@ -63,7 +63,7 @@ public class Robot extends IterativeRobot {
 	public static Winch winch;
 	public static Elevator elevator;
 	public static Hopper hopper;
-	public static GearHolder gearHolder;
+//	public static GearHolder gearHolder;
 	
 	public static Servo shooterServo;
 	
@@ -95,7 +95,7 @@ public class Robot extends IterativeRobot {
     	winch = new Winch();
     	elevator = new Elevator();
     	hopper = new Hopper();
-    	gearHolder = new GearHolder();
+//    	gearHolder = new GearHolder();
     	
     	shooterServo = new Servo(RobotMap.shooterServo);
     	
@@ -143,7 +143,7 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putData("Rumble Right", new RumbleController(true));
 
         SmartDashboard.putBoolean("Camera is Active", cameraIsActive);
-        SmartDashboard.putBoolean("Gear is in Holder", gearHolder.getIsPushed());
+//        SmartDashboard.putBoolean("Gear is in Holder", gearHolder.getIsPushed());
     	SmartDashboard.putNumber("Gear Camera Angle", 0);
     	SmartDashboard.putBoolean("Gear Camera Found", false);
     	SmartDashboard.putNumber("Shooter Camera Angle", 0);
@@ -204,11 +204,11 @@ public class Robot extends IterativeRobot {
 			// Get the UsbCamera from CameraServer
 			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 			// Set the resolution
-			camera.setResolution(640, 480);
+			camera.setResolution(80, 60);
 			// Get a CvSink. This will capture Mats from the camera
 			CvSink cvSink = CameraServer.getInstance().getVideo();
 			// Setup a CvSource. This will send images back to the Dashboard
-			CvSource outputStream = CameraServer.getInstance().putVideo("Rectangle", 640, 480);
+			CvSource outputStream = CameraServer.getInstance().putVideo("Rectangle", 80, 60);
 
 			// Mats are very memory expensive. Lets reuse this Mat.
 			Mat mat = new Mat();

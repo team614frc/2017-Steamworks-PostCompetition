@@ -17,7 +17,7 @@ public class GearButtonChecker extends Command {
     public GearButtonChecker() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis)
-    	requires(Robot.gearHolder);
+//    	requires(Robot.gearHolder);
     }
 
     // Called just before this Command runs the first time
@@ -28,26 +28,26 @@ public class GearButtonChecker extends Command {
     protected void execute() {
 
         // whenever the gear button is toggled, rumble the controller.
-        SmartDashboard.putBoolean("Gear is in Holder", Robot.gearHolder.getIsPushed());
-        if(!wasPressedLastIteration) { // last iteration, button was open
-        	if(Robot.gearHolder.getIsPushed()) { // now, button is closed
-        		timeGearButtonWasLastTogggled = timeSinceInitialized();
-//        		if(timeSinceInitialized() > timeGearButtonWasLastTogggled + 2) {
-	        		Command rumble = new RumbleController(true);
-	        		rumble.start();
-	        		wasPressedLastIteration = true;
-//        		}
-        	}
-        } else {
-        	if(!Robot.gearHolder.getIsPushed()) { // this iteration, open
-        		timeGearButtonWasLastTogggled = timeSinceInitialized();
-//        		if(timeSinceInitialized() > timeGearButtonWasLastTogggled + 2) {
-	        		Command rumble = new RumbleController(false);
-	        		rumble.start();
-	        		wasPressedLastIteration = false;
-//        		}
-        	}
-        }
+//        SmartDashboard.putBoolean("Gear is in Holder", Robot.gearHolder.getIsPushed());
+//        if(!wasPressedLastIteration) { // last iteration, button was open
+//        	if(Robot.gearHolder.getIsPushed()) { // now, button is closed
+//        		timeGearButtonWasLastTogggled = timeSinceInitialized();
+////        		if(timeSinceInitialized() > timeGearButtonWasLastTogggled + 2) {
+//	        		Command rumble = new RumbleController(true);
+//	        		rumble.start();
+//	        		wasPressedLastIteration = true;
+////        		}
+//        	}
+//        } else {
+//        	if(!Robot.gearHolder.getIsPushed()) { // this iteration, open
+//        		timeGearButtonWasLastTogggled = timeSinceInitialized();
+////        		if(timeSinceInitialized() > timeGearButtonWasLastTogggled + 2) {
+//	        		Command rumble = new RumbleController(false);
+//	        		rumble.start();
+//	        		wasPressedLastIteration = false;
+////        		}
+//        	}
+//        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
