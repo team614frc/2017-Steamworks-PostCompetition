@@ -15,16 +15,25 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class BlueKnockHopperAndShoot extends CommandGroup {
 
     public BlueKnockHopperAndShoot() {
-    	addSequential(new DriveForADistance(-1, Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
-    	addSequential(new RotateToAngle(-90, true));
-    	addSequential(new DriveUntilStopped(Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
-    	addSequential(new DriveForADistance(-1, Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
+    	addSequential(new DriveForADistance(-20, -Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
+    	addSequential(new RotateToAngle(-45, true));
+    	addSequential(new DriveForADistance(-80, -Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
     	addSequential(new RotateToAngle(0, true));
-    	addSequential(new DriveForADistance(1, Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
-    	addSequential(new RotateToVisionTarget(false, true, false));
-    	addSequential(new DriveUntilStopped(Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
+    	addSequential(new DriveForADistance(-56, -Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
     	
-    	addSequential(new Shoot(false, false, false, false, false));
+    	addParallel(new Shoot(false, false, false, false, false));
+    	
+    	addParallel(new RotateToAngle(13, true));
+    	/*
+    	addSequential(new DriveStraightForADistance(-118, -Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
+    	addSequential(new RotateToAngle(90, true));
+//    	addSequential(new DriveStraightForADistance(62, Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
+    	addSequential(new DriveUntilStopped(Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
+    	addSequential(new RotateToAngle(15, true));
+//    	addSequential(new DriveStraightForADistance(-12, -Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
+//    	addSequential(new RotateToVisionTarget(false, true, true));
+//    	addSequential(new DriveUntilStopped(Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
+    	*/
     	
     	
     	

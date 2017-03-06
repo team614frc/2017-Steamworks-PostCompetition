@@ -13,7 +13,6 @@ import org.usfirst.frc.team614.robot.commands.autonomous.deliverLeftRed.LeftRedG
 import org.usfirst.frc.team614.robot.commands.autonomous.deliverRightBlue.RightBlueGear;
 import org.usfirst.frc.team614.robot.commands.autonomous.deliverRightRed.RightRedGear;
 import org.usfirst.frc.team614.robot.commands.autonomous.knockHopper.BlueKnockHopperAndShoot;
-import org.usfirst.frc.team614.robot.commands.autonomous.knockHopper.RedKnockHopperAndShoot;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveForADistance;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightAtSmartDashboardSpeed;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveUntilStopped;
@@ -63,7 +62,7 @@ public class Robot extends IterativeRobot {
 	public static Winch winch;
 	public static Elevator elevator;
 	public static Hopper hopper;
-//	public static GearHolder gearHolder;
+	public static GearHolder gearHolder;
 	
 	public static Servo shooterServo;
 	
@@ -95,7 +94,7 @@ public class Robot extends IterativeRobot {
     	winch = new Winch();
     	elevator = new Elevator();
     	hopper = new Hopper();
-//    	gearHolder = new GearHolder();
+    	gearHolder = new GearHolder();
     	
     	shooterServo = new Servo(RobotMap.shooterServo);
     	
@@ -112,12 +111,13 @@ public class Robot extends IterativeRobot {
     	
 		
         chooser = new SendableChooser();
-        chooser.addObject("Deliver Red Left Gear", new LeftRedGear());
-        chooser.addObject("Deliver Red Right Gear", new RightRedGear());
-        chooser.addObject("Deliver Blue Left Gear", new LeftBlueGear());
-        chooser.addObject("Deliver Blue Right Gear", new RightBlueGear());
+//        chooser.addObject("Deliver Red Left Gear", new LeftRedGear());
+//        chooser.addObject("Deliver Red Right Gear", new RightRedGear());
+//        chooser.addObject("Deliver Blue Left Gear", new LeftBlueGear());
+//        chooser.addObject("Deliver Blue Right Gear", new RightBlueGear());
+        chooser.addObject("Drive Past Base Line", new DriveForADistance(140, .5));
         chooser.addObject("Deliver Center Gear", new CenterGear());
-        chooser.addObject("Knock Red Hopper", new RedKnockHopperAndShoot());
+//        chooser.addObject("Knock Red Hopper", new RedKnockHopperAndShoot());
         chooser.addObject("Knock Blue Hopper", new BlueKnockHopperAndShoot());
         chooser.addDefault("Do Nothing", new DoNothing());
         SmartDashboard.putData("Autonomous", chooser);
@@ -127,7 +127,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Deliver Blue Left Gear", new LeftBlueGear());
         SmartDashboard.putData("Deliver Blue Right Gear", new RightBlueGear());
         SmartDashboard.putData("Deliver Center Gear", new CenterGear());
-        SmartDashboard.putData("Knock Red Hopper", new RedKnockHopperAndShoot());
+        SmartDashboard.putData("Knock Red Hopper", new BlueKnockHopperAndShoot());
         SmartDashboard.putData("Knock Blue Hopper", new BlueKnockHopperAndShoot());
         
         
@@ -143,7 +143,7 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putData("Rumble Right", new RumbleController(true));
 
         SmartDashboard.putBoolean("Camera is Active", cameraIsActive);
-//        SmartDashboard.putBoolean("Gear is in Holder", gearHolder.getIsPushed());
+        SmartDashboard.putBoolean("Gear is in Holder", gearHolder.getIsPushed());
     	SmartDashboard.putNumber("Gear Camera Angle", 0);
     	SmartDashboard.putBoolean("Gear Camera Found", false);
     	SmartDashboard.putNumber("Shooter Camera Angle", 0);
