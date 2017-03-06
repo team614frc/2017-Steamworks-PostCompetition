@@ -8,6 +8,8 @@ import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team614.robot.commands.DoNothing;
 import org.usfirst.frc.team614.robot.commands.ToggleVisionRotation;
 import org.usfirst.frc.team614.robot.commands.autonomous.CenterGear;
+import org.usfirst.frc.team614.robot.commands.autonomous.DriveForwardAndTurnLeft;
+import org.usfirst.frc.team614.robot.commands.autonomous.DriveForwardAndTurnRight;
 import org.usfirst.frc.team614.robot.commands.autonomous.deliverLeftBlue.LeftBlueGear;
 import org.usfirst.frc.team614.robot.commands.autonomous.deliverLeftRed.LeftRedGear;
 import org.usfirst.frc.team614.robot.commands.autonomous.deliverRightBlue.RightBlueGear;
@@ -109,7 +111,7 @@ public class Robot extends IterativeRobot {
     	gearCamera = NetworkTable.getTable("gearCamera");
     	shooterCamera = NetworkTable.getTable("shooterCamera");
     	
-		
+
         chooser = new SendableChooser();
 //        chooser.addObject("Deliver Red Left Gear", new LeftRedGear());
 //        chooser.addObject("Deliver Red Right Gear", new RightRedGear());
@@ -117,6 +119,8 @@ public class Robot extends IterativeRobot {
 //        chooser.addObject("Deliver Blue Right Gear", new RightBlueGear());
         chooser.addObject("Drive Past Base Line", new DriveForADistance(140, .5));
         chooser.addObject("Deliver Center Gear", new CenterGear());
+        chooser.addObject("Drive Forward & Turn Right", new DriveForwardAndTurnRight());
+        chooser.addObject("Drive Forward & Turn Left", new DriveForwardAndTurnLeft());
 //        chooser.addObject("Knock Red Hopper", new RedKnockHopperAndShoot());
         chooser.addObject("Knock Blue Hopper", new BlueKnockHopperAndShoot());
         chooser.addDefault("Do Nothing", new DoNothing());
@@ -136,36 +140,36 @@ public class Robot extends IterativeRobot {
 //        
 //        SmartDashboard.putData("Update PID Values", new UpdatePIDs());
 
-//        SmartDashboard.putData("KILL CAMERA", new ToggleVisionRotation());
-//        SmartDashboard.putData("KILL SHOOTER ENCODER", new KillShooterEncoderInput());
-//        SmartDashboard.putData("Zero Yaw", new ZeroNavxYaw());
+        SmartDashboard.putData("KILL CAMERA", new ToggleVisionRotation());
+        SmartDashboard.putData("KILL SHOOTER ENCODER", new KillShooterEncoderInput());
+        SmartDashboard.putData("Zero Yaw", new ZeroNavxYaw());
 //        SmartDashboard.putData("Rumble Left", new RumbleController(false));
 //        SmartDashboard.putData("Rumble Right", new RumbleController(true));
 
-//        SmartDashboard.putBoolean("Camera is Active", cameraIsActive);
-//        SmartDashboard.putBoolean("Gear is in Holder", gearHolder.getIsPushed());
-//    	SmartDashboard.putNumber("Gear Camera Angle", 0);
-//    	SmartDashboard.putBoolean("Gear Camera Found", false);
-//    	SmartDashboard.putNumber("Shooter Camera Angle", 0);
-//    	SmartDashboard.putBoolean("Shooter Camera Found", false);
+        SmartDashboard.putBoolean("Camera is Active", cameraIsActive);
+        SmartDashboard.putBoolean("Gear is in Holder", gearHolder.getIsPushed());
+    	SmartDashboard.putNumber("Gear Camera Angle", 0);
+    	SmartDashboard.putBoolean("Gear Camera Found", false);
+    	SmartDashboard.putNumber("Shooter Camera Angle", 0);
+    	SmartDashboard.putBoolean("Shooter Camera Found", false);
     	
 //        SmartDashboard.putNumber("Drivetrain P", Constants.drivetrainP);
 //        SmartDashboard.putNumber("Drivetrain I", Constants.drivetrainI);
 //        SmartDashboard.putNumber("Drivetrain D", Constants.drivetrainD);
 //        SmartDashboard.putNumber("Drivetrain F", Constants.drivetrainF);
-//        SmartDashboard.putNumber("Drivetrain Target Speed", Constants.DRIVETRAIN_AUTONOMOUS_SPEED);
-//        SmartDashboard.putNumber("Drivetrain Target Distance", -90);
-//        SmartDashboard.putNumber("Drivetrain left Encoder Distance (inches)", 0);
-//        SmartDashboard.putNumber("Drivetrain right Encoder Distance (inches)", 0);
-//        SmartDashboard.putNumber("Drivetrain right Encoder Rate (inches/sec)", 0);
-//        SmartDashboard.putNumber("Drivetrain Rotation Target (Degrees (-180, +180))", 0);
+        SmartDashboard.putNumber("Drivetrain Target Speed", Constants.DRIVETRAIN_AUTONOMOUS_SPEED);
+        SmartDashboard.putNumber("Drivetrain Target Distance", -90);
+        SmartDashboard.putNumber("Drivetrain left Encoder Distance (inches)", 0);
+        SmartDashboard.putNumber("Drivetrain right Encoder Distance (inches)", 0);
+        SmartDashboard.putNumber("Drivetrain right Encoder Rate (inches/sec)", 0);
+        SmartDashboard.putNumber("Drivetrain Rotation Target (Degrees (-180, +180))", 0);
 
-//        SmartDashboard.putData("Drivetrain Reset Encoder", new ResetDrivetrainEncoder());
-//        SmartDashboard.putData("Drivetrain Drive Indefinitely", new DriveStraightAtSmartDashboardSpeed());
-//        SmartDashboard.putData("Drivetrain Drive Until Stopped", new DriveUntilStopped(.4));
-//        SmartDashboard.putData("Drivetrain Drive for 4 Feet", new DriveForADistance(48, .7));
-//        SmartDashboard.putData("Rotate To Absolute SmartDashboard Angle", new RotateToSmartDashboardAngle(true));
-//        SmartDashboard.putData("Rotate To Relative SmartDashboard Angle", new RotateToSmartDashboardAngle(false));
+        SmartDashboard.putData("Drivetrain Reset Encoder", new ResetDrivetrainEncoder());
+        SmartDashboard.putData("Drivetrain Drive Indefinitely", new DriveStraightAtSmartDashboardSpeed());
+        SmartDashboard.putData("Drivetrain Drive Until Stopped", new DriveUntilStopped(.4));
+        SmartDashboard.putData("Drivetrain Drive for 4 Feet", new DriveForADistance(48, .7));
+        SmartDashboard.putData("Rotate To Absolute SmartDashboard Angle", new RotateToSmartDashboardAngle(true));
+        SmartDashboard.putData("Rotate To Relative SmartDashboard Angle", new RotateToSmartDashboardAngle(false));
 
 
 //        SmartDashboard.putNumber("Shooter P", Constants.shooterP);
@@ -177,24 +181,24 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putNumber("Shooter PID Output (XXX)", 0);
 //        SmartDashboard.putNumber("Shooter PID Error", 0);
 //        SmartDashboard.putNumber("Shooter Encoder Count (Revs*4096)", 0);
-//        SmartDashboard.putNumber("Shooter Encoder Rate (Revs per Sec)", 0);
-//		SmartDashboard.putNumber("Shooter Bang Error", 0);
-//		SmartDashboard.putNumber("Shooter Bang Min", Constants.SHOOTER_BANG_MIN);
-//		SmartDashboard.putNumber("Shooter Bang Max", Constants.SHOOTER_BANG_MAX);
-//        SmartDashboard.putNumber("Shooter Target Speed (Revs per Sec)", Constants.SHOOTER_RPS);
-//        SmartDashboard.putNumber("Shooter Tolerance", 0);
-//		SmartDashboard.putNumber("Shooter Servo Angle", shooterServo.getAngle());
+        SmartDashboard.putNumber("Shooter Encoder Rate (Revs per Sec)", 0);
+		SmartDashboard.putNumber("Shooter Bang Error", 0);
+		SmartDashboard.putNumber("Shooter Bang Min", Constants.SHOOTER_BANG_MIN);
+		SmartDashboard.putNumber("Shooter Bang Max", Constants.SHOOTER_BANG_MAX);
+        SmartDashboard.putNumber("Shooter Target Speed (Revs per Sec)", Constants.SHOOTER_RPS);
+        SmartDashboard.putNumber("Shooter Tolerance", 0);
+		SmartDashboard.putNumber("Shooter Servo Angle", shooterServo.getAngle());
 
-//        SmartDashboard.putData("Shooter Reset Encoder", new ResetShooterEncoder());
+        SmartDashboard.putData("Shooter Reset Encoder", new ResetShooterEncoder());
         
-//        SmartDashboard.putNumber("Hopper Speed", Constants.HOPPER_SPEED);
+        SmartDashboard.putNumber("Hopper Speed", Constants.HOPPER_SPEED);
         																																																																																																																			//		SmartDashboard.putNumber("Winch PD ID", RobotMap.PDPWinchMotor);
-//		SmartDashboard.putNumber("Winch Current Draw (Amps)", 0);
-//		SmartDashboard.putNumber("MAX Winch Current Draw (Amps)", 0);
-//        SmartDashboard.putNumber("Winch Encoder Distance (Revs)", 0);
-//        SmartDashboard.putNumber("Winch Encoder Rate (Revs per Sec)", 0);
+		SmartDashboard.putNumber("Winch Current Draw (Amps)", 0);
+		SmartDashboard.putNumber("MAX Winch Current Draw (Amps)", 0);
+        SmartDashboard.putNumber("Winch Encoder Distance (Revs)", 0);
+        SmartDashboard.putNumber("Winch Encoder Rate (Revs per Sec)", 0);
 
-//		printNavXData();
+		printNavXData();
 		
 		
 		// vision from camera:
