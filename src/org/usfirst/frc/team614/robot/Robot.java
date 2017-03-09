@@ -117,7 +117,7 @@ public class Robot extends IterativeRobot {
 //        chooser.addObject("Deliver Red Right Gear", new RightRedGear());
 //        chooser.addObject("Deliver Blue Left Gear", new LeftBlueGear());
 //        chooser.addObject("Deliver Blue Right Gear", new RightBlueGear());
-        chooser.addObject("Drive Past Base Line", new DriveForADistance(140, .5));
+        chooser.addObject("Drive Past Base Line", new DriveForADistance(-140, -.5));
         chooser.addObject("Deliver Center Gear", new CenterGear());
         chooser.addObject("Drive Forward & Turn Right", new DriveForwardAndTurnRight());
         chooser.addObject("Drive Forward & Turn Left", new DriveForwardAndTurnLeft());
