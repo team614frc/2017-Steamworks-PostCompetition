@@ -1,6 +1,7 @@
 package org.usfirst.frc.team614.robot.commands.shooter;
 
 import org.team708.robot.util.Gamepad;
+import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.OI;
 import org.usfirst.frc.team614.robot.Robot;
 
@@ -14,7 +15,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class ShooterDrive extends Command {
 
-	
     public ShooterDrive() {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.shooter);
@@ -29,29 +29,25 @@ public class ShooterDrive extends Command {
     	
     	
     	if(Robot.shooter.isEnabled()) {
-    		
-        	Robot.shooter.setGoalRPS(SmartDashboard.getNumber("Shooter Target Speed (Revs per Sec)", 0));
+//        	Robot.shooter.getVelocityController().setSetpoint(SmartDashboard.getNumber("Shooter Target Speed (Revs per Sec)", 0));
         	
-        	if(Robot.shooter.getShootingFromAirship()) {
-		    	
-//	        	Robot.shooter.setGoalRPS(60.0);
-				
+        	
+//        	if(Robot.shooter.getShootingFromAirship()) { // gear position
+//            	Robot.shooter.setGoalRPS(SmartDashboard.getNumber("Shooter Target Speed (Revs per Sec)", 0));
+//            	
+//        	} else { // hopper positon
+//            	Robot.shooter.setGoalRPS(31.0);
+//
+//        	}
+    		if(Robot.shooter.getUsingEncoder()) {
 				if(Robot.shooter.getRate() <= Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance()) {
-					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Max", .8));
+					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Max", Constants.SHOOTER_BANG_MAX));
 				} else if (Robot.shooter.getRate() >= Robot.shooter.getGoalRPS() + Robot.shooter.getTolerance()){
-					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Min", .6));
+					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Min", Constants.SHOOTER_BANG_MIN));
 				}
-
-        	} else { // robot is shooting right next to boiler
-        			Robot.shooter.stop();
-//	        	Robot.shooter.setGoalRPS(XXX);
-//				
-    				if(Robot.shooter.getRate() <= Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance()) {
-    					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Max", .8));
-    				} else if (Robot.shooter.getRate() >= Robot.shooter.getGoalRPS() + Robot.shooter.getTolerance()){
-    					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Min", .6));
-    				}
-        	}
+    		} else { // encoder is dead
+    			Robot.shooter.set(.51);
+    		}
     	}
     }
 

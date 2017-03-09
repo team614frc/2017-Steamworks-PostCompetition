@@ -8,18 +8,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class WaitUntilShooterIsAtTargetSpeed extends Command {
+public class RevShooterFromHopper extends Command {
+
 	
-	boolean isOnTarget = false;
-	
-    public WaitUntilShooterIsAtTargetSpeed() {
+    public RevShooterFromHopper() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	setTimeout(1);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.shooter.setEnabled(true, false);
+    	Robot.shooterServo.setAngle(0.0);
+    	Robot.shooter.setGoalRPS(30.5);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -28,28 +29,17 @@ public class WaitUntilShooterIsAtTargetSpeed extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-//    	if(!isOnTarget) { // robot was not on target last iteration
-//	    	isOnTarget = Robot.shooter.getRate() > Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance();
-//	    	if(isOnTarget) { // if robot was not on target but now is on target
-//		    	setTimeout(.5);
-//	    	}
-//    	} else { // robot was on target last iteration
-//	    	isOnTarget = Robot.shooter.getRate() > Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance();
-//	    	if(!isOnTarget) { // robot is no longer at target, so reset timeout
-//	    		setTimeout(.5);
-//	    	} // else { // robot was on target last iteration and still is; do nothing.
-//	    	//}
-//    	}	 
-
-        return isTimedOut();
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.shooter.setEnabled(false, false);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.shooter.setEnabled(false, false);
     }
 }

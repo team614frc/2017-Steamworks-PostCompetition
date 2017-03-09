@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team614.robot.commands.drivetrain;
 
+import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,12 +10,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Makes the drivetrain drive straight for a distance in inches
  */
-public class DriveStraightForADistance extends Command
+public class DriveForADistance extends Command
 {
 	private double distance, speed;
 //	private boolean done = false;
 
-	public DriveStraightForADistance(double distance, double speed)
+	public DriveForADistance(double distance, double speed)
 	{
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.drivetrain);
@@ -36,26 +37,15 @@ public class DriveStraightForADistance extends Command
 		Robot.drivetrain.rightEncoder.reset();
 
 //        Robot.drivetrain.getTurnController().setSetpoint(Robot.navX.getYaw());
-        Robot.drivetrain.getDistanceController().setSetpoint(SmartDashboard.getNumber("Drivetrain Target Distance", 0));
-//        Robot.drivetrain.getDistanceController().setSetpoint(distance);
+//        Robot.drivetrain.getDistanceController().setSetpoint(SmartDashboard.getNumber("Drivetrain Target Distance", 0));
+        Robot.drivetrain.getDistanceController().setSetpoint(distance);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute()
 	{
-		
-//		if (Robot.drivetrain.rightEncoder.getDistance() > distance) {
-//			
-//			Robot.drivetrain.arcadeDrive(-speed, 0);
-//			if(done == false) {
-//				setTimeout(this.timeSinceInitialized() + .3);
-//				done = true;
-//			}
-//		if(Robot.navX.isMoving())
-//		} else {
-
-		Robot.drivetrain.arcadeDrive(Robot.drivetrain.getPIDSpeed(), 0);
-//		Robot.drivetrain.arcadeDrive(Robot.drivetrain.getPIDSpeed(), Robot.drivetrain.getPIDRotateRate());
+		Robot.drivetrain.arcadeDrive(Constants.DRIVETRAIN_AUTONOMOUS_SPEED * Robot.drivetrain.getPIDSpeed(), 0);
+//		Robot.drivetrain.arcadeDrive(.7 * Robot.drivetrain.getPIDSpeed(), .7 * Robot.drivetrain.getPIDRotateRate());
 //		}
 		
 		
@@ -71,9 +61,14 @@ public class DriveStraightForADistance extends Command
     	// Robot isn't at the immediate start of command and may be stopped b/c it never even started
     	if(this.timeSinceInitialized() > .2) {
 	    	// PID stuff is done
-	    	if(!Robot.navX.isMoving()) {
-	    		return true;
-	    	}
+//	    	if(!Robot.navX.isMoving()) {
+//	    		return true;
+//	    	}
+
+
+    		if(Robot.drivetrain.rightEncoder.getRate() < 10.0 && Robot.drivetrain.rightEncoder.getRate() > -10.0) {
+				return true;
+			}
     	}	
 		return false; 
 //		 only tests right side... we're driving straight, so who cares.
@@ -91,7 +86,7 @@ public class DriveStraightForADistance extends Command
 	// Called once after isFinished returns true
 	protected void end()
 	{
-		Robot.drivetrain.setUsingTurnPID(false);
+//		Robot.drivetrain.setUsingTurnPID(false);
 		Robot.drivetrain.setUsingDistancePID(false);
 		Robot.drivetrain.stop();
 	}
@@ -100,7 +95,7 @@ public class DriveStraightForADistance extends Command
 	// subsystems is scheduled to run
 	protected void interrupted()
 	{
-		Robot.drivetrain.setUsingTurnPID(false);
+//		Robot.drivetrain.setUsingTurnPID(false);
 		Robot.drivetrain.setUsingDistancePID(false);
 		Robot.drivetrain.stop();
 	}

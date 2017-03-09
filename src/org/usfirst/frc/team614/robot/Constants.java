@@ -5,7 +5,7 @@ package org.usfirst.frc.team614.robot;
 public class Constants {
 	
 	// Drivetrain
-	public static final double drivetrainRotationP = 0.05;
+	public static final double drivetrainRotationP = 0.1;
 	public static final double drivetrainRotationI = 0;
 	public static final double drivetrainRotationD = 0.12;
 	public static final double drivetrainRotationF = 0;
@@ -14,18 +14,22 @@ public class Constants {
 	public static final double drivetrainDistanceD = 0.0;
 	public static final double drivetrainDistanceF = 0;
 	public static final double DRIVETRAIN_WHEEL_DIAMETER = 4;
-	public static final double DRIVETRAIN_AUTONOMOUS_SPEED = .75;
+	public static final double DRIVETRAIN_AUTONOMOUS_SPEED = 1.0; // more of a multiplier tbh
 	public static final double DRIVETRAIN_ENCODER_PULSES_PER_REV = 220.0;//250.0;
 	// each "distance" unit is 1 inch.
 	public static final double DRIVETRAIN_DISTANCE_PER_PULSE = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) / Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV;
 //	public static final double DRIVETRAIN_DISTANCE_PER_PULSE = 1 / DRIVETRAIN_ENCODER_PULSES_PER_REV;
 
 	// Shooter
-	
+
+	public static final double shooterP = 0.3;
+	public static final double shooterI = 0.0;
+	public static final double shooterD = 0.0;
+	public static final double shooterF = 0.0;
 	public static final double SHOOTER_ENCODER_COUNTS_PER_REV = 1024.0;
-	public static final double SHOOTER_RPS= 36;
+	public static final double SHOOTER_RPS= 32;
 	public static final double SHOOTER_BANG_MIN = .5;
-	public static final double SHOOTER_BANG_MAX = .7;
+	public static final double SHOOTER_BANG_MAX = .8;
 	public static final double SHOOTER_DISTANCE_PER_PULSE = 1 / SHOOTER_ENCODER_COUNTS_PER_REV;
 	
 	// Winch

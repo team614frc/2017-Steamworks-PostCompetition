@@ -1,16 +1,27 @@
 
 package org.usfirst.frc.team614.robot;
 
+import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team614.robot.commands.DoNothing;
-import org.usfirst.frc.team614.robot.commands.RumbleController;
 import org.usfirst.frc.team614.robot.commands.ToggleVisionRotation;
+import org.usfirst.frc.team614.robot.commands.autonomous.CenterGear;
+import org.usfirst.frc.team614.robot.commands.autonomous.DriveForwardAndTurnLeft;
+import org.usfirst.frc.team614.robot.commands.autonomous.DriveForwardAndTurnRight;
+import org.usfirst.frc.team614.robot.commands.autonomous.deliverLeftBlue.LeftBlueGear;
 import org.usfirst.frc.team614.robot.commands.autonomous.deliverLeftRed.LeftRedGear;
-import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraight;
+import org.usfirst.frc.team614.robot.commands.autonomous.deliverRightBlue.RightBlueGear;
+import org.usfirst.frc.team614.robot.commands.autonomous.deliverRightRed.RightRedGear;
+import org.usfirst.frc.team614.robot.commands.autonomous.knockHopper.BlueKnockHopperAndShoot;
+import org.usfirst.frc.team614.robot.commands.drivetrain.DriveForADistance;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightAtSmartDashboardSpeed;
-import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightForADistance;
+import org.usfirst.frc.team614.robot.commands.drivetrain.DriveUntilStopped;
 import org.usfirst.frc.team614.robot.commands.drivetrain.ResetDrivetrainEncoder;
 import org.usfirst.frc.team614.robot.commands.drivetrain.RotateToSmartDashboardAngle;
 import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
+import org.usfirst.frc.team614.robot.commands.shooter.KillShooterEncoderInput;
 import org.usfirst.frc.team614.robot.commands.shooter.ResetShooterEncoder;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.Elevator;
@@ -21,6 +32,10 @@ import org.usfirst.frc.team614.robot.subsystems.Winch;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -96,13 +111,28 @@ public class Robot extends IterativeRobot {
     	gearCamera = NetworkTable.getTable("gearCamera");
     	shooterCamera = NetworkTable.getTable("shooterCamera");
     	
-		
+
         chooser = new SendableChooser();
-        chooser.addObject("Drive Straight For a Little Bit", new DriveStraightForADistance(6, .5));
-        chooser.addObject("Deliver Red Left Gear", new LeftRedGear());
-        chooser.addObject("Drive Straight Indefinitely", new DriveStraight(.5));
+//        chooser.addObject("Deliver Red Left Gear", new LeftRedGear());
+//        chooser.addObject("Deliver Red Right Gear", new RightRedGear());
+//        chooser.addObject("Deliver Blue Left Gear", new LeftBlueGear());
+//        chooser.addObject("Deliver Blue Right Gear", new RightBlueGear());
+        chooser.addObject("Drive Past Base Line", new DriveForADistance(140, .5));
+        chooser.addObject("Deliver Center Gear", new CenterGear());
+        chooser.addObject("Drive Forward & Turn Right", new DriveForwardAndTurnRight());
+        chooser.addObject("Drive Forward & Turn Left", new DriveForwardAndTurnLeft());
+//        chooser.addObject("Knock Red Hopper", new RedKnockHopperAndShoot());
+        chooser.addObject("Knock Blue Hopper", new BlueKnockHopperAndShoot());
         chooser.addDefault("Do Nothing", new DoNothing());
         SmartDashboard.putData("Autonomous", chooser);
+
+        SmartDashboard.putData("Deliver Red Left Gear", new LeftRedGear());
+        SmartDashboard.putData("Deliver Red Right Gear", new RightRedGear());
+        SmartDashboard.putData("Deliver Blue Left Gear", new LeftBlueGear());
+        SmartDashboard.putData("Deliver Blue Right Gear", new RightBlueGear());
+        SmartDashboard.putData("Deliver Center Gear", new CenterGear());
+        SmartDashboard.putData("Knock Red Hopper", new BlueKnockHopperAndShoot());
+        SmartDashboard.putData("Knock Blue Hopper", new BlueKnockHopperAndShoot());
         
         
 //        SmartDashboard.putData("Run At Full Speed", new ShooterDrive());
@@ -110,7 +140,8 @@ public class Robot extends IterativeRobot {
 //        
 //        SmartDashboard.putData("Update PID Values", new UpdatePIDs());
 
-        SmartDashboard.putData("Toggle Camera Active", new ToggleVisionRotation());
+        SmartDashboard.putData("KILL CAMERA", new ToggleVisionRotation());
+        SmartDashboard.putData("KILL SHOOTER ENCODER", new KillShooterEncoderInput());
         SmartDashboard.putData("Zero Yaw", new ZeroNavxYaw());
 //        SmartDashboard.putData("Rumble Left", new RumbleController(false));
 //        SmartDashboard.putData("Rumble Right", new RumbleController(true));
@@ -127,14 +158,16 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putNumber("Drivetrain D", Constants.drivetrainD);
 //        SmartDashboard.putNumber("Drivetrain F", Constants.drivetrainF);
         SmartDashboard.putNumber("Drivetrain Target Speed", Constants.DRIVETRAIN_AUTONOMOUS_SPEED);
-        SmartDashboard.putNumber("Drivetrain Target Distance", 12);
+        SmartDashboard.putNumber("Drivetrain Target Distance", -90);
         SmartDashboard.putNumber("Drivetrain left Encoder Distance (inches)", 0);
         SmartDashboard.putNumber("Drivetrain right Encoder Distance (inches)", 0);
+        SmartDashboard.putNumber("Drivetrain right Encoder Rate (inches/sec)", 0);
         SmartDashboard.putNumber("Drivetrain Rotation Target (Degrees (-180, +180))", 0);
 
         SmartDashboard.putData("Drivetrain Reset Encoder", new ResetDrivetrainEncoder());
         SmartDashboard.putData("Drivetrain Drive Indefinitely", new DriveStraightAtSmartDashboardSpeed());
-        SmartDashboard.putData("Drivetrain Drive for 4 Feet", new DriveStraightForADistance(48, .5));
+        SmartDashboard.putData("Drivetrain Drive Until Stopped", new DriveUntilStopped(.4));
+        SmartDashboard.putData("Drivetrain Drive for 4 Feet", new DriveForADistance(48, .7));
         SmartDashboard.putData("Rotate To Absolute SmartDashboard Angle", new RotateToSmartDashboardAngle(true));
         SmartDashboard.putData("Rotate To Relative SmartDashboard Angle", new RotateToSmartDashboardAngle(false));
 
@@ -170,42 +203,41 @@ public class Robot extends IterativeRobot {
 		
 		// vision from camera:
 
-//		Thread visionThread;
-//		visionThread = new Thread(() -> {
-//			// Get the UsbCamera from CameraServer
-//			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-//			// Set the resolution
-//			camera.setResolution(640, 480);
-//			camera.setExposureManual(5);
-//			// Get a CvSink. This will capture Mats from the camera
-//			CvSink cvSink = CameraServer.getInstance().getVideo();
-//			// Setup a CvSource. This will send images back to the Dashboard
-//			CvSource outputStream = CameraServer.getInstance().putVideo("Rectangle", 640, 480);
-//
-//			// Mats are very memory expensive. Lets reuse this Mat.
-//			Mat mat = new Mat();
-//
-//			// This cannot be 'true'. The program will never exit if it is. This
-//			// lets the robot stop this thread when restarting robot code or
-//			// deploying.
-//			while (!Thread.interrupted()) {
-//				// Tell the CvSink to grab a frame from the camera and put it
-//				// in the source mat.  If there is an error notify the output.
-//				if (cvSink.grabFrame(mat) == 0) {
-//					// Send the output the error.
-//					outputStream.notifyError(cvSink.getError());
-//					// skip the rest of the current iteration
-//					continue;
-//				}
-//				// Put a rectangle on the image
-//				Imgproc.rectangle(mat, new Point(100, 100), new Point(400, 400),
-//						new Scalar(255, 255, 255), 5);
-//				// Give the output stream a new image to display
-//				outputStream.putFrame(mat);
-//			}
-//		});
-//		visionThread.setDaemon(true);
-//		visionThread.start();
+		Thread visionThread;
+		visionThread = new Thread(() -> {
+			// Get the UsbCamera from CameraServer
+			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+			// Set the resolution
+			camera.setResolution(80, 60);
+			// Get a CvSink. This will capture Mats from the camera
+			CvSink cvSink = CameraServer.getInstance().getVideo();
+			// Setup a CvSource. This will send images back to the Dashboard
+			CvSource outputStream = CameraServer.getInstance().putVideo("Rectangle", 80, 60);
+
+			// Mats are very memory expensive. Lets reuse this Mat.
+			Mat mat = new Mat();
+
+			// This cannot be 'true'. The program will never exit if it is. This
+			// lets the robot stop this thread when restarting robot code or
+			// deploying.
+			while (!Thread.interrupted()) {
+				// Tell the CvSink to grab a frame from the camera and put it
+				// in the source mat.  If there is an error notify the output.
+				if (cvSink.grabFrame(mat) == 0) {
+					// Send the output the error.
+					outputStream.notifyError(cvSink.getError());
+					// skip the rest of the current iteration
+					continue;
+				}
+				// Put a rectangle on the image
+				Imgproc.rectangle(mat, new Point(100, 100), new Point(400, 400),
+						new Scalar(255, 255, 255), 5);
+				// Give the output stream a new image to display
+				outputStream.putFrame(mat);
+			}
+		});
+		visionThread.setDaemon(true);
+		visionThread.start();
     }
 	
 	/**
@@ -216,6 +248,7 @@ public class Robot extends IterativeRobot {
     public void disabledInit(){
     	
     	cameraIsActive = true;
+    	shooter.setUsingEncoder(true);
     	
     	// resets NavX and disables the PID controller.
     	Robot.navX.reset();
@@ -225,8 +258,6 @@ public class Robot extends IterativeRobot {
     	shooter.reset();
     	shooter.setEnabled(false, false);
     	drivetrain.reset();
-//    	Robot.shooter.getPIDController().disable();
-//    	Robot.shooter.getPIDController().reset();
     }
 	
 	public void disabledPeriodic() {
@@ -243,7 +274,20 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
+
+
+    	cameraIsActive = true;
+    	shooter.setUsingEncoder(true);
+    	
+    	// resets NavX and disables the PID controller.
     	Robot.navX.reset();
+    	Robot.winch.reset();
+    	drivetrain.setUsingTurnPID(false);
+    	drivetrain.setUsingDistancePID(false);
+    	shooter.reset();
+    	shooter.setEnabled(false, false);
+    	drivetrain.reset();
+    	
         autonomousCommand = (Command) chooser.getSelected();
         
         // uhh, ignore these
@@ -285,6 +329,19 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+
+    	
+    	cameraIsActive = true;
+    	shooter.setUsingEncoder(true);
+    	
+    	// resets NavX and disables the PID controller.
+    	Robot.navX.reset();
+    	Robot.winch.reset();
+    	drivetrain.setUsingTurnPID(false);
+    	drivetrain.setUsingDistancePID(false);
+    	shooter.reset();
+    	shooter.setEnabled(false, false);
+    	drivetrain.reset();
     }
 
     /**
@@ -302,6 +359,7 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putNumber("Drivetrain left Encoder Distance (inches)", drivetrain.leftEncoder.getDistance());
         SmartDashboard.putNumber("Drivetrain right Encoder Distance (inches)", drivetrain.rightEncoder.getDistance());
+        SmartDashboard.putNumber("Drivetrain right Encoder Rate (inches/sec)", drivetrain.rightEncoder.getRate());
         
     	// winch
         if(SmartDashboard.getNumber("MAX Winch Current Draw (Amps)", 0) < Robot.pdp.getCurrent(RobotMap.PDPWinchMotor)) {

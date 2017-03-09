@@ -11,13 +11,13 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class Shoot extends CommandGroup {
 
-    public Shoot(boolean shootingFromAirship, boolean shouldRotateAtAll, boolean shouldRotateIfNoVision, boolean rotationDirection) {
+    public Shoot(boolean isTeleop, boolean shootingFromAirship, boolean shouldRotateAtAll, boolean shouldRotateIfNoVision, boolean rotationDirection) {
 
 //    	 rev shooter
     	if(shootingFromAirship) {
     		addParallel(new RevShooterFromAirship());
     	} else {
-    		addParallel(new RevShooterFromBoiler());
+    		addParallel(new RevShooterFromHopper());
     	}
     	
     	// line up to boiler
@@ -31,7 +31,14 @@ public class Shoot extends CommandGroup {
     	addSequential(new WaitUntilShooterIsAtTargetSpeed());
 //    	feed balls into shooter...
     	addSequential(new RevHopper());
-    	//    	 manually wait until all balls are shot
+    	if(isTeleop) {
+    		// button held to let command last
+    	} else {
+    		// autonomous:
+    		// approx. time for all balls to shoot
+        	addSequential(new WaitUntilAllBallsAreShot()); // doesnt work haha woops
+    	}
+    	
     }
     protected void end() {
     	Robot.hopper.stop();

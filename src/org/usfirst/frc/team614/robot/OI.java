@@ -60,7 +60,7 @@ public class OI {
 	private static final Button staticRevShooterFromBoiler = new JoystickButton(driverGamepad, Gamepad.button_Y);
 	private static final Button staticRevShooterFromAirship = new JoystickButton(driverGamepad, Gamepad.button_X);
 
-	private static final Button deliverGear = new JoystickButton(driverGamepad, Gamepad.button_A);
+//	private static final Button deliverGear = new JoystickButton(driverGamepad, Gamepad.button_A);
 
 	// Binding of Commands
 	public OI() {
@@ -70,12 +70,12 @@ public class OI {
 		stopClimber.whenPressed(new StopWinch());
 		reverseClimber.whileHeld(new ReverseWinch());
 		revElevator.whileHeld(new RevElevator());
-		deliverGear.whenPressed(new DeliverGear(false, false));
+//		deliverGear.whenPressed(new DeliverGear(false, false));
 //		revShooterFromBoiler.whileHeld(new Shoot(false, true, false, false));
 //		revShooterFromAirship.whileHeld(new Shoot(true, true, false, false));
 		
-		staticRevShooterFromBoiler.whileHeld(new Shoot(false, false, false, false));
-		staticRevShooterFromAirship.whileHeld(new Shoot(true, false, false, false));
+		staticRevShooterFromBoiler.whileHeld(new Shoot(true, false, false, false, false));
+		staticRevShooterFromAirship.whileHeld(new Shoot(true, true, false, false, false));
 		
 	}
 }

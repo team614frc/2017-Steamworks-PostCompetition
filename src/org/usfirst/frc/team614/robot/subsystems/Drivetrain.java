@@ -150,8 +150,6 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		if(usingTurnPID)
 			PIDrotateToAngleRate = output;
 		if(usingDistancePID) {
-	        SmartDashboard.putNumber("Drivetrain Encoder PID Output", output);
-
 			PIDdistanceSpeed = output;
 		}
 	}

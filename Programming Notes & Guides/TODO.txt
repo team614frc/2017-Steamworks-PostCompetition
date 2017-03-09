@@ -52,13 +52,13 @@ TELEOP:
 -in auto: differentiate rotation left/right if robot doesn't detect vision target
 	>done, but needs testing.
 
--update DISTANCE_PER_PULSE and PULSES_PER_REV in constants to reflect the actual encoder values
-
 -add DriveStraightForADistanceAtAbsoluteAngle
 	>done, needs testing
+-enable TurnController in driveStraights
 
 -tune Bang Bang
 
+-rotate to angle ends when XYZ veloctity < tolerance
 		 
 -AFTER ANY AUTONOMOUS: try to move the robot so that it ends at the farmost hopper.
 	

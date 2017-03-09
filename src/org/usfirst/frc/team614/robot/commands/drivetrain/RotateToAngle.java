@@ -45,18 +45,34 @@ public class RotateToAngle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		Robot.drivetrain.arcadeDrive(0.0, .7*Robot.drivetrain.getPIDRotateRate());
+		Robot.drivetrain.arcadeDrive(0.0, .7 * Robot.drivetrain.getPIDRotateRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	// Robot isn't at the immediate start of command and may be stopped b/c it never even started
-    	if(this.timeSinceInitialized() > .2) {
+    	if(this.timeSinceInitialized() > .5) {
 	    	// PID stuff is done, robot has been at target angle for a short time
-	    	if(!Robot.navX.isMoving()) {
-	    		return true;
-	    	}
-    	}	
+    		if(Robot.drivetrain.rightEncoder.getRate() < 10.0 && Robot.drivetrain.rightEncoder.getRate() > -10.0) {
+				return true;
+			}
+//			if(Robot.navX.getYaw() - angle > 0) { // positive angle to travel, robot is turning left
+//
+//				if(Robot.drivetrain.rightEncoder.getRate() > -1.0) {
+//					return true;
+//				}
+//			}
+//			if(Robot.navX.getYaw() - angle < 0) { // negative angle to travel, robot is turning right
+//
+//				if(Robot.drivetrain.rightEncoder.getRate() < 1.0) {
+//					return true;
+//				}
+//			}
+//    		
+//	    	if(!Robot.navX.isMoving()) {
+//	    		return true;
+//	    	}
+    	}
 		return false; 
     }
 

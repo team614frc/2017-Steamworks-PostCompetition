@@ -8,8 +8,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class WaitUntilAllBallsAreShot extends Command {
 
     public WaitUntilAllBallsAreShot() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	setTimeout(5);
     }
 
