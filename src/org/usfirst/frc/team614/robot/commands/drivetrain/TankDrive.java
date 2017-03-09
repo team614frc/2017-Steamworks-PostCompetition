@@ -25,7 +25,7 @@ public class TankDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 //    	Robot.winch.set(OI.driverGamepad.getAxis(Gamepad.leftStick_Y));
-    	Robot.drivetrain.arcadeDrive(OI.driverGamepad.getAxis(Gamepad.leftStick_Y), OI.driverGamepad.getAxis(Gamepad.rightStick_X));
+    	Robot.drivetrain.arcadeDrive(-OI.driverGamepad.getAxis(Gamepad.leftStick_Y), OI.driverGamepad.getAxis(Gamepad.rightStick_X));
     }
 
     // Make this return true when this Command no longer needs to run execute()
