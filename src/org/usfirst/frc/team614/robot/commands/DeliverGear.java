@@ -13,7 +13,7 @@ public class DeliverGear extends CommandGroup {
 
     public DeliverGear(boolean shouldRotateIfNoVision, boolean rotationDirection) {
 //    	addSequential(new RotateToVisionTarget(true, shouldRotateIfNoVision, rotationDirection));
-    	addSequential(new DriveUntilStopped(-.5));
+    	addSequential(new DriveUntilStopped(-.5, 4));
 //    	addSequential(new DriveStraightAtSmartDashboardSpeed());
     }
 }

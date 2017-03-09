@@ -12,11 +12,12 @@ import edu.wpi.first.wpilibj.command.Command;
 //However isMoving seems to include thresholds of its own, not sure if they can be modified
 public class DriveUntilStopped extends Command {
 	private double speed;
-    public DriveUntilStopped(double speed) {
+    public DriveUntilStopped(double speed, double timeout) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivetrain);
     	this.speed = speed;
+    	setTimeout(timeout);
     }
 
     // Called just before this Command runs the first time
@@ -43,7 +44,7 @@ public class DriveUntilStopped extends Command {
     		return true;
     	}
     	else
-    		return false;
+    		return isTimedOut();
     }
 
     // Called once after isFinished returns true

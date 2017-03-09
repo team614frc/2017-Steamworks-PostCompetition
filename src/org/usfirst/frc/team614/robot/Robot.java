@@ -117,13 +117,13 @@ public class Robot extends IterativeRobot {
 //        chooser.addObject("Deliver Red Right Gear", new RightRedGear());
 //        chooser.addObject("Deliver Blue Left Gear", new LeftBlueGear());
 //        chooser.addObject("Deliver Blue Right Gear", new RightBlueGear());
-        chooser.addObject("Drive Past Base Line", new DriveForADistance(-140, -.5));
-        chooser.addObject("Deliver Center Gear", new CenterGear());
+        chooser.addDefault("Deliver Center Gear", new CenterGear());
+        chooser.addObject("Knock Blue Hopper", new BlueKnockHopperAndShoot());
+        chooser.addObject("Drive Past Base Line", new DriveForADistance(-140, .5));
         chooser.addObject("Drive Forward & Turn Right", new DriveForwardAndTurnRight());
         chooser.addObject("Drive Forward & Turn Left", new DriveForwardAndTurnLeft());
 //        chooser.addObject("Knock Red Hopper", new RedKnockHopperAndShoot());
-        chooser.addObject("Knock Blue Hopper", new BlueKnockHopperAndShoot());
-        chooser.addDefault("Do Nothing", new DoNothing());
+        chooser.addObject("Do Nothing", new DoNothing());
         SmartDashboard.putData("Autonomous", chooser);
 
         SmartDashboard.putData("Deliver Red Left Gear", new LeftRedGear());
@@ -166,7 +166,7 @@ public class Robot extends IterativeRobot {
 
         SmartDashboard.putData("Drivetrain Reset Encoder", new ResetDrivetrainEncoder());
         SmartDashboard.putData("Drivetrain Drive Indefinitely", new DriveStraightAtSmartDashboardSpeed());
-        SmartDashboard.putData("Drivetrain Drive Until Stopped", new DriveUntilStopped(.4));
+        SmartDashboard.putData("Drivetrain Drive Until Stopped", new DriveUntilStopped(.4, 5));
         SmartDashboard.putData("Drivetrain Drive for 4 Feet", new DriveForADistance(48, .7));
         SmartDashboard.putData("Rotate To Absolute SmartDashboard Angle", new RotateToSmartDashboardAngle(true));
         SmartDashboard.putData("Rotate To Relative SmartDashboard Angle", new RotateToSmartDashboardAngle(false));
@@ -246,7 +246,7 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
-    	
+
     	cameraIsActive = true;
     	shooter.setUsingEncoder(true);
     	
@@ -290,26 +290,6 @@ public class Robot extends IterativeRobot {
     	
         autonomousCommand = (Command) chooser.getSelected();
         
-        // uhh, ignore these
-//		String autoSelected = SmartDashboard.getString("Autonomous", "Default");
-//		switch(autoSelected) {
-//			case "Drive Straight Indefinitely": {
-//				autonomousCommand = new DriveStraight(.5);
-//				break;
-//			}
-//			case "Drive Straight For a Little Bit": {
-//				autonomousCommand = new DriveStraightForADistance(1, .5);
-//				break;
-//			}
-//			case "Deliver Red Left Gear": {
-//				autonomousCommand = new LeftRedGear();
-//				break;
-//			}
-//			default: {
-//				autonomousCommand = new DoNothing();
-//				break;
-//			}
-//		}
     	
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
@@ -330,7 +310,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
 
-    	
+
     	cameraIsActive = true;
     	shooter.setUsingEncoder(true);
     	

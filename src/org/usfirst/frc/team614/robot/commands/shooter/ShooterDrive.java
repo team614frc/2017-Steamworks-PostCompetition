@@ -39,14 +39,16 @@ public class ShooterDrive extends Command {
 //            	Robot.shooter.setGoalRPS(31.0);
 //
 //        	}
-    		if(Robot.shooter.getUsingEncoder()) {
+//    		if(Robot.shooter.getUsingEncoder()) {
+    		if(Robot.shooter.getRate() == 0) {
+    			 // encoder is dead or hasnt started shooting yet
+    			Robot.shooter.set(.6);
+    		} else {
 				if(Robot.shooter.getRate() <= Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance()) {
 					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Max", Constants.SHOOTER_BANG_MAX));
 				} else if (Robot.shooter.getRate() >= Robot.shooter.getGoalRPS() + Robot.shooter.getTolerance()){
 					Robot.shooter.set(SmartDashboard.getNumber("Shooter Bang Min", Constants.SHOOTER_BANG_MIN));
 				}
-    		} else { // encoder is dead
-    			Robot.shooter.set(.51);
     		}
     	}
     }

@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DriveForwardAndTurnLeft extends CommandGroup {
 
     public DriveForwardAndTurnLeft() {
-    	addSequential(new DriveForADistance(-100, -Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
+    	addSequential(new DriveForADistance(-100, .5));
     	addSequential(new RotateToAngle(-45, true));
     	
     }
