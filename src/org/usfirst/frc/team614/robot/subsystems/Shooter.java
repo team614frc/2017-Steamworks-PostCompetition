@@ -22,6 +22,7 @@ public class Shooter extends Subsystem implements PIDOutput {
 	private double goalRPS = 0;
 	private double tolerance = 0.0;
 	private double PIDspeed = 0.0;
+	private double speed = Constants.SHOOTER_PERCENT;
 	
 	private PIDController velocityController;
 	
@@ -91,9 +92,15 @@ public class Shooter extends Subsystem implements PIDOutput {
 	public VictorSP getMotor() {
 		return shooterMotor;
 	}
-	
+
 	public void set(double speed) {
 		shooterMotor.set(speed);
+	}
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+	public double getSpeed() {
+		return speed;
 	}
 	public void stop() {
 		set(0);

@@ -1,8 +1,8 @@
 package org.usfirst.frc.team614.robot;
 
 import org.team708.robot.util.Gamepad;
-import org.usfirst.frc.team614.robot.commands.DeliverGear;
 import org.usfirst.frc.team614.robot.commands.elevator.RevElevator;
+import org.usfirst.frc.team614.robot.commands.shooter.ChangeSpeedBy10Percent;
 import org.usfirst.frc.team614.robot.commands.shooter.Shoot;
 import org.usfirst.frc.team614.robot.commands.winch.CatchAndClimbRope;
 import org.usfirst.frc.team614.robot.commands.winch.ReverseWinch;
@@ -58,7 +58,9 @@ public class OI {
 	private static final Button revElevator = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
 //	private static final Button revShooterFromBoiler = new JoystickButton(driverGamepad, Gamepad.button_Y);
 //	private static final Button revShooterFromAirship = new JoystickButton(driverGamepad, Gamepad.button_X);
-	private static final Button staticRevShooterFromBoiler = new JoystickButton(operatorGamepad, Gamepad.button_A);
+	private static final Button staticRevShooterFromBoiler = new JoystickButton(operatorGamepad, Gamepad.button_B);
+	private static final Button increaseShooterSpeed = new JoystickButton(operatorGamepad, Gamepad.button_Y);
+	private static final Button decreaseShooterSpeed = new JoystickButton(operatorGamepad, Gamepad.button_A);
 //	private static final Button staticRevShooterFromAirship = new JoystickButton(driverGamepad, Gamepad.button_X);
 
 //	private static final Button deliverGear = new JoystickButton(driverGamepad, Gamepad.button_A);
@@ -76,6 +78,8 @@ public class OI {
 //		revShooterFromAirship.whileHeld(new Shoot(true, true, false, false));
 		
 		staticRevShooterFromBoiler.whileHeld(new Shoot(true, false, false, false, false));
+		increaseShooterSpeed.whenPressed(new ChangeSpeedBy10Percent(true));
+		decreaseShooterSpeed.whenPressed(new ChangeSpeedBy10Percent(false));
 //		staticRevShooterFromAirship.whileHeld(new Shoot(true, true, false, false, false));
 		
 	}

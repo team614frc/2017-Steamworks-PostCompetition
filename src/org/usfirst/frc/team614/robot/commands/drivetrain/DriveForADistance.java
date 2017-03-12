@@ -67,7 +67,7 @@ public class DriveForADistance extends Command
 //	    	}
 
 
-    		if(Robot.drivetrain.rightEncoder.getRate() < 10.0 && Robot.drivetrain.rightEncoder.getRate() > -10.0) {
+    		if(Robot.drivetrain.rightEncoder.getRate() < 2.5 && Robot.drivetrain.rightEncoder.getRate() > -2.5) {
 				return true;
 			}
     	}	
