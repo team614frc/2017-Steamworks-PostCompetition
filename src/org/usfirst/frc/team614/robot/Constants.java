@@ -27,6 +27,7 @@ public class Constants {
 	public static final double shooterD = 0.0;
 	public static final double shooterF = 0.0;
 	public static final double SHOOTER_ENCODER_COUNTS_PER_REV = 1024.0;
+	public static final double SHOOTER_PERCENT = .7;
 	public static final double SHOOTER_RPS= 32;
 	public static final double SHOOTER_BANG_MIN = .5;
 	public static final double SHOOTER_BANG_MAX = .8;

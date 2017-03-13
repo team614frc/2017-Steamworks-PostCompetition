@@ -1,6 +1,5 @@
-package org.usfirst.frc.team614.robot.commands.drivetrain;
+package org.usfirst.frc.team614.robot.commands.shooter;
 
-import org.team708.robot.util.Gamepad;
 import org.usfirst.frc.team614.robot.OI;
 import org.usfirst.frc.team614.robot.Robot;
 
@@ -10,27 +9,40 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class TankDrive extends Command {
+public class ChangeSpeedBy10Percent extends Command {
 
-    public TankDrive() {
+	private boolean increase = false;
+	
+    public ChangeSpeedBy10Percent(boolean increase) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+    	this.increase = increase;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	if(increase) {
+    		if(Robot.shooter.getSpeed() < 1.0) {
+	    		Robot.shooter.setSpeed(
+	    				Robot.shooter.getSpeed() + .1
+				);
+    		}
+    	} else { // decrease
+    		if(Robot.shooter.getSpeed() > 0.0) {
+	    		Robot.shooter.setSpeed(
+	    				Robot.shooter.getSpeed() - .1
+				);
+    		}
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//    	Robot.winch.set(OI.driverGamepad.getAxis(Gamepad.leftStick_Y));
-    	Robot.drivetrain.arcadeDrive(-OI.driverGamepad.getAxis(Gamepad.leftStick_Y), OI.driverGamepad.getAxis(Gamepad.rightStick_X));
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

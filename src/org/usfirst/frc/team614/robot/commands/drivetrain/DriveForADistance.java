@@ -44,7 +44,8 @@ public class DriveForADistance extends Command
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute()
 	{
-		Robot.drivetrain.arcadeDrive(Constants.DRIVETRAIN_AUTONOMOUS_SPEED * Robot.drivetrain.getPIDSpeed(), 0);
+//		Robot.drivetrain.arcadeDrive(Constants.DRIVETRAIN_AUTONOMOUS_SPEED * Robot.drivetrain.getPIDSpeed(), 0);
+		Robot.drivetrain.arcadeDrive(speed * Robot.drivetrain.getPIDSpeed(), 0);
 //		Robot.drivetrain.arcadeDrive(.7 * Robot.drivetrain.getPIDSpeed(), .7 * Robot.drivetrain.getPIDRotateRate());
 //		}
 		
@@ -66,7 +67,7 @@ public class DriveForADistance extends Command
 //	    	}
 
 
-    		if(Robot.drivetrain.rightEncoder.getRate() < 10.0 && Robot.drivetrain.rightEncoder.getRate() > -10.0) {
+    		if(Robot.drivetrain.rightEncoder.getRate() < 2.5 && Robot.drivetrain.rightEncoder.getRate() > -2.5) {
 				return true;
 			}
     	}	
