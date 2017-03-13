@@ -126,10 +126,10 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putBoolean("Camera is Active", cameraIsActive);
 //        SmartDashboard.putBoolean("Gear is in Holder", gearHolder.getIsPushed());
 //        
-//        SmartDashboard.putNumber("Gear Camera Angle", 0);
-//        SmartDashboard.putBoolean("Gear Camera Found", false);
-//        SmartDashboard.putNumber("Shooter Camera Angle", 0);
-//        SmartDashboard.putBoolean("Shooter Camera Found", false);
+        SmartDashboard.putNumber("Gear Camera Angle", 0);
+        SmartDashboard.putBoolean("Gear Camera Found", false);
+        SmartDashboard.putNumber("Shooter Camera Angle", 0);
+        SmartDashboard.putBoolean("Shooter Camera Found", false);
     	
 //        SmartDashboard.putNumber("Drivetrain P", Constants.drivetrainP);
 //        SmartDashboard.putNumber("Drivetrain I", Constants.drivetrainI);
@@ -155,8 +155,6 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putNumber("Shooter D", Constants.shooterD);
 //        SmartDashboard.putNumber("Shooter F", Constants.shooterF);
 //        SmartDashboard.putNumber("Shooter Target (Revs/Sec)", 0);
-//        SmartDashboard.putNumber("Shooter PID Target (XXX)", 0);
-//        SmartDashboard.putNumber("Shooter PID Output (XXX)", 0);
 //        SmartDashboard.putNumber("Shooter PID Error", 0);
 //        SmartDashboard.putNumber("Shooter Encoder Count (Revs*4096)", 0);
         
@@ -342,6 +340,7 @@ public class Robot extends IterativeRobot {
 //		SmartDashboard.putNumber("operatorGamepad POV", OI.operatorGamepad.getPOVs(0));
 		
         // vision
+        
 		SmartDashboard.putBoolean("Camera is Active", cameraIsActive);
     	SmartDashboard.putNumber(
     			"Gear Camera Angle",
