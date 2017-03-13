@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class DriveForADistance extends Command
 {
 	private double distance, speed;
-//	private boolean done = false;
 
 	public DriveForADistance(double distance, double speed)
 	{
@@ -27,16 +26,14 @@ public class DriveForADistance extends Command
 	protected void initialize()
 	{
 		
-//		Robot.navX.reset();
-//		Robot.navX.zeroYaw();
 
-//		Robot.drivetrain.setUsingTurnPID(true);
+		Robot.drivetrain.setUsingTurnPID(true);
 		Robot.drivetrain.setUsingDistancePID(true);
 
 		Robot.drivetrain.leftEncoder.reset();
 		Robot.drivetrain.rightEncoder.reset();
 
-//        Robot.drivetrain.getTurnController().setSetpoint(Robot.navX.getYaw());
+        Robot.drivetrain.getTurnController().setSetpoint(Robot.navX.getYaw());
 //        Robot.drivetrain.getDistanceController().setSetpoint(SmartDashboard.getNumber("Drivetrain Target Distance", 0));
         Robot.drivetrain.getDistanceController().setSetpoint(distance);
 	}
@@ -44,8 +41,8 @@ public class DriveForADistance extends Command
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute()
 	{
-//		Robot.drivetrain.arcadeDrive(Constants.DRIVETRAIN_AUTONOMOUS_SPEED * Robot.drivetrain.getPIDSpeed(), 0);
-		Robot.drivetrain.arcadeDrive(speed * Robot.drivetrain.getPIDSpeed(), 0);
+//		Robot.drivetrain.arcadeDrive(speed * Robot.drivetrain.getPIDSpeed(), 0);
+		Robot.drivetrain.arcadeDrive(speed * Robot.drivetrain.getPIDSpeed(), .7 * Robot.drivetrain.getPIDRotateRate());
 //		Robot.drivetrain.arcadeDrive(.7 * Robot.drivetrain.getPIDSpeed(), .7 * Robot.drivetrain.getPIDRotateRate());
 //		}
 		
@@ -87,7 +84,7 @@ public class DriveForADistance extends Command
 	// Called once after isFinished returns true
 	protected void end()
 	{
-//		Robot.drivetrain.setUsingTurnPID(false);
+		Robot.drivetrain.setUsingTurnPID(false);
 		Robot.drivetrain.setUsingDistancePID(false);
 		Robot.drivetrain.stop();
 	}
@@ -96,7 +93,7 @@ public class DriveForADistance extends Command
 	// subsystems is scheduled to run
 	protected void interrupted()
 	{
-//		Robot.drivetrain.setUsingTurnPID(false);
+		Robot.drivetrain.setUsingTurnPID(false);
 		Robot.drivetrain.setUsingDistancePID(false);
 		Robot.drivetrain.stop();
 	}

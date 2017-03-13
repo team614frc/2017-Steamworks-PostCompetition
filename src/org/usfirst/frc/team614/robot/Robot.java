@@ -1,11 +1,12 @@
 
 package org.usfirst.frc.team614.robot;
 
-import org.usfirst.frc.team614.robot.commands.DoNothing;
 import org.usfirst.frc.team614.robot.commands.autonomous.CenterGear;
+import org.usfirst.frc.team614.robot.commands.autonomous.DoNothing;
 import org.usfirst.frc.team614.robot.commands.autonomous.knockHopper.BlueKnockHopperAndShoot;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveForADistance;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team614.robot.subsystems.DrivetrainCompanion;
 import org.usfirst.frc.team614.robot.subsystems.GearFeeder;
 import org.usfirst.frc.team614.robot.subsystems.Hopper;
 import org.usfirst.frc.team614.robot.subsystems.Pneumatics;
@@ -38,6 +39,7 @@ public class Robot extends IterativeRobot {
 
 	public static AHRS navX;
 	public static Drivetrain drivetrain;
+	public static DrivetrainCompanion drivetrainCompanion;
 	public static Shooter shooter;
 	public static Winch winch;
 	public static GearFeeder gearFeeder;
@@ -72,6 +74,7 @@ public class Robot extends IterativeRobot {
             DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
         }
     	drivetrain = new Drivetrain();
+    	drivetrainCompanion = new DrivetrainCompanion();
     	shooter = new Shooter();
     	winch = new Winch();
     	gearFeeder = new GearFeeder();
