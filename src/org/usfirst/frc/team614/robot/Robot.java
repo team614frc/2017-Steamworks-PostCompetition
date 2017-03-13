@@ -1,41 +1,20 @@
 
 package org.usfirst.frc.team614.robot;
 
-import org.opencv.core.Mat;
-import org.opencv.core.Point;
-import org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team614.robot.commands.DoNothing;
-import org.usfirst.frc.team614.robot.commands.ToggleVisionRotation;
 import org.usfirst.frc.team614.robot.commands.autonomous.CenterGear;
 import org.usfirst.frc.team614.robot.commands.autonomous.DriveForwardAndTurnLeft;
 import org.usfirst.frc.team614.robot.commands.autonomous.DriveForwardAndTurnRight;
-import org.usfirst.frc.team614.robot.commands.autonomous.deliverLeftBlue.LeftBlueGear;
-import org.usfirst.frc.team614.robot.commands.autonomous.deliverLeftRed.LeftRedGear;
-import org.usfirst.frc.team614.robot.commands.autonomous.deliverRightBlue.RightBlueGear;
-import org.usfirst.frc.team614.robot.commands.autonomous.deliverRightRed.RightRedGear;
 import org.usfirst.frc.team614.robot.commands.autonomous.knockHopper.BlueKnockHopperAndShoot;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveForADistance;
-import org.usfirst.frc.team614.robot.commands.drivetrain.DriveStraightAtSmartDashboardSpeed;
-import org.usfirst.frc.team614.robot.commands.drivetrain.DriveUntilStopped;
-import org.usfirst.frc.team614.robot.commands.drivetrain.ResetDrivetrainEncoder;
-import org.usfirst.frc.team614.robot.commands.drivetrain.RotateToSmartDashboardAngle;
-import org.usfirst.frc.team614.robot.commands.navx.ZeroNavxYaw;
-import org.usfirst.frc.team614.robot.commands.shooter.KillShooterEncoderInput;
-import org.usfirst.frc.team614.robot.commands.shooter.ResetShooterEncoder;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.Elevator;
-import org.usfirst.frc.team614.robot.subsystems.GearHolder;
 import org.usfirst.frc.team614.robot.subsystems.Hopper;
 import org.usfirst.frc.team614.robot.subsystems.Shooter;
 import org.usfirst.frc.team614.robot.subsystems.Winch;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -64,7 +43,6 @@ public class Robot extends IterativeRobot {
 	public static Winch winch;
 	public static Elevator elevator;
 	public static Hopper hopper;
-	public static GearHolder gearHolder;
 	
 	public static Servo shooterServo;
 	
@@ -98,7 +76,6 @@ public class Robot extends IterativeRobot {
     	winch = new Winch();
     	elevator = new Elevator();
     	hopper = new Hopper();
-    	gearHolder = new GearHolder();
     	
     	shooterServo = new Servo(RobotMap.shooterServo);
     	
