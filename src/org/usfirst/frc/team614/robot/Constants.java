@@ -43,8 +43,8 @@ public class Constants {
 	public static final double WINCH_ENCODER_COUNTS_PER_REV = 1024; // must be changed
 	public static final double WINCH_ENCODER_DISTANCE_PER_PULSE = 1 / WINCH_ENCODER_COUNTS_PER_REV;
 	
-	// Elevator
-	public static final double ELEVATOR_SPEED = .7;
+	// GearFeeder
+	public static final double FEEDER_SPEED = .7;
 	
 	// Hopper
 	public static final double HOPPER_SPEED = -1.0;

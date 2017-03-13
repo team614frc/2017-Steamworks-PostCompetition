@@ -8,7 +8,7 @@ import org.usfirst.frc.team614.robot.commands.autonomous.DriveForwardAndTurnRigh
 import org.usfirst.frc.team614.robot.commands.autonomous.knockHopper.BlueKnockHopperAndShoot;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveForADistance;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team614.robot.subsystems.Elevator;
+import org.usfirst.frc.team614.robot.subsystems.GearFeeder;
 import org.usfirst.frc.team614.robot.subsystems.Hopper;
 import org.usfirst.frc.team614.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team614.robot.subsystems.Shooter;
@@ -42,7 +42,7 @@ public class Robot extends IterativeRobot {
 	public static Drivetrain drivetrain;
 	public static Shooter shooter;
 	public static Winch winch;
-	public static Elevator elevator;
+	public static GearFeeder gearFeeder;
 	public static Hopper hopper;
 	public static Pneumatics pneumatics;
 	
@@ -76,7 +76,7 @@ public class Robot extends IterativeRobot {
     	drivetrain = new Drivetrain();
     	shooter = new Shooter();
     	winch = new Winch();
-    	elevator = new Elevator();
+    	gearFeeder = new GearFeeder();
     	hopper = new Hopper();
     	pneumatics = new Pneumatics();
     	

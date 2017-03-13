@@ -1,4 +1,4 @@
-package org.usfirst.frc.team614.robot.commands.elevator;
+package org.usfirst.frc.team614.robot.commands.feeder;
 
 import org.team708.robot.util.Gamepad;
 import org.usfirst.frc.team614.robot.Constants;
@@ -11,21 +11,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class RevElevator extends Command {
+public class RevFeeder extends Command {
 
-    public RevElevator() {
+    public RevFeeder() {
         // Use requires() here to declare subsystem dependencies
-         requires(Robot.elevator);
+         requires(Robot.gearFeeder);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-//    	Robot.elevator.set(OI.driverGamepad.getAxis(Gamepad.leftStick_Y);
+//    	Robot.gearFeeder.set(OI.driverGamepad.getAxis(Gamepad.leftStick_Y);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.elevator.set(Constants.ELEVATOR_SPEED);
+    	Robot.gearFeeder.set(Constants.FEEDER_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -35,12 +35,12 @@ public class RevElevator extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.elevator.stop();
+    	Robot.gearFeeder.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.elevator.stop();
+    	Robot.gearFeeder.stop();
     }
 }
