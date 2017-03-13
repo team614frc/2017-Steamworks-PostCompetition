@@ -206,7 +206,7 @@ public class Robot extends IterativeRobot {
 		
 		// vision from camera:
 
-		Thread visionThread;
+		/*Thread visionThread;
 		visionThread = new Thread(() -> {
 			// Get the UsbCamera from CameraServer
 			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
@@ -241,6 +241,7 @@ public class Robot extends IterativeRobot {
 		});
 		visionThread.setDaemon(true);
 		visionThread.start();
+		*/
     }
 	
 	/**
