@@ -2,6 +2,7 @@ package org.usfirst.frc.team614.robot;
 
 import org.team708.robot.util.Gamepad;
 import org.usfirst.frc.team614.robot.commands.elevator.RevElevator;
+import org.usfirst.frc.team614.robot.commands.pneumatics.TogglePiston;
 import org.usfirst.frc.team614.robot.commands.shooter.ChangeSpeedBy10Percent;
 import org.usfirst.frc.team614.robot.commands.shooter.Shoot;
 import org.usfirst.frc.team614.robot.commands.winch.CatchAndClimbRope;
@@ -52,6 +53,9 @@ public class OI {
 	
 	private static final Button revElevator = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
 
+	private static final Button toggleDropper = new JoystickButton(driverGamepad, Gamepad.button_A);
+	private static final Button toggleSqueezer = new JoystickButton(driverGamepad, Gamepad.button_B);
+
 	
 	private static final Button tryToClimbRope = new JoystickButton(operatorGamepad, Gamepad.button_R_Shoulder);
 	private static final Button stopClimber = new JoystickButton(operatorGamepad, Gamepad.button_L_Shoulder);
@@ -71,6 +75,9 @@ public class OI {
 		stopClimber.whenPressed(new StopWinch());
 		reverseClimber.whileHeld(new ReverseWinch());
 		revElevator.whileHeld(new RevElevator());
+
+		toggleDropper.whenPressed(new TogglePiston(true));
+		toggleSqueezer.whenPressed(new TogglePiston(false));
 		
 		staticRevShooterFromBoiler.whileHeld(new Shoot(true, false, false, false, false));
 		increaseShooterSpeed.whenPressed(new ChangeSpeedBy10Percent(true));

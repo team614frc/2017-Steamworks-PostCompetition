@@ -1,5 +1,7 @@
 package org.usfirst.frc.team614.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 // Constant values used throughout the project
 
 public class Constants {
@@ -46,4 +48,9 @@ public class Constants {
 	
 	// Hopper
 	public static final double HOPPER_SPEED = -1.0;
+	
+	// Pneumatics
+	public static final DoubleSolenoid.Value pistonOut = DoubleSolenoid.Value.kForward;
+	public static final DoubleSolenoid.Value pistonIn = DoubleSolenoid.Value.kReverse;
+	
 }

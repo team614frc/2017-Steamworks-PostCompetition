@@ -51,8 +51,4 @@ public class RobotMap {
 	// Power Distribution Board
 	public static final int PDPWinchMotor = 0; // we think it's zero
 	
-	// Pneumatics
-	public static final DoubleSolenoid.Value pistonOut = DoubleSolenoid.Value.kForward;
-	public static final DoubleSolenoid.Value pistonIn = DoubleSolenoid.Value.kReverse;
-
 }
