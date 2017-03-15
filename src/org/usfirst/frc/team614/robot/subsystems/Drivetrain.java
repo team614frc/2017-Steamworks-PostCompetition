@@ -28,6 +28,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
     private double PIDrotateToAngleRate;
     
     private boolean usingTurnPID;
+    public boolean flippyThingButton;
     
     /* The following PID Controller coefficients will need to be tuned */
     /* to match the dynamics of your drive system.  Note that the      */
@@ -50,6 +51,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	public Drivetrain() {
 		
 		usingTurnPID = false;
+		flippyThingButton = false;
 		drivetrain = new RobotDrive(leftMotorA, leftMotorB, rightMotorA, rightMotorB);
 		leftEncoder = new Encoder(RobotMap.drivetrainLeftEncoderA, RobotMap.drivetrainLeftEncoderB, false, Encoder.EncodingType.k4X);
 		rightEncoder = new Encoder(RobotMap.drivetrainRightEncoderA, RobotMap.drivetrainRightEncoderB, false, Encoder.EncodingType.k4X);
@@ -81,7 +83,10 @@ public class Drivetrain extends Subsystem implements PIDOutput {
         setDefaultCommand(new TankDrive());
     }
     public void arcadeDrive(double moveValue, double rotateValue) {
-    	drivetrain.arcadeDrive(moveValue, -rotateValue);
+    	if(flippyThingButton)
+    		drivetrain.arcadeDrive(moveValue, -rotateValue);
+    	else
+    		drivetrain.arcadeDrive(-moveValue, -rotateValue);
     }
     public void stop() {
     	drivetrain.arcadeDrive(0, 0);

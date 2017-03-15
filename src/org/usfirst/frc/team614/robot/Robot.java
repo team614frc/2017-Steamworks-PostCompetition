@@ -234,12 +234,14 @@ public class Robot extends IterativeRobot {
     	pneumatics.compressor.stop();
     	cameraIsActive = true;
     	shooter.setUsingEncoder(true);
+    	winch.setShouldBeStopped(false);
     	
     	// resets NavX and disables the PID controller.
     	Robot.navX.reset();
     	Robot.winch.reset();
     	drivetrain.setUsingTurnPID(false);
     	drivetrain.setUsingDistancePID(false);
+    	drivetrain.flippyThingButton = false;
     	shooter.reset();
     	shooter.setEnabled(false, false);
     	drivetrain.reset();
@@ -263,12 +265,14 @@ public class Robot extends IterativeRobot {
 
     	cameraIsActive = true;
     	shooter.setUsingEncoder(true);
+    	winch.setShouldBeStopped(false);
     	
     	// resets NavX and disables the PID controller.
     	Robot.navX.reset();
     	Robot.winch.reset();
     	drivetrain.setUsingTurnPID(false);
     	drivetrain.setUsingDistancePID(false);
+    	drivetrain.flippyThingButton = false;
     	shooter.reset();
     	shooter.setEnabled(false, false);
     	drivetrain.reset();
@@ -298,12 +302,14 @@ public class Robot extends IterativeRobot {
 
     	cameraIsActive = true;
     	shooter.setUsingEncoder(true);
+    	winch.setShouldBeStopped(false);
     	
     	// resets NavX and disables the PID controller.
     	Robot.navX.reset();
     	Robot.winch.reset();
     	drivetrain.setUsingTurnPID(false);
     	drivetrain.setUsingDistancePID(false);
+    	drivetrain.flippyThingButton = false;
     	shooter.reset();
     	shooter.setEnabled(false, false);
     	drivetrain.reset();

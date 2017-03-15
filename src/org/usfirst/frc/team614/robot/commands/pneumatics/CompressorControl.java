@@ -22,13 +22,20 @@ public class CompressorControl extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.pneumatics.compressor.enabled()) {
-	    	if(DriverStation.getInstance().getBatteryVoltage() < 9.5) {
-	    		Robot.pneumatics.compressor.stop(); // disables compressor
-	    	}
-    	} else { // the compressor is disabled; the voltage was < 9.5 last time it checked
-	    	if(DriverStation.getInstance().getBatteryVoltage() > 10.5) {
-	    		Robot.pneumatics.compressor.start();
+    	
+    	// disable during the winch, no matter what
+    	if(!Robot.winch.shouldBeStopped()) {
+    		Robot.pneumatics.compressor.stop();
+    	} else {
+    	
+	    	if(Robot.pneumatics.compressor.enabled()) {
+		    	if(DriverStation.getInstance().getBatteryVoltage() < 9.5) {
+		    		Robot.pneumatics.compressor.stop(); // disables compressor
+		    	}
+	    	} else { // the compressor is disabled; the voltage was < 9.5 last time it checked
+		    	if(DriverStation.getInstance().getBatteryVoltage() > 10.5) {
+		    		Robot.pneumatics.compressor.start();
+		    	}
 	    	}
     	}
     	
