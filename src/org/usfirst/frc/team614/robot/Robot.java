@@ -53,8 +53,8 @@ public class Robot extends IterativeRobot {
 	public double timeWhenDpadIsReady = 0;
 	
 	public static PowerDistributionPanel pdp;
-	public static NetworkTable gearCamera;
-	public static NetworkTable shooterCamera;
+//	public static NetworkTable gearCamera;
+//	public static NetworkTable shooterCamera;
 	public static OI oi;
 	
     Command autonomousCommand;
@@ -88,11 +88,11 @@ public class Robot extends IterativeRobot {
     	pdp = new PowerDistributionPanel();
 		oi = new OI();
 		
-    	NetworkTable.setServerMode();
-    	NetworkTable.setTeam(614);
-    	NetworkTable.initialize();
-    	gearCamera = NetworkTable.getTable("gearCamera");
-    	shooterCamera = NetworkTable.getTable("shooterCamera");
+//    	NetworkTable.setServerMode();
+//    	NetworkTable.setTeam(614);
+//    	NetworkTable.initialize();
+//    	gearCamera = NetworkTable.getTable("gearCamera");
+//    	shooterCamera = NetworkTable.getTable("shooterCamera");
     	
 
         chooser = new SendableChooser();
@@ -129,10 +129,10 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putBoolean("Camera is Active", cameraIsActive);
 //        SmartDashboard.putBoolean("Gear is in Holder", gearHolder.getIsPushed());
 //        
-        SmartDashboard.putNumber("Gear Camera Angle", 0);
-        SmartDashboard.putBoolean("Gear Camera Found", false);
-        SmartDashboard.putNumber("Shooter Camera Angle", 0);
-        SmartDashboard.putBoolean("Shooter Camera Found", false);
+//        SmartDashboard.putNumber("Gear Camera Angle", 0);
+//        SmartDashboard.putBoolean("Gear Camera Found", false);
+//        SmartDashboard.putNumber("Shooter Camera Angle", 0);
+//        SmartDashboard.putBoolean("Shooter Camera Found", false);
     	
 //        SmartDashboard.putNumber("Drivetrain P", Constants.drivetrainP);
 //        SmartDashboard.putNumber("Drivetrain I", Constants.drivetrainI);
@@ -163,7 +163,7 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putNumber("Shooter Encoder Rate (Revs per Sec)", 0);
         
-//        SmartDashboard.putNumber("Shooter Bang Error", 0);
+        SmartDashboard.putNumber("Shooter Bang Error", 0);
 //        SmartDashboard.putNumber("Shooter Bang Min", Constants.SHOOTER_BANG_MIN);
 //        SmartDashboard.putNumber("Shooter Bang Max", Constants.SHOOTER_BANG_MAX);
         
@@ -340,35 +340,34 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Shooter Bang Error", shooter.getError()); 
 		
         SmartDashboard.putNumber("Shooter Target Speed (%)", shooter.getSpeed());
-//		SmartDashboard.putNumber("operatorGamepad POV", OI.operatorGamepad.getPOVs(0));
 		
         // vision
         
-		SmartDashboard.putBoolean("Camera is Active", cameraIsActive);
-    	SmartDashboard.putNumber(
-    			"Gear Camera Angle",
-    			gearCamera.getNumber("angle", 0)
-		);
-    	SmartDashboard.putNumber(
-    			"Gear Camera Distance",
-    			gearCamera.getNumber("distance", 0)
-		);
-    	SmartDashboard.putBoolean(
-    			"Gear Camera Found",
-    			gearCamera.getBoolean("targetFound", false)
-		);
-    	SmartDashboard.putNumber(
-    			"Shooter Camera Angle",
-    			shooterCamera.getNumber("angle", 0)
-		);
-    	SmartDashboard.putNumber(
-    			"Shooter Camera Distance",
-    			shooterCamera.getNumber("distance", 0)
-		);
-    	SmartDashboard.putBoolean(
-    			"Shooter Camera Found",
-    			shooterCamera.getBoolean("targetFound", false)
-		);
+//		SmartDashboard.putBoolean("Camera is Active", cameraIsActive);
+//    	SmartDashboard.putNumber(
+//    			"Gear Camera Angle",
+//    			gearCamera.getNumber("angle", 0)
+//		);
+//    	SmartDashboard.putNumber(
+//    			"Gear Camera Distance",
+//    			gearCamera.getNumber("distance", 0)
+//		);
+//    	SmartDashboard.putBoolean(
+//    			"Gear Camera Found",
+//    			gearCamera.getBoolean("targetFound", false)
+//		);
+//    	SmartDashboard.putNumber(
+//    			"Shooter Camera Angle",
+//    			shooterCamera.getNumber("angle", 0)
+//		);
+//    	SmartDashboard.putNumber(
+//    			"Shooter Camera Distance",
+//    			shooterCamera.getNumber("distance", 0)
+//		);
+//    	SmartDashboard.putBoolean(
+//    			"Shooter Camera Found",
+//    			shooterCamera.getBoolean("targetFound", false)
+//		);
     }
     
     /**
