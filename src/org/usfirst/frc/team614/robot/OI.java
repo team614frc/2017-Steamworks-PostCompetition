@@ -55,7 +55,7 @@ public class OI {
 //	private static final Button revFeeder = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
 
 	private static final Button toggleDropper = new JoystickButton(driverGamepad, Gamepad.button_A);
-	private static final Button toggleSqueezer = new JoystickButton(driverGamepad, Gamepad.button_B);
+//	private static final Button toggleSqueezer = new JoystickButton(driverGamepad, Gamepad.button_B);
 	private static final Button flippyThing = new JoystickButton(driverGamepad, Gamepad.button_Back);
 
 	
@@ -79,7 +79,7 @@ public class OI {
 //		revFeeder.whileHeld(new RevFeeder());
 
 		toggleDropper.whenPressed(new TogglePiston(true));
-		toggleSqueezer.whenPressed(new TogglePiston(false));
+//		toggleSqueezer.whenPressed(new TogglePiston(false));
 		
 		staticRevShooterFromBoiler.whileHeld(new Shoot(true, false, false, false, false));
 		increaseShooterSpeed.whenPressed(new ChangeSpeedBy10Percent(true));
