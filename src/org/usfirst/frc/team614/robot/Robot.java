@@ -1,10 +1,10 @@
 
 package org.usfirst.frc.team614.robot;
 
+import org.usfirst.frc.team614.robot.commands.autonomous.BlueKnockHopperAndShoot;
 import org.usfirst.frc.team614.robot.commands.autonomous.CenterGear;
 import org.usfirst.frc.team614.robot.commands.autonomous.DoNothing;
 import org.usfirst.frc.team614.robot.commands.autonomous.LeftGear;
-import org.usfirst.frc.team614.robot.commands.autonomous.knockHopper.BlueKnockHopperAndShoot;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveForADistance;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.DrivetrainCompanion;

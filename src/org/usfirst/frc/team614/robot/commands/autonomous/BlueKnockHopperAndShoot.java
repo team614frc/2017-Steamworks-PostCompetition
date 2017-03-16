@@ -1,4 +1,4 @@
-package org.usfirst.frc.team614.robot.commands.autonomous.knockHopper;
+package org.usfirst.frc.team614.robot.commands.autonomous;
 
 import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.commands.RotateToVisionTarget;

@@ -2,7 +2,7 @@ package org.usfirst.frc.team614.robot;
 
 import org.team708.robot.util.Gamepad;
 import org.usfirst.frc.team614.robot.commands.drivetrain.FlippyThingButton;
-import org.usfirst.frc.team614.robot.commands.feeder.RevFeeder;
+import org.usfirst.frc.team614.robot.commands.pneumatics.ActivateGearHolder;
 import org.usfirst.frc.team614.robot.commands.pneumatics.TogglePiston;
 import org.usfirst.frc.team614.robot.commands.shooter.ChangeSpeedBy10Percent;
 import org.usfirst.frc.team614.robot.commands.shooter.Shoot;
@@ -56,7 +56,8 @@ public class OI {
 
 	private static final Button toggleDropper = new JoystickButton(driverGamepad, Gamepad.button_A);
 //	private static final Button toggleSqueezer = new JoystickButton(driverGamepad, Gamepad.button_B);
-	private static final Button flippyThing = new JoystickButton(driverGamepad, Gamepad.button_Back);
+	private static final Button activateGearHolder = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
+	private static final Button flippyThing = new JoystickButton(driverGamepad, Gamepad.button_R_Shoulder);
 
 	
 	private static final Button tryToClimbRope = new JoystickButton(operatorGamepad, Gamepad.button_R_Shoulder);
@@ -76,6 +77,8 @@ public class OI {
 		tryToClimbRope.whenPressed(new CatchAndClimbRope());
 		stopClimber.whenPressed(new StopWinch());
 		reverseClimber.whileHeld(new ReverseWinch());
+		
+		activateGearHolder.whileHeld(new ActivateGearHolder(true));
 //		revFeeder.whileHeld(new RevFeeder());
 
 		toggleDropper.whenPressed(new TogglePiston(true));

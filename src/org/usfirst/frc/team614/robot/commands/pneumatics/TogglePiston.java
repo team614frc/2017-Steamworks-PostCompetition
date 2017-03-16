@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team614.robot.commands.pneumatics;
 
+import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -21,19 +22,19 @@ public class TogglePiston extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(dropper) {
-        	if (Robot.pneumatics.dropper.get().equals(DoubleSolenoid.Value.kForward)) {
-        		Robot.pneumatics.dropper.set(DoubleSolenoid.Value.kReverse);
+//    	if(dropper) {
+        	if (Robot.pneumatics.getDropperState().equals(Constants.pistonIn)) {
+        		Robot.pneumatics.setDropperState(Constants.pistonOut);
         	} else {
-        		Robot.pneumatics.dropper.set(DoubleSolenoid.Value.kForward);
+        		Robot.pneumatics.setDropperState(Constants.pistonIn);
         	}
-    	} else {
-        	if (Robot.pneumatics.squeezer.get().equals(DoubleSolenoid.Value.kForward)) {
-        		Robot.pneumatics.squeezer.set(DoubleSolenoid.Value.kReverse);
-        	} else {
-        		Robot.pneumatics.squeezer.set(DoubleSolenoid.Value.kForward);
-        	}
-    	}
+//    	} else {
+//        	if (Robot.pneumatics.squeezer.get().equals(DoubleSolenoid.Value.kForward)) {
+//        		Robot.pneumatics.squeezer.set(DoubleSolenoid.Value.kReverse);
+//        	} else {
+//        		Robot.pneumatics.squeezer.set(DoubleSolenoid.Value.kForward);
+//        	}
+//    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
