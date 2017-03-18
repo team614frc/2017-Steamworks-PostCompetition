@@ -2,6 +2,7 @@ package org.usfirst.frc.team614.robot.commands;
 
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveForADistance;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveUntilStopped;
+import org.usfirst.frc.team614.robot.commands.drivetrain.RotateToAngle;
 import org.usfirst.frc.team614.robot.commands.pneumatics.ActivateGearHolder;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -16,6 +17,7 @@ public class DeliverGear extends CommandGroup {
     	addSequential(new DriveUntilStopped(-.6, 8));
     	
     	addParallel(new ActivateGearHolder(autonomous));
-    	addSequential(new DriveForADistance(-48, -.6));
+    	addSequential(new DriveForADistance(-96, -.6));
+    	addSequential(new RotateToAngle(-90, true));
     }
 }
