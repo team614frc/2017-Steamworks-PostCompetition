@@ -42,7 +42,7 @@ public class RobotMap {
 	
 	public static final int shooterFireMotor = 6;
 	
-	public static final int elevatorMotor = 7;
+	public static final int feederMotor = 7;
 	
 	public static final int hopperMotor = 8;
 	
@@ -51,8 +51,4 @@ public class RobotMap {
 	// Power Distribution Board
 	public static final int PDPWinchMotor = 0; // we think it's zero
 	
-	// Pneumatics
-	public static final DoubleSolenoid.Value pistonOut = DoubleSolenoid.Value.kForward;
-	public static final DoubleSolenoid.Value pistonIn = DoubleSolenoid.Value.kReverse;
-
 }

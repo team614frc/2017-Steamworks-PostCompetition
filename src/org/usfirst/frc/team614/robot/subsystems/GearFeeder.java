@@ -8,22 +8,22 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class Elevator extends Subsystem {
+public class GearFeeder extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-	private VictorSP elevatorMotor = new VictorSP(RobotMap.elevatorMotor);
+	private VictorSP feederMotor = new VictorSP(RobotMap.feederMotor);
 	
-	public Elevator() {
+	public GearFeeder() {
 		
 	}
 	
 	public void set(double speed) {
-		elevatorMotor.set(speed);
+		feederMotor.set(speed);
 	}
 	public void stop() {
-		elevatorMotor.set(0);
+		feederMotor.set(0);
 	}
 	
     public void initDefaultCommand() {

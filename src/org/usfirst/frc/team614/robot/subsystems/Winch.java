@@ -20,10 +20,12 @@ public class Winch extends Subsystem {
 		
 		winchEncoder.setDistancePerPulse(Constants.WINCH_ENCODER_DISTANCE_PER_PULSE);
 		winchEncoder.reset();
+		
+		shouldBeStopped = true;
 	
 	}
     // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+    // here. Call these from Comm;ands.
 	public void set(double speed) {
 		shouldBeStopped = false;
 		winchMotorA.set(speed);
@@ -45,6 +47,9 @@ public class Winch extends Subsystem {
 	}
 	public boolean shouldBeStopped() {
 		return shouldBeStopped;
+	}
+	public void setShouldBeStopped(boolean set) {
+		shouldBeStopped = set;
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

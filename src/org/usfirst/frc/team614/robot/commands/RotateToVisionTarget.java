@@ -49,15 +49,15 @@ public class RotateToVisionTarget extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(Robot.cameraIsActive) {
-	    	if(usingGearCamera) { // using front gear camera
-		    	angle = Robot.gearCamera.getNumber("angle", 0);
-		    	targetFound = Robot.gearCamera.getBoolean("targetFound", false);
-		    	distance = Robot.gearCamera.getNumber("distance", 0);
-	    	} else { // using shooter camera
-		    	angle = Robot.shooterCamera.getNumber("angle", 0);
-		    	targetFound = Robot.shooterCamera.getBoolean("targetFound", false);
-		    	distance = Robot.shooterCamera.getNumber("distance", 0);
-	    	}
+//	    	if(usingGearCamera) { // using front gear camera
+//		    	angle = Robot.gearCamera.getNumber("angle", 0);
+//		    	targetFound = Robot.gearCamera.getBoolean("targetFound", false);
+//		    	distance = Robot.gearCamera.getNumber("distance", 0);
+//	    	} else { // using shooter camera
+//		    	angle = Robot.shooterCamera.getNumber("angle", 0);
+//		    	targetFound = Robot.shooterCamera.getBoolean("targetFound", false);
+//		    	distance = Robot.shooterCamera.getNumber("distance", 0);
+//	    	}
 	//    	targetFound = true;
 	    	
 	    	if(shouldRotateIfNoVision == true && targetFound == false) { // vision target not yet seen and the robot should act on this

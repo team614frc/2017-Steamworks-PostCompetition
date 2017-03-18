@@ -24,13 +24,11 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	public Encoder rightEncoder;
 	
 	PIDController turnController;
-	PIDController distanceController;
 
     private double PIDrotateToAngleRate;
-    private double PIDdistanceSpeed;
     
     private boolean usingTurnPID;
-    private boolean usingDistancePID;
+    public boolean flippyThingButton;
     
     /* The following PID Controller coefficients will need to be tuned */
     /* to match the dynamics of your drive system.  Note that the      */
@@ -40,7 +38,6 @@ public class Drivetrain extends Subsystem implements PIDOutput {
     
 
     static final double turnTolerance = 0.1f;
-    static final double distanceTolerance = 0.1f;
 	
 	// VictorSP motor controllers
 //	VictorSP leftMotor = new VictorSP(RobotMap.drivetrainLeftMotor);
@@ -54,7 +51,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	public Drivetrain() {
 		
 		usingTurnPID = false;
-		usingDistancePID = false;
+		flippyThingButton = false;
 		drivetrain = new RobotDrive(leftMotorA, leftMotorB, rightMotorA, rightMotorB);
 		leftEncoder = new Encoder(RobotMap.drivetrainLeftEncoderA, RobotMap.drivetrainLeftEncoderB, false, Encoder.EncodingType.k4X);
 		rightEncoder = new Encoder(RobotMap.drivetrainRightEncoderA, RobotMap.drivetrainRightEncoderB, false, Encoder.EncodingType.k4X);
@@ -69,26 +66,15 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 				Constants.drivetrainRotationF,
 				Robot.navX, this
 		);
-		distanceController = new PIDController(
-				Constants.drivetrainDistanceP,
-				Constants.drivetrainDistanceI,
-				Constants.drivetrainDistanceD,
-				Constants.drivetrainDistanceF,
-				rightEncoder, this
-		);
         turnController.setInputRange(-180.0f,  180.0f);
         turnController.setOutputRange(-1.0, 1.0);
         turnController.setAbsoluteTolerance(turnTolerance);
         turnController.setContinuous(true);
         
-        distanceController.setOutputRange(-1.0, 1.0);
-        turnController.setAbsoluteTolerance(distanceTolerance);
-
         /* Add the PID Controller to the Test-mode dashboard, allowing manual  */
         /* tuning of the Turn Controller's P, I and D coefficients.            */
         /* Typically, only the P value needs to be modified.                   */
         LiveWindow.addActuator("DriveSystem", "RotateController", turnController);
-        LiveWindow.addActuator("DriveSystem", "DistanceController", distanceController);
         
 	}
 	
@@ -97,7 +83,10 @@ public class Drivetrain extends Subsystem implements PIDOutput {
         setDefaultCommand(new TankDrive());
     }
     public void arcadeDrive(double moveValue, double rotateValue) {
-    	drivetrain.arcadeDrive(moveValue, -rotateValue);
+    	if(flippyThingButton)
+    		drivetrain.arcadeDrive(moveValue, -rotateValue);
+    	else
+    		drivetrain.arcadeDrive(-moveValue, -rotateValue);
     }
     public void stop() {
     	drivetrain.arcadeDrive(0, 0);
@@ -120,38 +109,30 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		}
 	}
 	public void setUsingDistancePID(boolean set) {
-		usingDistancePID = true;
-		if(set == true) {
-			distanceController.enable();
-		} else {
-			distanceController.disable();
-		}
+		Robot.drivetrainCompanion.setUsingDistancePID(set);
 	}
 	public boolean getUsingTurnPID() {
 		return usingTurnPID;
 	}
 	public boolean getUsingDistancePID() {
-		return usingTurnPID;
+		return Robot.drivetrainCompanion.getUsingDistancePID();
 	}
 	public double getPIDRotateRate() {
 		return PIDrotateToAngleRate;
 	}
 	public double getPIDSpeed() {
-		return PIDdistanceSpeed;
+		return Robot.drivetrainCompanion.getPIDSpeed();
 	}
 	public PIDController getTurnController() {
 		return turnController;
 	}
 	public PIDController getDistanceController() {
-		return distanceController;
+		return Robot.drivetrainCompanion.getDistanceController();
 	}
 
 	public void pidWrite(double output) {
 		if(usingTurnPID)
 			PIDrotateToAngleRate = output;
-		if(usingDistancePID) {
-			PIDdistanceSpeed = output;
-		}
 	}
 }
 

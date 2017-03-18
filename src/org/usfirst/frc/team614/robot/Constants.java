@@ -1,5 +1,7 @@
 package org.usfirst.frc.team614.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 // Constant values used throughout the project
 
 public class Constants {
@@ -41,9 +43,14 @@ public class Constants {
 	public static final double WINCH_ENCODER_COUNTS_PER_REV = 1024; // must be changed
 	public static final double WINCH_ENCODER_DISTANCE_PER_PULSE = 1 / WINCH_ENCODER_COUNTS_PER_REV;
 	
-	// Elevator
-	public static final double ELEVATOR_SPEED = .7;
+	// GearFeeder
+	public static final double FEEDER_SPEED = .7;
 	
 	// Hopper
 	public static final double HOPPER_SPEED = -1.0;
+	
+	// Pneumatics
+	public static final DoubleSolenoid.Value pistonOut = DoubleSolenoid.Value.kForward;
+	public static final DoubleSolenoid.Value pistonIn = DoubleSolenoid.Value.kReverse;
+	
 }
