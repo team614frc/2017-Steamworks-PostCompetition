@@ -22,7 +22,7 @@ public class ActivateGearHolder extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	// open holder
-		Robot.pneumatics.setDropperState(Constants.pistonIn);
+		Robot.pneumatics.setDropperState(Constants.pistonOut);
 		if(autonomous)
 			setTimeout(3);
 
@@ -44,7 +44,7 @@ public class ActivateGearHolder extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	// close holder
-		Robot.pneumatics.setDropperState(Constants.pistonOut);
+		Robot.pneumatics.setDropperState(Constants.pistonIn);
 
     }
 
@@ -52,7 +52,7 @@ public class ActivateGearHolder extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     	// close holder
-		Robot.pneumatics.setDropperState(Constants.pistonOut);
+		Robot.pneumatics.setDropperState(Constants.pistonIn);
 
     }
 }

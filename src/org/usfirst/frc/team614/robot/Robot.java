@@ -100,7 +100,7 @@ public class Robot extends IterativeRobot {
         chooser.addObject("Deliver Left Gear", new LeftGear());
         chooser.addObject("Deliver Right Gear", new LeftGear());
         chooser.addObject("Knock Blue Hopper", new BlueKnockHopperAndShoot());
-        chooser.addObject("Drive Past Base Line", new DriveForADistance(-140, .5));
+        chooser.addObject("Drive Past Base Line", new DriveForADistance(140, -.5));
         chooser.addObject("Do Nothing", new DoNothing());
         SmartDashboard.putData("Autonomous", chooser);
 
@@ -329,8 +329,8 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putNumber("Drivetrain Encoder PID Error", drivetrain.getDistanceController().getError());
         
         
-//        SmartDashboard.putNumber("Drivetrain left Encoder Distance (inches)", drivetrain.leftEncoder.getDistance());
-//        SmartDashboard.putNumber("Drivetrain right Encoder Distance (inches)", drivetrain.rightEncoder.getDistance());
+        SmartDashboard.putNumber("Drivetrain left Encoder Distance (inches)", drivetrain.leftEncoder.getDistance());
+        SmartDashboard.putNumber("Drivetrain right Encoder Distance (inches)", drivetrain.rightEncoder.getDistance());
 //        SmartDashboard.putNumber("Drivetrain right Encoder Rate (inches/sec)", drivetrain.rightEncoder.getRate());
         
     	// winch
