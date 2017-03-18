@@ -159,15 +159,15 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putNumber("Shooter I", Constants.shooterI);
 //        SmartDashboard.putNumber("Shooter D", Constants.shooterD);
 //        SmartDashboard.putNumber("Shooter F", Constants.shooterF);
-//        SmartDashboard.putNumber("Shooter Target (Revs/Sec)", 0);
+        SmartDashboard.putNumber("Shooter Target (Revs/Sec)", 0);
 //        SmartDashboard.putNumber("Shooter PID Error", 0);
 //        SmartDashboard.putNumber("Shooter Encoder Count (Revs*4096)", 0);
         
         SmartDashboard.putNumber("Shooter Encoder Rate (Revs per Sec)", 0);
         
         SmartDashboard.putNumber("Shooter Bang Error", 0);
-//        SmartDashboard.putNumber("Shooter Bang Min", Constants.SHOOTER_BANG_MIN);
-//        SmartDashboard.putNumber("Shooter Bang Max", Constants.SHOOTER_BANG_MAX);
+        SmartDashboard.putNumber("Shooter Bang Min", Constants.SHOOTER_BANG_MIN);
+        SmartDashboard.putNumber("Shooter Bang Max", Constants.SHOOTER_BANG_MAX);
         
         SmartDashboard.putNumber("Shooter Target Speed (%)", Constants.SHOOTER_PERCENT);
 		

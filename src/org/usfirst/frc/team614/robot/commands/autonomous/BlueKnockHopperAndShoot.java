@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class BlueKnockHopperAndShoot extends CommandGroup {
 
     public BlueKnockHopperAndShoot() {
-    	double speed = 1.0;
+    	double speed = -1.0;
     	
     	addSequential(new DriveForADistance(-20, speed));
     	addSequential(new RotateToAngle(-35, true));
