@@ -14,10 +14,11 @@ public class DeliverGear extends CommandGroup {
 
     public DeliverGear(boolean shouldRotateIfNoVision, boolean rotationDirection, boolean autonomous) {
     	
-    	addSequential(new DriveUntilStopped(-.6, 8));
+    	addSequential(new DriveUntilStopped(-.8, 8));
     	
     	addParallel(new ActivateGearHolder(autonomous));
+    	addSequential(new Wait(.5));
     	addSequential(new DriveForADistance(-96, -.6));
-    	addSequential(new RotateToAngle(-90, true));
+//    	addSequential(new RotateToAngle(-90, true));
     }
 }

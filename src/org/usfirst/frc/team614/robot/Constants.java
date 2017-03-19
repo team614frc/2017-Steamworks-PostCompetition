@@ -31,8 +31,8 @@ public class Constants {
 	public static final double SHOOTER_ENCODER_COUNTS_PER_REV = 1024.0;
 	public static final double SHOOTER_PERCENT = .7;
 	public static final double SHOOTER_RPS= 32;
-	public static final double SHOOTER_BANG_MIN = .5;
-	public static final double SHOOTER_BANG_MAX = .8;
+	public static final double SHOOTER_BANG_MIN = .6;
+	public static final double SHOOTER_BANG_MAX = .85;
 	public static final double SHOOTER_DISTANCE_PER_PULSE = 1 / SHOOTER_ENCODER_COUNTS_PER_REV;
 	
 	// Winch
