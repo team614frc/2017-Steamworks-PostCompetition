@@ -5,6 +5,7 @@ import org.usfirst.frc.team614.robot.commands.autonomous.BlueKnockHopperAndShoot
 import org.usfirst.frc.team614.robot.commands.autonomous.CenterGear;
 import org.usfirst.frc.team614.robot.commands.autonomous.DoNothing;
 import org.usfirst.frc.team614.robot.commands.autonomous.LeftGear;
+import org.usfirst.frc.team614.robot.commands.autonomous.RedKnockHopperAndShoot;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveForADistance;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.DrivetrainCompanion;
@@ -99,7 +100,8 @@ public class Robot extends IterativeRobot {
         chooser.addDefault("Deliver Center Gear", new CenterGear());
         chooser.addObject("Deliver Left Gear", new LeftGear());
         chooser.addObject("Deliver Right Gear", new LeftGear());
-        chooser.addObject("Knock Blue Hopper", new BlueKnockHopperAndShoot());
+        chooser.addObject("Knock Blue Hopper and Shoot", new BlueKnockHopperAndShoot());
+        chooser.addObject("Knock Red Hopper and Shoot", new RedKnockHopperAndShoot());
         chooser.addObject("Drive Past Base Line", new DriveForADistance(140, -.5));
         chooser.addObject("Do Nothing", new DoNothing());
         SmartDashboard.putData("Autonomous", chooser);
