@@ -1,4 +1,4 @@
-package org.usfirst.frc.team614.robot.commands.autonomous.knockHopper;
+package org.usfirst.frc.team614.robot.commands.autonomous;
 
 import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.commands.RotateToVisionTarget;
@@ -12,20 +12,20 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class BlueKnockHopperAndShoot extends CommandGroup {
+public class RedKnockHopperAndShoot extends CommandGroup {
 
-    public BlueKnockHopperAndShoot() {
-    	double speed = 1.0;
+    public RedKnockHopperAndShoot() {
+    	double speed = -1.0;
     	
     	addSequential(new DriveForADistance(-20, speed));
-    	addSequential(new RotateToAngle(-35, true));
+    	addSequential(new RotateToAngle(35, true));
     	addSequential(new DriveForADistance(-80, speed));
     	addSequential(new RotateToAngle(0, true));
     	addSequential(new DriveForADistance(-70, speed));
     	
     	addParallel(new Shoot(false, false, false, false, false));
     	
-    	addParallel(new RotateToAngle(13, true));
+    	addParallel(new RotateToAngle(-13, true));
     	/*
     	addSequential(new DriveStraightForADistance(-118, -Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
     	addSequential(new RotateToAngle(90, true));

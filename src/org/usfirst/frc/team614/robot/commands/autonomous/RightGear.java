@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class RightGear extends CommandGroup {
 
     public RightGear() {
-    	addSequential(new DriveForADistance(-125, .5));
+    	addSequential(new DriveForADistance(100, -.5));
     	addSequential(new RotateToAngle(-45, true));
 
-    	addSequential(new DeliverGear(false, false));
+    	addSequential(new DeliverGear(false, false, true));
     }
 }

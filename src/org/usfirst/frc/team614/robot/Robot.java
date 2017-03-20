@@ -1,10 +1,10 @@
 
 package org.usfirst.frc.team614.robot;
 
+import org.usfirst.frc.team614.robot.commands.autonomous.BlueKnockHopperAndShoot;
 import org.usfirst.frc.team614.robot.commands.autonomous.CenterGear;
 import org.usfirst.frc.team614.robot.commands.autonomous.DoNothing;
 import org.usfirst.frc.team614.robot.commands.autonomous.LeftGear;
-import org.usfirst.frc.team614.robot.commands.autonomous.knockHopper.BlueKnockHopperAndShoot;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveForADistance;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.DrivetrainCompanion;
@@ -100,7 +100,7 @@ public class Robot extends IterativeRobot {
         chooser.addObject("Deliver Left Gear", new LeftGear());
         chooser.addObject("Deliver Right Gear", new LeftGear());
         chooser.addObject("Knock Blue Hopper", new BlueKnockHopperAndShoot());
-        chooser.addObject("Drive Past Base Line", new DriveForADistance(-140, .5));
+        chooser.addObject("Drive Past Base Line", new DriveForADistance(140, -.5));
         chooser.addObject("Do Nothing", new DoNothing());
         SmartDashboard.putData("Autonomous", chooser);
 
@@ -142,8 +142,8 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putNumber("Drivetrain F", Constants.drivetrainF);
 //        SmartDashboard.putNumber("Drivetrain Target Speed", Constants.DRIVETRAIN_AUTONOMOUS_SPEED);
 //        SmartDashboard.putNumber("Drivetrain Target Distance", -90);
-//        SmartDashboard.putNumber("Drivetrain left Encoder Distance (inches)", 0);
-//        SmartDashboard.putNumber("Drivetrain right Encoder Distance (inches)", 0);
+        SmartDashboard.putNumber("Drivetrain left Encoder Distance (inches)", 0);
+        SmartDashboard.putNumber("Drivetrain right Encoder Distance (inches)", 0);
 //        SmartDashboard.putNumber("Drivetrain right Encoder Rate (inches/sec)", 0);
 //        SmartDashboard.putNumber("Drivetrain Rotation Target (Degrees (-180, +180))", 0);
 //
@@ -159,15 +159,15 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putNumber("Shooter I", Constants.shooterI);
 //        SmartDashboard.putNumber("Shooter D", Constants.shooterD);
 //        SmartDashboard.putNumber("Shooter F", Constants.shooterF);
-//        SmartDashboard.putNumber("Shooter Target (Revs/Sec)", 0);
+        SmartDashboard.putNumber("Shooter Target (Revs/Sec)", 0);
 //        SmartDashboard.putNumber("Shooter PID Error", 0);
 //        SmartDashboard.putNumber("Shooter Encoder Count (Revs*4096)", 0);
         
         SmartDashboard.putNumber("Shooter Encoder Rate (Revs per Sec)", 0);
         
         SmartDashboard.putNumber("Shooter Bang Error", 0);
-//        SmartDashboard.putNumber("Shooter Bang Min", Constants.SHOOTER_BANG_MIN);
-//        SmartDashboard.putNumber("Shooter Bang Max", Constants.SHOOTER_BANG_MAX);
+        SmartDashboard.putNumber("Shooter Bang Min", Constants.SHOOTER_BANG_MIN);
+        SmartDashboard.putNumber("Shooter Bang Max", Constants.SHOOTER_BANG_MAX);
         
         SmartDashboard.putNumber("Shooter Target Speed (%)", Constants.SHOOTER_PERCENT);
 		
@@ -329,8 +329,8 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putNumber("Drivetrain Encoder PID Error", drivetrain.getDistanceController().getError());
         
         
-//        SmartDashboard.putNumber("Drivetrain left Encoder Distance (inches)", drivetrain.leftEncoder.getDistance());
-//        SmartDashboard.putNumber("Drivetrain right Encoder Distance (inches)", drivetrain.rightEncoder.getDistance());
+        SmartDashboard.putNumber("Drivetrain left Encoder Distance (inches)", drivetrain.leftEncoder.getDistance());
+        SmartDashboard.putNumber("Drivetrain right Encoder Distance (inches)", drivetrain.rightEncoder.getDistance());
 //        SmartDashboard.putNumber("Drivetrain right Encoder Rate (inches/sec)", drivetrain.rightEncoder.getRate());
         
     	// winch
