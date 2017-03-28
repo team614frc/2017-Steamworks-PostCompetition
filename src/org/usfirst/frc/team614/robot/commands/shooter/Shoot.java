@@ -1,7 +1,7 @@
 package org.usfirst.frc.team614.robot.commands.shooter;
 
 import org.usfirst.frc.team614.robot.Robot;
-import org.usfirst.frc.team614.robot.commands.RotateToVisionTarget;
+import org.usfirst.frc.team614.robot.commands.drivetrain.RotateToVisionTarget;
 import org.usfirst.frc.team614.robot.commands.hopper.RevHopper;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -25,7 +25,8 @@ public class Shoot extends CommandGroup {
     	// if in teleop, don't rotate if no vision targeting is recieved; default left/right rotation is ignored.
     	// if camera is broken, don't rotate at all
     	if(shouldRotateAtAll) {
-    		addSequential(new RotateToVisionTarget(false, shouldRotateIfNoVision, rotationDirection)); // on blue side => rotate right and vice versa
+//    		addSequential(new RotateToVisionTarget(false, shouldRotateIfNoVision, rotationDirection)); // on blue side => rotate right and vice versa
+    		addParallel(new RotateToVisionTarget(false, shouldRotateIfNoVision, rotationDirection)); // on blue side => rotate right and vice versa
     	}
     	// wait until shooter is up to speed...
     	addSequential(new WaitUntilShooterIsAtTargetSpeed());
@@ -36,7 +37,7 @@ public class Shoot extends CommandGroup {
     	} else {
     		// autonomous:
     		// approx. time for all balls to shoot
-        	addSequential(new WaitUntilAllBallsAreShot()); // doesnt work haha woops
+//        	addSequential(new WaitUntilAllBallsAreShot()); // doesnt work haha woops
     	}
     	
     }

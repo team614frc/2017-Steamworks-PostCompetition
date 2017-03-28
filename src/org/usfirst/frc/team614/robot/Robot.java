@@ -97,7 +97,9 @@ public class Robot extends IterativeRobot {
     	
 
         chooser = new SendableChooser();
-        chooser.addDefault("Deliver Center Gear", new CenterGear());
+        chooser.addDefault("Deliver Center Gear and Stop", new CenterGear());
+        chooser.addDefault("[RED] Deliver Center Gear and Shoot", new CenterGear());
+        chooser.addDefault("[BLUE] Deliver Center Gear and Shoot", new CenterGear());
         chooser.addObject("Deliver Left Gear", new LeftGear());
         chooser.addObject("Deliver Right Gear", new LeftGear());
         chooser.addObject("Knock Blue Hopper and Shoot", new BlueKnockHopperAndShoot());

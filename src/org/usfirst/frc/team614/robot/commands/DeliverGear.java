@@ -17,8 +17,7 @@ public class DeliverGear extends CommandGroup {
     	addSequential(new DriveUntilStopped(-.8, 4));
     	
     	addParallel(new ActivateGearHolder(autonomous));
-    	addSequential(new Wait(.5));
+//    	addSequential(new Wait(.5));
     	addSequential(new DriveForADistance(-96, -.6));
-//    	addSequential(new RotateToAngle(-90, true));
     }
 }

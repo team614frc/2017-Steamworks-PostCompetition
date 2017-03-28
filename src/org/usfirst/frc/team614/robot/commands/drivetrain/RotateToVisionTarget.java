@@ -1,9 +1,9 @@
-package org.usfirst.frc.team614.robot.commands;
+package org.usfirst.frc.team614.robot.commands.drivetrain;
 
+import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * based on vision, rotates to the left for the right gear lift
@@ -68,10 +68,10 @@ public class RotateToVisionTarget extends Command {
 	    		}
 	    	}
 	    	else if(targetFound) { // vision target seen
-	    		if(usingGearCamera)
+	    		if(usingGearCamera) // gear camera
 	    			Robot.drivetrain.getTurnController().setSetpoint(angle);
-	    		else
-	    			Robot.drivetrain.getTurnController().setSetpoint(angle-10);
+	    		else // shooter/ camera
+	    			Robot.drivetrain.getTurnController().setSetpoint(angle + Constants.SHOOTER_CAMERA_OFFSET);
 	    	}
 	//    	
 	    	Robot.drivetrain.arcadeDrive(0, .7 * Robot.drivetrain.getPIDRotateRate());
