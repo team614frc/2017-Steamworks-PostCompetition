@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Shooter extends Subsystem implements PIDOutput {
 
+	public boolean isOnTarget = false;
 	private boolean isEnabled = false;
 	private boolean usingEncoder = true;
 	private boolean shootingFromAirship = true; // true if robot is shooting from airship; false if robot is right up to the boiler

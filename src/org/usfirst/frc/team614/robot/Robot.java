@@ -1,10 +1,12 @@
 
 package org.usfirst.frc.team614.robot;
 
+import org.usfirst.frc.team614.robot.commands.autonomous.BlueCenterGearAndShoot;
 import org.usfirst.frc.team614.robot.commands.autonomous.BlueKnockHopperAndShoot;
 import org.usfirst.frc.team614.robot.commands.autonomous.CenterGear;
 import org.usfirst.frc.team614.robot.commands.autonomous.DoNothing;
 import org.usfirst.frc.team614.robot.commands.autonomous.LeftGear;
+import org.usfirst.frc.team614.robot.commands.autonomous.RedCenterGearAndShoot;
 import org.usfirst.frc.team614.robot.commands.autonomous.RedKnockHopperAndShoot;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveForADistance;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
@@ -26,6 +28,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -55,7 +58,7 @@ public class Robot extends IterativeRobot {
 	
 	public static PowerDistributionPanel pdp;
 //	public static NetworkTable gearCamera;
-//	public static NetworkTable shooterCamera;
+	public static NetworkTable shooterCamera;
 	public static OI oi;
 	
     Command autonomousCommand;
@@ -89,17 +92,17 @@ public class Robot extends IterativeRobot {
     	pdp = new PowerDistributionPanel();
 		oi = new OI();
 		
-//    	NetworkTable.setServerMode();
-//    	NetworkTable.setTeam(614);
-//    	NetworkTable.initialize();
+    	NetworkTable.setServerMode();
+    	NetworkTable.setTeam(614);
+    	NetworkTable.initialize();
 //    	gearCamera = NetworkTable.getTable("gearCamera");
-//    	shooterCamera = NetworkTable.getTable("shooterCamera");
+    	shooterCamera = NetworkTable.getTable("shooterCamera");
     	
 
         chooser = new SendableChooser();
         chooser.addDefault("Deliver Center Gear and Stop", new CenterGear());
-        chooser.addDefault("[RED] Deliver Center Gear and Shoot", new CenterGear());
-        chooser.addDefault("[BLUE] Deliver Center Gear and Shoot", new CenterGear());
+        chooser.addDefault("[RED] Deliver Center Gear and Shoot", new RedCenterGearAndShoot());
+        chooser.addDefault("[BLUE] Deliver Center Gear and Shoot", new BlueCenterGearAndShoot());
         chooser.addObject("Deliver Left Gear", new LeftGear());
         chooser.addObject("Deliver Right Gear", new LeftGear());
         chooser.addObject("Knock Blue Hopper and Shoot", new BlueKnockHopperAndShoot());
@@ -137,8 +140,10 @@ public class Robot extends IterativeRobot {
 //        
 //        SmartDashboard.putNumber("Gear Camera Angle", 0);
 //        SmartDashboard.putBoolean("Gear Camera Found", false);
-//        SmartDashboard.putNumber("Shooter Camera Angle", 0);
-//        SmartDashboard.putBoolean("Shooter Camera Found", false);
+        SmartDashboard.putBoolean("Shooter Is On Target", shooter.isOnTarget);
+        SmartDashboard.putNumber("Shooter Camera Angle", 0);
+        SmartDashboard.putNumber("Shooter Camera Distance", 0);
+        SmartDashboard.putBoolean("Shooter Camera Found", false);
     	
 //        SmartDashboard.putNumber("Drivetrain P", Constants.drivetrainP);
 //        SmartDashboard.putNumber("Drivetrain I", Constants.drivetrainI);
@@ -368,18 +373,26 @@ public class Robot extends IterativeRobot {
 //    			"Gear Camera Found",
 //    			gearCamera.getBoolean("targetFound", false)
 //		);
-//    	SmartDashboard.putNumber(
-//    			"Shooter Camera Angle",
-//    			shooterCamera.getNumber("angle", 0)
-//		);
-//    	SmartDashboard.putNumber(
-//    			"Shooter Camera Distance",
-//    			shooterCamera.getNumber("distance", 0)
-//		);
-//    	SmartDashboard.putBoolean(
-//    			"Shooter Camera Found",
-//    			shooterCamera.getBoolean("targetFound", false)
-//		);
+        
+        // TERNARY OPERATOR BOYS HERE WE GO
+        // HAHA
+        SmartDashboard.putBoolean("Shooter Is On Target", (
+        		shooterCamera.getNumber("angle", 0) > -5 &&
+        		shooterCamera.getNumber("angle", 0) < 5
+        		) ? true : false);
+        
+    	SmartDashboard.putNumber(
+    			"Shooter Camera Angle",
+    			shooterCamera.getNumber("angle", 0)
+		);
+    	SmartDashboard.putNumber(
+    			"Shooter Camera Distance",
+    			shooterCamera.getNumber("distance", 0)
+		);
+    	SmartDashboard.putBoolean(
+    			"Shooter Camera Found",
+    			shooterCamera.getBoolean("targetFound", false)
+		);
     }
     
     /**

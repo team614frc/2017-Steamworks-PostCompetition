@@ -2,6 +2,7 @@ package org.usfirst.frc.team614.robot;
 
 import org.team708.robot.util.Gamepad;
 import org.usfirst.frc.team614.robot.commands.drivetrain.FlippyThingButton;
+import org.usfirst.frc.team614.robot.commands.drivetrain.RotateToVisionTarget;
 import org.usfirst.frc.team614.robot.commands.pneumatics.ActivateGearHolder;
 import org.usfirst.frc.team614.robot.commands.pneumatics.TogglePiston;
 import org.usfirst.frc.team614.robot.commands.shooter.ChangeSpeedBy10Percent;
@@ -59,6 +60,8 @@ public class OI {
 	private static final Button activateGearHolder = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
 	private static final Button flippyThing = new JoystickButton(driverGamepad, Gamepad.button_R_Shoulder);
 
+	private static final Button TESTING_VISION_ROTATION = new JoystickButton(driverGamepad, Gamepad.button_X);
+	private static final Button TESTING_RINGLIGHT_TOGGLE = new JoystickButton(driverGamepad, Gamepad.button_Y);
 	
 	private static final Button tryToClimbRope = new JoystickButton(operatorGamepad, Gamepad.button_R_Shoulder);
 	private static final Button stopClimber = new JoystickButton(operatorGamepad, Gamepad.button_L_Shoulder);
@@ -72,7 +75,8 @@ public class OI {
 
 	// Binding of Commands
 	public OI() {
-		
+		TESTING_VISION_ROTATION.whileHeld(new RotateToVisionTarget(false, true, true));
+		TESTING_RINGLIGHT_TOGGLE.whenPressed(new TogglePiston(true));
 		
 		tryToClimbRope.whenPressed(new CatchAndClimbRope());
 		stopClimber.whenPressed(new StopWinch());

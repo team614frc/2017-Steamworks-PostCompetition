@@ -15,7 +15,9 @@ public class RotateToVisionTarget extends Command {
 
 	boolean usingGearCamera = false;
 	boolean shouldRotateIfNoVision = false;
-	boolean rotationDirection = false; // left for false, right for true
+	boolean rotationDirection = false;	// left for false, right for true
+										// used if the robot loses sight of its vision target
+	boolean hitTarget = false;
 	
 	double angle = 0;
 	double distance = 0;
@@ -25,11 +27,12 @@ public class RotateToVisionTarget extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivetrain);
-    	
+
     	this.rotationDirection = rotationDirection;
     	this.shouldRotateIfNoVision = shouldRotateIfNoVision;
     	this.usingGearCamera = usingGearCamera;
     	
+    	hitTarget = false;
     	angle = 0;
     	distance = 0;
     	this.usingGearCamera = usingGearCamera;
@@ -44,36 +47,58 @@ public class RotateToVisionTarget extends Command {
 		Robot.drivetrain.setUsingTurnPID(true);
 		Robot.drivetrain.getTurnController().setSetpoint(Robot.navX.getAngle());
 
+		Robot.shooter.isOnTarget = false;
+		
+    	angle = Robot.shooterCamera.getNumber("angle", 0);
+    	targetFound = Robot.shooterCamera.getBoolean("targetFound", false);
+//    	distance = Robot.shooterCamera.getNumber("distance", 0);
+		Robot.drivetrain.getTurnController().setSetpoint(Robot.navX.getYaw() + angle + Constants.SHOOTER_CAMERA_OFFSET);
+
+		
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(Robot.cameraIsActive) {
 //	    	if(usingGearCamera) { // using front gear camera
-//		    	angle = Robot.gearCamera.getNumber("angle", 0);
-//		    	targetFound = Robot.gearCamera.getBoolean("targetFound", false);
-//		    	distance = Robot.gearCamera.getNumber("distance", 0);
+////		    	angle = Robot.gearCamera.getNumber("angle", 0);
+////		    	targetFound = Robot.gearCamera.getBoolean("targetFound", false);
+////		    	distance = Robot.gearCamera.getNumber("distance", 0);
 //	    	} else { // using shooter camera
-//		    	angle = Robot.shooterCamera.getNumber("angle", 0);
-//		    	targetFound = Robot.shooterCamera.getBoolean("targetFound", false);
+		    	angle = Robot.shooterCamera.getNumber("angle", 0);
+		    	targetFound = Robot.shooterCamera.getBoolean("targetFound", false);
 //		    	distance = Robot.shooterCamera.getNumber("distance", 0);
 //	    	}
-	//    	targetFound = true;
+//	    	targetFound = true;
 	    	
 	    	if(shouldRotateIfNoVision == true && targetFound == false) { // vision target not yet seen and the robot should act on this
-	    		if(rotationDirection) { // spin right
-	    			Robot.drivetrain.getTurnController().setSetpoint(179.9);
-	    		} else { // spin left
-	    			Robot.drivetrain.getTurnController().setSetpoint(-179.9);
-	    		}
+//	    		if(rotationDirection) { // spin right
+//	    			Robot.drivetrain.getTurnController().setSetpoint(179.9);
+//	    		} else { // spin left
+//	    			Robot.drivetrain.getTurnController().setSetpoint(-179.9);
+//	    		}
 	    	}
 	    	else if(targetFound) { // vision target seen
-	    		if(usingGearCamera) // gear camera
-	    			Robot.drivetrain.getTurnController().setSetpoint(angle);
-	    		else // shooter/ camera
-	    			Robot.drivetrain.getTurnController().setSetpoint(angle + Constants.SHOOTER_CAMERA_OFFSET);
+	    		// stores target rotation direction in case the robot loses vision target
+//	    		if(angle > 0) // rotate right
+//	    			rotationDirection = true;
+//	    		else // rotate left
+//	    			rotationDirection = false;
+	    		
+	    		// continuously update the target angle for rotating
+//	    		if(usingGearCamera) { // gear camera
+//	    			Robot.drivetrain.getTurnController().setSetpoint(angle);
+//	    		} else { // shooter/ camera
+//	    			Robot.drivetrain.getTurnController().setSetpoint(angle + Constants.SHOOTER_CAMERA_OFFSET);
+//	    		}
+    		}
+	    	if(angle > -5 && angle < 5) {
+	    		hitTarget = true;
+	    	} else {
+    			if(!hitTarget) {
+    				Robot.drivetrain.getTurnController().setSetpoint(angle + Constants.SHOOTER_CAMERA_OFFSET);
+    			}
 	    	}
-	//    	
 	    	Robot.drivetrain.arcadeDrive(0, .7 * Robot.drivetrain.getPIDRotateRate());
     	}
     }
