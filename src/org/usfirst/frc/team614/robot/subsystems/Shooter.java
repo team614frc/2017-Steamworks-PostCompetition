@@ -1,17 +1,21 @@
 package org.usfirst.frc.team614.robot.subsystems;
 
+import org.team708.robot.util.Gamepad;
 import org.usfirst.frc.team614.robot.Constants;
+import org.usfirst.frc.team614.robot.OI;
 import org.usfirst.frc.team614.robot.RobotMap;
 import org.usfirst.frc.team614.robot.commands.shooter.ShooterDrive;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
+import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  *
@@ -38,7 +42,34 @@ public class Shooter extends Subsystem implements PIDOutput {
 	public Shooter() {
 		
 		talon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-		talon.configEncoderCodesPerRev(codesPerRev);
+
+		talon.reverseSensor(true);
+		
+		talon.changeControlMode(TalonControlMode.Speed);
+		talon.set(0.0);
+		
+		
+		talon.reverseSensor(true);
+		talon.configEncoderCodesPerRev(128);
+
+        talon.setProfile(1);
+        
+        // PID TUNING PARAMETERS for FIRE MOTOR
+        // see 12.4.2 of CAN Talon SRX Software Reference Manual
+        talon.setF(.1094);
+        talon.setP(.22);
+        talon.setI(0);
+        talon.setD(0);
+        
+//		setInputRange(0, 800000);
+//      setAbsoluteTolerance(1000);
+
+        talon.enable();
+        /* Add the PID Controller to the Test-mode dashboard, allowing manual  */
+        /* tuning of the Turn Controller's P, I and D coefficients.            */
+        /* Typically, only the P value needs to be modified.                   */
+        LiveWindow.addActuator("ShooterSystem", "ShooterSpeed", talon);
+		
 		
 		velocityController = new PIDController(
 				Constants.shooterP,
@@ -135,11 +166,9 @@ public class Shooter extends Subsystem implements PIDOutput {
         setDefaultCommand(new ShooterDrive());
     }
 
-
 	public void pidWrite(double output) {
 		PIDspeed = output;
 	}
-
-
 }
+
 

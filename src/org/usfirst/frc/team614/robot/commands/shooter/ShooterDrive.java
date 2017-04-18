@@ -26,9 +26,11 @@ public class ShooterDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+
+		Robot.shooter.talon.changeControlMode(TalonControlMode.Speed);
+    	Robot.shooter.talon.set(OI.driverGamepad.getAxis(Gamepad.leftStick_Y) * 1500.0D);
     	
-    	
-    	if(Robot.shooter.isEnabled()) {
+//    	if(Robot.shooter.isEnabled()) {
 //        	Robot.shooter.getVelocityController().setSetpoint(SmartDashboard.getNumber("Shooter Target Speed (Revs per Sec)", 0));
         	
         	
@@ -46,13 +48,13 @@ public class ShooterDrive extends Command {
 //    					Robot.shooter.getSpeed()
 //				);
 //    		} else {
-				if(Robot.shooter.getRate() <= Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance()) {
-					Robot.shooter.set(Constants.SHOOTER_BANG_MAX);
-				} else if (Robot.shooter.getRate() >= Robot.shooter.getGoalRPS() + Robot.shooter.getTolerance()){
-					Robot.shooter.set(Constants.SHOOTER_BANG_MIN);
-				}
+//				if(Robot.shooter.getRate() <= Robot.shooter.getGoalRPS() - Robot.shooter.getTolerance()) {
+//					Robot.shooter.set(Constants.SHOOTER_BANG_MAX);
+//				} else if (Robot.shooter.getRate() >= Robot.shooter.getGoalRPS() + Robot.shooter.getTolerance()){
+//					Robot.shooter.set(Constants.SHOOTER_BANG_MIN);
+//				}
 //    		}
-    	}
+//    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

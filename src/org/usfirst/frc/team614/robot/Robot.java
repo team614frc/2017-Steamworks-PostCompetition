@@ -180,6 +180,8 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putNumber("Shooter Target Speed (%)", Constants.SHOOTER_PERCENT);
 		
+        SmartDashboard.putNumber("Shooter CAN Talon Speed", 0);
+        
 //        SmartDashboard.putNumber("Shooter Tolerance", 0);
 //        SmartDashboard.putNumber("Shooter Servo Angle", shooterServo.getAngle());
 //
@@ -353,11 +355,14 @@ public class Robot extends IterativeRobot {
         
         // shooter
 //        shooter.setTolerance(SmartDashboard.getNumber("Shooter Tolerance", 0));
-        SmartDashboard.putNumber("Shooter Encoder Rate (Revs per Sec)", shooter.getRate());
+        SmartDashboard.putNumber("Shooter Encoder Rate (Revs per Sec)", shooter.talon.getPosition());
 		SmartDashboard.putNumber("Shooter Bang Error", shooter.getError()); 
 		
         SmartDashboard.putNumber("Shooter Target Speed (%)", shooter.getSpeed());
 		
+        SmartDashboard.putNumber("Shooter CAN Talon Speed", shooter.talon.getSpeed());
+        SmartDashboard.putNumber("Shooter CAN Talon Error", shooter.talon.getError());
+        
         // vision
         
 //		SmartDashboard.putBoolean("Camera is Active", cameraIsActive);
