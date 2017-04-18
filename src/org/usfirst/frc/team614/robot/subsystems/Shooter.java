@@ -1,9 +1,11 @@
 package org.usfirst.frc.team614.robot.subsystems;
 
 import org.usfirst.frc.team614.robot.Constants;
-import org.usfirst.frc.team614.robot.Robot;
 import org.usfirst.frc.team614.robot.RobotMap;
 import org.usfirst.frc.team614.robot.commands.shooter.ShooterDrive;
+
+import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
@@ -16,6 +18,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Shooter extends Subsystem implements PIDOutput {
 
+	public CANTalon talon = new CANTalon(0);
+	
 	public boolean isOnTarget = false;
 	private boolean isEnabled = false;
 	private boolean usingEncoder = true;
@@ -32,6 +36,10 @@ public class Shooter extends Subsystem implements PIDOutput {
 	VictorSP shooterMotor = new VictorSP(RobotMap.shooterFireMotor);
 	
 	public Shooter() {
+		
+		talon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		talon.configEncoderCodesPerRev(codesPerRev);
+		
 		velocityController = new PIDController(
 				Constants.shooterP,
 				Constants.shooterI,
