@@ -8,6 +8,7 @@ import org.usfirst.frc.team614.robot.commands.shooter.ShooterDrive;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
+import com.ctre.CANTalon.StatusFrameRate;
 import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -46,21 +47,27 @@ public class Shooter extends Subsystem implements PIDOutput {
 		talon.reverseSensor(true);
 		
 		talon.changeControlMode(TalonControlMode.Speed);
-		talon.set(0.0);
+		
+		talon.setVoltageRampRate(36.0);
+		talon.setStatusFrameRateMs(StatusFrameRate.Feedback, 10);
+		talon.clearStickyFaults();
+		
+		
 		
 		
 		talon.reverseSensor(true);
-		talon.configEncoderCodesPerRev(128);
+//		talon.configEncoderCodesPerRev(128);
 
         talon.setProfile(1);
         
         // PID TUNING PARAMETERS for FIRE MOTOR
         // see 12.4.2 of CAN Talon SRX Software Reference Manual
-        talon.setF(.1094);
-        talon.setP(.22);
+        talon.setF(.0404);
+        talon.setP(.45);
         talon.setI(0);
         talon.setD(0);
-        
+//        talon.setPID(.22, 0, 0, .1093, (int) (1023/.22), 0, 0);
+		talon.set(0.0);
 //		setInputRange(0, 800000);
 //      setAbsoluteTolerance(1000);
 

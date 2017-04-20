@@ -359,9 +359,10 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Shooter Bang Error", shooter.getError()); 
 		
         SmartDashboard.putNumber("Shooter Target Speed (%)", shooter.getSpeed());
-		
+
         SmartDashboard.putNumber("Shooter CAN Talon Speed", shooter.talon.getSpeed());
-        SmartDashboard.putNumber("Shooter CAN Talon Error", shooter.talon.getError());
+//        SmartDashboard.putNumber("Shooter CAN Talon Setpoint", shooter.talon.getSetpoint());
+        SmartDashboard.putNumber("Shooter CAN Talon Error", shooter.talon.getSpeed() - shooter.talon.getSetpoint());
         
         // vision
         

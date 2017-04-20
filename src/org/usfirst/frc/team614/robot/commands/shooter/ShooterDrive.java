@@ -28,7 +28,8 @@ public class ShooterDrive extends Command {
     protected void execute() {
 
 		Robot.shooter.talon.changeControlMode(TalonControlMode.Speed);
-    	Robot.shooter.talon.set(OI.driverGamepad.getAxis(Gamepad.leftStick_Y) * 1500.0D);
+//    	Robot.shooter.talon.set(OI.driverGamepad.getAxis(Gamepad.leftStick_Y) * 4220.00);
+    	Robot.shooter.talon.set(SmartDashboard.getNumber("Shooter CAN Talon Setpoint", 0));
     	
 //    	if(Robot.shooter.isEnabled()) {
 //        	Robot.shooter.getVelocityController().setSetpoint(SmartDashboard.getNumber("Shooter Target Speed (Revs per Sec)", 0));
