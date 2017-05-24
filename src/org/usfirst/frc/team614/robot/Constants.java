@@ -35,6 +35,7 @@ public class Constants {
 	public static final double SHOOTER_BANG_MIN = .6;
 	public static final double SHOOTER_BANG_MAX = .85;
 	public static final double SHOOTER_DISTANCE_PER_PULSE = 1 / SHOOTER_ENCODER_COUNTS_PER_REV;
+	public static final double SHOOTER_MAX_RPM = 4220;
 	
 	// Winch
 	public static final double WINCH_SPEED = 1.0;

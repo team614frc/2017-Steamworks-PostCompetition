@@ -68,8 +68,9 @@ public class OI {
 	private static final Button reverseClimber = new JoystickButton(operatorGamepad, Gamepad.button_Back);
 	
 	private static final Button staticRevShooterFromBoiler = new JoystickButton(operatorGamepad, Gamepad.button_B);
-	private static final Button increaseShooterSpeed = new JoystickButton(operatorGamepad, Gamepad.button_Y);
-	private static final Button decreaseShooterSpeed = new JoystickButton(operatorGamepad, Gamepad.button_A);
+	private static final Button staticRevShooterFromAirship = new JoystickButton(operatorGamepad, Gamepad.button_A);
+//	private static final Button increaseShooterSpeed = new JoystickButton(operatorGamepad, Gamepad.button_Y);
+//	private static final Button decreaseShooterSpeed = new JoystickButton(operatorGamepad, Gamepad.button_A);
 
 //	private static final Button deliverGear = new JoystickButton(driverGamepad, Gamepad.button_A);
 
@@ -88,9 +89,10 @@ public class OI {
 		toggleDropper.whenPressed(new TogglePiston(true));
 //		toggleSqueezer.whenPressed(new TogglePiston(false));
 		
-		staticRevShooterFromBoiler.whileHeld(new Shoot(true, false, false, false, false));
-		increaseShooterSpeed.whenPressed(new ChangeSpeedBy10Percent(true));
-		decreaseShooterSpeed.whenPressed(new ChangeSpeedBy10Percent(false));
+//		staticRevShooterFromBoiler.whileHeld(new Shoot(true, false, false, false, false));
+		staticRevShooterFromAirship.whileHeld(new Shoot(true, true, false, false, false));
+//		increaseShooterSpeed.whenPressed(new ChangeSpeedBy10Percent(true));
+//		decreaseShooterSpeed.whenPressed(new ChangeSpeedBy10Percent(false));
 		flippyThing.whenPressed(new FlippyThingButton());
 		
 	}

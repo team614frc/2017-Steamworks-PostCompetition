@@ -63,8 +63,8 @@ public class Shooter extends Subsystem implements PIDOutput {
         // PID TUNING PARAMETERS for FIRE MOTOR
         // see 12.4.2 of CAN Talon SRX Software Reference Manual
         talon.setF(.0404);
-        talon.setP(.45);
-        talon.setI(0);
+        talon.setP(.10);
+        talon.setI(0.0005);
         talon.setD(0);
 //        talon.setPID(.22, 0, 0, .1093, (int) (1023/.22), 0, 0);
 		talon.set(0.0);
@@ -141,7 +141,7 @@ public class Shooter extends Subsystem implements PIDOutput {
 	}
 
 	public void set(double speed) {
-		shooterMotor.set(speed);
+		talon.set(speed);
 	}
 	public void setSpeed(double speed) {
 		this.speed = speed;
@@ -162,7 +162,10 @@ public class Shooter extends Subsystem implements PIDOutput {
     	if(set){
     		velocityController.enable();
     	} else {
+    		talon.changeControlMode(TalonControlMode.PercentVbus);
+    		talon.set(0);
     		velocityController.setSetpoint(0);
+    		shooterMotor.set(0);
     		stop();
     		velocityController.disable();
     	}

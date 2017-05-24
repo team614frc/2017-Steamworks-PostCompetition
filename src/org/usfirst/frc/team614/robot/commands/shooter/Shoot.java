@@ -43,10 +43,10 @@ public class Shoot extends CommandGroup {
     }
     protected void end() {
     	Robot.hopper.stop();
-    	Robot.shooter.setEnabled(false, false);
+//    	Robot.shooter.setEnabled(false, false);
     }
     protected void interrupted() {
     	Robot.hopper.stop();
-    	Robot.shooter.setEnabled(false, false);
+//    	Robot.shooter.setEnabled(false, false);
     }
 }
