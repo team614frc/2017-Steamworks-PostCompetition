@@ -24,10 +24,10 @@ public class Constants {
 
 	// Shooter
 
-	public static final double shooterP = 0.3;
-	public static final double shooterI = 0.0;
+	public static final double shooterP = 0.10;
+	public static final double shooterI = 0.0005;
 	public static final double shooterD = 0.0;
-	public static final double shooterF = 0.0;
+	public static final double shooterF = 0.0404;
 	public static final double SHOOTER_CAMERA_OFFSET = 0;
 	public static final double SHOOTER_ENCODER_COUNTS_PER_REV = 1024.0;
 	public static final double SHOOTER_PERCENT = .7;

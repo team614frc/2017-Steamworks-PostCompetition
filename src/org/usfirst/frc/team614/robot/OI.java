@@ -2,11 +2,10 @@ package org.usfirst.frc.team614.robot;
 
 import org.team708.robot.util.Gamepad;
 import org.usfirst.frc.team614.robot.commands.drivetrain.FlippyThingButton;
-import org.usfirst.frc.team614.robot.commands.drivetrain.RotateToVisionTarget;
 import org.usfirst.frc.team614.robot.commands.pneumatics.ActivateGearHolder;
 import org.usfirst.frc.team614.robot.commands.pneumatics.TogglePiston;
-import org.usfirst.frc.team614.robot.commands.shooter.ChangeSpeedBy10Percent;
-import org.usfirst.frc.team614.robot.commands.shooter.Shoot;
+import org.usfirst.frc.team614.robot.commands.shooter.RevShooterFeeder;
+import org.usfirst.frc.team614.robot.commands.shooter.RevShooterFromHopper;
 import org.usfirst.frc.team614.robot.commands.winch.CatchAndClimbRope;
 import org.usfirst.frc.team614.robot.commands.winch.ReverseWinch;
 import org.usfirst.frc.team614.robot.commands.winch.StopWinch;
@@ -53,47 +52,77 @@ public class OI {
 	public static final Gamepad operatorGamepad = new Gamepad(1);
 
 	
-//	private static final Button revFeeder = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
-
-	private static final Button toggleDropper = new JoystickButton(driverGamepad, Gamepad.button_A);
+	
+	
+	/*		TWO-CONTROLLER SETUP
+	 * 
+//	private static final Button toggleDropper = new JoystickButton(driverGamepad, Gamepad.button_A);
 //	private static final Button toggleSqueezer = new JoystickButton(driverGamepad, Gamepad.button_B);
 	private static final Button activateGearHolder = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
+	
 	private static final Button flippyThing = new JoystickButton(driverGamepad, Gamepad.button_R_Shoulder);
 
-	private static final Button TESTING_VISION_ROTATION = new JoystickButton(driverGamepad, Gamepad.button_X);
-	private static final Button TESTING_RINGLIGHT_TOGGLE = new JoystickButton(driverGamepad, Gamepad.button_Y);
+//	private static final Button TESTING_VISION_ROTATION = new JoystickButton(driverGamepad, Gamepad.button_X);
+	private static final Button toggleRinglight = new JoystickButton(driverGamepad, Gamepad.button_Y);
 	
 	private static final Button tryToClimbRope = new JoystickButton(operatorGamepad, Gamepad.button_R_Shoulder);
 	private static final Button stopClimber = new JoystickButton(operatorGamepad, Gamepad.button_L_Shoulder);
 	private static final Button reverseClimber = new JoystickButton(operatorGamepad, Gamepad.button_Back);
 	
-	private static final Button staticRevShooterFromBoiler = new JoystickButton(operatorGamepad, Gamepad.button_B);
-	private static final Button staticRevShooterFromAirship = new JoystickButton(operatorGamepad, Gamepad.button_A);
-//	private static final Button increaseShooterSpeed = new JoystickButton(operatorGamepad, Gamepad.button_Y);
-//	private static final Button decreaseShooterSpeed = new JoystickButton(operatorGamepad, Gamepad.button_A);
+	private static final Button RevShooterFromHopper = new JoystickButton(driverGamepad, Gamepad.button_A);
+//	private static final Button RevShooterFromAirship = new JoystickButton(operatorGamepad, Gamepad.button_B);
 
-//	private static final Button deliverGear = new JoystickButton(driverGamepad, Gamepad.button_A);
+	private static final Button revShooterFeeder = new JoystickButton(driverGamepad, Gamepad.button_B);
+	
+	*/
+	
+	/*			ONE-CONTROLLER SETUP
+	 * 
+	 */
+//	private static final Button toggleDropper = new JoystickButton(driverGamepad, Gamepad.button_A);
+//	private static final Button toggleSqueezer = new JoystickButton(driverGamepad, Gamepad.button_B);
+//	private static final Button activateGearHolder = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
+	
+	private static final Button flippyThing = new JoystickButton(driverGamepad, Gamepad.button_R_Shoulder);
+
+//	private static final Button TESTING_VISION_ROTATION = new JoystickButton(driverGamepad, Gamepad.button_X);
+	private static final Button toggleRinglight = new JoystickButton(driverGamepad, Gamepad.button_Y);
+	
+	private static final Button tryToClimbRope = new JoystickButton(driverGamepad, Gamepad.button_X);
+	private static final Button stopClimber = new JoystickButton(driverGamepad, Gamepad.button_Start);
+	private static final Button reverseClimber = new JoystickButton(driverGamepad, Gamepad.button_Back);
+	
+	private static final Button RevShooterFromHopper = new JoystickButton(driverGamepad, Gamepad.button_A);
+//	private static final Button RevShooterFromAirship = new JoystickButton(operatorGamepad, Gamepad.button_B);
+
+	private static final Button revShooterFeeder = new JoystickButton(driverGamepad, Gamepad.button_B);
+	
+	
 
 	// Binding of Commands
 	public OI() {
-		TESTING_VISION_ROTATION.whileHeld(new RotateToVisionTarget(false, true, true));
-		TESTING_RINGLIGHT_TOGGLE.whenPressed(new TogglePiston(true));
+//		TESTING_VISION_ROTATION.whileHeld(new RotateToVisionTarget(false, true, true));
+//		TESTING_RINGLIGHT_TOGGLE.whenPressed(new TogglePiston(true));
+
+//		activateGearHolder.whileHeld(new ActivateGearHolder(true));
+
+		flippyThing.whenPressed(new FlippyThingButton());
 		
 		tryToClimbRope.whenPressed(new CatchAndClimbRope());
 		stopClimber.whenPressed(new StopWinch());
 		reverseClimber.whileHeld(new ReverseWinch());
 		
-		activateGearHolder.whileHeld(new ActivateGearHolder(true));
-//		revFeeder.whileHeld(new RevFeeder());
-
-		toggleDropper.whenPressed(new TogglePiston(true));
+		toggleRinglight.whenPressed(new TogglePiston(false));
+//		toggleDropper.whenPressed(new TogglePiston(true));
 //		toggleSqueezer.whenPressed(new TogglePiston(false));
 		
-//		staticRevShooterFromBoiler.whileHeld(new Shoot(true, false, false, false, false));
-		staticRevShooterFromAirship.whileHeld(new Shoot(true, true, false, false, false));
-//		increaseShooterSpeed.whenPressed(new ChangeSpeedBy10Percent(true));
-//		decreaseShooterSpeed.whenPressed(new ChangeSpeedBy10Percent(false));
-		flippyThing.whenPressed(new FlippyThingButton());
+//		RevShooterFromHopper.whileHeld(new Shoot(true, false, false, false, false));
+		RevShooterFromHopper.whileHeld(new RevShooterFromHopper());
+//		RevShooterFromAirship.whileHeld(new Shoot(true, true, false, false, false));
+		
+		revShooterFeeder.whileHeld(new RevShooterFeeder());
+		
+		// reverses driving direction
 		
 	}
 }

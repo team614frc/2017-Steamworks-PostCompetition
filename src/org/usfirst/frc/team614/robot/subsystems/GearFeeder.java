@@ -13,18 +13,18 @@ public class GearFeeder extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-	private VictorSP feederMotor = new VictorSP(RobotMap.feederMotor);
+//	private VictorSP feederMotor = new VictorSP(RobotMap.feederMotor);
 	
 	public GearFeeder() {
 		
 	}
 	
-	public void set(double speed) {
-		feederMotor.set(speed);
-	}
-	public void stop() {
-		feederMotor.set(0);
-	}
+//	public void set(double speed) {
+//		feederMotor.set(speed);
+//	}
+//	public void stop() {
+//		feederMotor.set(0);
+//	}
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

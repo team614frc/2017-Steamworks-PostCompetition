@@ -29,9 +29,9 @@ public class Shoot extends CommandGroup {
     		addParallel(new RotateToVisionTarget(false, shouldRotateIfNoVision, rotationDirection)); // on blue side => rotate right and vice versa
     	}
     	// wait until shooter is up to speed...
-    	addSequential(new WaitUntilShooterIsAtTargetSpeed());
+//    	addSequential(new WaitUntilShooterIsAtTargetSpeed());
 //    	feed balls into shooter...
-    	addSequential(new RevHopper());
+//    	addSequential(new RevHopper());
     	if(isTeleop) {
     		// button held to let command last
     	} else {
@@ -42,11 +42,11 @@ public class Shoot extends CommandGroup {
     	
     }
     protected void end() {
-    	Robot.hopper.stop();
+//    	Robot.hopper.stop();
 //    	Robot.shooter.setEnabled(false, false);
     }
     protected void interrupted() {
-    	Robot.hopper.stop();
+//    	Robot.hopper.stop();
 //    	Robot.shooter.setEnabled(false, false);
     }
 }

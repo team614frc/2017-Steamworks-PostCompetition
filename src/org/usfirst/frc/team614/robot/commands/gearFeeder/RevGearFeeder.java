@@ -1,5 +1,7 @@
-package org.usfirst.frc.team614.robot.commands.shooter;
+package org.usfirst.frc.team614.robot.commands.gearFeeder;
 
+import org.team708.robot.util.Gamepad;
+import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.OI;
 import org.usfirst.frc.team614.robot.Robot;
 
@@ -9,48 +11,36 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class ChangeSpeedBy10Percent extends Command {
+public class RevGearFeeder extends Command {
 
-	private boolean increase = false;
-	
-    public ChangeSpeedBy10Percent(boolean increase) {
+    public RevGearFeeder() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	this.increase = increase;
+         requires(Robot.gearFeeder);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(increase) {
-    		if(Robot.shooter.getSpeed() < 1.0) {
-	    		Robot.shooter.setSpeed(
-	    				Robot.shooter.getSpeed() + .1
-				);
-    		}
-    	} else { // decrease
-    		if(Robot.shooter.getSpeed() > 0.0) {
-	    		Robot.shooter.setSpeed(
-	    				Robot.shooter.getSpeed() - .1
-				);
-    		}
-    	}
+//    	Robot.gearFeeder.set(OI.driverGamepad.getAxis(Gamepad.leftStick_Y);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+//    	Robot.gearFeeder.set(Constants.FEEDER_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+//    	Robot.gearFeeder.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+//    	Robot.gearFeeder.stop();
     }
 }
