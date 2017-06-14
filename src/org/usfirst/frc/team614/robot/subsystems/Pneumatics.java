@@ -1,11 +1,11 @@
 package org.usfirst.frc.team614.robot.subsystems;
 
-import org.usfirst.frc.team614.robot.Robot;
 import org.usfirst.frc.team614.robot.Constants;
 import org.usfirst.frc.team614.robot.commands.pneumatics.CompressorControl;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -16,6 +16,8 @@ public class Pneumatics extends Subsystem {
 	public Compressor compressor;
 	
 	public DoubleSolenoid dropper;
+	// ... it's plugged into the PCM
+	public Solenoid ringlight;
 //	public DoubleSolenoid squeezer;
 	
 	public Pneumatics() {
@@ -23,6 +25,8 @@ public class Pneumatics extends Subsystem {
 		
 		dropper = new DoubleSolenoid(0, 1);
 		dropper.set(Constants.pistonIn);
+		ringlight = new Solenoid(2);
+		ringlight.set(true);
 //		squeezer = new DoubleSolenoid(2, 3);
 //		squeezer.set(Constants.pistonIn);
 		

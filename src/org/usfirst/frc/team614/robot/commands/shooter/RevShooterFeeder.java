@@ -1,4 +1,4 @@
-package org.usfirst.frc.team614.robot.commands.feeder;
+package org.usfirst.frc.team614.robot.commands.shooter;
 
 import org.team708.robot.util.Gamepad;
 import org.usfirst.frc.team614.robot.Constants;
@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class RevFeeder extends Command {
+public class RevShooterFeeder extends Command {
 
-    public RevFeeder() {
+    public RevShooterFeeder() {
         // Use requires() here to declare subsystem dependencies
-         requires(Robot.gearFeeder);
+         requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
@@ -25,7 +25,7 @@ public class RevFeeder extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.gearFeeder.set(Constants.FEEDER_SPEED);
+    	Robot.shooter.revFeeder(SmartDashboard.getNumber("Shooter Feeder Speed", 0.0));
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -35,12 +35,12 @@ public class RevFeeder extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.gearFeeder.stop();
+    	Robot.shooter.revFeeder(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.gearFeeder.stop();
+    	Robot.shooter.revFeeder(0);
     }
 }

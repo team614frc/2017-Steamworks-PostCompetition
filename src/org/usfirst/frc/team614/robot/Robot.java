@@ -1,10 +1,13 @@
 
 package org.usfirst.frc.team614.robot;
 
+import org.team708.robot.util.Gamepad;
+import org.usfirst.frc.team614.robot.commands.autonomous.BlueCenterGearAndShoot;
 import org.usfirst.frc.team614.robot.commands.autonomous.BlueKnockHopperAndShoot;
 import org.usfirst.frc.team614.robot.commands.autonomous.CenterGear;
 import org.usfirst.frc.team614.robot.commands.autonomous.DoNothing;
 import org.usfirst.frc.team614.robot.commands.autonomous.LeftGear;
+import org.usfirst.frc.team614.robot.commands.autonomous.RedCenterGearAndShoot;
 import org.usfirst.frc.team614.robot.commands.autonomous.RedKnockHopperAndShoot;
 import org.usfirst.frc.team614.robot.commands.drivetrain.DriveForADistance;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
@@ -15,6 +18,7 @@ import org.usfirst.frc.team614.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team614.robot.subsystems.Shooter;
 import org.usfirst.frc.team614.robot.subsystems.Winch;
 
+import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -26,6 +30,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -55,7 +60,7 @@ public class Robot extends IterativeRobot {
 	
 	public static PowerDistributionPanel pdp;
 //	public static NetworkTable gearCamera;
-//	public static NetworkTable shooterCamera;
+	public static NetworkTable shooterCamera;
 	public static OI oi;
 	
     Command autonomousCommand;
@@ -89,15 +94,17 @@ public class Robot extends IterativeRobot {
     	pdp = new PowerDistributionPanel();
 		oi = new OI();
 		
-//    	NetworkTable.setServerMode();
-//    	NetworkTable.setTeam(614);
-//    	NetworkTable.initialize();
+    	NetworkTable.setServerMode();
+    	NetworkTable.setTeam(614);
+    	NetworkTable.initialize();
 //    	gearCamera = NetworkTable.getTable("gearCamera");
-//    	shooterCamera = NetworkTable.getTable("shooterCamera");
+    	shooterCamera = NetworkTable.getTable("shooterCamera");
     	
 
         chooser = new SendableChooser();
-        chooser.addDefault("Deliver Center Gear", new CenterGear());
+        chooser.addDefault("Deliver Center Gear and Stop", new CenterGear());
+        chooser.addDefault("[RED] Deliver Center Gear and Shoot", new RedCenterGearAndShoot());
+        chooser.addDefault("[BLUE] Deliver Center Gear and Shoot", new BlueCenterGearAndShoot());
         chooser.addObject("Deliver Left Gear", new LeftGear());
         chooser.addObject("Deliver Right Gear", new LeftGear());
         chooser.addObject("Knock Blue Hopper and Shoot", new BlueKnockHopperAndShoot());
@@ -135,8 +142,10 @@ public class Robot extends IterativeRobot {
 //        
 //        SmartDashboard.putNumber("Gear Camera Angle", 0);
 //        SmartDashboard.putBoolean("Gear Camera Found", false);
-//        SmartDashboard.putNumber("Shooter Camera Angle", 0);
-//        SmartDashboard.putBoolean("Shooter Camera Found", false);
+        SmartDashboard.putBoolean("Shooter Is On Target", shooter.isOnTarget);
+        SmartDashboard.putNumber("Shooter Camera Angle", 0);
+        SmartDashboard.putNumber("Shooter Camera Distance", 0);
+        SmartDashboard.putBoolean("Shooter Camera Found", false);
     	
 //        SmartDashboard.putNumber("Drivetrain P", Constants.drivetrainP);
 //        SmartDashboard.putNumber("Drivetrain I", Constants.drivetrainI);
@@ -161,18 +170,24 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putNumber("Shooter I", Constants.shooterI);
 //        SmartDashboard.putNumber("Shooter D", Constants.shooterD);
 //        SmartDashboard.putNumber("Shooter F", Constants.shooterF);
-        SmartDashboard.putNumber("Shooter Target (Revs/Sec)", 0);
+//        SmartDashboard.putNumber("Shooter Target (Revs/Sec)", 0);
 //        SmartDashboard.putNumber("Shooter PID Error", 0);
 //        SmartDashboard.putNumber("Shooter Encoder Count (Revs*4096)", 0);
         
-        SmartDashboard.putNumber("Shooter Encoder Rate (Revs per Sec)", 0);
+//        SmartDashboard.putNumber("Shooter Encoder Rate (Revs per Sec)", 0);
         
-        SmartDashboard.putNumber("Shooter Bang Error", 0);
-        SmartDashboard.putNumber("Shooter Bang Min", Constants.SHOOTER_BANG_MIN);
-        SmartDashboard.putNumber("Shooter Bang Max", Constants.SHOOTER_BANG_MAX);
+//        SmartDashboard.putNumber("Shooter Bang Error", 0);
+//        SmartDashboard.putNumber("Shooter Bang Min", Constants.SHOOTER_BANG_MIN);
+//        SmartDashboard.putNumber("Shooter Bang Max", Constants.SHOOTER_BANG_MAX);
         
-        SmartDashboard.putNumber("Shooter Target Speed (%)", Constants.SHOOTER_PERCENT);
-		
+//        SmartDashboard.putNumber("Shooter Target Speed (%)", Constants.SHOOTER_PERCENT);
+
+        SmartDashboard.putNumber("Shooter CAN Talon Setpoint", 0);
+        SmartDashboard.putNumber("Shooter CAN Talon Speed", 0);
+        SmartDashboard.putNumber("Shooter CAN Talon Error", 0);
+        SmartDashboard.putNumber("Shooter Feeder Speed", 0);
+//        SmartDashboard.putNumber("Shooter CAN Talon Voltage", pdp.getCurrent(3));
+        
 //        SmartDashboard.putNumber("Shooter Tolerance", 0);
 //        SmartDashboard.putNumber("Shooter Servo Angle", shooterServo.getAngle());
 //
@@ -247,7 +262,7 @@ public class Robot extends IterativeRobot {
     	drivetrain.setUsingDistancePID(false);
     	drivetrain.flippyThingButton = false;
     	shooter.reset();
-    	shooter.setEnabled(false, false);
+//    	shooter.setEnabled(false, false);
     	drivetrain.reset();
     }
 	
@@ -278,7 +293,7 @@ public class Robot extends IterativeRobot {
     	drivetrain.setUsingDistancePID(false);
     	drivetrain.flippyThingButton = false;
     	shooter.reset();
-    	shooter.setEnabled(false, false);
+//    	shooter.setEnabled(false, false);
     	drivetrain.reset();
     	
         autonomousCommand = (Command) chooser.getSelected();
@@ -315,7 +330,7 @@ public class Robot extends IterativeRobot {
     	drivetrain.setUsingDistancePID(false);
     	drivetrain.flippyThingButton = false;
     	shooter.reset();
-    	shooter.setEnabled(false, false);
+//    	shooter.setEnabled(false, false);
     	drivetrain.reset();
     }
 
@@ -324,7 +339,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-
+             
         printNavXData();
 
         // drivetrain
@@ -345,12 +360,12 @@ public class Robot extends IterativeRobot {
         
         
         // shooter
-//        shooter.setTolerance(SmartDashboard.getNumber("Shooter Tolerance", 0));
-        SmartDashboard.putNumber("Shooter Encoder Rate (Revs per Sec)", shooter.getRate());
-		SmartDashboard.putNumber("Shooter Bang Error", shooter.getError()); 
+//		SmartDashboard.putNumber("Shooter Bang Error", shooter.getError()); 
 		
-        SmartDashboard.putNumber("Shooter Target Speed (%)", shooter.getSpeed());
-		
+
+        SmartDashboard.putNumber("Shooter CAN Talon Speed", shooter.getSpeed());
+        SmartDashboard.putNumber("Shooter CAN Talon Error", shooter.getError());
+        
         // vision
         
 //		SmartDashboard.putBoolean("Camera is Active", cameraIsActive);
@@ -366,18 +381,26 @@ public class Robot extends IterativeRobot {
 //    			"Gear Camera Found",
 //    			gearCamera.getBoolean("targetFound", false)
 //		);
-//    	SmartDashboard.putNumber(
-//    			"Shooter Camera Angle",
-//    			shooterCamera.getNumber("angle", 0)
-//		);
-//    	SmartDashboard.putNumber(
-//    			"Shooter Camera Distance",
-//    			shooterCamera.getNumber("distance", 0)
-//		);
-//    	SmartDashboard.putBoolean(
-//    			"Shooter Camera Found",
-//    			shooterCamera.getBoolean("targetFound", false)
-//		);
+        
+        // TERNARY OPERATOR BOYS HERE WE GO
+        // HAHA
+        SmartDashboard.putBoolean("Shooter Is On Target", (
+        		shooterCamera.getNumber("angle", 0) > -5 &&
+        		shooterCamera.getNumber("angle", 0) < 5
+        		) ? true : false);
+        
+    	SmartDashboard.putNumber(
+    			"Shooter Camera Angle",
+    			shooterCamera.getNumber("angle", 0)
+		);
+    	SmartDashboard.putNumber(
+    			"Shooter Camera Distance",
+    			shooterCamera.getNumber("distance", 0)
+		);
+    	SmartDashboard.putBoolean(
+    			"Shooter Camera Found",
+    			shooterCamera.getBoolean("targetFound", false)
+		);
     }
     
     /**

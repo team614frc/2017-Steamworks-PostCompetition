@@ -6,6 +6,7 @@ import org.usfirst.frc.team614.robot.Robot;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Toggles the shooter piston; if it's in, make it out, and vice versa.
@@ -18,17 +19,20 @@ public class TogglePiston extends Command {
     public TogglePiston(boolean dropper) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.pneumatics);
+        this.dropper = dropper;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-//    	if(dropper) {
+    	if(dropper) {
         	if (Robot.pneumatics.getDropperState().equals(Constants.pistonIn)) {
         		Robot.pneumatics.setDropperState(Constants.pistonOut);
         	} else {
         		Robot.pneumatics.setDropperState(Constants.pistonIn);
         	}
-//    	} else {
+    	} else {
+    		Robot.pneumatics.ringlight.set(!Robot.pneumatics.ringlight.get());
+    	}
 //        	if (Robot.pneumatics.squeezer.get().equals(DoubleSolenoid.Value.kForward)) {
 //        		Robot.pneumatics.squeezer.set(DoubleSolenoid.Value.kReverse);
 //        	} else {
